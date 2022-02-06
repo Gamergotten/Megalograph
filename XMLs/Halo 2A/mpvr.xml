@@ -1,0 +1,1655 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+
+<base>
+<RefTypes>
+	<Var name="PlayerTraits" type="Container" bits="0" >
+		<Var name="DamageResistance" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ShieldMultiplier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="BodyMultiplier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ShieldStunDuration" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ShieldRechargeRate" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="BodyRechargeRate" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="OvershieldRechargeRate" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="VampirismPercent" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ExplosiveDamageResistance" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="WheelmanArmorVehicleStunTimeModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="WheelmanArmorVehicleRechargeTimeModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="WheelmanArmorVehicleEmpDisabledTimeModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="FallDamageMultiplier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="HeadshotImmunity" type="Int" bits="2" />
+   		<Var name="Assasinationimmunity" type="Int" bits="2" />
+		<Var name="invincible" type="Int" bits="2" />
+		<Var name="Fasttrackarmor" type="Int" bits="2" />
+		<Var name="PowerupCancellation" type="Int" bits="2" />
+		<Var name="damagemultiplyer" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="meleedamagemultiplyer" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="GrenadeRechargeSecondsFrag" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="GrenadeRechargeSecondsPlasma" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="GrenadeRechargeSecondsSpike" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="HeroEquipmentEnergyUseRateModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="HeroEquipmentEnergyRechargeDelayModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="HeroEquipmentEnergyRechargeRateModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="HeroEquipmentInitialEnergyModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="EquipmentEnergyUseRateModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="EquipmentEnergyRechargeDelayModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="EquipmentEnergyUseRechargeRateModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="EquipmentInitialEnergyModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="SwitchSpeedModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ReloadSpeedModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="OrdnancePointsModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="ExplosiveAreaOfEffectRadiusModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="GunnerArmorModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="StabilityArmorModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="DropReconWarningSeconds" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="DropReconDistanceModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="AssassinationSpeedModifier" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="WeaponPickup" type="Int" bits="2" />
+		<Var name="Grenades" type="Int" bits="5" />
+		<Var name="Infiniteammo" type="Int" bits="2" />
+		<Var name="AbilityUsage" type="Int" bits="2" />
+		<Var name="usageSansAutoTurret" type="Int" bits="2" />
+		<Var name="Abilitiesdropondeath" type="Int" bits="2" />
+		<Var name="InfiniteAbility" type="Int" bits="2" />
+		<Var name="traitsbits6" type="Int" bits="6" />
+		<Var name="ordance marker visibility" type="Int" bits="2" />
+        <Var name="traitsbits4" type="Int" bits="4" />
+		<Var name="allow ordance reroll" type="Int" bits="2" />
+		<Var name="ordance disabled" type="Int" bits="2" />
+		<Var name="Primaryweapon" type="Int" bits="8" />
+		<Var name="Secondaryweapon" type="Int" bits="8" />
+		<Var name="Equipment" type="Int" bits="8" />
+		<Var name="tactical package" type="Int" bits="8" />
+		<Var name="support package" type="Int" bits="8" />
+		<Var name="PlayerSpeed" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="PlayerGravity" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="JumpHeight" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="TurnSpeed" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="VehicleUse" type="Int" bits="4" />
+		<Var name="bits1here" type="Int" bits="1" />
+		<Var name="double jump" type="Int" bits="2" />
+		<Var name="Sprint" type="Int" bits="2" />
+		<Var name="AutoMomentumn" type="Int" bits="2" />
+		<Var name="Vaulting" type="Int" bits="2" />
+		<Var name="Stealthy" type="Int" bits="2" />
+		<Var name="bits1hereaswell" type="Int" bits="1" />
+		<!-- turns out we're missing two in here-->
+		<!-- 1bit?? just gave it to camo -->
+		<Var name="Camo" type="Int" bits="4" />
+		<Var name="Visiblewaypoint" type="Int" bits="2" />
+		<Var name="VisibleName" type="Int" bits="2" />
+		<Var name="Aura" type="Int" bits="3" />
+		<!-- 10 unaccounted bits here -->
+		<Var name="blank10" type="Int" bits="10" />
+		<!-- possibly presence bit -->
+		<Var name="UsePrimaryColor" type="Int" bits="1" />
+		<Var name="PrimaryRed" type="Int" bits="8" />
+		<Var name="PrimaryGreen" type="Int" bits="8" />
+		<Var name="PrimaryBlue" type="Int" bits="8" />
+		<!-- again possibly presence bit -->
+		<Var name="UseSecondaryColor" type="Int" bits="1" />
+		<Var name="SecondaryRed" type="Int" bits="8" />
+		<Var name="SecondaryGreen" type="Int" bits="8" />
+		<Var name="SecondaryBlue" type="Int" bits="8" />
+		
+		<Var name="OverridePlayerModel" type="Int" bits="1" />
+		<Var name="PlayerModelNameVariant" type="Int" bits="8" />
+		<Var name="DeathEffect" type="Int" bits="32" />
+		<Var name="LoopingEffect" type="Int" bits="32" />
+		
+		<Var name="ShieldHud" type="Int" bits="2" />
+		<Var name="motionTracker" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="NemesisDuration" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<!-- mising a bit right here potentially presencebit -->
+		<!-- no it was not; refer to infection -->
+		<Var name="uhh" type="Int" bits="1" />
+		<!--Var name="somethingfloat" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Value" type="Int" bits="16" />
+			</Var>
+		</Var-->
+		<!-- mising a bit right here potentially presencebit -->
+		<Var name="MotionTrackerUsage" type="Int" bits="3" />
+		<Var name="MotionTrackerUsageZoomed" type="Int" bits="2" />
+		<Var name="DirectionalDamageindicator" type="Int" bits="2" />
+		<Var name="VisionMode" type="Int" bits="2" />
+		<Var name="BattleAwareness" type="Int" bits="2" />
+		<Var name="ThreatView" type="Int" bits="2" />
+		<Var name="Aura2" type="Int" bits="2" />
+		<Var name="Nemesis" type="Int" bits="2" />
+		<!-- 18 gits leftover, looks like a float nvm unrelated-->
+	</Var>
+	<Var name="TeamOptions" type="Container" bits="0" >
+		<Var name="EmblemOverride" type="Int" bits="1" />
+		<Var name="UNKNOWNOverride" type="Int" bits="1" />
+		<Var name="TertiarycolorOverride" type="Int" bits="1" />
+		<Var name="SecondarycolorOverride" type="Int" bits="1" />
+		<Var name="PrimarycolorOverride" type="Int" bits="1" />
+		<Var name="TeamEnabled" type="Int" bits="1" />
+		<Var name="Overridename" type="Enum" bits="1" >
+			<Var ID="0" name="False" />
+			<Var ID="1" name="True" >
+				<Var name="bool1" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="EnglishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool2" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="JapaneseStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool3" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="GermanStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool4" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FrenchStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool5" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="SpanishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool6" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="MexicanStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool7" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ItalianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool8" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="KoreanStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool9" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="Chinese1StringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool10" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="Chinese2StringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool11" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PortugeseStringIndex" type="Int" bits="10"/>
+					</Var>
+				</Var>
+				<Var name="bool12" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PolishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool13" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="RussianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool14" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DanishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool15" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FinnishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool16" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DutchStringIndex" type="Int" bits="10"/>
+					</Var>
+				</Var>
+				<Var name="bool17" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="NorwegianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="TeamnameBufferIndex" type="HCount" bits="10" />
+			</Var>
+		</Var>
+		<Var name="InitialDesignator" type="Int" bits="4" />
+		<Var name="Elitespecies" type="Int" bits="1" />
+		<Var name="PrimaryColor" type="Hex" bits="32" />
+		<Var name="SecondaryColor" type="Hex" bits="32" />
+		<Var name="TextColor" type="Hex" bits="32" />
+		<Var name="InterfaceColor" type="Hex" bits="32" />
+		<Var name="FireteamCount" type="Int" bits="5" />
+		<Var name="EmblemForeground" type="Int" bits="8" />
+		<Var name="EmblemBackground" type="Int" bits="8" />
+		<!-- potentially some sort of flags -->
+		<Var name="EmblemUNKNOWN" type="Int" bits="3" />
+		<Var name="EmblemPrimaryColor" type="Int" bits="6" />
+		<Var name="EmblemSecondaryColor" type="Int" bits="6" />
+		<Var name="EmblemBackgroundColor" type="Int" bits="6" />
+	</Var>
+	
+	<Var name="LoadoutOptions" type="Container" bits="0" >
+		<Var name="LoadoutVisibleingame" type="Int" bits="1" />
+		<Var name="LoadoutName" type="Enum" bits="1" >
+			<Var ID="0" name="True" >
+				<Var name="NameIndex" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="False" />
+		</Var>
+		<Var name="PrimaryWeapon" type="Int" bits="8" />
+		<Var name="SecondaryWeapon" type="Int" bits="8" />
+		<Var name="Armorability" type="Int" bits="8" />
+		<Var name="tacticalPackage" type="Int" bits="8" />
+		<Var name="supportUpgrade" type="Int" bits="8" />
+		<Var name="Grenades" type="Int" bits="5" />
+		<Var name="UNKNOWN" type="Int" bits="6" />
+	</Var>
+	
+	<Var name="loadoutCLuster" type="Container" bits="0" >
+		<Var name="Loadout1" type="Enumref:LoadoutOptions" bits="0" />
+		<Var name="Loadout2" type="Enumref:LoadoutOptions" bits="0" />
+		<Var name="Loadout3" type="Enumref:LoadoutOptions" bits="0" />
+		<Var name="Loadout4" type="Enumref:LoadoutOptions" bits="0" />
+		<Var name="Loadout5" type="Enumref:LoadoutOptions" bits="0" />
+	</Var>
+	
+	<Var name="OrdnanceWeights" type="Container" bits="0" >
+		<Var name="PossibiltyName1" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight1" type="Int" bits="30" />
+		<Var name="PossibiltyName2" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight2" type="Int" bits="30" />
+		<Var name="PossibiltyName3" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight3" type="Int" bits="30" />
+		<Var name="PossibiltyName4" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight4" type="Int" bits="30" />
+		<Var name="PossibiltyName5" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight5" type="Int" bits="30" />
+		<Var name="PossibiltyName6" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight6" type="Int" bits="30" />
+		<Var name="PossibiltyName7" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight7" type="Int" bits="30" />
+		<Var name="PossibiltyName8" type="UString8" bits="0" />
+		<Var name="PossibiltyWeight8" type="Int" bits="30" />
+	</Var>
+	
+	<Var name="FiringProperties" type="Container" bits="0" >
+		<Var name="bits37" type="Blank" bits="37" />
+		<Var name="Buckshot Spread" type="Enum" bits="1" offset="26" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Buckshot Accuracy" type="Enum" bits="1" offset="25" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Projectile Damage Range upper" type="Enum" bits="1" offset="24">
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 4" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Projectile Damage Range lower" type="Enum" bits="1" offset="23" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 4" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Damage Upper max" type="Enum" bits="1" offset="22" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 3" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Damage Upper min" type="Enum" bits="1" offset="21" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Damage Lower" type="Enum" bits="1" offset="20" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Area of Effect Radius" type="Enum" bits="1" offset="19" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Charge Percentage Subtraction" type="Enum" bits="1" offset="18" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Heat Generated Per Fire" type="Enum" bits="1" offset="17" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Bloom Increase Rate" type="Enum" bits="1" offset="16" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Base Bloom" type="Enum" bits="1" offset="15" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Error angle" type="Enum" bits="1" offset="14" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="blank1" type="Enum" bits="1" offset="13" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="blank2" type="Enum" bits="1" offset="12" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="blank3" type="Enum" bits="1" offset="11" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Damage Error Upper" type="Enum" bits="1" offset="10" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Damage Error Lower" type="Enum" bits="1" offset="9" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Bloom Reset Speed" type="Enum" bits="1" offset="8" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Soft Recovery Time" type="Enum" bits="1" offset="7" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Fire Recovery Time" type="Enum" bits="1" offset="6" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Shots Per Trigger-Pull upper" type="Enum" bits="1" offset="5" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int7" type="Int" bits="7" />
+			</Var>
+		</Var>
+		<Var name="Shots Per Trigger-Pull lower" type="Enum" bits="1" offset="4" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int7" type="Int" bits="7" />
+			</Var>
+		</Var>
+		<Var name="Spin-Up Deceleration Time" type="Enum" bits="1" offset="3" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Spin-Up Acceleration Time" type="Enum" bits="1" offset="2" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Rounds Per-Second upper" type="Enum" bits="1" offset="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="Rounds Per-Second lower" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="int16" type="Int" bits="16" />
+			</Var>
+		</Var>
+	</Var>
+	
+	<Var name="WeaponProperties" type="Container" bits="0" >
+		<Var name="bits50" type="Blank" bits="50" />
+		<Var name="Deviation Angle" type="Enum" bits="1" offset="13" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Magnetism minimum" type="Enum" bits="1" offset="12" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Magnetism short" type="Enum" bits="1" offset="11" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Magnetism long" type="Enum" bits="1" offset="10" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Magnetism angle" type="Enum" bits="1" offset="9" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Red-Reticule Minimum" type="Enum" bits="1" offset="8" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Red-Reticule Near" type="Enum" bits="1" offset="7" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Red-Reticule Far" type="Enum" bits="1" offset="6" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 2" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Red-Reticule Angle" type="Enum" bits="1" offset="5" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Overheated Heat Loss Per Second" type="Enum" bits="1" offset="4" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Heat Illumination" type="Enum" bits="1" offset="3" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Heat Loss Per Second" type="Enum" bits="1" offset="2" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Overheat Threshold" type="Enum" bits="1" offset="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+		<Var name="Heat Recovery Threshold" type="Enum" bits="1"  >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="float20 1" type="Int" bits="20" />
+			</Var>
+		</Var>
+	</Var>
+</RefTypes>
+<ExTypes>
+	<Var name="mpvr" type="String" bits="32" />
+	<Var name="megaloversion" type="Int" bits="32" />
+	<Var name="Unknown0x2F8" type="Int" bits="16" /> 
+	<Var name="Unknown0x2FA" type="Int" bits="16" />
+	
+	<Var name="UnknownHash0x2FC" type="Hex" bits="160" />
+	
+	<Var name="Blank0x310" type="Hex" bits="32" />
+	<Var name="Fileusedsize" type="UInt" bits="32" />
+	<Var name="Unknown0x318" type="Int" bits="8" />
+	<Var name="Unknown0x319" type="Int" bits="32" />
+	<Var name="Unknown0x31D" type="Int" bits="32" />
+	
+	<Var name="FileLength" type="Int" bits="32" />
+	<Var name="GametypeHeaders" type="Container" bits="0" >
+		<Var name="ID0x48" type="Hex" bits="64" />
+		<Var name="ID0x50" type="Hex" bits="64" />
+		<Var name="ID0x58" type="Hex" bits="64" />
+		<Var name="Blank0x60" type="Hex" bits="64" />
+		
+		<Var name="UnknownFlags" type="Blank" bits="8" />
+		<Var name="Unknown-1" type="Int" bits="32" />
+		<Var name="Unknown0x1" type="Int" bits="8" />
+		<Var name="Blank04" type="Int" bits="32" />
+		
+		<Var name="TimeStampUint" type="Hex" bits="32" />
+		<Var name="XUID" type="Hex" bits="64" />
+		<Var name="Gamertag" type="UString8" bits="0" />
+		
+		<Var name="Blank041bit" type="Blank" bits="33" />
+		
+		
+		<Var name="EditTimeStampUint" type="Hex" bits="32" />
+		<Var name="EditXUID" type="Hex" bits="64" />
+		<Var name="EditGamertag" type="UString8" bits="0" />
+		
+		<Var name="UnknownFlag1" type="UInt" bits="1" />
+		
+		<Var name="Title" type="UString16" bits="0" />
+		<Var name="Description" type="UString16" bits="0" />
+		<Var name="GameIcon" type="Int" bits="8" />
+	</Var>
+	<Var name="ModeSettings" type="Container" bits="0" >
+		<Var name="UnknownFlag2" type="Int" bits="2" />
+		<Var name="Teamsenabled" type="Int" bits="1" />
+		<Var name="Resetmaponnewroundunused" type="Int" bits="1" />
+		<Var name="Resetplayersonnewroundunused" type="Int" bits="1" />
+		<Var name="Perfectionmedalenabled" type="Int" bits="1" />
+		<Var name="RoundTimeLimit" type="Int" bits="8" />
+		<Var name="NumberOfRounds" type="Int" bits="5" />
+		<Var name="RoundsToWin" type="Int" bits="4" />
+		<Var name="KillCamEnabled" type="Int" bits="1" />
+		<Var name="pointsSystemEnabled" type="Int" bits="1" />
+		<Var name="FinalKillCamEnabled" type="Int" bits="1" />
+		<Var name="Unknwon2" type="Int" bits="1" />
+		<Var name="SuddenDeathTime" type="Int" bits="7" />
+		<Var name="bit4" type="Int" bits="1" />
+		<Var name="bit5" type="Int" bits="1" />
+		<Var name="moshdifficulty" type="Int" bits="2" />
+		<!-- doesn't make a lot of sense but better than blank -->
+		<Var name="protomode" type="Int" bits="11" />
+		<Var name="unknwon4" type="Int" bits="4" />
+		<Var name="ClassColorOverride" type="Int" bits="1" />
+		<Var name="InheritRespawnTime" type="Int" bits="1" />
+		<Var name="unknwon42" type="Int" bits="4" />
+	</Var>
+	<!-- incorrect 
+	<Var name="RespawnOnKills" type="Int" bits="1" />
+	<Var name="respawnatlocationunused" type="Int" bits="1" />
+	<Var name="respawnwithteammateunused" type="Int" bits="1" />
+	<Var name="RespawnSyncwithteam" type="Int" bits="1" />
+	<Var name="LivesPerround" type="Int" bits="6" />
+	<Var name="TeamLivesPerround" type="Int" bits="7" />
+	<Var name="unknown16" type="Int" bits="16" />
+	incorrect-->
+	<Var name="SpawnSettings" type="Container" bits="0" >
+		<Var name="LivesPerround" type="Int" bits="6" />
+		<Var name="TeamLivesPerround" type="Int" bits="7" />
+		<Var name="MinRespawntime" type="Int" bits="8" />
+		<Var name="RespawnTime" type="Int" bits="8" />
+		<Var name="Suicidepenalty" type="Int" bits="8" />
+		<Var name="Betrayalpenalty" type="Int" bits="8" />
+		<Var name="RespawnTimegrowth" type="Int" bits="4" />
+		<Var name="LoadoutCamTime" type="Int" bits="4" />
+		
+		<Var name="Respawntraitsduration" type="Int" bits="6" />
+		<Var name="RespawnPlayerTraits" type="Enumref:PlayerTraits" bits="0" />
+	</Var>
+	
+	<Var name="GameSettings" type="Container" bits="0" >
+		<Var name="EnableObservers" type="Int" bits="1" />
+		<Var name="Teamchanging" type="Int" bits="2" />
+		<Var name="FriendlyFire" type="Int" bits="1" />
+		<!--Var name="BetrayalBooting" type="Int" bits="1" /-->
+		<Var name="idunno1" type="Int" bits="1" />
+		<Var name="Dontrestrictteamvoicechat" type="Int" bits="1" />
+		<Var name="idunno2" type="Int" bits="1" />
+		<Var name="idunno3" type="Int" bits="1" />
+		<Var name="Indestructiblevehicles" type="Int" bits="1" />
+		<Var name="turretsonmap" type="Int" bits="1" />
+		<Var name="powerupsonmap" type="Int" bits="1" />
+		<Var name="abilitiesonmap" type="Int" bits="1" />
+		<Var name="shortcutsonmap" type="Int" bits="1" />
+		<!--Var name="grenadesonmap" type="Int" bits="1" />
+		<Var name="unknon" type="Int" bits="1" /-->
+		<Var name="BasePlayerTraits" type="Enumref:PlayerTraits" bits="0" />
+		
+		<Var name="WeaponSet" type="Int" bits="8" />
+		<Var name="VehicleSet" type="Int" bits="8" />
+		<Var name="EquipSet" type="Int" bits="8" />
+		<Var name="Uknowned" type="Blank" bits="55" />
+	</Var>
+	
+	<Var name="PowerupTraits" type="Container" bits="0" >
+		<Var name="DamageTraits" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="DamageTraitsDuration" type="Int" bits="6" />
+		<Var name="DamageTraitsRutnime" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="DamageTraitsRuntimeDuration" type="Int" bits="6" />
+		
+		<Var name="SpeedTraits" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="SpeedTraitsDuration" type="Int" bits="6" />
+		<Var name="SpeedTraitsRuntime" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="SpeedTraitsRuntimeDuration" type="Int" bits="6" />
+		
+		<Var name="OvershieldTraits" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="OvershieldTraitsDuration" type="Int" bits="6" />
+		<Var name="OvershieldTraitsRuntime" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="OvershieldTraitsRuntimeDuration" type="Int" bits="6" />
+		
+		<Var name="CustomTraits" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="CustomTraitsDuration" type="Int" bits="6" />
+		<Var name="CustomTraitsRuntime" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="CustomTraitsRuntimeDuration" type="Int" bits="6" />
+	</Var>
+	
+	<Var name="TeamSettings" type="Container" bits="0" >
+		<Var name="TeamScoringMethod" type="Int" bits="3" />
+		<Var name="bUNKNOWN8" type="Int" bits="4" />
+		<Var name="UNKNOWN32" type="Hex" bits="32" />
+		<Var name="UNKNOWN32_2" type="Hex" bits="32" />
+		<Var name="UNKNOWN32_3" type="Hex" bits="32" />
+		<Var name="PlayerSpecies" type="Int" bits="3" />
+		<Var name="DesignatorSwitchtype" type="Int" bits="2" />
+		<Var name="Team1Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team2Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team3Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team4Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team5Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team6Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team7Options" type="Enumref:TeamOptions" bits="0" />
+		<Var name="Team8Options" type="Enumref:TeamOptions" bits="0" />
+	</Var>
+	
+	<Var name="LoadoutPalettes" type="Container" bits="0" >
+		<Var name="MapLoadoutsEnabled" type="Int" bits="1" />
+		<Var name="EliteLoadoutsEnabled" type="Int" bits="1" />
+		<Var name="SpartanLoadoutsEnabled" type="Int" bits="1" />
+		<Var name="CustomLoadoutsEnabled" type="Int" bits="1" />
+		<Var name="loudouts1" type="Enumref:loadoutCLuster" bits="0" />
+		<Var name="loudouts2" type="Enumref:loadoutCLuster" bits="0" />
+		<Var name="loudouts3" type="Enumref:loadoutCLuster" bits="0" />
+		<Var name="loudouts4" type="Enumref:loadoutCLuster" bits="0" />
+		<Var name="loudouts5" type="Enumref:loadoutCLuster" bits="0" />
+		<Var name="loudouts6" type="Enumref:loadoutCLuster" bits="0" />
+	</Var>
+	
+	<Var name="Ordance" type="Container" bits="0" >
+		<!-- these need double checking if possible -->
+		<Var name="Ordances2bit" type="Int" bits="1" />
+		<Var name="InitialOrdnance" type="Int" bits="1" />
+		<Var name="RandomOrdnance" type="Int" bits="1" />
+		<!--Var name="UnknownOrdnance" type="Int" bits="1" /-->
+		<Var name="PersonalOrdnance" type="Int" bits="1" />
+		<Var name="OrdancesEnabled" type="Int" bits="1" />
+		
+		<Var name="Ordnance8bit" type="Int" bits="8" />
+		
+		<Var name="OrdResupplyTimeMin" type="Int" bits="16" />
+		<Var name="OrdResupplyTimeMax" type="Int" bits="16" />
+		<Var name="Ordnance16bit1" type="Int" bits="16" />
+		<Var name="InitialDropsetNAME" type="UString8" bits="0" />
+		<Var name="Ordnance16bit2" type="Int" bits="16" />
+		<Var name="Ordnance16bit3" type="Int" bits="16" />
+		<Var name="RandomDropsetNAME" type="UString8" bits="0" />
+		<Var name="PersonalDropsetNAME" type="UString8" bits="0" />
+		<Var name="ordnanceSubstitutionsNAME" type="UString8" bits="0" />
+		<Var name="CustomizePersonalOrdance" type="Int" bits="1" />
+		
+		<Var name="OrdnanceRight" type="Enumref:OrdnanceWeights" bits="0" />
+		<Var name="OrdnanceLeft" type="Enumref:OrdnanceWeights" bits="0" />
+		<Var name="OrdnanceDown" type="Enumref:OrdnanceWeights" bits="0" />
+		<Var name="OrdnanceUnknown" type="Enumref:OrdnanceWeights" bits="0" />
+		
+		<Var name="OrdnancePointsRequirement" type="Blank" bits="30" />
+		<Var name="OrdnanceIncreaseMultiplyer" type="Blank" bits="30" />
+	</Var>
+	
+	<Var name="ScriptedPlayerTraits" type="Count" bits="5" >
+		<Var name="String1" type="Int" bits="8" />
+		<Var name="String2" type="Int" bits="8" />
+		<Var name="PlayerTraits" type="Enumref:PlayerTraits" bits="0" />
+		<Var name="IsHidden" type="Int" bits="1" />
+		<!--Var name="IsRuntime" type="Int" bits="1" /-->
+	</Var>
+	<Var name="ScriptOptions" type="Count" bits="5" >
+		<Var name="String1" type="Int" bits="8" />
+		<Var name="String2" type="Int" bits="8" />
+		<Var name="ScriptOption" type="Enum" bits="1" >
+			<Var ID="0" name="Scriptoption" >
+				<Var name="ChildIndex" type="Int" bits="4" />
+				<Var name="ScriptOptionChild" type="Count" bits="5" >
+					<Var name="Value" type="Int" bits="10" />
+					<Var name="String1" type="Int" bits="8" />
+					<Var name="String2" type="Int" bits="8" />
+				</Var>
+				<Var name="Unknown" type="Int" bits="4" />
+			</Var>
+			<Var ID="1" name="Range" >
+				<Var name="range1" type="Int" bits="10" />
+				<Var name="range2" type="Int" bits="10" />
+				<Var name="range3" type="Int" bits="10" />
+				<Var name="range4" type="Int" bits="10" />
+			</Var>
+		</Var>
+	</Var>
+	
+	<Var name="Strings" type="Container" bits="0" >
+		<Var name="StringTableStringgroups" type="Count" bits="8" >
+			<Var name="bool1" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="EnglishStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool2" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="JapaneseStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool3" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="GermanStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool4" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="FrenchStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool5" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="SpanishStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool6" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="LatinStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool7" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="ItalianStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool8" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="KoreanStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool9" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="ChineseStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool10" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="ChineseStringIndex2" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool11" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="PortugeseStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool12" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="PolishStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool13" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="RussianStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool14" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="DanishStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool15" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="FinnishStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+			<Var name="bool16" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="DutchStringIndex" type="Int" bits="16"/>
+				</Var>
+			</Var>
+			<Var name="bool17" type="Enum" bits="1" >
+				<Var ID="0" name="Null" />
+				<Var ID="1" name="In-Use" >
+					<Var name="NorwegianStringIndex" type="Int" bits="16" />
+				</Var>
+			</Var>
+		</Var>
+		<Var name="StringTableBufferIndex" type="HCount" bits="16" />
+		
+		<Var name="StringNameIndex" type="Int" bits="8" />
+		<Var name="metanameStringgroups" type="Enum" bits="1" >
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="bool1" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="EnglishStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool2" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="JapaneseStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool3" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="GermanStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool4" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FrenchStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool5" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="SpanishStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool6" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="LatinStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool7" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ItalianStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool8" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="KoreanStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool9" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool10" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex2" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool11" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PortugeseStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool12" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PolishStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool13" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="RussianStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool14" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DanishStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool15" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FinnishStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="bool16" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DutchStringIndex" type="Int" bits="11"/>
+					</Var>
+				</Var>
+				<Var name="bool17" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="NorwegianStringIndex" type="Int" bits="11" />
+					</Var>
+				</Var>
+				<Var name="metanameBufferIndex" type="HCount" bits="11" />
+			</Var>
+		</Var>
+		
+		<Var name="metadescStringgroups" type="Enum" bits="1" >
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="bool1" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="EnglishStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool2" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="JapaneseStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool3" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="GermanStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool4" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FrenchStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool5" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="SpanishStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool6" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="LatinStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool7" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ItalianStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool8" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="KoreanStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool9" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool10" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex2" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool11" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PortugeseStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool12" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PolishStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool13" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="RussianStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool14" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DanishStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool15" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FinnishStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="bool16" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DutchStringIndex" type="Int" bits="13"/>
+					</Var>
+				</Var>
+				<Var name="bool17" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="NorwegianStringIndex" type="Int" bits="13" />
+					</Var>
+				</Var>
+				<Var name="metadescBufferIndex" type="HCount" bits="13" />
+			</Var>
+		</Var>
+		<Var name="Random1bit" type="Int" bits="1" />
+		<Var name="metagroupStringgroups" type="Enum" bits="1" >
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="bool1" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="EnglishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool2" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="JapaneseStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool3" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="GermanStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool4" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FrenchStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool5" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="SpanishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool6" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="LatinStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool7" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ItalianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool8" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="KoreanStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool9" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool10" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="ChineseStringIndex2" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool11" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PortugeseStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool12" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="PolishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool13" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="RussianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool14" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DanishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool15" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="FinnishStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="bool16" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="DutchStringIndex" type="Int" bits="10"/>
+					</Var>
+				</Var>
+				<Var name="bool17" type="Enum" bits="1" >
+					<Var ID="0" name="Null" />
+					<Var ID="1" name="In-Use" >
+						<Var name="NorwegianStringIndex" type="Int" bits="10" />
+					</Var>
+				</Var>
+				<Var name="metagroupBufferIndex" type="HCount" bits="10" />
+			</Var>
+		</Var>
+	</Var>
+	
+	<Var name="ActualGameicon" type="Int" bits="5" />
+	<Var name="ActualGamecategory" type="Int" bits="5" />
+	
+	<Var name="mapperms" type="Count" bits="6" >
+		<Var name="MapID" type="Hex" bits="16" />
+	</Var>
+	<Var name="mappermsflip" type="Int" bits="1" />
+	
+	<Var name="PlayerRatings" type="Container" bits="0" >
+		<Var name="Playerrating-ratingscale" type="Hex" bits="32" />
+		<Var name="Playerrating-kilweight" type="Hex" bits="32" />
+		<Var name="Playerrating-assistweight" type="Hex" bits="32" />
+		<Var name="Playerrating-betrayalweight" type="Hex" bits="32" />
+		<Var name="Playerrating-deathweight" type="Hex" bits="32" />
+		<Var name="Playerrating-normalizebymaxkills" type="Hex" bits="32" />
+		<Var name="Playerrating-base" type="Hex" bits="32" />
+		<Var name="Playerrating-range" type="Hex" bits="32" />
+		<Var name="Playerrating-lossscalar" type="Hex" bits="32" />
+		<Var name="Playerrating-customstat0" type="Hex" bits="32" />
+		<Var name="Playerrating-customstat1" type="Hex" bits="32" />
+		<Var name="Playerrating-customstat2" type="Hex" bits="32" />
+		<Var name="Playerrating-customstat3" type="Hex" bits="32" />
+		<Var name="Playerrating-expansion0" type="Hex" bits="32" />
+		<Var name="Playerrating-expansion1" type="Hex" bits="32" />
+		<Var name="showplayerratings" type="Int" bits="1" />
+	</Var>
+	
+	<Var name="unknown42" type="Blank" bits="42" />
+	<Var name="loadouts" type="Count" bits="9" >
+		<Var name="size" type="Int" bits="2" />
+		<Var name="Enabled" type="Int" bits="1" />
+		<Var name="LoadoutName" type="Enum" bits="1" >
+			<Var ID="0" name="Override" >
+				<Var name="NameIndex" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Null" />
+		</Var>
+		<Var name="Primary" type="Int" bits="8" />
+		<Var name="Secondary" type="Int" bits="8" />
+		<Var name="ArmorAbility" type="Int" bits="8" />
+		<Var name="TacticalPackage" type="Int" bits="8" />
+		<Var name="SupportUpgrade" type="Int" bits="8" />
+		<Var name="GrenadeCount" type="Int" bits="5" />
+		<Var name="Unknown" type="Int" bits="6" />
+	</Var>
+	
+	
+	<Var name="unknown2643" type="Blank" bits="1728" />
+	
+	<Var name="megl" type="External:\Halo 2A\var enums.xml" bits="0" />
+	
+	
+	<Var name="hudwidgets" type="Count" bits="3" >
+		<Var name="location" type="Int" bits="4" />
+	</Var>
+	<Var name="InsertionPoints" type="Container" bits="0" >
+		<Var name="Init" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="LocalInit" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="HostMigration" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="DoubleHostMigration" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="ObjectDeath" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="Local" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="Pregame" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+		<Var name="Incident" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
+		</Var>
+	</Var>
+	<Var name="unknown63" type="Blank" bits="34" />
+	<Var name="requiredobjects" type="Blank" bits="224" />
+	<Var name="unknown1790" type="Blank" bits="1790" />
+	
+	<Var name="Labels" type="Count" bits="5" >
+		<Var name="StringID" type="Int" bits="8" />
+		
+		<Var name="usenumber" type="Enum" bits="1" offset="3">
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="Number" type="Int" bits="16" />
+			</Var>
+		</Var>
+		<Var name="useteamype" type="Enum" bits="1" offset="1">
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="Team" type="Int" bits="4" />
+			</Var>
+		</Var>
+		<Var name="useobjectype" type="Enum" bits="1" >
+			<Var ID="0" name="Null" />
+			<Var ID="1" name="In-Use" >
+				<Var name="Objecttype" type="Int" bits="12" />
+			</Var>
+		</Var>
+		<Var name="MapMinimum" type="Int" bits="7" />
+	</Var>
+	
+	<!-- looking for it in the wrong spot 0 we should be looking after player variables-->
+	
+	<Var name="ObjecFiltersFakecount" type="Int" bits="3" />
+	<Var name="ObjectFilters" type="Count" bits="3" >
+		<Var name="StringIDorLabelID" type="Int" bits="8" />
+		<Var name="Unknown25" type="Blank" bits="25" />
+	</Var>
+	
+	<Var name="Weapontunings" type="Container" bits="0" >
+		<Var name="LightriflePrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="LightrifleSecondary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BoltshotPrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BoltshotSecondary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="SplaserPrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="SplaserSecondary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="RailgunPrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="RailgunSecondary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="PlasmapistolPrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="PlasmapistolSecondary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="PersonalAutoTurretPrimary" type="Enumref:FiringProperties" bits="0" />
+		<Var name="PersonalAutoTurretSecondary" type="Enumref:FiringProperties" bits="0" />
+		
+		<Var name="Suppressor" type="Enumref:FiringProperties" bits="0" />
+		<Var name="Scattershot" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BinaryRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="IncinerationCannon" type="Enumref:FiringProperties" bits="0" />
+		<Var name="Magnum" type="Enumref:FiringProperties" bits="0" />
+		<Var name="AssaultRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="DMR" type="Enumref:FiringProperties" bits="0" />
+		<Var name="Shotgun" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BattleRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="SniperRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="RocketLauncher" type="Enumref:FiringProperties" bits="0" />
+		<Var name="StickyDetonator" type="Enumref:FiringProperties" bits="0" />
+		<Var name="SAW" type="Enumref:FiringProperties" bits="0" />
+		<Var name="Needler" type="Enumref:FiringProperties" bits="0" />
+		<Var name="Carbine" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BeamRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="StormRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="ConcussionRifle" type="Enumref:FiringProperties" bits="0" />
+		<Var name="FuelRodCannon" type="Enumref:FiringProperties" bits="0" />
+		<Var name="GhostPlasmas" type="Enumref:FiringProperties" bits="0" />
+		<Var name="WraithMortar" type="Enumref:FiringProperties" bits="0" />
+		<Var name="WraithAntiInfantry" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BansheePlasmas" type="Enumref:FiringProperties" bits="0" />
+		<Var name="BansheeBomb" type="Enumref:FiringProperties" bits="0" />
+		<Var name="WarthogChaingun" type="Enumref:FiringProperties" bits="0" />
+		<Var name="WarthogGuass" type="Enumref:FiringProperties" bits="0" />
+		<Var name="WarthogRockets" type="Enumref:FiringProperties" bits="0" />
+		<Var name="ScorpionCannon" type="Enumref:FiringProperties" bits="0" />
+		<Var name="ScorpionAntiInfantry" type="Enumref:FiringProperties" bits="0" />
+		<Var name="MantisChaingun" type="Enumref:FiringProperties" bits="0" />
+		<Var name="MantisRockets" type="Enumref:FiringProperties" bits="0" />
+		<Var name="CTFMagnum" type="Enumref:FiringProperties" bits="0" />
+		<Var name="FloodSword" type="Enumref:FiringProperties" bits="0" />
+		
+	</Var>
+	<Var name="Weapontunings2" type="Container" bits="0" >
+		<Var name="Suppressor" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Scattershot" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="BinaryRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="IncinerationCannon" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Magnum" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="AssaultRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="DMR" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Shotgun" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="BattleRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="SniperRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="RocketLauncher" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="StickyDetonator" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="SAW" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Needler" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Carbine" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="BeamRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="StormRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="ConcussionRifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="FuelRodCannon" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="GhostPlasmas" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="WraithMortar" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="WraithAntiInfantry" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="BansheePlasmas" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="BansheeBomb" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="WarthogChaingun" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="WarthogGuass" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="WarthogRockets" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="ScorpionCannon" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="ScorpionAntiInfantry" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="MantisChaingun" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="MantisRockets" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="CTFMagnum" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="FloodSword" type="Enumref:WeaponProperties" bits="0" />
+	
+		<Var name="Lightrifle" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Boltshot" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Splaser" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Railgun" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="Plasmapistol" type="Enumref:WeaponProperties" bits="0" />
+		<Var name="PersonalAutoTurret" type="Enumref:WeaponProperties" bits="0" />
+	</Var>
+	
+</ExTypes>
+</base>

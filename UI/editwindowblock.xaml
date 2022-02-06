@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="gamtetyper.editwindowblock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gamtetyper"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Margin="10,0,0,0">
+            <StackPanel x:Name="resizepanel" Background="White" >
+                
+            </StackPanel>
+        </Border>
+
+
+        <DockPanel x:Name="dock">
+            <Button x:Name="wrapbutton" Grid.Column="1" Content="-" Click="Button_Click" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Width="20" />
+            <Border x:Name="childcontent" BorderBrush="Black" BorderThickness="1" Background="GreenYellow" HorizontalAlignment="Stretch" DockPanel.Dock="Left" >
+                <TextBlock x:Name="UItitle" Text="Player traits speed"/>
+            </Border>
+           
+            <TextBox x:Name="UIvalue" Grid.Column="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Text="TextBox" DockPanel.Dock="Left" HorizontalAlignment="Stretch" />
+
+            
+        </DockPanel>
+
+
+
+    </Grid>
+</UserControl>

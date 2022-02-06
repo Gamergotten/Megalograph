@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="gamtetyper.BranchBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gamtetyper"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="200">
+    
+    <Border x:Name="status_border" BorderBrush="#FFA0BBC1" BorderThickness="2" CornerRadius="1" Width="200" MinHeight="60" >
+        <Border.RenderTransform>
+            <TranslateTransform x:Name="transfrom_location" />
+        </Border.RenderTransform>
+
+        <Grid x:Name="main" Background="White" >
+
+
+            <Border x:Name="head" BorderBrush="Black" Background="#FFCBFF48" BorderThickness="1" CornerRadius="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <Label Content="Branch" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" Margin="9,0,0,0"/>
+                    <Label Content="DO" Grid.Column="1" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" HorizontalAlignment="Right" Margin="0,0,9,0"/>
+                    <Label Content="THEN" Grid.Row="1" Grid.Column="1" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Stretch"/>
+
+                </Grid>
+            </Border>
+
+            <Rectangle x:Name="do_connection" HorizontalAlignment="Right" Margin="166,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="10" Height="10" MouseLeftButtonDown="do_connection_MouseLeftButtonDown" Fill="#FFE2E2E2" Stroke="#FF5D5D5D"/>
+            <Rectangle x:Name="then_connection" HorizontalAlignment="Right" Margin="166,0,0,11" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="10" Height="10" MouseLeftButtonDown="then_connection_MouseLeftButtonDown" Fill="#FFE2E2E2" Stroke="#FF5D5D5D"/>
+            
+            <Rectangle x:Name="in_connection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="10" Height="10" Margin="0,10,0,0" MouseLeftButtonUp="in_connection_MouseLeftButtonUp" Fill="#FFE2E2E2" Stroke="#FF5D5D5D" MouseLeftButtonDown="in_connection_MouseLeftButtonDown"/>
+
+
+        </Grid>
+    </Border>
+</UserControl>

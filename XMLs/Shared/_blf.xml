@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base>
+<ExTypes>
+	<Var name="_BLF" type="String" bits="32" />
+	<Var name="Unknown0x4" type="Int" bits="32" />
+	<Var name="Unknown0x6" type="Int" bits="16" />
+	<Var name="Unknown0x8" type="Int" bits="16" />
+	<Var name="Unknown0xA" type="Int" bits="16" />
+	<Var name="Blank0xC" type="Hex" bits="272" />
+</ExTypes>
+</base>

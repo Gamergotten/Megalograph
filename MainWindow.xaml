@@ -1,0 +1,339 @@
+﻿<Window x:Class="gamtetyper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gamtetyper"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" >
+    <Grid Background="Blue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Background="Green">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Background="Yellow" Grid.Column="1">
+
+
+                <Border BorderBrush="Black" BorderThickness="1" Height="20">
+                    <Grid Grid.Row="1" Background="PaleGoldenrod">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="OpnBinText" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="D:\Game\gametype\path\etc..." VerticalAlignment="Stretch"/>
+
+                        <Button x:Name="OpnBINButton" Grid.Column="1" Content="..." Click="OpnBINButton_Click" />
+
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="20">
+                    <Grid Grid.Row="1" Background="Lime">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="OpnDumpText" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="D:\Game\gametype\path\etc..." VerticalAlignment="Stretch"/>
+                        <Button x:Name="OpnDmpButton" Grid.Column="1" Content="..." Click="OpnDmpButton_Click" />
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="20">
+                    <Grid Grid.Row="1" Background="red">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="90"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="Wrap" Text="Output Target"/>
+                        <ComboBox x:Name="XMLFILTER" Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" IsSynchronizedWithCurrentItem="True" AllowDrop="True" SelectedIndex="0">
+                        </ComboBox>
+
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="20" Background="LightBlue">
+                    <TextBlock TextWrapping="Wrap" Text="Gamemode Title"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="20" Background="BlueViolet">
+                    <TextBlock TextWrapping="Wrap" Text="Gamemode Description"/>
+                </Border>
+                <!--Border BorderBrush="Black" BorderThickness="1" Height="130">
+                    <Grid Background="Brown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1" Background="BurlyWood">
+                            <Grid Grid.Row="1" Background="Coral">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="File Usage" VerticalAlignment="Center"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="White" >
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="Scripted Traits (0/16) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="Scripted Traits (0/16) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="Scripted Traits (0/16) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="Scripted Traits (0/16) 0%" FontSize="10"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="Black" BorderThickness="1" Height="130">
+                    <Grid Background="Brown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1" Background="BurlyWood">
+                            <Grid Grid.Row="1" Background="Chocolate">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Variables" VerticalAlignment="Center"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="White" >
+
+
+                            <Border BorderBrush="Black" BorderThickness="1" Height="16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="15"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2">
+                                        <TextBlock TextWrapping="Wrap" Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                    </Border>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="global.number[0]" VerticalAlignment="Stretch" FontSize="10"/>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="test numeric" VerticalAlignment="Stretch" FontSize="10"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="130">
+                    <Grid Background="Brown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1" Background="BurlyWood">
+                            <Grid Grid.Row="1" Background="Moccasin">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Strings" VerticalAlignment="Center"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="White" >
+
+
+                            <Border BorderBrush="Black" BorderThickness="1" Height="16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="15"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2">
+                                        <TextBlock TextWrapping="Wrap" Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                    </Border>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="global.number[0]" VerticalAlignment="Stretch" FontSize="10"/>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="test numeric" VerticalAlignment="Stretch" FontSize="10"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="65">
+                    <Grid Background="Brown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1" Background="BurlyWood">
+                            <Grid Grid.Row="1" Background="Lavender">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Plugins" VerticalAlignment="Center"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="White" >
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="Scripted Traits (0/16) 0%" FontSize="10"/>
+                            <TextBlock TextWrapping="Wrap" Text="String Table (0/112) 0%" FontSize="10"/>
+                        </StackPanel>
+                    </Grid>
+                </Border-->
+                <Border BorderBrush="Black" BorderThickness="1" Height="130">
+                    <Grid Background="Brown">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1" Background="BurlyWood">
+                            <Grid Grid.Row="1" Background="Chocolate" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="The Console" VerticalAlignment="Center" Margin="0,0,18,0"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Stretch" Width="18">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Stretch" Width="18">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" HorizontalAlignment="Stretch" Width="18">
+                                    <TextBlock TextWrapping="Wrap" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <StackPanel x:Name="ConsolePanel" Grid.Row="1" Margin="0,0,0,0" Background="White" >
+
+
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.RowSpan="3">
+                <local:edit x:Name="testdump" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Border>
+
+            <TabControl x:Name="gmaetypeTabs" Grid.Column="2" SelectionChanged="OnSelectionChanged">
+
+            </TabControl>
+
+
+            <Border Background="#FF232323" x:Name="parent_nodegraph" Grid.Column="2" MouseWheel="testab_MouseWheel" Margin="0,90,0,0" ClipToBounds="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" >
+                <Canvas x:Name="testab" Background="#FF232323"   HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.5,1.5" Width="800" Height="800">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="nodegraph_scale" ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform x:Name="nodegraph_trans" />
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+
+
+                </Canvas>
+            </Border>
+            <Border Background="Yellow"  Grid.Column="2"  Margin="0,90,0,0" Width="13" Height="13">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="DEBUG_LOCAITON" X="0" Y="0" />
+                </Border.RenderTransform>
+            </Border>
+
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="309"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+
+
+
+
+                <Border BorderBrush="Black" BorderThickness="1" Background="Pink" Grid.Row="1" Grid.ColumnSpan="2" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+
+
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="OpnDmpButtontoolbar" Grid.Column="1" Content="Open .sgf" Click="OpnDmpButton_Click" Background="#FFA7E600" />
+                        <Button x:Name="OpnBINButtontoolbar" Grid.Column="2" Content="Open .bin" Click="OpnBINButton_Click" Background="#FFA7E600" />
+
+                        <Button x:Name="DecompButton" Grid.Column="4" Content="Decompile" IsEnabled="False" Click="DecompButton_Click" Background="#FFA7E600" />
+                        <Button x:Name="DecompAsButton" Grid.Column="5" Content="Decompile As" IsEnabled="False" />
+
+                        <Button x:Name="CompButton" Grid.Column="7" Content="Compile" IsEnabled="False" Click="CompButton_Click" Background="#FFA7E600" />
+                        <Button x:Name="CompAsButton" Grid.Column="8" Content="Compile AS" IsEnabled="False"  />
+
+                        <Button x:Name="SaveButton" Grid.Column="10" Content="Save" IsEnabled="False" Click="SaveButton_Click"  />
+                        <Button x:Name="SaveAsButton" Grid.Column="11" Content="Save As" IsEnabled="False"  />
+
+
+                    </Grid>
+                </Border>
+
+                <Border x:Name="meta_viewer" BorderBrush="Black" BorderThickness="1" Background="Purple"  Grid.Row="2" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="Edit Gametype" VerticalAlignment="Center" FontSize="14"/>
+                        <Button x:Name="hide_panel" HorizontalAlignment="Right" Width="40" Click="hide_panel_Click"/>
+                        <ScrollViewer BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+                            <StackPanel x:Name="settingspanel" Grid.Row="1" Background="White"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+
+
+
+        </Grid>
+
+    </Grid>
+</Window>

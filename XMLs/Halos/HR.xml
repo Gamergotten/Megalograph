@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base>
+<ExTypes>
+	<Var name="_blf" type="External:\Shared\_blf.xml" bits="384" />
+	<Var name="chdr" type="External:\Shared\chdr.xml" bits="5632" />
+	<Var name="mpvr" type="External:\Halo reach\mpvr.xml" bits="164160" />
+	<Var name="_eof" type="External:\Shared\_eof.xml" bits="136" />
+	<!--Var name="_fsm" type="External:" bits="3712" /-->
+</ExTypes>
+</base>

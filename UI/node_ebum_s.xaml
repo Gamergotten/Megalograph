@@ -6,37 +6,52 @@
              xmlns:local="clr-namespace:gamtetyper.UI"
              mc:Ignorable="d">
 
-        
+
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1">
+
+        <!--Border x:Name="thing_border" BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+            <Grid x:Name="source_grid" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="type_text" Text="Basic" Grid.Column="0" Foreground="#FF109277" HorizontalAlignment="Center"/>
+
+                <Button x:Name="source_text" Grid.Column="1" Content="Interact" Click="source_text_Click"/>
+                <TextBox x:Name="source_int" Grid.Column="1" Text="poop" LostFocus="source_int_LostFocus" KeyDown="source_int_KeyDown" BorderBrush="Gray" Visibility="Collapsed" />
+                <ComboBox x:Name="source_enum" Grid.Column="1" LostFocus="source_enum_LostFocus" SelectionChanged="source_enum_SelectionChanged" Visibility="Collapsed" DropDownClosed="source_enum_DropDownClosed"/>
+
+                <TextBlock Text="bit" Grid.Column="3" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                <TextBlock x:Name="bit_text" Text="16" Grid.Column="2" Foreground="#FF109277" HorizontalAlignment="Right" Margin="5,0,0,0"/>
+            </Grid>
+        </Border-->
+
+        <Border x:Name="thing_border" BorderBrush="White" BorderThickness="1">
+            <Grid x:Name="source_grid" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="17*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="block_name" Text="Basic element name" Margin="5,1,5,0" Foreground="White" Grid.Row="2"/>
+
+                <Button x:Name="source_text" Grid.Column="1" Content="Interact" Click="source_text_Click" Grid.RowSpan="3"/>
+                <TextBox x:Name="source_int" Grid.Column="1" Text="poop" LostFocus="source_int_LostFocus" KeyDown="source_int_KeyDown" BorderBrush="Gray" Visibility="Collapsed" Grid.RowSpan="3" />
+                <ComboBox x:Name="source_enum" Grid.Column="1" LostFocus="source_enum_LostFocus" SelectionChanged="source_enum_SelectionChanged" Visibility="Collapsed" DropDownClosed="source_enum_DropDownClosed" Grid.RowSpan="3"/>
+            </Grid>
         </Border>
-        <Grid x:Name="source_grid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="35"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="20"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock x:Name="type_text" Text="Basic" Grid.Column="0" Foreground="#FF109277" HorizontalAlignment="Center"/>
-
-
-            <Button x:Name="source_text" Grid.Column="1" Content="Interact" Click="source_text_Click"/>
-            <TextBox x:Name="source_int" Grid.Column="1" Text="poop" LostFocus="source_int_LostFocus" KeyDown="source_int_KeyDown" BorderBrush="Gray" SelectionBrush="DeepSkyBlue" Visibility="Collapsed" />
-            <ComboBox x:Name="source_enum" Grid.Column="1" LostFocus="source_enum_LostFocus" SelectionChanged="source_enum_SelectionChanged" Visibility="Collapsed" DropDownClosed="source_enum_DropDownClosed">
-                
-            </ComboBox>
-
-
-
-            <TextBlock Text="bit" Grid.Column="3" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <TextBlock x:Name="bit_text" Text="16" Grid.Column="2" Foreground="#FF109277" HorizontalAlignment="Right" Margin="5,0,0,0"/>
-        </Grid>
         <StackPanel x:Name="child_panel" Grid.Row="1" Margin="10,2,0,2">
         </StackPanel>
     </Grid>

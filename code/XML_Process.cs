@@ -19,6 +19,111 @@ namespace gamtetyper
 
     class XML_Process
     {
+        public void WRITE_NODE_OF_FILE(Ebum target)
+        {
+            var mmmmmmm = target.nodes_list_yes_i_did_just_do_that;
+
+            string parent_thingo_node = @"Gametype/base";
+            foreach (string s in mmmmmmm.SkipLast(1))
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
+                parent_thingo_node += "/" + test;
+            }
+            string child_node = @"Gametype/base";
+            foreach (string s in mmmmmmm ) //.Take(mmmmmmm.Count - 1))
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
+                child_node += "/" + test;
+            }
+
+            XmlNode node_parent = XMLdump.SelectSingleNode(parent_thingo_node);
+            XmlNode nodde_child = XMLdump.SelectSingleNode(child_node);
+
+            if (nodde_child != null)
+                node_parent.RemoveChild(nodde_child);
+
+            XmlNode acthead = XMLdump.CreateNode("element", target.Name, "");
+            node_parent.AppendChild(acthead); // why are we completely scrubbing this node lol
+
+            XmlAttribute Attr = XMLdump.CreateAttribute("v");
+            Attr.Value = target.V;
+            acthead.Attributes.Append(Attr); // surely this wont work, its set specifically as "get"
+
+
+            append_children_from_ebum_export(acthead, target);
+
+            XMLdump.Save(XMLdump_directory);
+        }
+        public void clear_xml_thingo_thanks(Ebum target)
+        {
+            var mmmmmmm = target.nodes_list_yes_i_did_just_do_that;
+
+            string parent_thingo_node = @"Gametype/base";
+            foreach (string s in mmmmmmm.SkipLast(1))
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
+                parent_thingo_node += "/" + test;
+            }
+            string child_node = @"Gametype/base";
+            foreach (string s in mmmmmmm) //.Take(mmmmmmm.Count - 1))
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
+                child_node += "/" + test;
+            }
+
+            XmlNode node_parent = XMLdump.SelectSingleNode(parent_thingo_node);
+            XmlNode nodde_child = XMLdump.SelectSingleNode(child_node);
+
+            if (nodde_child != null)
+                node_parent.RemoveChild(nodde_child);
+            else
+            {
+                string debug_moment = "we tried to delete something that didnt exist :C";
+            }
+
+            XMLdump.Save(XMLdump_directory);
+        }
+        public List<Ebum> READ_THE_WHOLE_FILE(string node_directory, string shorter_directory, string haloxml)
+        {
+            string xml = haloxml;
+            XmlDocument c = xina(xml);
+            //XmlNode o = c.SelectSingleNode(node_directory);
+            //paramheader2 ph = test(o, xml, "ExTypes");
+
+            List<Ebum> bases = new();
+            //foreach (XmlNode xn in o.ChildNodes)
+
+            //_blf
+            XmlNode o1 = c.SelectSingleNode("/base/ExTypes/Var[@name='_blf']");
+            paramheader2 ph1 = test(o1, xml, "ExTypes");
+            bases.Add(readblock(ph1, "ExTypes", new List<string> {  }));
+            //chdr
+            XmlNode o2 = c.SelectSingleNode("/base/ExTypes/Var[@name='chdr']");
+            paramheader2 ph2 = test(o2, xml, "ExTypes");
+            bases.Add(readblock(ph2, "ExTypes", new List<string> {  }));
+            //mpvr
+            XmlNode o3 = c.SelectSingleNode("/base/ExTypes/Var[@name='mpvr']");
+            paramheader2 ph3 = test(o3, xml, "ExTypes");
+            bases.Add(readblock(ph3, "ExTypes", new List<string> {  }));
+            //_eof
+            XmlNode o4 = c.SelectSingleNode("/base/ExTypes/Var[@name='_eof']");
+            paramheader2 ph4 = test(o4, xml, "ExTypes");
+            bases.Add(readblock(ph4, "ExTypes", new List<string> {  }));
+
+            return bases;
+        }
+
+        public Ebum cheat_to_do_the_node_creation(string node_directory, string shorter_directory, string haloxml)
+        {
+
+            string xml = haloxml;
+            XmlDocument c = xina(xml);
+            XmlNode o = c.SelectSingleNode(node_directory);
+            paramheader2 ph2 = test(o, xml, "ExTypes");
+
+            return readblock(ph2, shorter_directory, new List<string> { "AMONGSUS" });
+        }
+
 
         XmlWriterSettings settings = new XmlWriterSettings()
         {
@@ -46,7 +151,7 @@ namespace gamtetyper
             return list;
         }
 
-        public List<Gametype.trigger> returnScripts(bool is_reach)
+        public List<Gametype.trigger> returnScripts(bool is_reach, string haloxml)
         {
             List<Gametype.trigger> triggers = new List<Gametype.trigger>();
             
@@ -78,7 +183,7 @@ namespace gamtetyper
                 //}
                 //curr_trigg.Attribute = attribute;
                 // grab our ph
-                string a_xml = @"\Halo 2A\var enums.xml";
+                string a_xml = haloxml;
                 XmlDocument a_c = xina(a_xml);
                 XmlNode a_o = a_c.SelectSingleNode("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']/Var[@name='Attribute']");
                 paramheader2 a_ph2 = test(a_o, a_xml, "ExTypes");
@@ -99,7 +204,7 @@ namespace gamtetyper
                 //curr_trigg.Type = type;
 
                 // grab our ph
-                string t_xml = @"\Halo 2A\var enums.xml"; // how do i mark this so i can fix it later
+                string t_xml = haloxml; // how do i mark this so i can fix it later
                 XmlDocument t_c = xina(t_xml);
                 XmlNode t_o = t_c.SelectSingleNode("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']/Var[@name='Type']");
                 paramheader2 t_ph2 = test(t_o, t_xml, "ExTypes");
@@ -115,6 +220,7 @@ namespace gamtetyper
 
                 int actions_offset = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/TriggerCount/" + node + "/ActionOffset").Attributes["v"].InnerText);
                 if (!is_reach) actions_offset -= 1;
+                //actions_offset -= 1;
                 XmlNodeList Actions = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ActionCount").ChildNodes;
 
                 curr_trigg.Actions_insert = actions_offset;
@@ -126,6 +232,7 @@ namespace gamtetyper
 
                 int conditions_offset = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/TriggerCount/" + node + "/ConditionOffset").Attributes["v"].InnerText);
                 if (!is_reach) conditions_offset -= 1;
+                //conditions_offset -= 1;
                 XmlNodeList Conditions = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount").ChildNodes;
 
                 curr_trigg.Conditions_insert = conditions_offset;
@@ -146,7 +253,7 @@ namespace gamtetyper
             
         }
 
-        public List<Gametype.action> doactions()
+        public List<Gametype.action> doactions(string haloxml)
         {
             XmlNodeList Actions = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ActionCount").ChildNodes;
 
@@ -158,19 +265,13 @@ namespace gamtetyper
 
                 XmlNode w = Actions[Index].SelectSingleNode("Type");
 
-
-
-
                 // grab our ph
-                string xml = @"\Halo 2A\var enums.xml";
+                string xml = haloxml;
                 XmlDocument c = xina(xml);
                 XmlNode o = c.SelectSingleNode("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='ActionCount']/Var[@name='Type']");
                 paramheader2 ph2 = test(o, xml, "ExTypes");
 
                 newaction.Type = readblock(ph2, "ExTypes/Var[@name='MegaloScript']/Var[@name='ActionCount']", new List<string> { "mpvr", "megl", "MegaloScript", "ActionCount", w.ParentNode.Name });
-
-
-
 
                 ActionDump.Add(newaction);
             }
@@ -178,7 +279,7 @@ namespace gamtetyper
             return ActionDump;
         }
 
-        public List<Gametype.condition> doconditions()
+        public List<Gametype.condition> doconditions(string haloxml)
         {
             XmlNodeList Conditions = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount").ChildNodes;
 
@@ -191,7 +292,7 @@ namespace gamtetyper
                 XmlNode w = Conditions[Index].SelectSingleNode("Type");
 
                 // grab our ph
-                string xml = @"\Halo 2A\var enums.xml";
+                string xml = haloxml;
                 XmlDocument c = xina(xml);
                 XmlNode o = c.SelectSingleNode("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='ConditionCount']/Var[@name='Type']");
                 paramheader2 ph2 = test(o, xml, "ExTypes");
@@ -358,6 +459,9 @@ namespace gamtetyper
             Ebum t = new Ebum();
             //t.V = ph.name;
             node.Add(ph.name);
+
+            t.nodes_list_yes_i_did_just_do_that = new List<string>(node);
+
             t.Name = node[node.Count-1];
             t.XMLDoc = ph.node;
 
@@ -372,7 +476,12 @@ namespace gamtetyper
 
             if (ph.type == "Int")
             {
-                t.V = returnfromdump(node);
+                var test = returnfromdump(node);
+                if (test == null)
+                {
+                    test = "0";
+                }
+                t.V = test;
 
                 node.RemoveAt(node.Count - 1);
                 return t;
@@ -460,7 +569,7 @@ namespace gamtetyper
                 e3.FUCKK_YOU = ph.name;
                 if (ph.name == "Bool1")
                 {
-                    string DEBUGTHESEBALLS = "";
+                    string DEBUGTHESEBooLLS = "";
                 }
                 return e3;
             }
@@ -493,19 +602,29 @@ namespace gamtetyper
             }
             if (ph.type == "Count")
             {
-                //// convert int to binary and append to compile
-                //int m = m_process.numbofchild(node);
+                // convert int to binary and append to compile
+                int m = numbofchild(node);
                 //string v = clippedtolength(Convert.ToString(m, 2), ph.bits);
 
-                //binarytogo += v; // int to binary
-                //// count children
-                //for (int i = 0; i < m; i++)
-                //{
-                //    node.Add(ph.name + "-child" + i);
-                //    InterpStruct e = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
-                //    readchildren(e, wrap, ph.node, node);
-                //    node.RemoveAt(node.Count - 1);
-                //}
+                // count children
+                t.Params = new List<Ebum>();
+                for (int i = 0; i < m; i++)
+                {
+                    Ebum wrapper = new();
+                    node.Add(ph.name + "-child" + i);
+                    InterpStruct e = readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
+
+                    wrapper.Name = ph.name + "-child" + i;
+                    wrapper.Params = readchildren(e, wrap, ph.node, node);
+
+
+                    var w = new List<string>(node);
+                    wrapper.nodes_list_yes_i_did_just_do_that = w;
+
+
+                    t.Params.Add(wrapper);
+                    node.RemoveAt(node.Count - 1);
+                }
             }
             if (ph.type.Contains("External"))
             {
@@ -562,32 +681,6 @@ namespace gamtetyper
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public string fetchenumID(string path, string doc)
         {
             XmlDocument c = xina(doc);
@@ -605,7 +698,6 @@ namespace gamtetyper
 
             return XMLdump.SelectSingleNode(URItogo).ChildNodes.Count;
         }
-
         public void intakeDecompiledmode(string s)
         {
             XMLdump = new XmlDocument();

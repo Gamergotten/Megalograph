@@ -6,30 +6,35 @@
              xmlns:local="clr-namespace:gamtetyper"
              mc:Ignorable="d" 
              d:DesignHeight="90" d:DesignWidth="200">
-    
-    <Border x:Name="status_border" BorderBrush="#FFA0BBC1" BorderThickness="2" CornerRadius="1" Width="200" MinHeight="90" >
-        <Border.RenderTransform>
-            <TranslateTransform x:Name="transfrom_location" />
-        </Border.RenderTransform>
 
-        <Grid x:Name="main" Background="White" >
+<Border x:Name="status_border" BorderBrush="White" BorderThickness="2" CornerRadius="1" Width="200" MinHeight="90" >
+    <Border.RenderTransform>
+        <TranslateTransform x:Name="transfrom_location" />
+    </Border.RenderTransform>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+    <Grid x:Name="main" Background="#FF3C3C3C" >
 
-            <Border x:Name="head" BorderBrush="Black" Background="#FFD548FF" BorderThickness="1" CornerRadius="1">
-                <Label x:Name="typename" Content="Block Name" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" Margin="30,0,0,0"/>
-            </Border>
-            <StackPanel x:Name="Content_panel" Grid.Row="1" Margin="5,4,5,5">
-       
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-            <Border x:Name="out_connection" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="30" Height="30" MouseLeftButtonDown="out_connection_MouseLeftButtonDown"  Background="#FFE2E2E2" BorderBrush="#FF5D5D5D" BorderThickness="1"/>
-            <Border x:Name="in_connection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="0,0,0,0" MouseLeftButtonUp="in_connection_MouseLeftButtonUp"  Background="#FFE2E2E2" BorderBrush="#FF5D5D5D" BorderThickness="1" MouseLeftButtonDown="in_connection_MouseLeftButtonDown"/>
+        <Border x:Name="head" BorderBrush="Black" Background="#FF9E009E" BorderThickness="1" CornerRadius="1">
+            <Label x:Name="typename" Content="Block Name" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" Margin="30,0,0,0" Foreground="White"/>
+        </Border>
+        <StackPanel x:Name="Content_panel" Grid.Row="1" Margin="5,4,5,5">
+                
+        </StackPanel>
+
+        <Border x:Name="out_connection" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="30" Height="30" MouseLeftButtonDown="out_connection_MouseLeftButtonDown" BorderThickness="1" Background="Transparent">
+            <Border BorderBrush="#FF505050" BorderThickness="2" Background="White" Width="10" Height="10" Margin="18,0,0,0"/>
+        </Border>
+        <Border x:Name="in_connection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="0,0,0,0" MouseLeftButtonUp="in_connection_MouseLeftButtonUp" BorderThickness="1" MouseLeftButtonDown="in_connection_MouseLeftButtonDown" Background="Transparent">
+            <Border BorderBrush="#FF505050" BorderThickness="2" Background="White" Width="10" Height="10" Margin="0,0,18,0"/>
+        </Border>
 
 
-        </Grid>
-    </Border>
+    </Grid>
+</Border>
+
 </UserControl>

@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Windows.Markup;
 using static gamtetyper.Gametype;
 using gamtetyper.UI;
+using gamtetyper.metaviewer;
 
 namespace gamtetyper
 {
@@ -37,7 +38,7 @@ namespace gamtetyper
         }
         public void WHY3(node_ebum_s parent_thing)
         {
-            string bad_fix_trim_his_BALLS = String.Join("", parent_thing.linkedthing.XMLPath.Split('/').SkipLast(1));
+            //string bad_fix_trim_his_BALLS = String.Join("", parent_thing.linkedthing.XMLPath.Split('/').SkipLast(1));
             string path = @"/base/" + parent_thing.linkedthing.XMLPath + "/Var[@name='"+parent_thing.linkedthing.V+ "']";
             string path2 = parent_thing.linkedthing.XMLPath;
             string doc = parent_thing.linkedthing.XMLDoc;
@@ -56,6 +57,270 @@ namespace gamtetyper
                 }
             }
         }
+
+
+        public inline_new_node_thing nodewind;
+        private void parent_nodegraph_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (nodewind != null)
+            {
+                nodewind.is_fucking_closing = true;
+                close_new_node_window();
+                nodewind = null;
+            }
+            nodewind = new inline_new_node_thing();
+
+
+            nodewind.main = this;
+            nodewind.node_X = mouseX;
+            nodewind.node_Y = mouseY;
+
+            //if () // if target is halo reach then hide the branch option
+
+            string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+            if (haloxml2 == "HR")
+                nodewind.new_branch_butt.Visibility = Visibility.Collapsed;
+
+            testab.Children.Add(nodewind);
+
+            nodewind.transfrom_location.X = mouseX;
+            nodewind.transfrom_location.Y = mouseY;
+
+            nodewind.Focus();
+        }
+        public void close_new_node_window()
+        {
+            if (nodewind != null)
+            {
+                testab.Children.Remove(nodewind);
+                nodewind = null;
+            }
+        }
+        public void create_trigger(double x, double y)
+        {
+            string haloxml = returnmegldoc_fromhalo(Loaded_Gametypes[Current_Gametype].Target_Halo);
+
+            Gametype.trigger trigger = new();
+            trigger.Attribute = XP.cheat_to_do_the_node_creation("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']/Var[@name='Attribute']",
+                                                                  "ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']", haloxml);
+            trigger.Type = XP.cheat_to_do_the_node_creation("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']/Var[@name='Type']",
+                                                            "ExTypes/Var[@name='MegaloScript']/Var[@name='TriggerCount']", haloxml);
+            trigger.Name = "Trigger" + active_triggers.Count;
+            trigger.unknown1 = 1;
+            trigger.unknown2 = 1;
+
+            CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+            cb.transfrom_location.X = x;
+            cb.transfrom_location.Y = y;
+
+
+            testab.Children.Add(cb);
+            cb.main.Children.Remove(cb.in_connection);
+            active_triggers.Add(cb);
+
+            //active_triggers.Add(new Gametype.TriggerUI { UI = cb, stored_trigger = trigger });
+            cb.trigger_parent = new Gametype.TriggerUI { UI = cb, stored_trigger = trigger };
+
+            cb.typename.Content = trigger.Name;
+            //cb.
+
+            handleType(cb, cb.Content_panel, trigger.Type);
+
+            handleType(cb, cb.Content_panel, trigger.Attribute);
+
+            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
+
+            cb.trigger_parent.CHILD_elements_key = -1;
+
+        }
+
+
+        public void create_action(double x, double y)
+        {
+            string haloxml = returnmegldoc_fromhalo(Loaded_Gametypes[Current_Gametype].Target_Halo);
+
+
+            Gametype.action action = new();
+            action.Type = XP.cheat_to_do_the_node_creation("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='ActionCount']/Var[@name='Type']",
+                                                           "ExTypes/Var[@name='MegaloScript']/Var[@name='ActionCount']", haloxml);
+
+            CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+            cb.transfrom_location.X = x;
+            cb.transfrom_location.Y = y;
+
+            //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
+            testab.Children.Add(cb);
+            active_actions.Add(give_us_a_stupid_number(), cb);
+            cb.action_parent = new Gametype.ActionUI { UI = cb, stored_action = action };
+            cb.typename.Content = "Action";
+            handleType(cb, cb.Content_panel, action.Type);
+            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
+
+            int test_this_mofo = links.Count;
+            while (links.ContainsKey(test_this_mofo))
+            {
+                test_this_mofo++;
+            }
+            List<potential_block> linkedstuff = new();
+            linkedstuff.Add(new potential_block { _action = cb });
+            links.Add(test_this_mofo, linkedstuff);
+            cb.action_parent.linked_elements_key = test_this_mofo;
+        }
+        public void create_condition(double x, double y)
+        {
+            string haloxml = returnmegldoc_fromhalo(Loaded_Gametypes[Current_Gametype].Target_Halo);
+
+            Gametype.condition condition = new();
+            condition.Not = 0;
+            condition.OR_Group = 0;
+            condition.insertionpoint = -1;
+            condition.Type = XP.cheat_to_do_the_node_creation("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='ConditionCount']/Var[@name='Type']",
+                                                              "ExTypes/Var[@name='MegaloScript']/Var[@name='ConditionCount']", haloxml);
+
+            CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+            cb.transfrom_location.X = x;
+            cb.transfrom_location.Y = y;
+
+            testab.Children.Add(cb);
+            active_conditions.Add(give_us_a_stupid_number(), cb);
+            //active_conditions.Add(ind,new Gametype.ConditionUI { UI = cb, stored_condition = condition });
+            cb.condition_parent = new Gametype.ConditionUI { UI = cb, stored_condition = condition };
+
+            cb.typename.Content = "Condition";
+            //cb.
+
+            condition_top_blocks phee = new();
+            phee.OR_group.Text = condition.OR_Group.ToString();
+            phee.knot_box.IsChecked = (condition.Not == 1);
+            cb.Content_panel.Children.Add(phee);
+            phee.cb = cb;
+
+
+            handleType(cb, cb.Content_panel, condition.Type);
+
+            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
+
+            int test_this_mofo = links.Count;
+            while (links.ContainsKey(test_this_mofo))
+            {
+                test_this_mofo++;
+            }
+            List<potential_block> linkedstuff = new();
+            linkedstuff.Add(new potential_block { _condition = cb });
+            links.Add(test_this_mofo, linkedstuff);
+            cb.condition_parent.linked_elements_key = test_this_mofo;
+        }
+        public void create_branch(double x, double y)
+        {
+            Gametype.action action = new();
+
+            // do i really even need to do something here?
+            // im pretty sure we handle branches just off of the related nodes
+            // ok i was wrong, we do need to do the thing here
+
+            string haloxml = returnmegldoc_fromhalo(Loaded_Gametypes[Current_Gametype].Target_Halo);
+
+            action.Type = new Ebum()
+            {
+                FUCKK_YOU = null,
+                Name = "Type",
+                Size = 8,
+                Type = "Enum",
+                V = "Virtual Trigger",
+                XMLDoc = haloxml,
+                XMLPath = "ExTypes / Var[@name = 'MegaloScript'] / Var[@name = 'ActionCount'] / Var[@name = 'Type']",
+                Params = new()
+                {
+                    new Ebum()
+                    {
+                        FUCKK_YOU = "VirtualTriggerRef",
+                        Name = "VirtualTriggerRef",
+                        Size = 9,
+                        Type = "Container",
+                        V = null,
+                        XMLDoc = haloxml,
+                        XMLPath = "RefTypes/ Var[@name = 'VirtualTriggerRef']",
+                        Params = new()
+                        {
+                            new Ebum()
+                            {
+                                FUCKK_YOU = null,
+                                Name = "UnanmmedInt1",
+                                Size = 10,
+                                Type = "Int",
+                                V = "-1",
+                                XMLDoc = haloxml,
+                                XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt1']",
+                                Params = null,
+                            },
+                            new Ebum()
+                            {
+                                FUCKK_YOU = null,
+                                Name = "UnanmmedInt2",
+                                Size = 10,
+                                Type = "Int",
+                                V = "-1",
+                                XMLDoc = haloxml,
+                                XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt2']",
+                                Params = null,
+                            },
+                            new Ebum()
+                            {
+                                FUCKK_YOU = null,
+                                Name = "UnanmmedInt3",
+                                Size = 11,
+                                Type = "Int",
+                                V = "-1",
+                                XMLDoc = haloxml,
+                                XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt3']",
+                                Params = null,
+                            },
+                            new Ebum()
+                            {
+                                FUCKK_YOU = null,
+                                Name = "UnanmmedInt4",
+                                Size = 11,
+                                Type = "Int",
+                                V = "-1",
+                                XMLDoc = haloxml,
+                                XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt4']",
+                                Params = null,
+                            },
+                        },
+                    }
+                },
+            };
+
+            BranchBlock cb = new BranchBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+            cb.transfrom_location.X = x;
+            cb.transfrom_location.Y = y;
+
+            testab.Children.Add(cb);
+            active_branches.Add(give_us_a_stupid_number(), cb);
+            cb.branch_parent = new Gametype.BranchUI
+            {
+                UI = cb,
+                stored_action = action
+            };
+            cb.branch_parent.CHILD_elements_key = -1;
+
+            int test_this_mofo = links.Count;
+            while (links.ContainsKey(test_this_mofo))
+            {
+                test_this_mofo++;
+            }
+            List<potential_block> linkedstuff = new();
+            linkedstuff.Add(new potential_block { _branch = cb });
+            links.Add(test_this_mofo, linkedstuff);
+            cb.branch_parent.linked_elements_key = test_this_mofo;
+        }
+        public int give_us_a_stupid_number()
+        {
+            return active_actions.Count + active_branches.Count + active_conditions.Count;
+        }
+
+
+        
 
         public MainWindow()
         {
@@ -78,6 +343,19 @@ namespace gamtetyper
 
 
 
+        }
+        public string returnmegldoc_fromhalo(string halo)
+        {
+            switch (halo)
+            {
+                case "HR":
+                    return @"\Halo reach\var enums.xml";
+                case "H4":
+                    return @"\Halo 4\var enums.xml";
+                case "H2A":
+                    return @"\Halo 2A\var enums.xml";
+            }
+            return "";
         }
 
         // public Dictionary<string, string> Loaded_XMLS = new Dictionary<string, string>();
@@ -106,13 +384,8 @@ namespace gamtetyper
         }
 
 
-        public void SGF_LOAD()
-        {
-
-        }
-
         public List<CodeBlock> active_triggers = new ();
-
+        // im *pretty sure* that we only use the number for converting to nodes
         public Dictionary<int, CodeBlock> active_conditions = new();
 
         public Dictionary<int, CodeBlock> active_actions = new ();
@@ -129,10 +402,15 @@ namespace gamtetyper
         {
             // bla lab la return struct data from xml
 
+            string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+            string haloxml = returnmegldoc_fromhalo(haloxml2);
+            bool is_Reach = false;
+            if (haloxml2 == "HR")
+                is_Reach = true;
 
-            t = XP.returnScripts(false);
-            a = XP.doactions();
-            c = XP.doconditions();
+            t = XP.returnScripts(is_Reach, haloxml);
+            a = XP.doactions(haloxml);
+            c = XP.doconditions(haloxml);
 
             for (int ind = 0; ind < a.Count; ind++)  //   Gametype.action
             {
@@ -153,7 +431,7 @@ namespace gamtetyper
 
                     handleType(cb, cb.Content_panel, action.Type);
 
-                    cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 255, 72, 72));
+                    cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
                 }
                 else
                 {
@@ -163,36 +441,14 @@ namespace gamtetyper
 
                     testab.Children.Add(cb);
                     active_branches.Add(ind, cb);
-                    //active_branches.Add(ind, new Gametype.BranchUI
-                    //{
-                    //    UI = cb,
-                    //    stored_action = action,
-                    //    stored_trigger = new Gametype.trigger
-                    //    {
-                    //        Conditions_insert = int.Parse(action.Type.Params[0].Params[0].Name),
-                    //        Conditions_count = int.Parse(action.Type.Params[0].Params[1].Name),
-                    //        Actions_insert = int.Parse(action.Type.Params[0].Params[2].Name),
-                    //        Actions_count = int.Parse(action.Type.Params[0].Params[3].Name),
-
-                    //    },
-                    //}); 
                     cb.branch_parent = new Gametype.BranchUI
                     {
                         UI = cb,
-                        stored_action = action,
-                        stored_trigger = new Gametype.trigger // not sure that we need this tbh
-                        {
-                            Conditions_insert = int.Parse(action.Type.Params[0].Params[0].V),
-                            Conditions_count = int.Parse(action.Type.Params[0].Params[1].V),
-                            Actions_insert = int.Parse(action.Type.Params[0].Params[2].V),
-                            Actions_count = int.Parse(action.Type.Params[0].Params[3].V),
-
-                        },
+                        stored_action = action
                     };
-                    //cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 255, 72, 72));
                 }
 
-
+                
                 //cb.
 
 
@@ -214,17 +470,16 @@ namespace gamtetyper
                 cb.typename.Content = "Condition";
                 //cb.
 
-                TextBox y = new TextBox();
-                cb.Content_panel.Children.Add(y);
-                y.Text = "or group: " + condition.OR_Group;
+                condition_top_blocks phee = new();
+                phee.OR_group.Text = condition.OR_Group.ToString();
+                phee.knot_box.IsChecked = (condition.Not == 1);
+                cb.Content_panel.Children.Add(phee);
+                phee.cb = cb;
 
-                TextBox y1 = new TextBox();
-                cb.Content_panel.Children.Add(y1);
-                y1.Text = "not: " +condition.Not;
 
                 handleType(cb, cb.Content_panel, condition.Type);
 
-                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 213, 72, 255));
+                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
             }
 
             height = 0;
@@ -255,7 +510,7 @@ namespace gamtetyper
 
                 handleType(cb, cb.Content_panel, trigger.Attribute);
 
-                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 255, 188, 43));
+                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
 
                 run_the_loop_on_mf(trigger, longitude, cb, null);
             }
@@ -271,6 +526,17 @@ namespace gamtetyper
 
         public void run_the_loop_on_mf(Gametype.trigger trigger, int longitude, CodeBlock caller, BranchBlock? altcaller)
         {
+            // clear those keys so it hopefully doesn't do something silly
+            if (caller != null) // is a trigger
+            {
+                caller.trigger_parent.CHILD_elements_key = -1;
+            }
+            else // is a branch
+            {
+                altcaller.branch_parent.CHILD_elements_key = -1;
+            }
+
+
             List<potential_block> linkedstuff = new();
 
             List<nodelineupthing> NODELINEUP = new();
@@ -358,7 +624,7 @@ namespace gamtetyper
                         else
                         {
                             _x1 = prev_to_link_branch.transfrom_location.X;
-                            _y1 = prev_to_link_branch.transfrom_location.Y + 30;
+                            _y1 = prev_to_link_branch.transfrom_location.Y + 25;
                         }
                     }
 
@@ -367,9 +633,9 @@ namespace gamtetyper
                         StrokeThickness = 5,
                         IsHitTestVisible = false,
                         Stroke = new SolidColorBrush(Colors.White),
-                        X1 = _x1 + 191,
+                        X1 = _x1 + 192,
                         Y1 = _y1 + 17,
-                        X2 = kv.g_cb.transfrom_location.X + 9,
+                        X2 = kv.g_cb.transfrom_location.X + 8,
                         Y2 = kv.g_cb.transfrom_location.Y + 17
                     };
                     testab.Children.Add(node_connect);
@@ -444,7 +710,7 @@ namespace gamtetyper
                         else
                         {
                             _x1 = prev_to_link_branch.transfrom_location.X;
-                            _y1 = prev_to_link_branch.transfrom_location.Y + 30;
+                            _y1 = prev_to_link_branch.transfrom_location.Y + 25;
                         }
                     }
                     Line node_connect = new Line
@@ -452,9 +718,9 @@ namespace gamtetyper
                         StrokeThickness = 5,
                         IsHitTestVisible = false,
                         Stroke = new SolidColorBrush(Colors.White),
-                        X1 = _x1 + 191,
+                        X1 = _x1 + 192,
                         Y1 = _y1 + 17,
-                        X2 = kv.g_bb.transfrom_location.X + 9,
+                        X2 = kv.g_bb.transfrom_location.X + 8,
                         Y2 = kv.g_bb.transfrom_location.Y + 17
                     };
                     testab.Children.Add(node_connect);
@@ -525,8 +791,14 @@ namespace gamtetyper
             t_element.Children.Add(y);
             y.source_text.Content = append.V;
 
-            y.type_text.Text = append.Type;
-            y.bit_text.Text = append.Size.ToString();
+            //y.type_text.Text = append.Type;
+            //y.bit_text.Text = append.Size.ToString();
+            //rip bozo, you will be missed
+
+            if (append.FUCKK_YOU != null)
+                y.block_name.Text = append.FUCKK_YOU;
+            else
+                y.block_name.Text = append.Name;
 
             y.linkedthing = append;
             y.xmlp = this;
@@ -737,7 +1009,7 @@ namespace gamtetyper
                     StrokeThickness = 5,
                     IsHitTestVisible = false,
                     Stroke = new SolidColorBrush(Colors.White),
-                    X1 = _x1 + 191,
+                    X1 = _x1 + 192,
                     Y1 = _y1 + 17,
                     X2 = mouseX,
                     Y2 = mouseY
@@ -788,25 +1060,6 @@ namespace gamtetyper
                 if (is_not_a_line_from_the_parent_block)
                 {
                     // ----------- DO CODE HERE TO DELINK FROM PREVIOUS GROUP
-                    int key_to_snap = -1;
-                    if (cb.action_parent != null)
-                    {
-                        key_to_snap = cb.action_parent.linked_elements_key;
-                    }
-                    else if (cb.condition_parent != null)
-                    {
-                        key_to_snap = cb.condition_parent.linked_elements_key;
-                    }
-                    List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
-                    int breanpointsnap = -1;
-                    for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
-                    {
-                        if (snap_link_to_find_index_from[p_index]._action == cb || snap_link_to_find_index_from[p_index]._condition == cb)
-                        {
-                            breanpointsnap = p_index;
-                            break;
-                        }
-                    }
 
                     if (owning_KEY_thing != -1) // means that this ISNT a trigger type
                     {
@@ -833,6 +1086,27 @@ namespace gamtetyper
                             }
                         }
                         snap_links_connection(owning_KEY_thing, breanpointbase+1);
+
+                        int key_to_snap = -1;
+                        if (cb.action_parent != null)
+                        {
+                            key_to_snap = cb.action_parent.linked_elements_key;
+                        }
+                        else if (cb.condition_parent != null)
+                        {
+                            key_to_snap = cb.condition_parent.linked_elements_key;
+                        }
+                        List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
+                        int breanpointsnap = -1;
+                        for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
+                        {
+                            if (snap_link_to_find_index_from[p_index]._action == cb || snap_link_to_find_index_from[p_index]._condition == cb)
+                            {
+                                breanpointsnap = p_index;
+                                break;
+                            }
+                        }
+
                         snap_links_connection(key_to_snap, breanpointsnap, owning_KEY_thing);
 
                         // check if line was only snapped and not just appended
@@ -848,21 +1122,21 @@ namespace gamtetyper
                         if (line_dragging_from_codeblock != null)
                         {
                             line_dragging_from_codeblock.Outpath = node_connect;
-                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_codeblock.transfrom_location.Y + 17;
                         }
 
                         if (line_dragging_from_branchblockTHEN != null)
                         {
                             line_dragging_from_branchblockTHEN.THENpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 191;
-                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 47;
+                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 192;
+                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 42;
                         }
 
                         if (line_dragging_from_branchblockDO != null)
                         {
                             line_dragging_from_branchblockDO.DOpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_branchblockDO.transfrom_location.Y + 17;
                         }
                     }
@@ -878,8 +1152,42 @@ namespace gamtetyper
                         {
                             poop = line_dragging_from_codeblock.trigger_parent.CHILD_elements_key;
                         }
+                        if (poop != -1)
+                            snap_links_connection(poop, 0);
+                        else
+                        {
+                            if (line_dragging_from_branchblockDO != null)
+                            {
+                                testab.Children.Remove(line_dragging_from_branchblockDO.DOpath);
+                                line_dragging_from_branchblockDO.DOpath = null;
+                            }
+                            else // its a trigger
+                            {
+                                testab.Children.Remove(line_dragging_from_codeblock.Outpath);
+                                line_dragging_from_codeblock.Outpath = null;
+                            }
+                        }
 
-                        snap_links_connection(poop, 0);
+                        int key_to_snap = -1;
+                        if (cb.action_parent != null)
+                        {
+                            key_to_snap = cb.action_parent.linked_elements_key;
+                        }
+                        else if (cb.condition_parent != null)
+                        {
+                            key_to_snap = cb.condition_parent.linked_elements_key;
+                        }
+                        List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
+                        int breanpointsnap = -1;
+                        for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
+                        {
+                            if (snap_link_to_find_index_from[p_index]._action == cb || snap_link_to_find_index_from[p_index]._condition == cb)
+                            {
+                                breanpointsnap = p_index;
+                                break;
+                            }
+                        }
+
                         snap_links_connection(key_to_snap, breanpointsnap);
 
                         Line node_connect = new Line
@@ -893,21 +1201,21 @@ namespace gamtetyper
                         if (line_dragging_from_codeblock != null)
                         {
                             line_dragging_from_codeblock.Outpath = node_connect;
-                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_codeblock.transfrom_location.Y + 17;
                         }
 
                         if (line_dragging_from_branchblockTHEN != null)
                         {
                             line_dragging_from_branchblockTHEN.THENpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 191;
-                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 47;
+                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 192;
+                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 42;
                         }
 
                         if (line_dragging_from_branchblockDO != null)
                         {
                             line_dragging_from_branchblockDO.DOpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_branchblockDO.transfrom_location.Y + 17;
                         }
 
@@ -998,7 +1306,7 @@ namespace gamtetyper
                     StrokeThickness = 5,
                     IsHitTestVisible = false,
                     Stroke = new SolidColorBrush(Colors.White),
-                    X1 = _x1 + 191,
+                    X1 = _x1 + 192,
                     Y1 = _y1 + 17,
                     X2 = mouseX,
                     Y2 = mouseY
@@ -1021,8 +1329,8 @@ namespace gamtetyper
                     StrokeThickness = 5,
                     IsHitTestVisible = false,
                     Stroke = new SolidColorBrush(Colors.White),
-                    X1 = _x1 + 191,
-                    Y1 = _y1 + 17,
+                    X1 = _x1 + 192,
+                    Y1 = _y1 + 42,
                     X2 = mouseX,
                     Y2 = mouseY
                 };
@@ -1072,21 +1380,7 @@ namespace gamtetyper
                 if (is_not_a_line_from_the_parent_block)
                 {
                     // ----------- DO CODE HERE TO DELINK FROM PREVIOUS GROUP
-                    int key_to_snap = -1;
-                    if (bb.branch_parent != null)
-                    {
-                        key_to_snap = bb.branch_parent.linked_elements_key;
-                    }
-                    List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
-                    int breanpointsnap = -1;
-                    for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
-                    {
-                        if (snap_link_to_find_index_from[p_index]._branch == bb)
-                        {
-                            breanpointsnap = p_index;
-                            break;
-                        }
-                    }
+
 
                     if (owning_KEY_thing != -1) // means that this ISNT a trigger type
                     {
@@ -1113,6 +1407,23 @@ namespace gamtetyper
                             }
                         }
                         snap_links_connection(owning_KEY_thing, breanpointbase + 1);
+
+                        int key_to_snap = -1;
+                        if (bb.branch_parent != null)
+                        {
+                            key_to_snap = bb.branch_parent.linked_elements_key;
+                        }
+                        List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
+                        int breanpointsnap = -1;
+                        for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
+                        {
+                            if (snap_link_to_find_index_from[p_index]._branch == bb)
+                            {
+                                breanpointsnap = p_index;
+                                break;
+                            }
+                        }
+
                         snap_links_connection(key_to_snap, breanpointsnap, owning_KEY_thing);
 
                         // check if line was only snapped and not just appended
@@ -1128,21 +1439,21 @@ namespace gamtetyper
                         if (line_dragging_from_codeblock != null)
                         {
                             line_dragging_from_codeblock.Outpath = node_connect;
-                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_codeblock.transfrom_location.Y + 17;
                         }
 
                         if (line_dragging_from_branchblockTHEN != null)
                         {
                             line_dragging_from_branchblockTHEN.THENpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 191;
-                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 47;
+                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 192;
+                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 42;
                         }
 
                         if (line_dragging_from_branchblockDO != null)
                         {
                             line_dragging_from_branchblockDO.DOpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_branchblockDO.transfrom_location.Y + 17;
                         }
                     }
@@ -1158,8 +1469,38 @@ namespace gamtetyper
                         {
                             poop = line_dragging_from_codeblock.trigger_parent.CHILD_elements_key;
                         }
+                        if (poop != -1)
+                            snap_links_connection(poop, 0);
+                        else
+                        {
+                            if (line_dragging_from_branchblockDO != null)
+                            {
+                                testab.Children.Remove(line_dragging_from_branchblockDO.DOpath);
+                                line_dragging_from_branchblockDO.DOpath = null;
+                            }
+                            else // its a trigger
+                            {
+                                testab.Children.Remove(line_dragging_from_codeblock.Outpath);
+                                line_dragging_from_codeblock.Outpath = null;
+                            }
+                        }
 
-                        snap_links_connection(poop, 0);
+                        int key_to_snap = -1;
+                        if (bb.branch_parent != null)
+                        {
+                            key_to_snap = bb.branch_parent.linked_elements_key;
+                        }
+                        List<potential_block> snap_link_to_find_index_from = links[key_to_snap];
+                        int breanpointsnap = -1;
+                        for (int p_index = 0; p_index < snap_link_to_find_index_from.Count; p_index++)
+                        {
+                            if (snap_link_to_find_index_from[p_index]._branch == bb)
+                            {
+                                breanpointsnap = p_index;
+                                break;
+                            }
+                        }
+
                         snap_links_connection(key_to_snap, breanpointsnap);
 
                         Line node_connect = new Line
@@ -1173,21 +1514,21 @@ namespace gamtetyper
                         if (line_dragging_from_codeblock != null)
                         {
                             line_dragging_from_codeblock.Outpath = node_connect;
-                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_codeblock.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_codeblock.transfrom_location.Y + 17;
                         }
 
                         if (line_dragging_from_branchblockTHEN != null)
                         {
                             line_dragging_from_branchblockTHEN.THENpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 191;
-                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 47;
+                            node_connect.X1 = line_dragging_from_branchblockTHEN.transfrom_location.X + 192;
+                            node_connect.Y1 = line_dragging_from_branchblockTHEN.transfrom_location.Y + 42;
                         }
 
                         if (line_dragging_from_branchblockDO != null)
                         {
                             line_dragging_from_branchblockDO.DOpath = node_connect;
-                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 191;
+                            node_connect.X1 = line_dragging_from_branchblockDO.transfrom_location.X + 192;
                             node_connect.Y1 = line_dragging_from_branchblockDO.transfrom_location.Y + 17;
                         }
 
@@ -1292,7 +1633,12 @@ namespace gamtetyper
                 export_triggs.Add(outthis);
             }
 
-            XP.exportScripts(export_triggs, false);
+            string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+            bool is_Reach = false;
+            if (haloxml2 == "HR")
+                is_Reach = true;
+
+            XP.exportScripts(export_triggs, is_Reach);
             XP.exportactions(export_actions);
             XP.exportconditions(export_condis);
         }
@@ -1598,6 +1944,7 @@ namespace gamtetyper
         public double zoom = 1;
 
         public bool nodegraph_grabbed;
+        public bool graph_in_lod_state;
         private void testab_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             zoom += ((float)e.Delta) / 1000;
@@ -1608,9 +1955,41 @@ namespace gamtetyper
 
             testab.RenderTransformOrigin = new(((1f / (testab.ActualWidth)) * -nodegraph_trans.X) + 0.5f, ((1f / (testab.ActualHeight)) * -nodegraph_trans.Y) + 0.5f);
 
-
             DEBUG_LOCAITON.X = RenderTransformOrigin.X * testab.ActualWidth;
             DEBUG_LOCAITON.Y = RenderTransformOrigin.Y * testab.ActualHeight;
+
+            if (!graph_in_lod_state && zoom <= 0.2f)
+            {
+                graph_in_lod_state = true;
+                foreach(var v in active_triggers)
+                {
+                    v.Content_panel.Visibility = Visibility.Hidden;
+                }
+                foreach (var v in active_conditions)
+                {
+                    v.Value.Content_panel.Visibility = Visibility.Hidden;
+                }
+                foreach (var v in active_actions)
+                {
+                    v.Value.Content_panel.Visibility = Visibility.Hidden;
+                }
+            }
+            if (graph_in_lod_state && zoom > 0.2f)
+            {
+                graph_in_lod_state = false;
+                foreach (var v in active_triggers)
+                {
+                    v.Content_panel.Visibility = Visibility.Visible;
+                }
+                foreach (var v in active_conditions)
+                {
+                    v.Value.Content_panel.Visibility = Visibility.Visible;
+                }
+                foreach (var v in active_actions)
+                {
+                    v.Value.Content_panel.Visibility = Visibility.Visible;
+                }
+            }
         }
         // run all movement events
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -1620,9 +1999,6 @@ namespace gamtetyper
 
             double factored_X = DeltaX * nodegraph_scale.ScaleX;
             double factored_Y = DeltaY * nodegraph_scale.ScaleY;
-
-            double defactored_X = DeltaX;/// nodegraph_scale.ScaleX;
-            double defactored_Y = DeltaY;/// nodegraph_scale.ScaleY;
 
             // 
             foreach (CodeBlock cb in active_triggers)
@@ -1705,12 +2081,12 @@ namespace gamtetyper
             cb.transfrom_location.Y -= Delta_Y;
             if (cb.Inpath != null)
             {
-                cb.Inpath.X2 = cb.transfrom_location.X + 9;
+                cb.Inpath.X2 = cb.transfrom_location.X + 8;
                 cb.Inpath.Y2 = cb.transfrom_location.Y + 17;
             }
             if (cb.Outpath != null)
             {
-                cb.Outpath.X1 = cb.transfrom_location.X + 191;
+                cb.Outpath.X1 = cb.transfrom_location.X + 192;
                 cb.Outpath.Y1 = cb.transfrom_location.Y + 17;
             }
         }
@@ -1721,18 +2097,18 @@ namespace gamtetyper
             cb.transfrom_location.Y -= Delta_Y;
             if (cb.Inpath != null)
             {
-                cb.Inpath.X2 = cb.transfrom_location.X + 9;
+                cb.Inpath.X2 = cb.transfrom_location.X + 8;
                 cb.Inpath.Y2 = cb.transfrom_location.Y + 17;
             }
             if (cb.DOpath != null)
             {
-                cb.DOpath.X1 = cb.transfrom_location.X + 191;
+                cb.DOpath.X1 = cb.transfrom_location.X + 192;
                 cb.DOpath.Y1 = cb.transfrom_location.Y + 17;
             }
             if (cb.THENpath != null)
             {
-                cb.THENpath.X1 = cb.transfrom_location.X + 191;
-                cb.THENpath.Y1 = cb.transfrom_location.Y + 47;
+                cb.THENpath.X1 = cb.transfrom_location.X + 192;
+                cb.THENpath.Y1 = cb.transfrom_location.Y + 42;
             }
         }
 
@@ -1867,6 +2243,251 @@ namespace gamtetyper
                 }
             }
             return -1;
+        }
+
+
+        // -----------------------
+        // -- META VIEWER STUFF --
+        // -----------------------
+        //
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string haloxml = "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml";
+
+            var the_thing = XP.READ_THE_WHOLE_FILE("/base/ExTypes", "ExTypes", haloxml);
+
+            foreach(Ebum v in the_thing)
+            {
+                MV_container_block cotainer = new();
+                cotainer.main = this;
+                cotainer.child = v;
+                cotainer.block_name.Text = v.Name;
+                meta_panel.Children.Add(cotainer);
+            }
+
+        }
+        static public void obama_abducted_my_children(Ebum e, StackPanel new_home_for, MainWindow main)
+        {
+            if (e.Type == "Int")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "UInt")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "Long")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "ULong")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "String")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "String16")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "UString8")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "UString16")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "Hex")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+            if (e.Type == "Blank")
+            {
+                create_value_block(e, new_home_for, main);
+            }
+
+            if (e.Type.Contains("Enumref"))
+            {
+                // container
+                create_container(e, new_home_for, main);
+            }
+            if (e.Type == "Enum")
+            {
+                // enum
+                // this'll be interesting
+                create_enum(e, new_home_for, main);
+            }
+            if (e.Type == "Container")
+            {
+                // container
+                create_container(e, new_home_for, main);
+            }
+            if (e.Type == "Count")
+            {
+                // count
+                create_count(e, new_home_for, main);
+            }
+            if (e.Type.Contains("External"))
+            {
+                // container
+                create_container(e, new_home_for, main);
+            }
+        }
+        static public void biden_abducted_my_children(Ebum e, StackPanel new_home_for, MainWindow main)
+        {
+            create_count_item(e, new_home_for, main);
+        }
+        static void create_container(Ebum data, StackPanel spot, MainWindow main)
+        {
+            MV_container_block cotainer = new();
+            cotainer.main = main;
+            cotainer.child = data;
+            if (data.FUCKK_YOU != null)
+                cotainer.block_name.Text = data.FUCKK_YOU;
+            else
+                cotainer.block_name.Text = data.Name;
+            spot.Children.Add(cotainer);
+        }
+        static void create_count(Ebum data, StackPanel spot, MainWindow main)
+        {
+            MV_count_block count = new();
+            count.main = main;
+            count.child = data;
+            if (data.FUCKK_YOU != null)
+                count.block_name.Text = data.FUCKK_YOU;
+            else
+                count.block_name.Text = data.Name;
+
+            double d = Math.Pow(2.0, (double)data.Size);
+            count.max_text.Text = "(" + d + ")";
+            count.max = (int)d;
+            count.update_count();
+
+            spot.Children.Add(count);
+        }
+        static void create_value_block(Ebum data, StackPanel spot, MainWindow main)
+        {
+            MV_value_block block = new();
+            block.main = main;
+            block.child = data;
+            if (data.FUCKK_YOU != null)
+                block.name_text.Text = data.FUCKK_YOU;
+            else
+                block.name_text.Text = data.Name;
+            block.value_text.Text = data.V;
+            block.bits_text.Text = data.Size.ToString();
+            block.type_text.Text = data.Type;
+            spot.Children.Add(block);
+        }
+        static void create_enum(Ebum data, StackPanel spot, MainWindow main)
+        {
+            MV_enum_block enumb = new();
+            enumb.main = main;
+            enumb.child = data;
+
+            enumb.is_setting_up = true;
+
+            if (data.FUCKK_YOU != null)
+                enumb.name_text.Text = data.FUCKK_YOU;
+            else
+                enumb.name_text.Text = data.Name;
+
+            enumb.bits_text.Text = data.Size.ToString();
+
+            enumb.value_combox.ItemsSource = main.WHY2(data.XMLDoc, data.XMLPath);
+            int current_index = 0;
+            int selected_index = -1;
+            foreach (var v in enumb.value_combox.ItemsSource)
+            {
+                string s = v as string;
+                if (s == data.V)
+                {
+                    selected_index = current_index;
+                }
+                current_index++;
+            }
+            enumb.value_combox.SelectedIndex = selected_index;
+
+            spot.Children.Add(enumb);
+            enumb.is_setting_up = false;
+
+            if (enumb.child.Params != null)
+            {
+                foreach (Ebum ebama in enumb.child.Params)
+                {
+                    MainWindow.obama_abducted_my_children(ebama, enumb.childs_panel, main);
+                }
+            }
+        }
+        public void WHY4(MV_enum_block parent_thing)
+        {
+            //string bad_fix_trim_his_BALLS = String.Join("", parent_thing.linkedthing.XMLPath.Split('/').SkipLast(1));
+            string path = @"/base/" + parent_thing.child.XMLPath + "/Var[@name='" + parent_thing.child.V + "']";
+            string path2 = parent_thing.child.XMLPath;
+            string doc = parent_thing.child.XMLDoc;
+
+            parent_thing.child.Params = XP.readchildren(XP.readdata(path, doc), path2, doc, new List<string>(parent_thing.child.nodes_list_yes_i_did_just_do_that));
+
+            //var ebums = XP.readchildren(XP.readdata(path, doc), path2, doc, new List<string> { "BALLS" });
+            //parent_thing.child.Params = new List<Ebum>();
+            //parent_thing.childs_panel.Children.Clear();
+            //if (ebums != null)
+            //{
+            //    foreach (var v in ebums)
+            //    {
+            //        parent_thing.child.Params.Add(v);
+            //    }
+            //}
+        }
+        static void create_count_item(Ebum data, StackPanel spot, MainWindow main)
+        {
+            MV_count_item count = new();
+            count.main = main;
+            count.child = data;
+            if (data.FUCKK_YOU != null)
+                count.block_name.Text = data.FUCKK_YOU;
+            else
+                count.block_name.Text = data.Name;
+            spot.Children.Add(count);
+        }
+        public void create_count_item(MV_count_block parent_thing)
+        {
+            string bad_fix_trim_his_BALLS = String.Join("", parent_thing.child.XMLPath.Split('/').SkipLast(1));
+
+
+            string path = @"/base/" + parent_thing.child.XMLPath; // + "/Var[@name='" + parent_thing.child.V + "']";
+            string path2 = bad_fix_trim_his_BALLS;
+            string doc = parent_thing.child.XMLDoc;
+
+            var w = new List<string>(parent_thing.child.nodes_list_yes_i_did_just_do_that);
+            w.Add(parent_thing.child.Name +"-child"+parent_thing.child.Params.Count);
+
+            //parent_thing.child.Params;
+
+
+            Ebum wrapper = new();
+            InterpStruct e = XP.readdata(path, doc);
+
+            wrapper.Name = parent_thing.child.Name + "-child" + parent_thing.child.Params.Count;
+            wrapper.Params = XP.readchildren(e, path2, doc, w);
+            wrapper.nodes_list_yes_i_did_just_do_that = w;
+            parent_thing.child.Params.Add(wrapper);
+
+            write_node(wrapper);
+
+
+            //    = XP.readchildren(XP.readdata(path, doc), path2, doc, w);
+        }
+        public void clear_node(Ebum e)
+        {
+            XP.clear_xml_thingo_thanks(e);
+        }
+        public void write_node(Ebum e)
+        {
+            XP.WRITE_NODE_OF_FILE(e);
         }
     }
 }

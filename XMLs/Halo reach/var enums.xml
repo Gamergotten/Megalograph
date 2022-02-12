@@ -424,9 +424,19 @@
 		<Var name="UnanmmedInt2" type="Int" bits="8" />
 		<Var name="UnanmmedInt3" type="Int" bits="8" />
 	</Var>
-	<Var name="ObjectTimerIndex" type="Int" bits="2" />
+	<Var name="ObjectTimerIndex" type="Enum" bits="1" >
+		<Var ID="0" name="use" >
+			<Var name="Index" type="Int" bits="2" />
+		</Var>
+		<Var ID="1" name="none" />
+	</Var>
 	<!-- 3 bits prolly so you can set "none" like labels and widgets-->
-	<Var name="ObjectPlayerIndex" type="Int" bits="3" />
+	<Var name="ObjectPlayerIndex" type="Enum" bits="1" >
+		<Var ID="0" name="use" >
+			<Var name="Index" type="Int" bits="2" />
+		</Var>
+		<Var ID="1" name="none" />
+	</Var>
 	
 	<!-- Waypoints and stuff -->
 	<Var name="WaypointIcon" type="Int" bits="5" />

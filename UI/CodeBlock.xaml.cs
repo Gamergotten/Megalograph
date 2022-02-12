@@ -21,6 +21,9 @@ namespace gamtetyper
     /// </summary>
     public partial class CodeBlock : UserControl
     {
+
+
+
         public CodeBlock()
         {
             InitializeComponent();
@@ -47,7 +50,7 @@ namespace gamtetyper
         private void Label_MouseUp(object sender, MouseButtonEventArgs e)
         {
             is_grabbed = false;
-            status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 160, 187, 193));
+            status_border.BorderBrush = Brushes.White;
            // e.Handled = true;
 
         }

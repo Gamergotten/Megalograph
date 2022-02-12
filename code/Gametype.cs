@@ -58,7 +58,6 @@ namespace gamtetyper
             public BranchBlock UI { get; set; }
             public int CHILD_elements_key { get; set; }
             public int linked_elements_key { get; set; }
-            public trigger stored_trigger { get; set; }
             public action stored_action { get; set; }
         }
 
@@ -102,6 +101,7 @@ namespace gamtetyper
             public string Type { get; set; }
             public int Size { get; set; }
             public string FUCKK_YOU { get; set; } // the parent node in instances where we need a parent xml node
+            public List<string> nodes_list_yes_i_did_just_do_that { get; set; }
         }
 
     }

@@ -43,7 +43,7 @@ namespace gamtetyper.UI
                 
             }
         }
-
+        public bool ignore_selection_change;
         public void setup_valuebox_after_click(string type)
         {
             if (type == "Int")
@@ -109,8 +109,24 @@ namespace gamtetyper.UI
 
                 source_enum.ItemsSource = xmlp.WHY2(linkedthing.XMLDoc, linkedthing.XMLPath);
 
+                ignore_selection_change = true;
+                int current_index = 0;
+                int selected_index = -1;
+                foreach (var v in source_enum.ItemsSource)
+                {
+                    string s = v as string;
+                    if (s == linkedthing.V)
+                    {
+                        selected_index = current_index;
+                    }
+                    current_index++;
+                }
+                source_enum.SelectedIndex = selected_index;
+
                 source_enum.Focus();
                 source_enum.IsDropDownOpen = true;
+
+                ignore_selection_change = false;
             }
             if (type == "Container")
             {
@@ -153,7 +169,7 @@ namespace gamtetyper.UI
             catch
             {
                 number_box.BorderBrush = Brushes.Red;
-                number_box.SelectionBrush = Brushes.Red;
+                thing_border.BorderBrush = Brushes.Red;
                 return;
             }
             if (Convert.ToInt32(Math.Pow(2, linkedthing.Size)) > number)
@@ -168,7 +184,7 @@ namespace gamtetyper.UI
                 linkedthing.V = number.ToString();
                 source_text.Content = number.ToString();
 
-                number_box.SelectionBrush = Brushes.DeepSkyBlue;
+                thing_border.BorderBrush = Brushes.White;
                 number_box.BorderBrush = Brushes.Gray;
                 number_box = null;
                 // also delete it when we get to that part
@@ -176,7 +192,7 @@ namespace gamtetyper.UI
             else
             {
                 number_box.BorderBrush = Brushes.Red;
-                number_box.SelectionBrush = Brushes.Red;
+                thing_border.BorderBrush = Brushes.Red;
                 return;
             }
         }
@@ -190,6 +206,9 @@ namespace gamtetyper.UI
 
         private void source_enum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ignore_selection_change)
+                return;
+            
             source_text.Visibility = Visibility.Visible;
             enum_selected_thing.Visibility = Visibility.Collapsed;
 

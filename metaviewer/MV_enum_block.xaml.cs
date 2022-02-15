@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper.metaviewer
 {
     /// <summary>
@@ -27,7 +27,7 @@ namespace gamtetyper.metaviewer
         }
         public Ebum child;
 
-        public MainWindow main;
+        public NodeWindow main;
 
         public MV_container_block containing_container;
 
@@ -44,10 +44,10 @@ namespace gamtetyper.metaviewer
 
             child.V = selected_enum;
 
-            main.WHY4(this);
+            main.main.WHY4(this);
             childs_panel.Children.Clear();
 
-            main.write_node(child);
+            main.main.write_node(child);
 
             if (child.Params != null)
             {
@@ -62,7 +62,7 @@ namespace gamtetyper.metaviewer
         {
             foreach (Ebum ebama in inherit.Params)
             {
-                main.write_node(ebama);
+                main.main.write_node(ebama);
                 save_children_too(ebama);
             }
         }

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper.UI
 {
     /// <summary>
@@ -30,7 +30,7 @@ namespace gamtetyper.UI
         //    xmlp = xmlpp;
         //}
         public Ebum linkedthing;
-        public MainWindow xmlp;
+        public NodeWindow xmlp;
 
         private void source_text_Click(object sender, RoutedEventArgs e)
         {

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper.metaviewer
 {
     /// <summary>
@@ -32,7 +32,7 @@ namespace gamtetyper.metaviewer
 
         public bool troggle_children;
 
-        public MainWindow main;
+        public NodeWindow main;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             troggle_children = !troggle_children;

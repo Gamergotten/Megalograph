@@ -756,20 +756,21 @@
 	</Var>
 </RefTypes>
 <ExTypes>
-	<Var name="mpvr" type="String" bits="32" />
-	<Var name="megaloversion" type="Int" bits="32" />
-	<Var name="Unknown0x2F8" type="Int" bits="16" /> 
-	<Var name="Unknown0x2FA" type="Int" bits="16" />
-	
-	<Var name="UnknownHash0x2FC" type="Hex" bits="160" />
-	
-	<Var name="Blank0x310" type="Hex" bits="32" />
-	<Var name="Fileusedsize" type="UInt" bits="32" />
-	<Var name="Unknown0x318" type="Int" bits="8" />
-	<Var name="Unknown0x319" type="Int" bits="32" />
-	<Var name="Unknown0x31D" type="Int" bits="32" />
-	
-	<Var name="FileLength" type="Int" bits="32" />
+	<Var name="FileHeader" type="Container" bits="0" >
+		<Var name="mpvr" type="String" bits="32" />
+		<Var name="megaloversion" type="Int" bits="32" />
+		<Var name="Unknown0x2F8" type="Int" bits="16" />
+		<Var name="Unknown0x2FA" type="Int" bits="16" />
+
+		<Var name="UnknownHash0x2FC" type="Hex" bits="160" />
+
+		<Var name="Blank0x310" type="Hex" bits="32" />
+		<Var name="Fileusedsize" type="UInt" bits="32" />
+		<Var name="Unknown0x318" type="Int" bits="8" />
+		<Var name="Unknown0x319" type="Int" bits="32" />
+		<Var name="Unknown0x31D" type="Int" bits="32" />
+		<Var name="FileLength" type="Int" bits="32" />
+	</Var>
 	<Var name="GametypeHeaders" type="Container" bits="0" >
 		<Var name="ID0x48" type="Hex" bits="64" />
 		<Var name="ID0x50" type="Hex" bits="64" />
@@ -1469,60 +1470,6 @@
 	
 	<Var name="megl" type="External:\Halo 2A\var enums.xml" bits="0" />
 	
-	
-	<Var name="hudwidgets" type="Count" bits="3" >
-		<Var name="location" type="Int" bits="4" />
-	</Var>
-	<Var name="InsertionPoints" type="Container" bits="0" >
-		<Var name="Init" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="LocalInit" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="HostMigration" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="DoubleHostMigration" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="ObjectDeath" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="Local" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="Pregame" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-		<Var name="Incident" type="Enum" bits="1" >
-			<Var ID="0" name="Used" >
-				<Var name="Triggerref" type="Int" bits="7" />
-			</Var>
-			<Var ID="1" name="Unused" />
-		</Var>
-	</Var>
 	<Var name="unknown63" type="Blank" bits="34" />
 	<Var name="requiredobjects" type="Blank" bits="224" />
 	<Var name="unknown1790" type="Blank" bits="1790" />

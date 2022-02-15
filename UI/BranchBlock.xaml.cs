@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper
 {
     /// <summary>
@@ -26,7 +26,7 @@ namespace gamtetyper
             InitializeComponent();
         }
 
-        public MainWindow main_window;
+        public NodeWindow main_window;
 
         public BranchUI branch_parent;
 
@@ -36,18 +36,17 @@ namespace gamtetyper
         public Line Inpath;
 
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             is_grabbed = true;
             status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
             e.Handled = true;
         }
-
-        private void Label_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             is_grabbed = false;
             status_border.BorderBrush = Brushes.White;
-           // e.Handled = true;
+            // e.Handled = true;
         }
 
         private void in_connection_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -71,6 +70,12 @@ namespace gamtetyper
         private void in_connection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void Label_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            main_window.delete_branch(this);
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper
 {
     /// <summary>
@@ -29,7 +29,7 @@ namespace gamtetyper
             InitializeComponent();
         }
 
-        public MainWindow main_window;
+        public NodeWindow main_window;
 
         public TriggerUI trigger_parent;
         public ConditionUI condition_parent;
@@ -73,6 +73,12 @@ namespace gamtetyper
         private void in_connection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             e.Handled= true;
+        }
+
+        private void typename_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            main_window.delete_codeblock(this);
         }
     }
 }

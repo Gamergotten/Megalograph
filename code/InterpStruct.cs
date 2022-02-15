@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gamtetyper
 {
-    class InterpStruct
+    public class InterpStruct
     {
         public string name { get; set; }
         public string blockname { get; set; }

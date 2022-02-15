@@ -17,7 +17,7 @@ namespace gamtetyper
 {
 
 
-    class XML_Process
+    public class XML_Process
     {
         public void WRITE_NODE_OF_FILE(Ebum target)
         {
@@ -700,9 +700,17 @@ namespace gamtetyper
         }
         public void intakeDecompiledmode(string s)
         {
+            //if (XMLdump != null)
+            //    XMLdump = null;
             XMLdump = new XmlDocument();
             XMLdump.Load(s);
             XMLdump_directory = s;
+        }
+        public void wipe_decompiled_mode()
+        {
+            if (XMLdump != null)
+                XMLdump = null;
+            XMLdump_directory = null;
         }
 
         public string returnfromdump(List<string> height)

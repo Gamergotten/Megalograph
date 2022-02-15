@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
+using gamtetyper.UI;
 
 namespace gamtetyper.metaviewer
 {
@@ -34,7 +35,7 @@ namespace gamtetyper.metaviewer
 
         public int max;
 
-        public MainWindow main;
+        public NodeWindow main;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             troggle_children = !troggle_children;
@@ -57,7 +58,7 @@ namespace gamtetyper.metaviewer
         {
             if (child.Params.Count < max)
             {
-                main.create_count_item(this);
+                main.main.create_count_item(this);
 
                 troggle_children = false;
                 expand_button.Content = "+";
@@ -69,7 +70,7 @@ namespace gamtetyper.metaviewer
         {
             if (child.Params.Count > 0)
             {
-                main.clear_node(child.Params.Last());
+                main.main.clear_node(child.Params.Last());
                 child.Params.RemoveAt(child.Params.Count -1);
 
                 troggle_children = false;

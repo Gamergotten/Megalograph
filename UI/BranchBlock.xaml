@@ -11,7 +11,7 @@
             <TranslateTransform x:Name="transfrom_location" />
         </Border.RenderTransform>
 
-        <Grid x:Name="main" Background="White" >
+        <Grid x:Name="main" Background="White" MouseLeftButtonDown="Label_MouseLeftButtonDown" MouseLeftButtonUp="Label_MouseLeftButtonUp" MouseRightButtonDown="Label_MouseRightButtonDown" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="34*"/>
@@ -30,9 +30,9 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Branch" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" Margin="9,0,0,0" Foreground="White"/>
-                    <Label Content="DO" Grid.Column="1" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" HorizontalAlignment="Right" Margin="0,0,9,0" Foreground="White"/>
-                    <Label Content="THEN" Grid.Row="1" Grid.Column="1" MouseDown="Label_MouseDown" MouseUp="Label_MouseUp" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Stretch" Foreground="White"/>
+                    <Label Content="Branch"  Margin="9,0,0,0" Foreground="White" />
+                    <Label Content="DO" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,9,0" Foreground="White"/>
+                    <Label Content="THEN" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Stretch" Foreground="White"/>
 
                 </Grid>
             </Border>

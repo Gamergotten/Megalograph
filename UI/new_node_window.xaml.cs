@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using gamtetyper.UI;
 
 namespace gamtetyper.UI
 {
@@ -24,7 +25,7 @@ namespace gamtetyper.UI
             InitializeComponent();
         }
 
-        public MainWindow main;
+        public NodeWindow main;
         public double node_X;
         public double node_Y;
 

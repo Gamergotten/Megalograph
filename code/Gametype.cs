@@ -12,6 +12,8 @@ namespace gamtetyper
     {
         public struct GametypeLoaded
         {
+            public string tabname { get; set; }
+
             public string BIN_File {  get; set; }
             public string SSGF_File { get; set; }
 

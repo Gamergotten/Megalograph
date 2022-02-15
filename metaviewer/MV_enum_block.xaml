@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="name_text" Grid.Column="0" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
-        <ComboBox x:Name="value_combox" Grid.Column="1" SelectionChanged="value_combox_SelectionChanged" />
+        <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="value_combox" Grid.Column="1" SelectionChanged="value_combox_SelectionChanged" Foreground="White" />
 
         <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="White"/>
         <TextBlock Text="Bits" Margin="0,0,5,0" Grid.Column="3" Foreground="#FFB4D28B"/>

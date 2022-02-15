@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace gamtetyper
 {
-    class BitReader
+    public class BitReader
     {
         public int i = 0;
         public XML_Process m_process;

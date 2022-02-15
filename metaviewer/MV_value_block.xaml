@@ -15,7 +15,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="name_text" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
-        <TextBox x:Name="value_text" Text="test value moment" Grid.Column="1" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" KeyDown="edit_value_box"/>
+        <TextBox x:Name="value_text" Text="test value moment" Grid.Column="1" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" KeyDown="edit_value_box" LostFocus="value_text_LostFocus"/>
 
         <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="#FFB4D28B"/>
         <TextBlock Text="Bit" Margin="0,0,0,0" Grid.Column="3" Foreground="#FFB4D28B"/>

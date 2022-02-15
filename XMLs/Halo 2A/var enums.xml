@@ -1937,93 +1937,152 @@
 	</Var>
 	
 	
-	<Var name="MegaloVariables" type="Container" bits="0" >
-		<Var name="globalnumbers" type="Count" bits="5" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+	<Var name="MegaloVars" type="Container" bits="0" >
+		<Var name="GlobalVars" type="Container" bits="0" >
+			<Var name="globalnumbers" type="Count" bits="5" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="globaltimers" type="Count" bits="4" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+			</Var>
+			<Var name="globalteams" type="Count" bits="4" >
+				<Var name="team" type="Int" bits="4" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="globalplayers" type="Count" bits="4" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="globalobjects" type="Count" bits="5" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
 		</Var>
-		<Var name="globaltimers" type="Count" bits="4" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+		<Var name="PlayerVars" type="Container" bits="0" >
+			<Var name="playernumbers" type="Count" bits="4" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="playertimers" type="Count" bits="3" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+			</Var>
+			<Var name="playerteams" type="Count" bits="3" >
+				<Var name="team" type="Int" bits="4" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="playerplayers" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="playerobjects" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
 		</Var>
-		<Var name="globalteams" type="Count" bits="4" >
-			<Var name="team" type="Int" bits="4" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="ObjectVars" type="Container" bits="0" >
+			<Var name="objectnumbers" type="Count" bits="4" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="objecttimers" type="Count" bits="3" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+			</Var>
+			<Var name="objectteams" type="Count" bits="2" >
+				<Var name="team" type="Int" bits="4" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="objectplayers" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="objectobjects" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
 		</Var>
-		<Var name="globalplayers" type="Count" bits="4" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="TeamVars" type="Container" bits="0" >
+			<Var name="teamnumbers" type="Count" bits="4" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="teamtimers" type="Count" bits="3" >
+				<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+			</Var>
+			<Var name="teamteams" type="Count" bits="3" >
+				<Var name="team" type="Int" bits="4" />
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="teamplayers" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
+			<Var name="teamobjects" type="Count" bits="3" >
+				<Var name="locality" type="Int" bits="2" />
+				<Var name="Unknown" type="Int" bits="1" />
+			</Var>
 		</Var>
-		<Var name="globalobjects" type="Count" bits="5" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+	</Var>
+
+	<Var name="hudwidgets" type="Count" bits="3" >
+		<Var name="location" type="Int" bits="4" />
+	</Var>
+	<Var name="InsertionPoints" type="Container" bits="0" >
+		<Var name="Init" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		
-		<Var name="playernumbers" type="Count" bits="4" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="LocalInit" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		<Var name="playertimers" type="Count" bits="3" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
+		<Var name="HostMigration" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		<Var name="playerteams" type="Count" bits="3" >
-			<Var name="team" type="Int" bits="4" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="DoubleHostMigration" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		<Var name="playerplayers" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="ObjectDeath" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		<Var name="playerobjects" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="Local" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		
-		<Var name="objectnumbers" type="Count" bits="4" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="Pregame" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
-		<Var name="objecttimers" type="Count" bits="3" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-		</Var>
-		<Var name="objectteams" type="Count" bits="2" >
-			<Var name="team" type="Int" bits="4" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		<Var name="objectplayers" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		<Var name="objectobjects" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		
-		<Var name="teamnumbers" type="Count" bits="4" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		<Var name="teamtimers" type="Count" bits="3" >
-			<Var name="NumericTypeRef" type="Enumref:NumericTypeRef" bits="0" />
-		</Var>
-		<Var name="teamteams" type="Count" bits="3" >
-			<Var name="team" type="Int" bits="4" />
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		<Var name="teamplayers" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
-		</Var>
-		<Var name="teamobjects" type="Count" bits="3" >
-			<Var name="locality" type="Int" bits="2" />
-			<Var name="Unknown" type="Int" bits="1" />
+		<Var name="Incident" type="Enum" bits="1" >
+			<Var ID="0" name="Used" >
+				<Var name="Triggerref" type="Int" bits="7" />
+			</Var>
+			<Var ID="1" name="Unused" />
 		</Var>
 	</Var>
 </ExTypes>

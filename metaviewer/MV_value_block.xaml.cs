@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
-
+using gamtetyper.UI;
 namespace gamtetyper.metaviewer
 {
     /// <summary>
@@ -30,35 +30,42 @@ namespace gamtetyper.metaviewer
 
         public MV_container_block containing_container;
 
-        public MainWindow main;
+        public NodeWindow main;
         private void edit_value_box(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return )
             {
-                if (child.Type == "Int")
-                {
-                    try
-                    {
-                        child.V = int.Parse(value_text.Text).ToString();
-                    }
-                    catch
-                    {
-                        value_text.Foreground = Brushes.Red;
-                        return;
-                    }
-                }
-                else
-                {
-                    child.V = value_text.Text;
-                }
-
-                main.write_node(child);
-                value_text.Foreground = Brushes.White;
+                send_changes();
                 //OR_group.foc
                 Keyboard.ClearFocus();
             }
         }
 
- 
+        private void value_text_LostFocus(object sender, RoutedEventArgs e)
+        {
+            send_changes();
+        }
+        public void send_changes()
+        {
+            if (child.Type == "Int")
+            {
+                try
+                {
+                    child.V = int.Parse(value_text.Text).ToString();
+                }
+                catch
+                {
+                    value_text.Foreground = Brushes.Red;
+                    return;
+                }
+            }
+            else
+            {
+                child.V = value_text.Text;
+            }
+
+            main.main.write_node(child);
+            value_text.Foreground = Brushes.White;
+        }
     }
 }

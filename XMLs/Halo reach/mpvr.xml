@@ -50,7 +50,8 @@
 		<Var name="SecondarycolorOverride" type="Int" bits="1" />
 		<Var name="PrimarycolorOverride" type="Int" bits="1" />
 		<Var name="TeamEnabled" type="Int" bits="1" />
-		<Var name="Overridename" type="Enum" bits="1" >
+		<Var name="Teamstring" type="HCount" bits="1" chars="5" />
+		<!--Var name="Overridename" type="Enum" bits="1" >
 			<Var ID="0" name="True" />
 			<Var ID="1" name="False" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -127,7 +128,7 @@
 				</Var>
 				<Var name="TeamnameBufferIndex" type="HCount" bits="5" />
 			</Var>
-		</Var>
+		</Var-->
 		<Var name="InitialDesignator" type="Int" bits="4" />
 		<Var name="Elitespecies" type="Int" bits="1" />
 		<Var name="PrimaryColor" type="Hex" bits="32" />
@@ -316,7 +317,8 @@
 	</Var>
 	
 	<Var name="Strings" type="Container" bits="0" >
-		<Var name="StringTableStringgroups" type="Count" bits="7" >
+		<Var name="Stringtable" type="HCount" bits="7" chars="15" />
+		<!--Var name="StringTableStringgroups" type="Count" bits="7" >
 			<Var name="bool1" type="Enum" bits="1" >
 				<Var ID="0" name="Null" />
 				<Var ID="1" name="In-Use" >
@@ -390,10 +392,11 @@
 				</Var>
 			</Var>
 		</Var>
-		<Var name="StringTableBufferIndex" type="HCount" bits="15" />
+		<Var name="StringTableBufferIndex" type="HCount" bits="15" /-->
 		
 		<Var name="StringNameIndex" type="Int" bits="7" />
-		<Var name="metanameStringgroups" type="Enum" bits="1" >
+		<Var name="metanameStrings" type="HCount" bits="1" chars="9" />
+		<!--Var name="metanameStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -470,9 +473,9 @@
 				</Var>
 				<Var name="metanameBufferIndex" type="HCount" bits="9" />
 			</Var>
-		</Var>
-		
-		<Var name="metadescStringgroups" type="Enum" bits="1" >
+		</Var-->
+		<Var name="metadescStrings" type="HCount" bits="1" chars="12" />
+		<!--Var name="metadescStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -549,9 +552,9 @@
 				</Var>
 				<Var name="metadescBufferIndex" type="HCount" bits="12" />
 			</Var>
-		</Var>
-		
-		<Var name="metagroupStringgroups" type="Enum" bits="1" >
+		</Var-->
+		<Var name="metagroupStrings" type="HCount" bits="1" chars="9" />
+		<!--Var name="metagroupStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -628,7 +631,7 @@
 				</Var>
 				<Var name="metagroupBufferIndex" type="HCount" bits="9" />
 			</Var>
-		</Var>
+		</Var-->
 	</Var>
 	
 	<Var name="ActualGameicon" type="Int" bits="5" />

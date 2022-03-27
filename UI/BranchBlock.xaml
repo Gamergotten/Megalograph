@@ -11,7 +11,7 @@
             <TranslateTransform x:Name="transfrom_location" />
         </Border.RenderTransform>
 
-        <Grid x:Name="main" Background="White" MouseLeftButtonDown="Label_MouseLeftButtonDown" MouseLeftButtonUp="Label_MouseLeftButtonUp" MouseRightButtonDown="Label_MouseRightButtonDown" >
+        <Grid x:Name="main" Background="White" MouseLeftButtonDown="Label_MouseLeftButtonDown" MouseLeftButtonUp="Label_MouseLeftButtonUp" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="34*"/>

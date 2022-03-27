@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gamtetyper.UI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="#FF232323" x:Name="parent_nodegraph" Grid.Column="2" MouseWheel="testab_MouseWheel" ClipToBounds="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" MouseRightButtonDown="parent_nodegraph_MouseRightButtonDown" >
-        <Canvas x:Name="testab" Background="#FF232323"   HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.5,1.5" Width="800" Height="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             KeyDown="parent_nodegraph_KeyDown" Focusable="True">
+    <Border Background="#FF232323" x:Name="parent_nodegraph" Grid.Column="2" MouseWheel="testab_MouseWheel" ClipToBounds="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" MouseRightButtonDown="parent_nodegraph_MouseRightButtonDown" MouseDown="parent_nodegraph_MouseDown" MouseUp="parent_nodegraph_MouseUp" MouseLeave="parent_nodegraph_MouseLeave"  
+            >
+        <Canvas x:Name="testab" Background="#FF232323"   HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.5,1.5" Width="800" Height="800" 
+             >
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="nodegraph_scale" ScaleX="1" ScaleY="1"/>

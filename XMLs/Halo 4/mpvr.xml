@@ -315,7 +315,8 @@
 		<Var name="SecondarycolorOverride" type="Int" bits="1" />
 		<Var name="PrimarycolorOverride" type="Int" bits="1" />
 		<Var name="TeamEnabled" type="Int" bits="1" />
-		<Var name="Overridename" type="Enum" bits="1" >
+		<Var name="Teamstring" type="HCount" bits="1" chars="10" />
+		<!--Var name="Overridename" type="Enum" bits="1" >
 			<Var ID="0" name="False" />
 			<Var ID="1" name="True" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -422,7 +423,7 @@
 				</Var>
 				<Var name="TeamnameBufferIndex" type="HCount" bits="10" />
 			</Var>
-		</Var>
+		</Var-->
 		<Var name="InitialDesignator" type="Int" bits="4" />
 		<Var name="Elitespecies" type="Int" bits="1" />
 		<Var name="PrimaryColor" type="Hex" bits="32" />
@@ -963,7 +964,8 @@
 	</Var>
 	
 	<Var name="Strings" type="Container" bits="0" >
-		<Var name="StringTableStringgroups" type="Count" bits="8" >
+		<Var name="metanameStrings" type="HCount" bits="8" chars="16" />
+		<!--Var name="StringTableStringgroups" type="Count" bits="8" >
 			<Var name="bool1" type="Enum" bits="1" >
 				<Var ID="0" name="Null" />
 				<Var ID="1" name="In-Use" >
@@ -1067,10 +1069,11 @@
 				</Var>
 			</Var>
 		</Var>
-		<Var name="StringTableBufferIndex" type="HCount" bits="16" />
+		<Var name="StringTableBufferIndex" type="HCount" bits="16" /-->
 		
 		<Var name="StringNameIndex" type="Int" bits="8" />
-		<Var name="metanameStringgroups" type="Enum" bits="1" >
+		<Var name="metanameStrings" type="HCount" bits="1" chars="11" />
+		<!--Var name="metanameStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -1177,9 +1180,9 @@
 				</Var>
 				<Var name="metanameBufferIndex" type="HCount" bits="11" />
 			</Var>
-		</Var>
-		
-		<Var name="metadescStringgroups" type="Enum" bits="1" >
+		</Var-->
+		<Var name="metadescStrings" type="HCount" bits="1" chars="13" />
+		<!--Var name="metadescStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -1286,9 +1289,10 @@
 				</Var>
 				<Var name="metadescBufferIndex" type="HCount" bits="13" />
 			</Var>
-		</Var>
+		</Var-->
 		<Var name="Random1bit" type="Int" bits="1" />
-		<Var name="metagroupStringgroups" type="Enum" bits="1" >
+		<Var name="metanameStrings" type="HCount" bits="1" chars="10" />
+		<!--Var name="metagroupStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
 				<Var name="bool1" type="Enum" bits="1" >
@@ -1395,7 +1399,7 @@
 				</Var>
 				<Var name="metagroupBufferIndex" type="HCount" bits="10" />
 			</Var>
-		</Var>
+		</Var-->
 	</Var>
 	
 	<Var name="ActualGameicon" type="Int" bits="5" />
@@ -1498,7 +1502,6 @@
 		<Var name="PlasmapistolSecondary" type="Enumref:FiringProperties" bits="0" />
 		<Var name="PersonalAutoTurretPrimary" type="Enumref:FiringProperties" bits="0" />
 		<Var name="PersonalAutoTurretSecondary" type="Enumref:FiringProperties" bits="0" />
-		
 		<Var name="Suppressor" type="Enumref:FiringProperties" bits="0" />
 		<Var name="Scattershot" type="Enumref:FiringProperties" bits="0" />
 		<Var name="BinaryRifle" type="Enumref:FiringProperties" bits="0" />
@@ -1532,7 +1535,6 @@
 		<Var name="MantisRockets" type="Enumref:FiringProperties" bits="0" />
 		<Var name="CTFMagnum" type="Enumref:FiringProperties" bits="0" />
 		<Var name="FloodSword" type="Enumref:FiringProperties" bits="0" />
-		
 	</Var>
 	<Var name="Weapontunings2" type="Container" bits="0" >
 		<Var name="Suppressor" type="Enumref:WeaponProperties" bits="0" />
@@ -1568,7 +1570,6 @@
 		<Var name="MantisRockets" type="Enumref:WeaponProperties" bits="0" />
 		<Var name="CTFMagnum" type="Enumref:WeaponProperties" bits="0" />
 		<Var name="FloodSword" type="Enumref:WeaponProperties" bits="0" />
-	
 		<Var name="Lightrifle" type="Enumref:WeaponProperties" bits="0" />
 		<Var name="Boltshot" type="Enumref:WeaponProperties" bits="0" />
 		<Var name="Splaser" type="Enumref:WeaponProperties" bits="0" />

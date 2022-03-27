@@ -17,17 +17,9 @@ namespace gamtetyper
             public string BIN_File {  get; set; }
             public string SSGF_File { get; set; }
 
-            public List<string> TabsOpen { get; set; }
-            public List<string> UnsavedValues { get; set; }
-
             public string Target_Halo { get; set; }
             
             // make these refer to the UI counterparts
-            public List<trigger> triggers{ get; set; }
-
-            public List<action> actions { get; set; }
-
-            public List<condition> conditions { get; set; }
 
 
         }

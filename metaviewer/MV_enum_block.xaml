@@ -5,26 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gamtetyper.metaviewer"
              mc:Ignorable="d" >
-    <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="27"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid >
 
-        <TextBlock x:Name="name_text" Grid.Column="0" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
-        <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="value_combox" Grid.Column="1" SelectionChanged="value_combox_SelectionChanged" Foreground="White" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <Border BorderBrush="#FF9C9C9C" BorderThickness="1" Background="#FF353535">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="27"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="name_text" Grid.Column="0" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
+                <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="value_combox" Grid.Column="1" SelectionChanged="value_combox_SelectionChanged" Foreground="White" />
 
-        <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="White"/>
-        <TextBlock Text="Bits" Margin="0,0,5,0" Grid.Column="3" Foreground="#FFB4D28B"/>
+                <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="White"/>
+                <TextBlock Text="Bits" Margin="0,0,5,0" Grid.Column="3" Foreground="#FFB4D28B"/>
 
 
-        <StackPanel x:Name="childs_panel" Grid.Row="1" Grid.ColumnSpan="5" Margin="15,0,0,0">
-        </StackPanel>
-    </Grid>
+            </Grid>
+
+        </Border>
+
+
+            <StackPanel x:Name="childs_panel" Grid.Row="1" Grid.ColumnSpan="5" Margin="15,0,0,0">
+            </StackPanel>
+        </Grid>
 </UserControl>

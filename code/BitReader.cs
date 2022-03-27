@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using gamtetyper.code;
 
 namespace gamtetyper
 {
@@ -13,11 +14,13 @@ namespace gamtetyper
         public XML_Process m_process;
         public string bitclump;
 
-        public string fordump;
+        //public string fordump;
 
         public string infstring;
 
         public bool skip;
+
+        public bool isreach;
 
         public void readbin(byte[] fileBytes, string XML)
         {
@@ -39,207 +42,265 @@ namespace gamtetyper
             m_process.writenode("base", "");
             foreach (paramheader2 p in m_process.returnchildren(path))
             {
-                fordump = "Halo ";
+                //fordump = "Halo ";
                 readblock(p, "ExTypes");
                 //runstack();
-                Console.WriteLine(fordump);
+                //Console.WriteLine(fordump);
             }
             m_process.endnode();
         }
 
         public void readblock(paramheader2 ph, string wrap)
         {
-            fordump += "@" + i;
-            if (ph.type == "Int")
-            {
-                string s = bitclumpBIN(ph.bits).ToString();
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s  + ") ";
-            }
-            if (ph.type == "UInt")
-            {
-                string s = bitclumpBIN(ph.bits).ToString();
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "Long")
-            {
-                string s = bitclumpBIN1(ph.bits).ToString();
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "ULong")
-            {
-                string s = bitclumpBIN1(ph.bits).ToString();
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "String")
-            {
-                string s = bitclumpBIN3(ph.bits);
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
+            //fordump += "@" + i;
 
-            }
-            if (ph.type == "String16")
+            switch (ph.type)
             {
-                string s = bitclumpBIN3(ph.bits);
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-
-            }
-            if (ph.type == "UString8")
-            {
-                string s1 = BinaryToString16(bitclumpBIN5());
-                string s = s1.Replace("\0\0", "");
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "UString16")
-            {
-                string s1 = BinaryToString16(bitclumpBIN4());
-                string s = s1.Replace("\0\0", "");
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "Hex")
-            {
-                string s = bitclumpBIN3(ph.bits);
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-            if (ph.type == "Blank")
-            {
-                string s = bitclumpBIN2(ph.bits);
-                m_process.writenode(ph.name, s);
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s + ") ";
-            }
-
-            if (ph.type.Contains("Enumref"))
-            {
-                string[] w = ph.type.Split(":");
-                ph.node1 = "RefTypes";
-                paramheader2 ph2 = VarInterpret(ph.node1, w[1], ph.node);
-                ph2.node = ph.node;
-                ph2.node1 = "RefTypes";
-
-                m_process.writenode(ph.name, "");
-                readblock(ph2, ph2.node1);
-                m_process.endnode();
-            }
-
-            if (ph.type == "Enum")
-            {
-                string i = bitclumpBIN2(ph.bits);
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i + ") ";
-
-                if (ph.offset != -1)
-                {
-                    callstack cw = new callstack();
-                    cw.w = m_process.readdata("base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@ID='" + i + "']", ph.node);
-                    cw.w.name = ph.name;
-                    cw.depth = ph.offset;
-                    cw.parentnode = wrap;
-                    cw.docx = ph.node;
-                    cw.read2 = ph.node1 + "/Var[@name='" + ph.name + "']";
-                    stack.Add(cw);
-                }
-                else
-                {
-                    InterpStruct e = m_process.readdata("base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@ID='" + i + "']", ph.node);
-                    m_process.writenode(ph.name, e.blockname);
-                    skip = true;
-                    readchildren(e, wrap + "/Var[@name='" + ph.name + "']", ph.node);
+                case "Int":
+                    string s1 = bitclumpBIN(ph.bits).ToString();
+                    m_process.writenode(ph.name, s1);
                     m_process.endnode();
-                    skip = false;
-                }
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s1 + ") ";
+                    break;
+                case "UInt":
+                    string s2 = bitclumpBIN(ph.bits).ToString();
+                    m_process.writenode(ph.name, s2);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s2 + ") ";
+                    break;
+                case "Long":
+                    string s3 = bitclumpBIN1(ph.bits).ToString();
+                    m_process.writenode(ph.name, s3);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s3 + ") ";
+                    break;
+                case "ULong":
+                    string s4 = bitclumpBIN1(ph.bits).ToString();
+                    m_process.writenode(ph.name, s4);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s4 + ") ";
+                    break;
+                case "String":
+                    string s5 = bitclumpBIN3(ph.bits);
+                    string s5_1 = FromHexString8(s5.Replace("00", ""));
+                    m_process.writenode(ph.name, s5_1);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s5 + ") ";
+                    break;
+                case "String16":
+                    string s6 = bitclumpBIN3(ph.bits);
+                    string s6_1 = FromHexString16(s6.Replace("0000", ""));
+                    m_process.writenode(ph.name, s6_1);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s6 + ") ";
+                    break;
+                case "UString8":
+                    string s7 = BinaryToString16(bitclumpBIN5());
+                    string s7_1 = FromHexString8(s7.Replace("00", ""));
+                    m_process.writenode(ph.name, s7_1);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s7 + ") ";
+                    break;
+                case "UString16":
+                    string s8 = BinaryToString16(bitclumpBIN4());
+                    string s8_1 = FromHexString16(s8.Replace("0000", ""));
+                    m_process.writenode(ph.name, s8_1);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s8 + ") ";
+                    break;
+                case "Hex":
+                    string s9 = bitclumpBIN3(ph.bits);
+                    m_process.writenode(ph.name, s9);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s9 + ") ";
+                    break;
+                case "Blank":
+                    string s10 = bitclumpBIN2(ph.bits);
+                    m_process.writenode(ph.name, s10);
+                    m_process.endnode();
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s10 + ") ";
+                    break;
+                case "Enum":
+                    // enum
+                    // this'll be interesting
+                    string i1 = bitclumpBIN2(ph.bits);
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i1 + ") ";
 
-            }
-            if (ph.type == "Container")
-            {
-                m_process.writenode(ph.name, "");
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
-                InterpStruct e = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
-                readchildren(e, wrap, ph.node);
-                m_process.endnode();
-            }
-            if (ph.type == "Count")
-            {
-                m_process.writenode(ph.name, "");
-                int m = bitclumpBIN(ph.bits);
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
-                for (int i = 0; i < m; i += 1)
-                {
-                     m_process.writenode(ph.name+"-child"+ i, "");
-                     InterpStruct e = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
-                     readchildren(e, wrap, ph.node);
-                     m_process.endnode();
-                }
-                m_process.endnode();
-            }
-            if (ph.type == "HCount")
-            {
-                m_process.writenode(ph.name, "");
-                int m = bitclumpBIN(ph.bits);
-                m_process.writenode("TableLength", m.ToString());
-                m_process.endnode();
-                fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") \r\n";
-                int d = bitclumpBIN(1);
-                m_process.writenode("Compressed", d.ToString());
-                fordump += "(" + 1 + "-bit Bool - " + ph.name + ": " + d + ") \r\n";
-                if (d == 0)
-                {
-                    string b = bitclumpBIN3(m * 8);
-                    fordump += "(" + 8 + "-bit Hex - " + ph.name + ": " + b + ") \r\n";
-                    m_process.writenode("TableBytes", b);
+                    if (ph.offset != -1)
+                    {
+                        callstack cw = new callstack();
+                        cw.w = m_process.readdata("base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@ID='" + i1 + "']", ph.node);
+                        cw.w.name = ph.name;
+                        cw.depth = ph.offset;
+                        cw.parentnode = wrap;
+                        cw.docx = ph.node;
+                        cw.read2 = ph.node1 + "/Var[@name='" + ph.name + "']";
+                        stack.Add(cw);
+                    }
+                    else
+                    {
+                        InterpStruct e = m_process.readdata("base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@ID='" + i1 + "']", ph.node);
+                        m_process.writenode(ph.name, e.blockname);
+                        skip = true;
+                        readchildren(e, wrap + "/Var[@name='" + ph.name + "']", ph.node);
+                        m_process.endnode();
+                        skip = false;
+                    }
+                    break;
+                case "Container":
+                    // container
+                    m_process.writenode(ph.name, "");
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
+                    InterpStruct e2 = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
+                    readchildren(e2, wrap, ph.node);
                     m_process.endnode();
-                }
-                else
-                {
-                    int m1 = bitclumpBIN(ph.bits);
-                    m_process.writenode("CompressedLength", m1.ToString());
-                    string b = bitclumpBIN3(m1 * 8);
-                    fordump += "(" + m1*8 + "-bit Hex - " + ph.name + ": " + b + ") \r\n";
-                    m_process.writenode("CompressedBytes", b);
+                    break;
+                case "Count":
+                    // count
+                    m_process.writenode(ph.name, "");
+                    int m = bitclumpBIN(ph.bits);
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
+                    for (int i = 0; i < m; i += 1)
+                    {
+                        m_process.writenode(ph.name + "-child" + i, "");
+                        InterpStruct e3 = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
+                        readchildren(e3, wrap, ph.node);
+                        m_process.endnode();
+                    }
                     m_process.endnode();
-                    m_process.endnode();
-                }
-                m_process.endnode();
-                m_process.endnode();
-            }
-            if (ph.type.Contains("External"))
-            {
-                string[] w = ph.type.Split(":");
-                m_process.writenode(ph.name, "");
-                int w2 = i;
-                foreach (paramheader2 p in m_process.returnchildren(w[1]))
-                {
+                    break;
+                case "HCount": // why did you have to make this so difficult bungie
+                    m_process.writenode(ph.name, "");
+
+                    int m9 = bitclumpBIN(ph.bits);
                     
-                    fordump = "\r\r"+ ph.name+" ";
-                    readblock(p, "ExTypes");
-                   // runstack();
-                    Console.WriteLine(fordump);
-                    fordump = "";
-                }
-                if (ph.bits > 0)
-                {
-                    int poop = i - w2;
-                    i += ph.bits - poop;
-                    Console.WriteLine("bits skipped " + (ph.bits - poop));
-                    if ((ph.bits - poop) < 0)
-                        Console.ReadLine();
-                }
-                m_process.endnode();
+                    List<zoingoboingo> string_indexes = new();
+                    for (int i = 0; i < m9; i += 1)
+                    {
+                        // do the language thingo // CLEANUP ON ISLE 2
+                        zoingoboingo z = new();
+                        z.EnglishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.JapaneseStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.GermanStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.FrenchStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.SpanishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.MexicanStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.ItalianStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.KoreanStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.Chinese1StringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.Chinese2StringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.PortugeseStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        z.PolishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        if (!isreach) // H4 & 2A
+                        {
+                            z.RussianStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                            z.DanishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                            z.FinnishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                            z.DutchStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                            z.NorwegianStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
+                        }
+                        string_indexes.Add(z);
+                    }
+                    zoingo_compressed_chunk = "";
+                    string compression_state = "True";
+                    if (m9 > 0) // we have at least one string
+                    {
+                        // table byte length
+                        int m3 = bitclumpBIN(ph.chars);
+                        // is compressed 
+                        int d = bitclumpBIN(1);
+
+                        if (d == 0)
+                        {
+                            zoingo_compressed_chunk = bitclumpBIN3(m3 * 8);
+                            compression_state = "False";
+                        }
+                        else
+                        {
+                            int m1 = bitclumpBIN(ph.chars);
+                            string b = bitclumpBIN3(m1 * 8);
+
+                            byte[] b2 = Convert.FromHexString(b);
+                            var bytethingos = z_testing.ZLib.LowLevelDecompress(b2, m3);
+                            zoingo_compressed_chunk = Convert.ToHexString(bytethingos);
+                        }
+                    }
+                    m_process.writenode("UseCompression", compression_state);
+                    m_process.endnode();
+                    m_process.writenode("Strings", "");
+                    for (int i = 0; i< string_indexes.Count; i++)
+                    {
+                        m_process.writenode("String"+i, "");
+                        zoingoboingo current_string = string_indexes[i];
+
+                        do_the_language(current_string.EnglishStringIndex, "EnglishString");
+                        do_the_language(current_string.JapaneseStringIndex, "JapaneseString");
+                        do_the_language(current_string.GermanStringIndex, "GermanString");
+                        do_the_language(current_string.FrenchStringIndex, "FrenchString");
+                        do_the_language(current_string.SpanishStringIndex, "SpanishString");
+                        do_the_language(current_string.MexicanStringIndex, "MexicanString");
+                        do_the_language(current_string.ItalianStringIndex, "ItalianString");
+                        do_the_language(current_string.KoreanStringIndex, "KoreanString");
+                        do_the_language(current_string.Chinese1StringIndex, "Chinese1String");
+                        do_the_language(current_string.Chinese2StringIndex, "Chinese2String");
+                        do_the_language(current_string.PortugeseStringIndex, "PortugeseString");
+                        do_the_language(current_string.PolishStringIndex, "PolishString");
+                        if (!isreach) // H4 & 2A
+                        {
+                            do_the_language(current_string.RussianStringIndex, "RussianString");
+                            do_the_language(current_string.DanishStringIndex, "DanishString");
+                            do_the_language(current_string.FinnishStringIndex, "FinnishString");
+                            do_the_language(current_string.DutchStringIndex, "DutchString");
+                            do_the_language(current_string.NorwegianStringIndex, "NorwegianString");
+                        }
+
+                        m_process.endnode();
+                    }
+
+                    // then we write it all down here
+                    m_process.endnode();
+                    m_process.endnode();
+                    zoingo_compressed_chunk = null;
+                    break;
+                default:
+                    if (ph.type.Contains("External"))
+                    {
+                        // container
+                        string[] w = ph.type.Split(":");
+                        m_process.writenode(ph.name, "");
+                        int w2 = i;
+                        foreach (paramheader2 p in m_process.returnchildren(w[1]))
+                        {
+
+                            //fordump += "\r\r" + ph.name + " ";
+                            readblock(p, "ExTypes");
+                            // runstack();
+                        }
+                        if (ph.bits > 0)
+                        {
+                            int poop = i - w2;
+                            i += ph.bits - poop;
+                            Console.WriteLine("bits skipped " + (ph.bits - poop));
+                            if ((ph.bits - poop) < 0)
+                                Console.ReadLine();
+                        }
+                        m_process.endnode();
+                    }
+                    if (ph.type.Contains("Enumref"))
+                    {
+                        // container
+                        string[] w = ph.type.Split(":");
+                        ph.node1 = "RefTypes";
+                        paramheader2 ph2 = VarInterpret(ph.node1, w[1], ph.node);
+                        ph2.node = ph.node;
+                        ph2.node1 = "RefTypes";
+
+                        m_process.writenode(ph.name, "");
+                        readblock(ph2, ph2.node1);
+                        m_process.endnode();
+                    }
+                    break;
+
             }
             if (!skip)
                 runstack();
@@ -291,6 +352,73 @@ namespace gamtetyper
             public string docx { get; set; }
         }
 
+        public struct zoingoboingo
+        {
+            public int EnglishStringIndex;
+            public int JapaneseStringIndex;
+            public int GermanStringIndex;
+            public int FrenchStringIndex;
+            public int SpanishStringIndex;
+            public int MexicanStringIndex;
+            public int ItalianStringIndex;
+            public int KoreanStringIndex;
+            public int Chinese1StringIndex;
+            public int Chinese2StringIndex;
+            public int PortugeseStringIndex;
+            public int PolishStringIndex;
+            // H4 & 2A
+            public int RussianStringIndex;
+            public int DanishStringIndex;
+            public int FinnishStringIndex;
+            public int DutchStringIndex;
+            public int NorwegianStringIndex;
+        }
+        public string zoingo_compressed_chunk;
+        public void do_the_language(int in1, string language_node_name)
+        {
+            if (in1 < 0)
+            {
+                m_process.writenode(language_node_name, "False");
+                m_process.endnode();
+            }
+            else // it does point to a thingo
+            {
+                m_process.writenode(language_node_name, "True");
+                bool searching = true;
+                string hextringthing = "";
+                int depth = in1;
+                while (searching)
+                {
+                    string s_byte = zoingo_compressed_chunk.Substring(depth * 2, 2);
+                    depth++;
+                    if (s_byte == "00")
+                    {
+                        searching = false;
+                    }
+                    else // is a probably normal character
+                    {
+                        hextringthing += s_byte;
+                    }
+                }
+                // super duper lazy way but whatever
+                var bytes = new byte[hextringthing.Length / 2];
+                for (var iw = 0; iw < bytes.Length; iw++)
+                {
+                    string s = hextringthing.Substring(iw * 2, 2);
+                    bytes[iw] = Convert.ToByte(s, 16);
+                }
+                string the_stringo_thingo = Encoding.UTF8.GetString(bytes);
+
+                if (the_stringo_thingo == null)
+                {
+
+                }
+                m_process.writenode("String", the_stringo_thingo);
+
+                m_process.endnode();
+                m_process.endnode();
+            }
+        }
         public static string BinaryToString16(string data)
         {
             //List<Byte> byteList = new List<Byte>();
@@ -301,9 +429,29 @@ namespace gamtetyper
             //}
             //return Encoding.ASCII.GetString(byteList.ToArray());
             var hex = string.Join(" ",
-            Enumerable.Range(0, data.Length / 8)
-            .Select(i => Convert.ToByte(data.Substring(i * 8, 8), 2).ToString("X2")));
-            return String.Concat(hex.Where(c => !Char.IsWhiteSpace(c))); ;
+            Enumerable.Range(0, data.Length / 8).Select(i => Convert.ToByte(data.Substring(i * 8, 8), 2).ToString("X2")));
+            return String.Concat(hex.Where(c => !Char.IsWhiteSpace(c)));
+        }
+
+        public static string FromHexString8(string hexString)
+        {
+            var bytes = new byte[hexString.Length / 2];
+            for (var i = 0; i < bytes.Length; i++)
+            {
+                bytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
+
+            return Encoding.UTF8.GetString(bytes); // returns: "Hello world" for "48656C6C6F20776F726C64"
+        }
+        public static string FromHexString16(string hexString)
+        {
+            var bytes = new byte[hexString.Length / 2];
+            for (var i = 0; i < bytes.Length; i++)
+            {
+                bytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
+
+            return Encoding.BigEndianUnicode.GetString(bytes); // returns: "Hello world" for "48656C6C6F20776F726C64"
         }
 
         public static string BinaryToString8(string data)
@@ -385,7 +533,7 @@ namespace gamtetyper
 
         public void readchildren(InterpStruct e, string parentloc, string docx)
         {
-            fordump += "\r\n" + (e.blockname) + "-child: ";
+            //fordump += "\r\n" + (e.blockname) + "-child: ";
             if (e.blockparams != null && e.blockparams.Count > 0) // simplify pls
             {
                 foreach (InterpStruct.s w in e.blockparams)
@@ -396,7 +544,7 @@ namespace gamtetyper
                     readblock(ph, parentloc + "/Var[@name='" + e.blockname + "']");
                 }
             }
-            fordump += "\r\n";
+            //fordump += "\r\n";
         }
 
         public paramheader2 VarInterpret(string type, string lookfor, string docx) // need to fix this to use a shared param rather than an array
@@ -429,7 +577,7 @@ namespace gamtetyper
             public string type { get; set; }
             public int bits { get; set; }
             public int offset { get; set; }
-
+            public int chars { get; set; }
         }
 
         struct param

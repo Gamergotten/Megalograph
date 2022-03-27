@@ -148,7 +148,7 @@ namespace gamtetyper.UI
 
             //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
             testab.Children.Add(cb);
-            active_actions.Add(give_us_a_stupid_number(), cb);
+            active_actions.Add(cb);
             cb.action_parent = new Gametype.ActionUI { UI = cb, stored_action = action };
             cb.typename.Content = "Action";
             handleType(cb, cb.Content_panel, action.Type);
@@ -180,7 +180,7 @@ namespace gamtetyper.UI
             cb.transfrom_location.Y = y;
 
             testab.Children.Add(cb);
-            active_conditions.Add(give_us_a_stupid_number(), cb);
+            active_conditions.Add(cb);
             //active_conditions.Add(ind,new Gametype.ConditionUI { UI = cb, stored_condition = condition });
             cb.condition_parent = new Gametype.ConditionUI { UI = cb, stored_condition = condition };
 
@@ -250,6 +250,7 @@ namespace gamtetyper.UI
                                 XMLDoc = haloxml,
                                 XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt1']",
                                 Params = null,
+                                nodes_list_yes_i_did_just_do_that = new List<string> { "balls" } // lol how does this even work - for some reason we're intentionally sabotaging this
                             },
                             new Ebum()
                             {
@@ -261,6 +262,7 @@ namespace gamtetyper.UI
                                 XMLDoc = haloxml,
                                 XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt2']",
                                 Params = null,
+                                nodes_list_yes_i_did_just_do_that = new List<string> { "balls" }
                             },
                             new Ebum()
                             {
@@ -272,6 +274,7 @@ namespace gamtetyper.UI
                                 XMLDoc = haloxml,
                                 XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt3']",
                                 Params = null,
+                                nodes_list_yes_i_did_just_do_that = new List<string> { "balls" }
                             },
                             new Ebum()
                             {
@@ -283,10 +286,13 @@ namespace gamtetyper.UI
                                 XMLDoc = haloxml,
                                 XMLPath = "RefTypes/Var[@name='VirtualTriggerRef']/ Var[@name = 'UnanmmedInt4']",
                                 Params = null,
+                                nodes_list_yes_i_did_just_do_that = new List<string> { "balls" }
                             },
                         },
+                        nodes_list_yes_i_did_just_do_that = new List<string> { "balls" }
                     }
                 },
+                nodes_list_yes_i_did_just_do_that = new List<string> {"balls"}
             };
 
             BranchBlock cb = new BranchBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
@@ -294,7 +300,7 @@ namespace gamtetyper.UI
             cb.transfrom_location.Y = y;
 
             testab.Children.Add(cb);
-            active_branches.Add(give_us_a_stupid_number(), cb);
+            active_branches.Add(cb);
             cb.branch_parent = new Gametype.BranchUI
             {
                 UI = cb,
@@ -312,58 +318,141 @@ namespace gamtetyper.UI
             links.Add(test_this_mofo, linkedstuff);
             cb.branch_parent.linked_elements_key = test_this_mofo;
         }
-        public int give_us_a_stupid_number()
-        {
-            return active_actions.Count + active_branches.Count + active_conditions.Count;
-        }
 
         public void delete_codeblock(CodeBlock cb)
         {
-            //check&clear for trigger
-            if (cb.trigger_parent != null)
-            {
-                // now snap the trigger part
-                int poop2 = cb.trigger_parent.CHILD_elements_key;
-                if (poop2 != -1)
-                    snap_links_connection(poop2, 0);
-
-                bool found_thing_now_engaging = false;
-                //int index_to_Remove = -1;
-                for (int index=0; index<active_triggers.Count; index++)
+            try
+            { 
+                //check&clear for trigger
+                if (cb.trigger_parent != null)
                 {
-                    var trigger = active_triggers[index];
-                    if (found_thing_now_engaging)
+                    // now snap the trigger part
+                    int poop2 = cb.trigger_parent.CHILD_elements_key;
+                    if (poop2 != -1)
+                        snap_links_connection(poop2, 0);
+
+                    int found_thing_now_engaging = -1;
+                    //int index_to_Remove = -1;
+                    for (int index=0; index<active_triggers.Count; index++)
                     {
-                        trigger.typename.Content = "Trigger" + (index - 1);
-                    }
-                    else
-                    {
-                        if (cb == trigger)
+                        var trigger = active_triggers[index];
+                        if (found_thing_now_engaging != -1)
                         {
-                            found_thing_now_engaging = true;
-                            continue;
+                            trigger.typename.Content = "Trigger" + (index - 1);
+                        }
+                        else
+                        {
+                            if (cb == trigger) // why did we do it this wayyyy
+                            {
+                                found_thing_now_engaging = index;
+                                continue;
+                            }
                         }
                     }
-                }
-                active_triggers.Remove(cb);
-                testab.Children.Remove(cb);
-                return;
-            }
+                    for (int index = 0; index < active_actions.Count; index++)
+                    {
+                        var action = active_actions[index];
+                        if (action.action_parent.stored_action.Type.V == "Megl.RunTrigger") // only do this for run trig nodes
+                        {
+                            int test_their_index = int.Parse(action.action_parent.stored_action.Type.Params[0].V);
+                            if (test_their_index == found_thing_now_engaging)
+                            {
+                                action.action_parent.stored_action.Type.Params[0].V = "0";
+                                var benis = action.Content_panel.Children[0] as node_ebum_s;
+                                var benis2 = benis.child_panel.Children[0] as node_ebum_s;
+                                benis2.source_text.Content = "0";
+                            }
+                            if (test_their_index > found_thing_now_engaging)
+                            {
+                                action.action_parent.stored_action.Type.Params[0].V = (test_their_index - 1).ToString();
+                                var benis = action.Content_panel.Children[0] as node_ebum_s;
+                                var benis2 = benis.child_panel.Children[0] as node_ebum_s;
+                                benis2.source_text.Content = action.action_parent.stored_action.Type.Params[0].V;
 
-            // first snap the in part
-            int owning_KEY_thing = -1;
-            if (cb.action_parent != null)
-                owning_KEY_thing = cb.action_parent.linked_elements_key;
-            if (cb.condition_parent != null)
-                owning_KEY_thing = cb.condition_parent.linked_elements_key;
-            if (owning_KEY_thing != -1)
+                            }
+
+                        }
+                    }
+
+                    active_triggers.Remove(cb);
+                    testab.Children.Remove(cb);
+                    return;
+                }
+
+                // first snap the in part
+                int owning_KEY_thing = -1;
+                if (cb.action_parent != null)
+                    owning_KEY_thing = cb.action_parent.linked_elements_key;
+                if (cb.condition_parent != null)
+                    owning_KEY_thing = cb.condition_parent.linked_elements_key;
+                if (owning_KEY_thing != -1)
+                {
+                    List<potential_block> base_link_to_find_index_from = links[owning_KEY_thing];
+                    int breanpointbase = -1;
+                    for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
+                    {
+                        var poop = base_link_to_find_index_from[p_index];
+                        if (poop._action == cb || poop._condition == cb)
+                        {
+                            breanpointbase = p_index;
+                            break;
+                        }
+                    }
+                    snap_links_connection(owning_KEY_thing, breanpointbase);
+                    // then snap the second part of it
+                    owning_KEY_thing = -1;
+                    if (cb.action_parent != null)
+                        owning_KEY_thing = cb.action_parent.linked_elements_key;
+                    if (cb.condition_parent != null)
+                        owning_KEY_thing = cb.condition_parent.linked_elements_key;
+                    base_link_to_find_index_from = links[owning_KEY_thing];
+                    breanpointbase = -1;
+                    for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
+                    {
+                        var poop = base_link_to_find_index_from[p_index];
+                        if (poop._action == cb || poop._condition == cb)
+                        {
+                            breanpointbase = p_index;
+                            break;
+                        }
+                    }
+                    snap_links_connection(owning_KEY_thing, breanpointbase + 1);
+                }
+
+                testab.Children.Remove(cb);
+
+                owning_KEY_thing = -1;
+                if (cb.action_parent != null)
+                {
+                    owning_KEY_thing = cb.action_parent.linked_elements_key;
+                    active_actions.Remove(cb);
+                }
+                if (cb.condition_parent != null)
+                {
+                    owning_KEY_thing = cb.condition_parent.linked_elements_key;
+                    active_conditions.Remove(cb);
+                }
+
+                links.Remove(owning_KEY_thing);
+            }
+            catch (Exception ex)
             {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
+        }
+
+        public void delete_branch(BranchBlock bb)
+        {
+            try
+            { 
+                // first snap the in part
+                int owning_KEY_thing = bb.branch_parent.linked_elements_key;
                 List<potential_block> base_link_to_find_index_from = links[owning_KEY_thing];
                 int breanpointbase = -1;
                 for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
                 {
                     var poop = base_link_to_find_index_from[p_index];
-                    if (poop._action == cb || poop._condition == cb)
+                    if (poop._branch == bb)
                     {
                         breanpointbase = p_index;
                         break;
@@ -371,94 +460,49 @@ namespace gamtetyper.UI
                 }
                 snap_links_connection(owning_KEY_thing, breanpointbase);
                 // then snap the second part of it
-                owning_KEY_thing = -1;
-                if (cb.action_parent != null)
-                    owning_KEY_thing = cb.action_parent.linked_elements_key;
-                if (cb.condition_parent != null)
-                    owning_KEY_thing = cb.condition_parent.linked_elements_key;
+                owning_KEY_thing = bb.branch_parent.linked_elements_key;
                 base_link_to_find_index_from = links[owning_KEY_thing];
                 breanpointbase = -1;
                 for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
                 {
                     var poop = base_link_to_find_index_from[p_index];
-                    if (poop._action == cb || poop._condition == cb)
+                    if (poop._branch == bb)
                     {
                         breanpointbase = p_index;
                         break;
                     }
                 }
                 snap_links_connection(owning_KEY_thing, breanpointbase + 1);
+
+                // now snap the trigger part
+                int poop2 = bb.branch_parent.CHILD_elements_key;
+                if (poop2 != -1)
+                    snap_links_connection(poop2, 0);
+
+                active_branches.Remove(bb);
+                testab.Children.Remove(bb);
+                owning_KEY_thing = bb.branch_parent.linked_elements_key;
+                links.Remove(owning_KEY_thing);
+
             }
-
-            testab.Children.Remove(cb);
-
-            owning_KEY_thing = -1;
-            if (cb.action_parent != null)
-                owning_KEY_thing = cb.action_parent.linked_elements_key;
-            if (cb.condition_parent != null)
-                owning_KEY_thing = cb.condition_parent.linked_elements_key;
-
-            links.Remove(owning_KEY_thing);
-        }
-
-        public void delete_branch(BranchBlock bb)
-        {
-            // first snap the in part
-            int owning_KEY_thing = bb.branch_parent.linked_elements_key;
-            List<potential_block> base_link_to_find_index_from = links[owning_KEY_thing];
-            int breanpointbase = -1;
-            for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
+            catch (Exception ex)
             {
-                var poop = base_link_to_find_index_from[p_index];
-                if (poop._branch == bb)
-                {
-                    breanpointbase = p_index;
-                    break;
-                }
+                MainWindow.catchexception_and_duly_ignore(ex);
             }
-            snap_links_connection(owning_KEY_thing, breanpointbase);
-            // then snap the second part of it
-            owning_KEY_thing = bb.branch_parent.linked_elements_key;
-            base_link_to_find_index_from = links[owning_KEY_thing];
-            breanpointbase = -1;
-            for (int p_index = 0; p_index < base_link_to_find_index_from.Count; p_index++)
-            {
-                var poop = base_link_to_find_index_from[p_index];
-                if (poop._branch == bb)
-                {
-                    breanpointbase = p_index;
-                    break;
-                }
-            }
-            snap_links_connection(owning_KEY_thing, breanpointbase + 1);
-
-            // now snap the trigger part
-            int poop2 = bb.branch_parent.CHILD_elements_key;
-            if (poop2 != -1)
-                snap_links_connection(poop2, 0);
-
-            int target_remove_our_dude_index = -1;
-            foreach (var v in active_branches)
-            {
-                if (v.Value == bb)
-                {
-                    target_remove_our_dude_index = v.Key;
-                }
-            }
-            active_branches.Remove(target_remove_our_dude_index);
-            testab.Children.Remove(bb);
-            owning_KEY_thing = bb.branch_parent.linked_elements_key;
-            links.Remove(owning_KEY_thing);
         }
 
 
         public List<CodeBlock> active_triggers = new();
         // im *pretty sure* that we only use the number for converting to nodes
-        public Dictionary<int, CodeBlock> active_conditions = new();
+        public List<CodeBlock> active_conditions = new();
 
-        public Dictionary<int, CodeBlock> active_actions = new();
+        public List<CodeBlock> active_actions = new();
 
-        public Dictionary<int, BranchBlock> active_branches = new();
+        public List<BranchBlock> active_branches = new();
+
+        public Dictionary<int, CodeBlock> temp_active_conditions = new();
+        public Dictionary<int, CodeBlock> temp_active_actions = new();
+        public Dictionary<int, BranchBlock> temp_active_branches = new();
 
         List<Gametype.trigger> t;
         List<Gametype.action> a;
@@ -468,9 +512,11 @@ namespace gamtetyper.UI
         public void dothething()
         {
             active_triggers.Clear();
-            active_conditions.Clear();
-            active_actions.Clear();
-            active_branches.Clear();
+
+            temp_active_conditions.Clear();
+            temp_active_actions.Clear();
+            temp_active_branches.Clear();
+
             height = 0;
             links.Clear();
             trigger_links_index = 0;
@@ -500,7 +546,7 @@ namespace gamtetyper.UI
 
                     //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
                     testab.Children.Add(cb);
-                    active_actions.Add(ind, cb);
+                    temp_active_actions.Add(ind, cb);
                     cb.action_parent = new Gametype.ActionUI { UI = cb, stored_action = action };
 
                     cb.typename.Content = "Action";
@@ -516,7 +562,7 @@ namespace gamtetyper.UI
                     cb.transfrom_location.Y = -700;
 
                     testab.Children.Add(cb);
-                    active_branches.Add(ind, cb);
+                    temp_active_branches.Add(ind, cb);
                     cb.branch_parent = new Gametype.BranchUI
                     {
                         UI = cb,
@@ -539,7 +585,7 @@ namespace gamtetyper.UI
                 cb.transfrom_location.Y = -300;
 
                 testab.Children.Add(cb);
-                active_conditions.Add(ind, cb);
+                temp_active_conditions.Add(ind, cb);
                 //active_conditions.Add(ind,new Gametype.ConditionUI { UI = cb, stored_condition = condition });
                 cb.condition_parent = new Gametype.ConditionUI { UI = cb, stored_condition = condition };
 
@@ -591,6 +637,25 @@ namespace gamtetyper.UI
                 run_the_loop_on_mf(trigger, longitude, cb, null);
             }
 
+            active_conditions.Clear();
+            active_actions.Clear();
+            active_branches.Clear();
+
+            foreach (var v in temp_active_conditions)
+            {
+                active_conditions.Add(v.Value);
+            }
+            foreach (var v in temp_active_actions)
+            {
+                active_actions.Add(v.Value);
+            }
+            foreach (var v in temp_active_branches)
+            {
+                active_branches.Add(v.Value);
+            }
+            temp_active_conditions.Clear();
+            temp_active_actions.Clear();
+            temp_active_branches.Clear();
         }
 
         public struct nodelineupthing
@@ -623,9 +688,9 @@ namespace gamtetyper.UI
 
                 if (a[index_for_action].Type.V != "Virtual Trigger")
                 {
-                    Gametype.action action = active_actions[index_for_action].action_parent.stored_action;
+                    Gametype.action action = temp_active_actions[index_for_action].action_parent.stored_action;
 
-                    CodeBlock A = active_actions[index_for_action];
+                    CodeBlock A = temp_active_actions[index_for_action];
                     A.action_parent.linked_elements_key = trigger_links_index;
 
                     NODELINEUP.Add(new nodelineupthing { g_action = action, g_cb = A.action_parent.UI });
@@ -635,9 +700,9 @@ namespace gamtetyper.UI
                 }
                 else
                 {
-                    Gametype.action action = active_branches[index_for_action].branch_parent.stored_action;
+                    Gametype.action action = temp_active_branches[index_for_action].branch_parent.stored_action;
 
-                    BranchBlock B = active_branches[index_for_action];
+                    BranchBlock B = temp_active_branches[index_for_action];
                     B.branch_parent.linked_elements_key = trigger_links_index;
 
                     NODELINEUP.Add(new nodelineupthing { g_action = action, g_bb = B.branch_parent.UI });
@@ -653,7 +718,7 @@ namespace gamtetyper.UI
             {
                 int index_for_condition = w + trigger.Conditions_insert;
 
-                CodeBlock C = active_conditions[index_for_condition];
+                CodeBlock C = temp_active_conditions[index_for_condition];
                 C.condition_parent.linked_elements_key = trigger_links_index;
 
                 int condition_insert = C.condition_parent.stored_condition.insertionpoint;
@@ -904,39 +969,336 @@ namespace gamtetyper.UI
         List<Gametype.condition> export_condis = new();
 
         Dictionary<int, trigger_things> mapped_trig_groups = new();
+
+        private void parent_nodegraph_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.C)
+                {
+                    copy_selection();
+                }
+                if (e.Key == Key.V)
+                {
+                    paste_selection();
+                }
+            }
+            else if (e.Key == Key.Delete)
+            {
+                for (int i=0; i<active_triggers.Count; i++)
+                {
+                    CodeBlock cb = active_triggers[i];
+                    if (cb.is_grabbed)
+                    {
+                        delete_codeblock(cb);
+                        i--;
+                    }
+                }
+                for (int i=0; i < active_actions.Count; i++)
+                {
+                    CodeBlock cb = active_actions[i];
+                    if (cb.is_grabbed)
+                    {
+                        delete_codeblock(cb);
+                        i--;
+                    }
+                }
+                for (int i=0; i < active_conditions.Count; i++)
+                {
+                    CodeBlock cb = active_conditions[i];
+                    if (cb.is_grabbed)
+                    {
+                        delete_codeblock(cb);
+                        i--;
+                    }
+                }
+                for (int i=0; i < active_branches.Count; i++)
+                {
+                    BranchBlock cb = active_branches[i];
+                    if (cb.is_grabbed)
+                    {
+                        delete_branch(cb);
+                        i--;
+                    }
+                }
+            }
+        }
+        public void copy_selection()
+        {
+            try
+            { 
+                export_triggs.Clear();
+                export_actions.Clear();
+                export_condis.Clear();
+                mapped_trig_groups.Clear();
+
+                string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
+                bool is_Reach = false;
+                if (haloxml2 == "HR")
+                    is_Reach = true;
+
+                int things_to_copy = 0;
+                foreach (var v in active_triggers) // triggers
+                {
+                    if (v.is_grabbed)
+                    {
+                        export_triggs.Add(v.trigger_parent.stored_trigger);
+                        things_to_copy++;
+                    }
+                }
+                foreach (var v in active_actions) // actions
+                {
+                    if (v.is_grabbed)
+                    {
+                        export_actions.Add(v.action_parent.stored_action);
+                        things_to_copy++;
+                    }
+                }
+                foreach (var v in active_branches) // branch actions
+                {
+                    if (v.is_grabbed)
+                    {
+                        export_actions.Add(v.branch_parent.stored_action);
+                        things_to_copy++;
+                    }
+                }
+                foreach (var v in active_conditions) // conditions
+                {
+                    if (v.is_grabbed)
+                    {
+                        export_condis.Add(v.condition_parent.stored_condition);
+                        things_to_copy++;
+                    }
+                }
+                if (things_to_copy > 0)
+                {
+                    var backup_our_open_xml = main.XP.XMLdump;
+                    main.XP.create_virtual_xdoc();
+
+                    main.XP.exportScripts(export_triggs, is_Reach);
+                    main.XP.exportactions(export_actions);
+                    main.XP.exportconditions(export_condis);
+
+                    Clipboard.SetText(":::"+main.XP.XMLdump.OuterXml);
+
+                    main.XP.XMLdump = backup_our_open_xml;
+
+                    main.PostConsole("Selection ("
+                                     +export_triggs.Count+" triggers "
+                                     +export_condis.Count+" conditions "
+                                     +export_actions.Count+ " actions) copied successfully",
+                                "Nodes Copied", "white", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
+        }
+        public void paste_selection()
+        {
+            try
+            { 
+                string test_paste = Clipboard.GetText();
+                string check_header = test_paste.Substring(0, 3);
+                if (check_header == ":::")
+                {
+                    string outter_xml = test_paste.Substring(3);
+
+                    var backup_our_open_xml = main.XP.XMLdump;
+
+                    main.XP.create_blank_virtual_xdoc_but_then_paste_a_string_in_it(outter_xml);
+
+
+
+                 
+                    string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
+                    string haloxml = main.returnmegldoc_fromhalo(haloxml2);
+                    bool is_Reach = false;
+                    if (haloxml2 == "HR")
+                        is_Reach = true;
+
+                    t = main.XP.returnScripts(is_Reach, haloxml);
+                    a = main.XP.doactions(haloxml);
+                    c = main.XP.doconditions(haloxml);
+
+                    for (int ind = 0; ind < a.Count; ind++)  //   Gametype.action
+                    {
+                        Gametype.action action = a[ind];
+                        //, Margin = new Thickness(400*ind, -300, 0, 0) 
+                        if (action.Type.V != "Virtual Trigger")
+                        {
+                            CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+                            cb.transfrom_location.X = testmouseX;
+                            cb.transfrom_location.Y = testmouseY;
+
+                            //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
+                            testab.Children.Add(cb);
+                            active_actions.Add(cb);
+                            cb.action_parent = new Gametype.ActionUI { UI = cb, stored_action = action };
+
+                            cb.typename.Content = "Action";
+
+                            handleType(cb, cb.Content_panel, action.Type);
+
+                            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
+
+                            int test_this_mofo = links.Count;
+                            while (links.ContainsKey(test_this_mofo))
+                            {
+                                test_this_mofo++;
+                            }
+                            List<potential_block> linkedstuff = new();
+                            linkedstuff.Add(new potential_block { _action = cb });
+                            links.Add(test_this_mofo, linkedstuff);
+                            cb.action_parent.linked_elements_key = test_this_mofo;
+                        }
+                        else
+                        {
+                            BranchBlock cb = new BranchBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+                            cb.transfrom_location.X = testmouseX;
+                            cb.transfrom_location.Y = testmouseY;
+
+                            testab.Children.Add(cb);
+                            active_branches.Add(cb);
+                            cb.branch_parent = new Gametype.BranchUI
+                            {
+                                UI = cb,
+                                stored_action = action
+                            };
+
+                            int test_this_mofo = links.Count;
+                            while (links.ContainsKey(test_this_mofo))
+                            {
+                                test_this_mofo++;
+                            }
+                            List<potential_block> linkedstuff = new();
+                            linkedstuff.Add(new potential_block { _branch = cb });
+                            links.Add(test_this_mofo, linkedstuff);
+                            cb.branch_parent.linked_elements_key = test_this_mofo;
+
+                            cb.branch_parent.CHILD_elements_key = -1;
+                        }
+                    }
+                    for (int ind = 0; ind < c.Count; ind++)  //   Gametype.condition
+                    {
+                        Gametype.condition condition = c[ind];
+                        //, Margin = new Thickness(400 * ind, 300, 0, 0)
+                        CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+                        cb.transfrom_location.X = testmouseX;
+                        cb.transfrom_location.Y = testmouseY;
+
+                        testab.Children.Add(cb);
+                        active_conditions.Add(cb);
+                        //active_conditions.Add(ind,new Gametype.ConditionUI { UI = cb, stored_condition = condition });
+                        cb.condition_parent = new Gametype.ConditionUI { UI = cb, stored_condition = condition };
+
+                        cb.typename.Content = "Condition";
+                        //cb.
+
+                        condition_top_blocks phee = new();
+                        phee.OR_group.Text = condition.OR_Group.ToString();
+                        phee.knot_box.IsChecked = (condition.Not == 1);
+                        cb.Content_panel.Children.Add(phee);
+                        phee.cb = cb;
+
+
+                        handleType(cb, cb.Content_panel, condition.Type);
+
+                        cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
+
+                        int test_this_mofo = links.Count;
+                        while (links.ContainsKey(test_this_mofo))
+                        {
+                            test_this_mofo++;
+                        }
+                        List<potential_block> linkedstuff = new();
+                        linkedstuff.Add(new potential_block { _condition = cb });
+                        links.Add(test_this_mofo, linkedstuff);
+                        cb.condition_parent.linked_elements_key = test_this_mofo;
+                    }
+                    foreach (Gametype.trigger trigger in t)  //   Gametype.trigger
+                    {
+                        CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+                        cb.transfrom_location.X = testmouseX;
+                        cb.transfrom_location.Y = testmouseY;
+
+
+                        testab.Children.Add(cb);
+                        cb.main.Children.Remove(cb.in_connection);
+
+                        //active_triggers.Add(new Gametype.TriggerUI { UI = cb, stored_trigger = trigger });
+                        cb.trigger_parent = new Gametype.TriggerUI { UI = cb, stored_trigger = trigger };
+
+                        cb.typename.Content = "Trigger" + active_triggers.Count;
+                        active_triggers.Add(cb);
+
+
+                        handleType(cb, cb.Content_panel, trigger.Type);
+
+                        handleType(cb, cb.Content_panel, trigger.Attribute);
+
+                        cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
+
+                        cb.trigger_parent.CHILD_elements_key = -1;
+                        //run_the_loop_on_mf(trigger, longitude, cb, null);
+                    }
+
+
+
+                    main.XP.XMLdump = backup_our_open_xml;
+
+                    main.PostConsole("Selection ("
+                                     + a.Count + " triggers "
+                                     + c.Count + " conditions "
+                                     + t.Count + " actions) pasted successfully",
+                                "Nodes Copied", "white", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
+        }
+
         public void SaveButton_Click()
         {
-            export_triggs.Clear();
-            export_actions.Clear();
-            export_condis.Clear();
+            try
+            { 
+                export_triggs.Clear();
+                export_actions.Clear();
+                export_condis.Clear();
 
-            mapped_trig_groups.Clear();
+                mapped_trig_groups.Clear();
 
-            string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
-            bool is_Reach = false;
-            if (haloxml2 == "HR")
-                is_Reach = true;
+                string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
+                bool is_Reach = false;
+                if (haloxml2 == "HR")
+                    is_Reach = true;
 
-            foreach (var v in active_triggers)
-            {
-                Gametype.trigger outthis = v.trigger_parent.stored_trigger;
+                foreach (var v in active_triggers)
+                {
+                    Gametype.trigger outthis = v.trigger_parent.stored_trigger;
 
-                int poop = v.trigger_parent.CHILD_elements_key;
-                trigger_things t = read_trigger_thing(poop, is_Reach);
-                outthis.Conditions_count = t.cond_count;
-                outthis.Conditions_insert = t.cond_offset;
-                outthis.Actions_count = t.acti_count;
-                outthis.Actions_insert = t.acti_offset;
+                    int poop = v.trigger_parent.CHILD_elements_key;
+                    trigger_things t = read_trigger_thing(poop, is_Reach);
+                    outthis.Conditions_count = t.cond_count;
+                    outthis.Conditions_insert = t.cond_offset;
+                    outthis.Actions_count = t.acti_count;
+                    outthis.Actions_insert = t.acti_offset;
 
 
-                export_triggs.Add(outthis);
+                    export_triggs.Add(outthis);
+                }
+                main.XP.exportScripts(export_triggs, is_Reach);
+                main.XP.exportactions(export_actions);
+                main.XP.exportconditions(export_condis);
+                main.XP.quick_save_the_xmls();
             }
-
-
-
-            main.XP.exportScripts(export_triggs, is_Reach);
-            main.XP.exportactions(export_actions);
-            main.XP.exportconditions(export_condis);
+            catch (Exception ex)
+            {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
         }
         public trigger_things read_trigger_thing(int poop, bool ishaloreach)
         {
@@ -1037,174 +1399,181 @@ namespace gamtetyper.UI
 
         public void snap_links_connection(int link, int breakpoint, int KEY_to_inherit = -1)
         {
-            List<potential_block> link_to_break = links[link];
-
-            // if breakpoint is 0 and key_to_inherit isnt -1 then we wanna take it off a trigger and put it on an action
-            if (breakpoint == 0) // && KEY_to_inherit != -1
-            {
-                foreach (CodeBlock t in active_triggers)
+            try
                 {
-                    if (t.trigger_parent.CHILD_elements_key == link)
+                List<potential_block> link_to_break = links[link];
+
+                // if breakpoint is 0 and key_to_inherit isnt -1 then we wanna take it off a trigger and put it on an action
+                if (breakpoint == 0) // && KEY_to_inherit != -1
+                {
+                    foreach (CodeBlock t in active_triggers)
                     {
-                        testab.Children.Remove(t.Outpath);
-                        t.trigger_parent.CHILD_elements_key = -1;
-                        t.Outpath = null;
+                        if (t.trigger_parent.CHILD_elements_key == link)
+                        {
+                            testab.Children.Remove(t.Outpath);
+                            t.trigger_parent.CHILD_elements_key = -1;
+                            t.Outpath = null;
+                        }
+                    }
+                    foreach (BranchBlock t in active_branches)
+                    {
+                        if (t.branch_parent.CHILD_elements_key == link)
+                        {
+                            testab.Children.Remove(t.DOpath);
+                            t.branch_parent.CHILD_elements_key = -1;
+                            t.DOpath = null;
+                        }
                     }
                 }
-                foreach (KeyValuePair<int, BranchBlock> t in active_branches)
+                int poopoint = breakpoint;
+                //if (breakpoint == 0 && KEY_to_inherit != -1)
+                poopoint--;
+                // if we're actually breaking a link - conjoining doesn't need any links broken
+                if (poopoint > -1)
                 {
-                    if (t.Value.branch_parent.CHILD_elements_key == link)
+                    var bigw = link_to_break[poopoint];
+                    if (bigw._action != null)
                     {
-                        testab.Children.Remove(t.Value.DOpath);
-                        t.Value.branch_parent.CHILD_elements_key = -1;
-                        t.Value.DOpath = null;
+                        testab.Children.Remove(bigw._action.Outpath);
+                        bigw._action.Outpath = null;
+                    }
+                    if (bigw._branch != null)
+                    {
+                        testab.Children.Remove(bigw._branch.THENpath);
+                        bigw._branch.THENpath = null;
+                    }
+                    if (bigw._condition != null)
+                    {
+                        testab.Children.Remove(bigw._condition.Outpath);
+                        bigw._condition.Outpath = null;
                     }
                 }
-            }
-            int poopoint = breakpoint;
-            //if (breakpoint == 0 && KEY_to_inherit != -1)
-            poopoint--;
-            // if we're actually breaking a link - conjoining doesn't need any links broken
-            if (poopoint > -1)
-            {
-                var bigw = link_to_break[poopoint];
-                if (bigw._action != null)
+                else if (KEY_to_inherit != -1)
                 {
-                    testab.Children.Remove(bigw._action.Outpath);
-                    bigw._action.Outpath = null;
-                }
-                if (bigw._branch != null)
-                {
-                    testab.Children.Remove(bigw._branch.THENpath);
-                    bigw._branch.THENpath = null;
-                }
-                if (bigw._condition != null)
-                {
-                    testab.Children.Remove(bigw._condition.Outpath);
-                    bigw._condition.Outpath = null;
-                }
-            }
-            else if (KEY_to_inherit != -1)
-            {
-                var bigw = links[KEY_to_inherit];
-                var bigw1 = bigw[bigw.Count - 1];
-                if (bigw1._action != null)
-                {
-                    testab.Children.Remove(bigw1._action.Outpath);
-                    bigw1._action.Outpath = null;
-                }
-                if (bigw1._branch != null)
-                {
-                    testab.Children.Remove(bigw1._branch.THENpath);
-                    bigw1._branch.THENpath = null;
-                }
-                if (bigw1._condition != null)
-                {
-                    testab.Children.Remove(bigw1._condition.Outpath);
-                    bigw1._condition.Outpath = null;
-                }
-            }
-            if (link_to_break.Count > poopoint + 1) // no idea why i did bp+1 // so we break the link of the next element as well
-            {
-                var bigw2 = link_to_break[poopoint + 1];
-                if (bigw2._action != null)
-                {
-                    testab.Children.Remove(bigw2._action.Inpath);
-                    bigw2._action.Inpath = null;
-                }
-                if (bigw2._branch != null)
-                {
-                    testab.Children.Remove(bigw2._branch.Inpath);
-                    bigw2._branch.Inpath = null;
-                }
-                if (bigw2._condition != null)
-                {
-                    testab.Children.Remove(bigw2._condition.Inpath);
-                    bigw2._condition.Inpath = null;
-                }
-            }
-
-
-            List<potential_block> new_blocklist = link_to_break.Skip(poopoint + 1).ToList();
-
-            List<potential_block> old_blocklist = link_to_break;
-            while (old_blocklist.Count > poopoint + 1)
-            {
-                old_blocklist.RemoveAt(poopoint + 1);
-            }
-            links[link] = old_blocklist;
-
-            // now assort the new list things
-
-
-            int test_this_mofo = KEY_to_inherit;
-            if (test_this_mofo == -1)
-            {
-                test_this_mofo = links.Count;
-                while (links.ContainsKey(test_this_mofo))
-                {
-                    test_this_mofo++;
-                }
-            }
-            else
-            {
-                string debug_moment = ":)";
-            }
-
-            foreach (potential_block pp in new_blocklist)
-            {
-                if (pp._action != null)
-                {
-                    pp._action.action_parent.linked_elements_key = test_this_mofo;
-                }
-                if (pp._branch != null)
-                {
-                    pp._branch.branch_parent.linked_elements_key = test_this_mofo;
-                }
-                if (pp._condition != null)
-                {
-                    pp._condition.condition_parent.linked_elements_key = test_this_mofo;
-                }
-            }
-            if (new_blocklist.Count > 0) // KEY_to_inherit == -1 &&
-            {
-                potential_block thingo_to_disjoin = new_blocklist[0];
-                if (thingo_to_disjoin._action != null)
-                {
-                    if (thingo_to_disjoin._action.Inpath != null)
+                    var bigw = links[KEY_to_inherit];
+                    var bigw1 = bigw[bigw.Count - 1];
+                    if (bigw1._action != null)
                     {
-                        testab.Children.Remove(thingo_to_disjoin._action.Inpath);
-                        thingo_to_disjoin._action.Inpath = null;
+                        testab.Children.Remove(bigw1._action.Outpath);
+                        bigw1._action.Outpath = null;
+                    }
+                    if (bigw1._branch != null)
+                    {
+                        testab.Children.Remove(bigw1._branch.THENpath);
+                        bigw1._branch.THENpath = null;
+                    }
+                    if (bigw1._condition != null)
+                    {
+                        testab.Children.Remove(bigw1._condition.Outpath);
+                        bigw1._condition.Outpath = null;
                     }
                 }
-                if (thingo_to_disjoin._branch != null)
+                if (link_to_break.Count > poopoint + 1) // no idea why i did bp+1 // so we break the link of the next element as well
                 {
-                    if (thingo_to_disjoin._branch.Inpath != null)
+                    var bigw2 = link_to_break[poopoint + 1];
+                    if (bigw2._action != null)
                     {
-                        testab.Children.Remove(thingo_to_disjoin._branch.Inpath);
-                        thingo_to_disjoin._branch.Inpath = null;
+                        testab.Children.Remove(bigw2._action.Inpath);
+                        bigw2._action.Inpath = null;
                     }
-                }
-                if (thingo_to_disjoin._condition != null)
-                {
-                    if (thingo_to_disjoin._condition.Inpath != null)
+                    if (bigw2._branch != null)
                     {
-                        testab.Children.Remove(thingo_to_disjoin._condition.Inpath);
-                        thingo_to_disjoin._condition.Inpath = null;
+                        testab.Children.Remove(bigw2._branch.Inpath);
+                        bigw2._branch.Inpath = null;
+                    }
+                    if (bigw2._condition != null)
+                    {
+                        testab.Children.Remove(bigw2._condition.Inpath);
+                        bigw2._condition.Inpath = null;
                     }
                 }
 
-                if (links.ContainsKey(test_this_mofo))
+
+                List<potential_block> new_blocklist = link_to_break.Skip(poopoint + 1).ToList();
+
+                List<potential_block> old_blocklist = link_to_break;
+                while (old_blocklist.Count > poopoint + 1)
                 {
-                    //links[test_this_mofo] = 
-                    links[test_this_mofo].AddRange(new_blocklist);
+                    old_blocklist.RemoveAt(poopoint + 1);
+                }
+                links[link] = old_blocklist;
+
+                // now assort the new list things
+
+
+                int test_this_mofo = KEY_to_inherit;
+                if (test_this_mofo == -1)
+                {
+                    test_this_mofo = links.Count;
+                    while (links.ContainsKey(test_this_mofo))
+                    {
+                        test_this_mofo++;
+                    }
                 }
                 else
                 {
-                    links.Add(test_this_mofo, new_blocklist);
+                    string debug_moment = ":)";
                 }
+
+                foreach (potential_block pp in new_blocklist)
+                {
+                    if (pp._action != null)
+                    {
+                        pp._action.action_parent.linked_elements_key = test_this_mofo;
+                    }
+                    if (pp._branch != null)
+                    {
+                        pp._branch.branch_parent.linked_elements_key = test_this_mofo;
+                    }
+                    if (pp._condition != null)
+                    {
+                        pp._condition.condition_parent.linked_elements_key = test_this_mofo;
+                    }
+                }
+                if (new_blocklist.Count > 0) // KEY_to_inherit == -1 &&
+                {
+                    potential_block thingo_to_disjoin = new_blocklist[0];
+                    if (thingo_to_disjoin._action != null)
+                    {
+                        if (thingo_to_disjoin._action.Inpath != null)
+                        {
+                            testab.Children.Remove(thingo_to_disjoin._action.Inpath);
+                            thingo_to_disjoin._action.Inpath = null;
+                        }
+                    }
+                    if (thingo_to_disjoin._branch != null)
+                    {
+                        if (thingo_to_disjoin._branch.Inpath != null)
+                        {
+                            testab.Children.Remove(thingo_to_disjoin._branch.Inpath);
+                            thingo_to_disjoin._branch.Inpath = null;
+                        }
+                    }
+                    if (thingo_to_disjoin._condition != null)
+                    {
+                        if (thingo_to_disjoin._condition.Inpath != null)
+                        {
+                            testab.Children.Remove(thingo_to_disjoin._condition.Inpath);
+                            thingo_to_disjoin._condition.Inpath = null;
+                        }
+                    }
+
+                    if (links.ContainsKey(test_this_mofo))
+                    {
+                        //links[test_this_mofo] = 
+                        links[test_this_mofo].AddRange(new_blocklist);
+                    }
+                    else
+                    {
+                        links.Add(test_this_mofo, new_blocklist);
+                    }
+                }
+                // add them to 
             }
-            // add them to 
+            catch (Exception ex)
+            {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
         }
 
 
@@ -1852,11 +2221,11 @@ namespace gamtetyper.UI
                 }
                 foreach (var v in active_conditions)
                 {
-                    v.Value.Content_panel.Visibility = Visibility.Hidden;
+                    v.Content_panel.Visibility = Visibility.Hidden;
                 }
                 foreach (var v in active_actions)
                 {
-                    v.Value.Content_panel.Visibility = Visibility.Hidden;
+                    v.Content_panel.Visibility = Visibility.Hidden;
                 }
             }
             if (graph_in_lod_state && zoom > 0.2f)
@@ -1868,11 +2237,11 @@ namespace gamtetyper.UI
                 }
                 foreach (var v in active_conditions)
                 {
-                    v.Value.Content_panel.Visibility = Visibility.Visible;
+                    v.Content_panel.Visibility = Visibility.Visible;
                 }
                 foreach (var v in active_actions)
                 {
-                    v.Value.Content_panel.Visibility = Visibility.Visible;
+                    v.Content_panel.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -1909,32 +2278,35 @@ namespace gamtetyper.UI
             double factored_Y = DeltaY / nodegraph_scale.ScaleY;
 
             // 
-            foreach (CodeBlock cb in active_triggers)
+            if (isdragging_nodes)
             {
-                if (cb.is_grabbed)
+                foreach (CodeBlock cb in active_triggers)
                 {
-                    drag_block(cb, factored_X, factored_Y);
+                    if (cb.is_grabbed)
+                    {
+                        drag_block(cb, factored_X, factored_Y);
+                    }
                 }
-            }
-            foreach (KeyValuePair<int, CodeBlock> cb in active_actions)
-            {
-                if (cb.Value.is_grabbed)
+                foreach (CodeBlock cb in active_actions)
                 {
-                    drag_block(cb.Value, factored_X, factored_Y);
+                    if (cb.is_grabbed)
+                    {
+                        drag_block(cb, factored_X, factored_Y);
+                    }
                 }
-            }
-            foreach (KeyValuePair<int, CodeBlock> cb in active_conditions)
-            {
-                if (cb.Value.is_grabbed)
+                foreach (CodeBlock cb in active_conditions)
                 {
-                    drag_block(cb.Value, factored_X, factored_Y);
+                    if (cb.is_grabbed)
+                    {
+                        drag_block(cb, factored_X, factored_Y);
+                    }
                 }
-            }
-            foreach (KeyValuePair<int, BranchBlock> cb in active_branches)
-            {
-                if (cb.Value.is_grabbed)
+                foreach (BranchBlock cb in active_branches)
                 {
-                    drag_retarded_block(cb.Value, factored_X, factored_Y);
+                    if (cb.is_grabbed)
+                    {
+                        drag_retarded_block(cb, factored_X, factored_Y);
+                    }
                 }
             }
 
@@ -1968,6 +2340,40 @@ namespace gamtetyper.UI
                 line_dragging_from_codeblock.Outpath.X2 = testmouseX;
                 line_dragging_from_codeblock.Outpath.Y2 = testmouseY;
             }
+
+            if (selection_box != null)
+            {
+                double testdeltaX = selectstartX - testmouseX;
+                double testdeltaY = selectstartY - testmouseY;
+
+
+
+
+
+                if (testdeltaX < 0)
+                {
+                    selection_box.transfrom_location.X = testmouseX + testdeltaX;
+                    testdeltaX *= -1;
+                }
+                else
+                {
+                    selection_box.transfrom_location.X = testmouseX; // - testdeltaX/2;
+                }
+                if (testdeltaY < 0)
+                {
+                    selection_box.transfrom_location.Y = testmouseY + testdeltaY;
+                    testdeltaY *= -1;
+                }
+                else
+                {
+                    selection_box.transfrom_location.Y = testmouseY; // - testdeltaY/2;
+                }
+
+                selection_box.border.Width = testdeltaX;
+                selection_box.border.Height = testdeltaY;
+
+            }
+
         }
         public void drag_block(CodeBlock cb, double Delta_X, double Delta_Y)
         {
@@ -2006,16 +2412,199 @@ namespace gamtetyper.UI
             }
         }
 
+        public selectionBorder selection_box;
+        double selectstartX;
+        double selectstartY;
+
+        bool isdragging_nodes;
+        //bool any_nodes_selected;
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            nodegraph_grabbed = true;
-        }
+            // before we spawn in our selecty square, lets remove the creation box
+            if (nodewind != null)
+            {
+                nodewind.is_fucking_closing = true;
+                close_new_node_window();
+                nodewind = null;
+            }
+            // ugh, make sure we cleanup the last one incase someone breaks it
+            if (selection_box != null)
+            {
+                testab.Children.Remove(selection_box);
+                selection_box = null;
+            }
+            //ok so lets create a square to start selecting things
 
+            selection_box = new selectionBorder();
+            selection_box.border.Width = 4;
+            selection_box.border.Height = 4;
+
+            selectstartX = testmouseX;
+            selectstartY = testmouseY;
+
+            selection_box.transfrom_location.X = testmouseX;
+            selection_box.transfrom_location.Y = testmouseY;
+
+
+
+            testab.Children.Add(selection_box);
+
+        }
         public void Window_MouseLeftButtonUp()
         {
-            nodegraph_grabbed = false;
+            isdragging_nodes = false;
+            if (selection_box != null)
+            {
+                testab.Children.Remove(selection_box);
+                selection_box = null;
+
+                foreach (CodeBlock cb in active_triggers)
+                {
+                    if (cb.is_grabbed)
+                    {
+                        cb.is_grabbed = false;
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                    if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
+                    {
+                        cb.is_grabbed = true;
+                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                    }
+                }
+                foreach (CodeBlock cb in active_actions)
+                {
+                    if (cb.is_grabbed)
+                    {
+                        cb.is_grabbed = false;
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                    if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
+                    {
+                        cb.is_grabbed = true;
+                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                    }
+                }
+                foreach (CodeBlock cb in active_conditions)
+                {
+                    if (cb.is_grabbed)
+                    {
+                        cb.is_grabbed = false;
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                    if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
+                    {
+                        cb.is_grabbed = true;
+                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                    }
+                }
+                foreach (BranchBlock cb in active_branches)
+                {
+                    if (cb.is_grabbed)
+                    {
+                        cb.is_grabbed = false;
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                    if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
+                    {
+                        cb.is_grabbed = true;
+                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                    }
+                }
+            }
+            else
+            {
+                if (count_grabbed_nodes() == 1)
+                {
+                    foreach (CodeBlock cb in active_triggers)
+                    {
+                        if (cb.is_grabbed)
+                        {
+                            cb.is_grabbed = false;
+                            cb.status_border.BorderBrush = Brushes.White;
+                        }
+                    }
+                    foreach (CodeBlock cb in active_actions)
+                    {
+                        if (cb.is_grabbed)
+                        {
+                            cb.is_grabbed = false;
+                            cb.status_border.BorderBrush = Brushes.White;
+                        }
+                    }
+                    foreach (CodeBlock cb in active_conditions)
+                    {
+                        if (cb.is_grabbed)
+                        {
+                            cb.is_grabbed = false;
+                            cb.status_border.BorderBrush = Brushes.White;
+                        }
+                    }
+                    foreach (BranchBlock cb in active_branches)
+                    {
+                        if (cb.is_grabbed)
+                        {
+                            cb.is_grabbed = false;
+                            cb.status_border.BorderBrush = Brushes.White;
+                        }
+                    }
+                }
+            }
+
+            // clear dragged lines n junk
             wait_a_second_and_then_solve_our_problem();
-            //drop all nodes too
+
+
+        }
+
+        public bool is_code_block_in_selection(double c_x, double c_y)
+        {
+            if (selectstartX > testmouseX)
+            {
+                if (c_x > selectstartX || c_x < testmouseX)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (c_x < selectstartX || c_x > testmouseX)
+                {
+                    return false;
+                }
+            }
+            if (selectstartY > testmouseY)
+            {
+                if (c_y > selectstartY || c_y < testmouseY)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (c_y < selectstartY || c_y > testmouseY)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // NODEGRAPH NAVIGATION STUFF
+        private void parent_nodegraph_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+            {
+                nodegraph_grabbed = true;
+                this.Focus();
+            }
+        }
+        private void parent_nodegraph_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Released)
+            {
+                nodegraph_grabbed = false;
+                //drop all nodes too
+            }
         }
         async void wait_a_second_and_then_solve_our_problem()
         {
@@ -2133,5 +2722,85 @@ namespace gamtetyper.UI
             }
             return -1;
         }
+
+        public void branchclick(BranchBlock bb)
+        {
+            bb.is_grabbed = true;
+            bb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+
+            isdragging_nodes = true;
+            // start moving all grabbed
+        }
+        public void branchrelease(BranchBlock bb)
+        {
+            //bb.is_grabbed = false;
+            //bb.status_border.BorderBrush = Brushes.White;
+
+            Window_MouseLeftButtonUp();
+        }
+
+        public void codeblockclick(CodeBlock cb)
+        {
+            if (nodewind != null)
+            {
+                nodewind.is_fucking_closing = true;
+                close_new_node_window();
+                nodewind = null;
+            }
+
+            cb.is_grabbed = true;
+            cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+
+            isdragging_nodes = true;
+            // start moving all grabbed
+        }
+        public void codeblockrelease(CodeBlock cb)
+        {
+            //cb.is_grabbed = false;
+            //cb.status_border.BorderBrush = Brushes.White;
+
+            Window_MouseLeftButtonUp();
+        }
+
+        private void parent_nodegraph_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // cleanup rectangle thingo
+            Window_MouseLeftButtonUp();
+        }
+
+        public int count_grabbed_nodes()
+        {
+            int returnvalue = 0;
+            foreach (CodeBlock cb in active_triggers)
+            {
+                if (cb.is_grabbed)
+                {
+                    returnvalue++;
+                }
+            }
+            foreach (CodeBlock cb in active_actions)
+            {
+                if (cb.is_grabbed)
+                {
+                    returnvalue++;
+                }
+            }
+            foreach (CodeBlock cb in active_conditions)
+            {
+                if (cb.is_grabbed)
+                {
+                    returnvalue++;
+                }
+            }
+            foreach (BranchBlock cb in active_branches)
+            {
+                if (cb.is_grabbed)
+                {
+                    returnvalue++;
+                }
+            }
+            return returnvalue;
+        }
+
     }
 }

@@ -6,20 +6,22 @@
              xmlns:local="clr-namespace:gamtetyper.metaviewer"
              Height="20"
              mc:Ignorable="d" >
-    <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Name="name_text" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
-        <TextBox x:Name="value_text" Text="test value moment" Grid.Column="1" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" KeyDown="edit_value_box" LostFocus="value_text_LostFocus"/>
+    <Border BorderBrush="#FF9C9C9C" BorderThickness="1" Background="#FF353535">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="name_text" Text="Test name" Margin="5,0,5,0" Foreground="White"/>
+            <TextBox x:Name="value_text" Text="test value moment" Grid.Column="1" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" KeyDown="edit_value_box" LostFocus="value_text_LostFocus"/>
 
-        <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="#FFB4D28B"/>
-        <TextBlock Text="Bit" Margin="0,0,0,0" Grid.Column="3" Foreground="#FFB4D28B"/>
-        <TextBlock x:Name="type_text" Text="type" Margin="0,0,5,0" Grid.Column="4" Foreground="#FFD28B8B"/>
+            <TextBlock x:Name="bits_text" Text="0" Margin="5,0,0,0" Grid.Column="2" Foreground="#FFB4D28B"/>
+            <TextBlock Text="Bit" Margin="0,0,0,0" Grid.Column="3" Foreground="#FFB4D28B"/>
+            <TextBlock x:Name="type_text" Text="type" Margin="0,0,5,0" Grid.Column="4" Foreground="#FFD28B8B"/>
 
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>

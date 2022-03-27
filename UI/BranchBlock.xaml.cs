@@ -38,15 +38,13 @@ namespace gamtetyper
 
         private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            is_grabbed = true;
-            status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            main_window.branchclick(this);
             e.Handled = true;
         }
         private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            is_grabbed = false;
-            status_border.BorderBrush = Brushes.White;
-            // e.Handled = true;
+            main_window.branchrelease(this);
+            e.Handled = true;
         }
 
         private void in_connection_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -72,10 +70,5 @@ namespace gamtetyper
             e.Handled = true;
         }
 
-        private void Label_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-            main_window.delete_branch(this);
-        }
     }
 }

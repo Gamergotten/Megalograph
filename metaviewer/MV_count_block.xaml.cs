@@ -83,6 +83,14 @@ namespace gamtetyper.metaviewer
         public void update_count()
         {
             count_text.Text = "(" + child.Params.Count+")";
+            if (child.Params.Count > 0)
+            {
+                expand_button.IsEnabled = true;
+            }
+            else
+            {
+                expand_button.IsEnabled=false;
+            }
         }
     }
 }

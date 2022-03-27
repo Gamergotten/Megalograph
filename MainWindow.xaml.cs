@@ -21,6 +21,7 @@ using System.Windows.Markup;
 using static gamtetyper.Gametype;
 using gamtetyper.UI;
 using gamtetyper.metaviewer;
+using gamtetyper.code;
 
 namespace gamtetyper
 {
@@ -29,6 +30,33 @@ namespace gamtetyper
 /// </summary>
     public partial class MainWindow : Window
     {
+        public static void catchexception_and_duly_ignore(Exception ex)
+        {
+            crashlog crash_window = new();
+
+            crash_window.error_title.Text = ex.Message.ToString();
+            if (ex.StackTrace != null)
+                crash_window.error_message.Text = ex.StackTrace.ToString();
+
+            if (ex.Message == "Root element is missing.")
+            {
+                crash_window.dev_note.Text = "You opened an empty XML you clown";
+            }
+            if (ex.Message == "Object reference not set to an instance of an object.")
+            {
+                crash_window.dev_note.Text = "thanks for the bloody vague error,\r\nyou probably tried to open a reach SGF file with the target set to either Halo 4 or 2\r\ntry to read better next time" +
+                    "\r\nalso this could be fault of a bad gametype mapping, try to stick to gamemodes made by 343/bungie if you keep having this issue\r\nok this can also apply to if you tried to copy paste the branch node into a reach nodegraph";
+            }
+            if (ex.Message.Contains(", is an invalid character."))
+            {
+                crash_window.dev_note.Text = "looks like the stupid decompiler broke, in this particular instance it was a bad string\r\nstupid mfer cant write strings with SPECIAL characters" +
+                    "\r\nthis could be due to either: you are targeting the wrong halo like a moron *or* im the moron and this gamemode has some data that isn't mapped correctly";
+            }
+
+            crash_window.Show();
+            crash_window.Focus();
+
+        }
 
         public XML_Process XP = new XML_Process();
 
@@ -38,8 +66,7 @@ namespace gamtetyper
         public bool console_flushed_state = false;
         public void PostConsole(string Message, string tldr_message, string color, bool flush)
         {
-
-
+            
             if (console_out_list.ContainsKey(tldr_message))
             {
                 var v = console_out_list[tldr_message];
@@ -85,29 +112,34 @@ namespace gamtetyper
             console_out_list.Clear();
         }
 
-
-
         public MainWindow()
         {
-
-            InitializeComponent();
-
-            XP.XMLdirectory = Directory.GetCurrentDirectory() + @"\XMLs\";
-
-            string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory() + @"\XMLs\Halos", "*.xml");
-            List<string> poopy = new List<string>();
-
-            foreach (string XMLFile in files)
+            try
             {
-                string XMLName = System.IO.Path.GetFileNameWithoutExtension(XMLFile);
-                Loaded_XMLS.Add(XMLName);
-                poopy.Add(XMLName);
+
+                InitializeComponent();
+
+                XP.XMLdirectory = Directory.GetCurrentDirectory() + @"\XMLs\";
+
+                string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory() + @"\XMLs\Halos", "*.xml");
+                List<string> poopy = new List<string>();
+
+                foreach (string XMLFile in files)
+                {
+                    string XMLName = System.IO.Path.GetFileNameWithoutExtension(XMLFile);
+                    Loaded_XMLS.Add(XMLName);
+                    poopy.Add(XMLName);
+                }
+                XMLFILTER_in.ItemsSource = poopy;
+
+                XMLFILTER_out.ItemsSource = poopy;
+
+                is_loading_xmls = false;
             }
-            XMLFILTER_in.ItemsSource = poopy;
-
-            XMLFILTER_out.ItemsSource = poopy;
-
-            is_loading_xmls = false;
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
+            }
         }
         public string returnmegldoc_fromhalo(string halo)
         {
@@ -157,14 +189,21 @@ namespace gamtetyper
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Current_Gametype != -1)
-            {
-                int index_to_wipe = gmaetypeTabs.SelectedIndex;
-                gmaetypeTabs.SelectedIndex = -1;
+            try 
+            { 
+                if (Current_Gametype != -1)
+                {
+                    int index_to_wipe = gmaetypeTabs.SelectedIndex;
+                    gmaetypeTabs.SelectedIndex = -1;
 
-                Loaded_Gametypes.RemoveAt(index_to_wipe);
-                Loaded_Gametypes_phys.RemoveAt(index_to_wipe);
-                gmaetypeTabs.Items.RemoveAt(index_to_wipe);
+                    Loaded_Gametypes.RemoveAt(index_to_wipe);
+                    Loaded_Gametypes_phys.RemoveAt(index_to_wipe);
+                    gmaetypeTabs.Items.RemoveAt(index_to_wipe);
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
             }
         }
 
@@ -218,8 +257,7 @@ namespace gamtetyper
             }
             catch (Exception ex)
             {
-                PostConsole(ex.Message,
-                            "Filesave Failed", "red", true);
+                catchexception_and_duly_ignore(ex);
             }
         }
 
@@ -315,16 +353,23 @@ namespace gamtetyper
 
         public void Import_SGF(string SGF_to_load)
         {
-            if (Current_Gametype == -1)
-            {
-                import_new_sgf(SGF_to_load);
+            try 
+            { 
+                if (Current_Gametype == -1)
+                {
+                    import_new_sgf(SGF_to_load);
+                }
+                else
+                {
+                    Gametype.GametypeLoaded edit = Loaded_Gametypes[Current_Gametype];
+                    edit.SSGF_File = SGF_to_load;
+                    Loaded_Gametypes[Current_Gametype] = edit;
+                    Load_Tab();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Gametype.GametypeLoaded edit = Loaded_Gametypes[Current_Gametype];
-                edit.SSGF_File = SGF_to_load;
-                Loaded_Gametypes[Current_Gametype] = edit;
-                Load_Tab();
+                catchexception_and_duly_ignore(ex);
             }
         }
         public void import_new_sgf(string SGF_to_load)
@@ -361,16 +406,23 @@ namespace gamtetyper
 
         public void Import_BIN(string BIN_to_load)
         {
-            if (Current_Gametype == -1)
-            {
-                import_new_BIN(BIN_to_load);
+            try 
+            { 
+                if (Current_Gametype == -1)
+                {
+                    import_new_BIN(BIN_to_load);
+                }
+                else
+                {
+                    Gametype.GametypeLoaded edit = Loaded_Gametypes[Current_Gametype];
+                    edit.BIN_File = BIN_to_load;
+                    Loaded_Gametypes[Current_Gametype] = edit;
+                    Load_Tab();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Gametype.GametypeLoaded edit = Loaded_Gametypes[Current_Gametype];
-                edit.BIN_File = BIN_to_load;
-                Loaded_Gametypes[Current_Gametype] = edit;
-                Load_Tab();
+                catchexception_and_duly_ignore(ex);
             }
         }
         public void import_new_BIN(string BIN_to_load)
@@ -403,49 +455,63 @@ namespace gamtetyper
 
         private void OpnBINButton_Click(object sender, RoutedEventArgs e) // ... button
         {
-            // our button has been clicked
-            // find and load a Binary file
-
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".bin";
-            dlg.Filter = "Gametype Files (*.bin)|*.bin";
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
+            try
             {
-                // Open document 
-                string filename = dlg.FileName;
-                Import_BIN(filename);
+                // our button has been clicked
+                // find and load a Binary file
+
+                OpenFileDialog dlg = new OpenFileDialog();
+
+                // Set filter for file extension and default file extension 
+                dlg.DefaultExt = ".bin";
+                dlg.Filter = "Gametype Files (*.bin)|*.bin";
+
+                // Display OpenFileDialog by calling ShowDialog method 
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox 
+                if (result == true)
+                {
+                    // Open document 
+                    string filename = dlg.FileName;
+                    Import_BIN(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
             }
         }
 
         private void OpnDmpButton_Click(object sender, RoutedEventArgs e) // ... button
         {
-            // our button has been clicked
-            // find and load an unpacked binary file aka our .SGF 
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".sgf";
-            dlg.Filter = "Unpacked .BIN files (*.sgf)|*.sgf";
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
+            try
             {
-                // Open document 
-                string filename = dlg.FileName;
-                Import_SGF(filename);
+                // our button has been clicked
+                // find and load an unpacked binary file aka our .SGF 
+                OpenFileDialog dlg = new OpenFileDialog();
 
-                XP.intakeDecompiledmode(filename);
-                Loaded_Gametypes_phys[Current_Gametype].dothething();
+                // Set filter for file extension and default file extension 
+                dlg.DefaultExt = ".sgf";
+                dlg.Filter = "Unpacked .BIN files (*.sgf)|*.sgf";
+
+                // Display OpenFileDialog by calling ShowDialog method 
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox 
+                if (result == true)
+                {
+                    // Open document 
+                    string filename = dlg.FileName;
+                    Import_SGF(filename);
+
+                    XP.intakeDecompiledmode(filename);
+                    Loaded_Gametypes_phys[Current_Gametype].dothething();
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
             }
 
         }
@@ -454,50 +520,85 @@ namespace gamtetyper
         //bin
         private void importBINButton_Click(object sender, RoutedEventArgs e) // ... button
         {
-            // our button has been clicked
-            // find and load a Binary file
-
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".bin";
-            dlg.Filter = "Gametype Files (*.bin)|*.bin";
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
+            try
             {
-                // Open document 
-                string filename = dlg.FileName;
-                import_new_BIN(filename);
+                // our button has been clicked
+                // find and load a Binary file
+
+                OpenFileDialog dlg = new OpenFileDialog();
+
+                // Set filter for file extension and default file extension 
+                dlg.DefaultExt = ".bin";
+                dlg.Filter = "Gametype Files (*.bin)|*.bin";
+
+                // Display OpenFileDialog by calling ShowDialog method 
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox 
+                if (result == true)
+                {
+                    // Open document 
+                    string filename = dlg.FileName;
+                    import_new_BIN(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
             }
         }
         //sgf
         private void importDmpButton_Click(object sender, RoutedEventArgs e) // ... button
         {
-            // our button has been clicked
-            // find and load an unpacked binary file aka our .SGF 
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".sgf";
-            dlg.Filter = "Unpacked .BIN files (*.sgf)|*.sgf";
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
+            try
             {
-                // Open document 
-                string filename = dlg.FileName;
-                import_new_sgf(filename);
+                // our button has been clicked
+                // find and load an unpacked binary file aka our .SGF 
+                OpenFileDialog dlg = new OpenFileDialog();
+
+                // Set filter for file extension and default file extension 
+                dlg.DefaultExt = ".sgf";
+                dlg.Filter = "Unpacked .BIN files (*.sgf)|*.sgf";
+
+                // Display OpenFileDialog by calling ShowDialog method 
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox 
+                if (result == true)
+                {
+                    // Open document 
+                    string filename = dlg.FileName;
 
 
-                XP.intakeDecompiledmode(filename);
-                Loaded_Gametypes_phys[Current_Gametype].dothething();
+                    import_new_sgf(filename);
+
+                    XP.intakeDecompiledmode(filename);
+                    bool version_match = XP.intakedecompiledmode_verscheck(filename, "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml");
+                    if (version_match)
+                    {
+                        Loaded_Gametypes_phys[Current_Gametype].dothething();
+                    }
+                    else
+                    {
+                        MessageBoxResult rsltMessageBox = MessageBox.Show("Database version mismatch. Continue?", "Database version mismatch", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                        switch (rsltMessageBox)
+                        {
+                            case MessageBoxResult.Yes:
+                                Loaded_Gametypes_phys[Current_Gametype].dothething();
+                                break;
+
+                            case MessageBoxResult.No:
+                                XP.wipe_decompiled_mode();
+                                CloseButton_Click(null, null);
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
             }
 
         }
@@ -539,11 +640,20 @@ namespace gamtetyper
         }
         private void DecompButton_Click(object sender, RoutedEventArgs e)
         {
-            BitReader b = new BitReader();
-            b.m_process = XP;
-            
             try
             {
+                BitReader b = new BitReader();
+                b.m_process = XP;
+
+                // hopefully this works
+                string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+                //string haloxml = returnmegldoc_fromhalo(haloxml2);
+                bool is_Reach = false;
+                if (haloxml2 == "HR")
+                    is_Reach = true;
+
+                b.isreach = is_Reach;
+
                 if (Loaded_Gametypes[Current_Gametype].SSGF_File == null)
                 {
                     Gametype.GametypeLoaded edit = Loaded_Gametypes[Current_Gametype];
@@ -552,10 +662,11 @@ namespace gamtetyper
                     Loaded_Gametypes[Current_Gametype] = edit;
                 }
 
-                b.m_process.instaniaterwrite(Loaded_Gametypes[Current_Gametype].SSGF_File);
+                b.m_process.instaniaterwrite(Loaded_Gametypes[Current_Gametype].SSGF_File, "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml");
 
                 byte[] fileBytes = File.ReadAllBytes(Loaded_Gametypes[Current_Gametype].BIN_File);
                 b.readbin(fileBytes, "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml");
+
                 b.m_process.enprocess();
 
 
@@ -566,13 +677,12 @@ namespace gamtetyper
 
                 PostConsole(Loaded_Gametypes[Current_Gametype].BIN_File + " Successfully Decompiled!",
                             "Decompiler Done", "green", true);
+
             }
             catch (Exception ex)
             {
-                PostConsole(ex.Message,
-                            "Decompiler Failed", "red", true);
+                catchexception_and_duly_ignore(ex);
             }
-
         }
 
         private void CompAsButton_Click(object sender, RoutedEventArgs e)
@@ -603,9 +713,16 @@ namespace gamtetyper
             {
                 Loaded_Gametypes_phys[Current_Gametype].SaveButton_Click();
 
+                string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+                //string haloxml = returnmegldoc_fromhalo(haloxml2);
+                bool is_Reach = false;
+                if (haloxml2 == "HR")
+                    is_Reach = true;
+
                 BitWriter y = new BitWriter();
                 y.m_process = XP;
 
+                y.isreach = is_Reach;
 
                 y.m_process.intakeDecompiledmode(Loaded_Gametypes[Current_Gametype].SSGF_File);
 
@@ -624,12 +741,12 @@ namespace gamtetyper
                 File.WriteAllBytes(Loaded_Gametypes[Current_Gametype].BIN_File, OUTPUT);
 
                 PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Successfully Compiled!",
-                            "Compiler Done", "green", true);
+                                "Compiler Done", "green", true);
+
             }
             catch (Exception ex)
             {
-                PostConsole(ex.Message,
-                            "Compiler Failed", "red", true);
+                catchexception_and_duly_ignore(ex);
             }
         }
 
@@ -667,92 +784,96 @@ namespace gamtetyper
         //
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string haloxml = "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml";
-
-            mettext.Text = "Meta Viewer (" + Loaded_Gametypes[Current_Gametype].tabname+")";
-            meta_panel.Children.Clear();
-
-            var the_thing = XP.READ_THE_WHOLE_FILE("/base/ExTypes", "ExTypes", haloxml);
-
-            foreach(Ebum v in the_thing)
+            try
             {
-                MV_container_block cotainer = new();
-                cotainer.main = Loaded_Gametypes_phys[Current_Gametype];
-                cotainer.child = v;
-                cotainer.block_name.Text = v.Name;
-                meta_panel.Children.Add(cotainer);
-            }
+                string haloxml = "Halos\\" + Loaded_Gametypes[Current_Gametype].Target_Halo + ".xml";
 
+                mettext.Text = "Meta Viewer (" + Loaded_Gametypes[Current_Gametype].tabname+")";
+                meta_panel.Children.Clear();
+
+                var the_thing = XP.READ_THE_WHOLE_FILE("/base/ExTypes", "ExTypes", haloxml);
+
+                foreach(Ebum v in the_thing)
+                {
+                    MV_container_block cotainer = new();
+                    cotainer.main = Loaded_Gametypes_phys[Current_Gametype];
+                    cotainer.child = v;
+                    cotainer.block_name.Text = v.Name;
+                    meta_panel.Children.Add(cotainer);
+                }
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
+            }
         }
         static public void obama_abducted_my_children(Ebum e, StackPanel new_home_for, NodeWindow main)
         {
-            if (e.Type == "Int")
+            switch (e.Type)
             {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "UInt")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "Long")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "ULong")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "String")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "String16")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "UString8")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "UString16")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "Hex")
-            {
-                create_value_block(e, new_home_for, main);
-            }
-            if (e.Type == "Blank")
-            {
-                create_value_block(e, new_home_for, main);
+                case "Int":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "UInt":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "Long":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "ULong":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "String":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "String16":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "UString8":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "UString16":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "Hex":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "Blank":
+                    create_value_block(e, new_home_for, main);
+                        break;
+                case "Enum":
+                    // enum
+                    // this'll be interesting
+                    create_enum(e, new_home_for, main);
+                        break;
+                case "Container":
+                    // container
+                    create_container(e, new_home_for, main);
+                        break;
+                case "Count":
+                    // count
+                    create_count(e, new_home_for, main);
+                        break;
+                case "HCount":
+                    // count
+                    create_Hcount(e, new_home_for, main);
+                    break;
+                default:
+                    if (e.Type.Contains("External"))
+                    {
+                        // container
+                        create_container(e, new_home_for, main);
+                    }
+                    if (e.Type.Contains("Enumref"))
+                    {
+                        // container
+                        create_container(e, new_home_for, main);
+                    }
+                    break;
+
             }
 
-            if (e.Type.Contains("Enumref"))
-            {
-                // container
-                create_container(e, new_home_for, main);
-            }
-            if (e.Type == "Enum")
-            {
-                // enum
-                // this'll be interesting
-                create_enum(e, new_home_for, main);
-            }
-            if (e.Type == "Container")
-            {
-                // container
-                create_container(e, new_home_for, main);
-            }
-            if (e.Type == "Count")
-            {
-                // count
-                create_count(e, new_home_for, main);
-            }
-            if (e.Type.Contains("External"))
-            {
-                // container
-                create_container(e, new_home_for, main);
-            }
+
         }
         static public void biden_abducted_my_children(Ebum e, StackPanel new_home_for, NodeWindow main)
         {
@@ -782,6 +903,34 @@ namespace gamtetyper
             double d = Math.Pow(2.0, data.Size-1);
             count.max_text.Text = "(" + d + ")";
             count.max = (int)d;
+            count.update_count();
+
+            spot.Children.Add(count);
+        }
+        static void create_Hcount(Ebum data, StackPanel spot, NodeWindow main)
+        {
+            MV_string_block count = new();
+            count.main = main;
+            count.child = data;
+            if (data.FUCKK_YOU != null)
+                count.block_name.Text = data.FUCKK_YOU;
+            else
+                count.block_name.Text = data.Name;
+
+            double d = Math.Pow(2.0, data.Size - 1);
+            count.max_text.Text = "(" + d + ")";
+            count.max = (int)d;
+
+            // count.update_count();
+
+            data.nodes_list_yes_i_did_just_do_that.Add("UseCompression"); // epic lazy moment
+            string is_compressed = main.main.XP.returnfromdump(data.nodes_list_yes_i_did_just_do_that);
+            data.nodes_list_yes_i_did_just_do_that.RemoveAt(data.nodes_list_yes_i_did_just_do_that.Count -1);
+            if (is_compressed == "True")
+            {
+                count.compbox.IsChecked = true;
+            }
+
             count.update_count();
 
             spot.Children.Add(count);
@@ -913,19 +1062,49 @@ namespace gamtetyper
                             "Meta Changes Failed", "red", true);
             }
         }
+        public void remove_node(List<string> nodes)
+        {
+            XP.remove_xml_node(nodes);
+            PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
+                        "Changes Saved", "green", false);
+        }
+
         public void write_node(Ebum e)
         {
-            try
-            {
+            //try
+            //{
                 XP.WRITE_NODE_OF_FILE(e);
                 PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
                             "Changes Saved", "green", false);
-            }
-            catch (Exception ex)
-            {
-                PostConsole(ex.Message,
-                            "Meta Changes Failed", "red", true);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    PostConsole(ex.Message,
+            //                "Meta Changes Failed", "red", true);
+            //}
+        }
+        public void write_using_compression_node(List<string> nodes, bool? use_compression)
+        {
+            XP.write_string_compression_type(nodes, use_compression);
+            PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
+                            "Changes Saved", "green", false);
+        }
+        public void add_new_table_string(List<string> nodes)
+        {
+            string haloxml2 = Loaded_Gametypes[Current_Gametype].Target_Halo;
+            bool is_Reach = false;
+            if (haloxml2 == "HR")
+                is_Reach = true;
+
+            XP.add_table_string(nodes, is_Reach);
+            PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
+                            "Changes Saved", "green", false);
+        }
+        public void table_write_string(string location, bool? use, string the_other_thing)
+        {
+            XP.write_string_use(location, use, the_other_thing);
+            PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
+                            "Changes Saved", "green", false);
         }
 
         private void XMLFILTER_in_SelectionChanged(object sender, SelectionChangedEventArgs e)

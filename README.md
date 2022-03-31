@@ -2,9 +2,11 @@
 
 Hello gametypers!
 
-this is a basic (plugin driven) tool for deciphering the contents of the magical .bin files
+this is a basic (xml plugin driven) tool for deciphering the contents of the magical .bin files
 Focused on H2A gametypes, this tool can decompile the (or rather, some) gamemodes into xml based files that can be interpretted (by this tool) into some gross from of node graph
 you get some basic node creation/altering tools but as of yet, the tools are quite bare bones because i haven't finished this project yet
+
+this tool uses dot net 6.0, which you will probably need to download to beable to run the tool (https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.201-windows-x64-installer)
 
 old video of me making a gamemode with it (this was v0.1, so some stuff is out-dated, new one coming tomorrow probably)
 https://youtu.be/2WY5gBvY2lI?t=52

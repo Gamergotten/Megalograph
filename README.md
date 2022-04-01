@@ -50,15 +50,15 @@ i would like to give a thanks to everyone whos helped me (and the gametype commu
 
 first shoutouts would go to Krevil & Arttumiro, whom i looked up to & for providing the helping hands that i needed, to learn the arts of modding halo
 
-shoutouts to the OGs: kornman & DavidJCobb, for all their hard work on their respective tools, which paved the way for gametype modding to even be as big as it is
+shoutouts to the OGs: kornman & DavidJCobb, for all their hard work on their respective tools, which paved the way for gametype modding to even be as big as it is right now
 
-shoutout to ICantFunkUp & LanHikari, the first of many gametyper friends i would make, although i cant really remember if i talked to you guys much
+shoutout to ICantFunkUp & LanHikari, the first of many gametyper friends i would make
 
-shoutout to the crew that formed HaloPogSwitch: Killswitch, Cozi, Cantaloupe & Slen, this project helped so much with learning software&reverse engineering, enabling me to beable to make this tool
+shoutout to the crew that formed HaloPogSwitch: Killswitch, Cozi, Cantaloupe & Slen, this project helped so much with learning software&reverse engineering, enabling me to even beable to make this tool
 
 my appreciation to the big halo modders who basically formed the entire halo modding community: Gamecheat & Lord Zedd
 
-brooen & greenknight for working on the mammoth in halo reach with me (mammoths r cool)
+brooen & greenknight for working on the mammoth in halo reach mod with me (mammoths are cool)
 
 thank you to the two most devoted playtesters: Clearcardinal & HaloNMincrft (and slen but i already put you down for something else), 
 i guess i should mention The Ark guys too, becasue i forced them all to endure my earliest cursed gamemodes
@@ -71,8 +71,13 @@ thanks to sofasleeper, trustysnooze & rushmypancake for keeping the scene alive 
 and thanks to Waffle for his work on the mjolnir forge editor, which has assisted many many forgers (including myself) in creating maps & conducting research
 
 cheers to the newer guys in the scene (or at least i think they're newer) rabidmagicman & weesee I, 
-for keeping me on my feet with all these questions, constantly making me doubt myself. and well, for becomming a part of the community, too
+for keeping me on my feet with all these questions, constantly making me doubt myself. and well, for being a part of the community, too
 
-shoutout to the peeps that popped up outta nowhere to shape the Infinite modding scene with IRTV: xxZxx, Baxvius, bissuetox, Callum Carmicheal & Sopitive
+shoutout to the peeps that popped up outta nowhere to shape the Infinite modding scene with me: xxZxx, Baxvius, bissuetox, Callum Carmicheal & Sopitive
 
 lastly, big thankyou to General Trex, for always keeping me on track. i probably would have given up on this project cause no one else really cared lol
+
+last lastly, a thankyou to all the rest of the gametypers who i've met along the way: Bagof, Charlieseeese, drapperbat, firerainV, Kruse002, Ausjacmacian & JonnyOThan
+
+its been an honour to meet all of you guys, and to be provided the opportunity to shape the future of gametyping (even if this tool does go by majorly unused)
+love you all

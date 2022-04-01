@@ -13,72 +13,112 @@ this tool uses dot net 6.0, which you will probably need to download to beable t
 old video of me making a gamemode with it (this was v0.1, so some stuff is out-dated, new one coming tomorrow probably)
 https://youtu.be/2WY5gBvY2lI?t=52
 
-
-# Usage?
-
-ok so i haven't entirely tested this on reach (because there are much better tools out there)
-so dont expect this tool to beable to open halo reach gamemodes, except if they were like one of the 7 default custom game gamemodes
+ok so i haven't entirely tested this on reach (because there are much better tools out there) so dont expect this tool to beable to open halo reach gamemodes, except if they were like one of the 7 default custom-game gamemodes
 
 also dont entirely expect it to work for halo 4 (because again there are better tools out there)
 
-mainly this was designed for H2A gamemodes, but anyway,
+mainly this was designed for H2A gamemodes
+
+
+# Usage?
 
 to get started, find a .bin file from one of the supported halos (halo reach, halo 4 or halo 2A)
+
 open that with megalograph (with the "open .bin" button on the main toolbar)
 
 once you've got that, hit decompile. (it may take a while, im not the best programmer lol)
+
 if you got no errors then it worked, and you can mess with the gametype scripts, in the node window
 
+
+# Controls
+
 node window controls are: 
+
 press&hold middle mouse to navigate
+
 left click to drag / drag select
+
 right mouse to pop up the basic node creation window
 
 drag at the little node connection boxes to draw connections, 
-any nodes that are not connected to a trigger when saving, will not be saved. 
-so make sure you leave nothing loose
 
+# Metaviewer
 
 and then theres the meta viewer as i like to call it
+
 basically it structures the decompiled megalograph gametype xmls
-there are a few handy tools in there, such as the string table compilers and count item creation/removal 
+
+there are a few handy tools in there, such as the count item creation/removal and string table compilers (which you can thank kornman for cause it was his code that i borrowed for string table stuff)
+
 (if you want to remove specific ones, it may be easier to edit the xml)
+
+
 
 # Notes
 
 copy & pasting doesn't remember which nodes were connected (yet)
+
 saving the nodegraph actually doesn't save the nodes positions (yet)
+
 nor does it save nodes that are not connected to anything
+
 nodes cant read dynamic gamemode things (eg: strings, script options, labels. you have to index those)
+
 
 
 # Todo list
 
 TODO (v1.0)
+
 . range values
+
 . database max attribute
+
 . database default attribute
+
 . generate blank gamemode from defaults
+
 . negative number support
+
 . warning logger - add warnings for things that can cause the game to not like the gametype
+
 . better exception handling (i think we removed exception handling in v0.2)
+
 . darkmode top window
+
 . node location saving
+
 . comment blocks & comment block saving
+
 . trigger ref index shuffling
+
 . hiding offscreen nodes
+
 . fix meta blocks to look good
+
 . duplication fix - make use of that cool system so it can do the lines & locations when pasting
+
 . rewrite database to remove "Var" from everything
+
 . FIX PROBABLY BROKEN CONSOLE
+
 . better database rearrangements
+
 . prevent copy pasting branch into reach (it crashes if you were wondering)
 
+
+
 TODO (v2.0)
+
 . text code editor
+
 . those line things to connect variables with saving?
 
+
+
 UI work
+
 . toolbar icons
 
 

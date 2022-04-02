@@ -670,32 +670,32 @@
 
 	<Var name="TimerRate" type="Enum" bits="5" >
 		<Var ID="00000" name="0%" />
-		<Var ID="00001" name="10%" />
-		<Var ID="00010" name="25%" />
-		<Var ID="00011" name="50%" />
-		<Var ID="00100" name="75%" />
-		<Var ID="00101" name="100%" />
-		<Var ID="00110" name="125%" />
-		<Var ID="00111" name="150%" />
-		<Var ID="01000" name="175%" />
-		<Var ID="01001" name="200%" />
-		<Var ID="01010" name="300%" />
-		<Var ID="01011" name="400%" />
-		<Var ID="01100" name="500%" />
-		<Var ID="01101" name="1000%" />
-		<Var ID="01110" name="-10%" />
-		<Var ID="01111" name="-25%" />
-		<Var ID="10000" name="-50%" />
-		<Var ID="10001" name="-75%" />
-		<Var ID="10010" name="-100%" />
-		<Var ID="10011" name="-125%" />
-		<Var ID="10100" name="-150%" />
-		<Var ID="10101" name="-175%" />
-		<Var ID="10110" name="-200%" />
-		<Var ID="10111" name="-300%" />
-		<Var ID="11000" name="-400%" />
-		<Var ID="11001" name="-500%" />
-		<Var ID="11010" name="-1000%" />
+		<Var ID="00001"	name="-10%" />
+		<Var ID="00010"	name="-25%" />
+		<Var ID="00011"	name="-50%" />
+		<Var ID="00100"	name="-75%" />
+		<Var ID="00101"	name="-100%" />
+		<Var ID="00110"	name="-125%" />
+		<Var ID="00111"	name="-150%" />
+		<Var ID="01000"	name="-175%" />
+		<Var ID="01001"	name="-200%" />
+		<Var ID="01010"	name="-300%" />
+		<Var ID="01011"	name="-400%" />
+		<Var ID="01100"	name="-500%" />
+		<Var ID="01101"	name="-1000%" />
+		<Var ID="01110" name="10%" />
+		<Var ID="01111" name="25%" />
+		<Var ID="10000" name="50%" />
+		<Var ID="10001" name="75%" />
+		<Var ID="10010" name="100%" />
+		<Var ID="10011" name="125%" />
+		<Var ID="10100" name="150%" />
+		<Var ID="10101" name="175%" />
+		<Var ID="10110" name="200%" />
+		<Var ID="10111" name="300%" />
+		<Var ID="11000" name="400%" />
+		<Var ID="11001" name="500%" />
+		<Var ID="11010" name="1000%" />
 		<Var ID="11011" name="Unlabelled·" />
 		<Var ID="11100" name="Unlabelled·" />
 		<Var ID="11101" name="Unlabelled·" />
@@ -1476,9 +1476,6 @@
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
 				</Var>
-				<Var ID="00100000" name="Virtual Trigger" >
-					<Var name="VirtualTriggerRef" type="Enumref:VirtualTriggerRef" bits="0" />
-				</Var>
 				<Var ID="00100011" name="Obj.BoundaryVisPerms_SET" >
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="AllowedPlayers" type="Enumref:Players" bits="0" />
@@ -1901,7 +1898,11 @@
 				   <Var name="String" type="Enumref:String" bits="0" />
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 			   </Var>
-			   
+
+
+			   <Var ID="00100000" name="Virtual Trigger" >
+				   <Var name="VirtualTriggerRef" type="Enumref:VirtualTriggerRef" bits="0" />
+			   </Var>
 			   
 				<Var ID="11010011" name="Unlabelled·" />
 				<Var ID="11010100" name="Unlabelled·" />

@@ -19,6 +19,7 @@ also dont entirely expect it to work for halo 4 (because again there are better 
 
 mainly this was designed for H2A gamemodes
 
+EDIT: i would like to warn RVT users that this tool does not do everything for you like RVT does, you have to figure a lot of it out yourself
 
 # Usage?
 

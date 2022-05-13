@@ -8,6 +8,54 @@
         Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" 
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
+
+        <!--Base style for title bar buttons-->
+        <Style x:Key="CaptionButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" Height="30">
+                            <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10" 
+                                Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                RenderOptions.ClearTypeHint="Auto" TextOptions.TextRenderingMode="Aliased"  TextOptions.TextFormattingMode="Display"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="LayoutRoot" Property="Background" Value="#E5E5E5"/>
+                                <Setter TargetName="txt" Property="Foreground" Value="#000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Minimize-->
+        <Style x:Key="MinimizeButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CaptionButtonStyle}">
+            <Setter Property="Content" Value="&#xE949;"/>
+        </Style>
+
+        <!--Maximize-->
+        <Style x:Key="MaximizeButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CaptionButtonStyle}">
+            <Setter Property="Content" Value="&#xE739;"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!--Restore-->
+        <Style x:Key="RestoreButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CaptionButtonStyle}">
+            <Setter Property="Content" Value="&#xE923;"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!--Close-->
+        <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CaptionButtonStyle}">
+            <Setter Property="Content" Value="&#xE106;"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+
+
+
         <!-- SCROLL VIEWER -->
         <Style x:Key="ScrollViewerTemplate1" TargetType="{x:Type ScrollViewer}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -237,7 +285,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <!-- TAB ITEM -->
         <Style x:Key="FocusVisual4">
             <Setter Property="Control.Template">
@@ -250,7 +298,7 @@
         </Style>
         <SolidColorBrush x:Key="TabItem.Static.Background" Color="#FF3A3A3A"/>
         <SolidColorBrush x:Key="TabItem.Static.Border" Color="#ACACAC"/>
-        
+
         <LinearGradientBrush x:Key="TabItem.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
             <GradientStop Color="#ECF4FC" Offset="0.0"/>
             <GradientStop Color="#DCECFC" Offset="1.0"/>
@@ -446,19 +494,50 @@
         </Style>
     </Window.Resources>
 
+    <!--Add the WindowChrome object-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="34" />
+    </WindowChrome.WindowChrome>
 
-    <Grid Background="Blue">
+    <!--Title bar button commands-->
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
+        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Maximize" />
+        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Minimize" />
+        <CommandBinding Command="{x:Static SystemCommands.RestoreWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Restore" />
+    </Window.CommandBindings>
+
+
+    <Grid Background="#FF292929">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0"/>
-            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Background="#FF5F5F5F">
+        <!--Window chrome-->
+        <Grid Grid.Row="0" Height="30" Background="#252526" Grid.ColumnSpan="3">
+
+
+            <!--Caption buttons-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                            Command="{x:Static SystemCommands.MinimizeWindowCommand}" />
+                <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
+                            Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
+                <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
+                            Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
+                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#FF292929">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition x:Name="poop_column" Width="305"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="342*"/>
             </Grid.ColumnDefinitions>
 
 
@@ -522,8 +601,6 @@
                         <Button x:Name="OpnDmpButton" Grid.Row="1" Grid.Column="2" Content="..." Click="OpnDmpButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
                     </Grid>
 
-
-
                 </StackPanel>
 
                 <Border x:Name="meta_viewer" BorderBrush="Black" BorderThickness="0" Grid.Row="1"  >
@@ -568,24 +645,26 @@
                     <ScrollViewer Style="{DynamicResource ScrollViewerTemplate1}" BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.ColumnSpan="2" >
                         <StackPanel x:Name="ConsolePanel" Background="#FF373737"/>
                     </ScrollViewer>
-  
+
                 </Grid>
             </Grid>
 
-            <GridSplitter Width="5" Grid.Column="1" Background="#FF424242"/>
+            <GridSplitter Width="5" Grid.Column="1" Background="#FF424242" HorizontalAlignment="Left" Margin="300,0,0,0"/>
 
 
-            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.RowSpan="3">
+            <Border BorderBrush="#FF292929" BorderThickness="1" Grid.Column="2" Grid.ColumnSpan="2">
                 <local:edit x:Name="testdump" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
 
-            <TabControl x:Name="gmaetypeTabs" Grid.Column="2" SelectionChanged="OnSelectionChanged" Background="#FF292929">
-                
-            </TabControl>
+            <TabControl x:Name="gmaetypeTabs" Grid.Column="2" SelectionChanged="OnSelectionChanged" Background="#FF292929" Grid.ColumnSpan="2">
 
-            <Grid Grid.Column="3">
+            </TabControl>
+            
+            
+
+            <Grid Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition/>
                     <RowDefinition Height="5"/>
@@ -594,7 +673,7 @@
 
 
 
-                <Border BorderBrush="#FF4E4E4E" BorderThickness="3" Background="#FF424242" Grid.Row="1" Grid.ColumnSpan="2" >
+                <Border BorderBrush="#FF4E4E4E" BorderThickness="3" Background="#FF424242" Grid.Row="0" Grid.ColumnSpan="2" >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>

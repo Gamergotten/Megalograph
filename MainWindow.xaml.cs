@@ -1111,5 +1111,38 @@ namespace gamtetyper
         {
 
         }
+
+
+        #region WindowStyling
+        // Can execute
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        // Minimize
+        private void CommandBinding_Executed_Minimize(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
+
+        // Maximize
+        private void CommandBinding_Executed_Maximize(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MaximizeWindow(this);
+        }
+
+        // Restore
+        private void CommandBinding_Executed_Restore(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.RestoreWindow(this);
+        }
+
+        // Close
+        private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
+        }
+        #endregion
     }
 }

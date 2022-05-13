@@ -105,6 +105,16 @@ namespace gamtetyper
             }
 
         }
+
+        private readonly NodeWindow nodes = new();
+
+        private void parent_nodegraph_KeyDown(object sender, KeyEventArgs e)
+        {
+            nodes.parent_nodegraph_KeyDown(sender, e);
+            IInputElement focusedControl = Keyboard.FocusedElement;
+            Debug.WriteLine(focusedControl);
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             console_flushed_state = false;
@@ -118,7 +128,6 @@ namespace gamtetyper
             {
 
                 InitializeComponent();
-
                 XP.XMLdirectory = Directory.GetCurrentDirectory() + @"\XMLs\";
 
                 string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory() + @"\XMLs\Halos", "*.xml");

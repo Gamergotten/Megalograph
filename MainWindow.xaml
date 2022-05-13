@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gamtetyper"
         mc:Ignorable="d"
-        Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" 
+        Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" KeyDown="parent_nodegraph_KeyDown"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
 
@@ -656,7 +656,7 @@
                 <local:edit x:Name="testdump" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
 
-            <TabControl x:Name="gmaetypeTabs" Grid.Column="2" SelectionChanged="OnSelectionChanged" Background="#FF292929" Grid.ColumnSpan="2">
+            <TabControl x:Name="gmaetypeTabs" Grid.Column="2" SelectionChanged="OnSelectionChanged" Background="#FF292929" Grid.ColumnSpan="2" Focusable="True">
 
             </TabControl>
             
@@ -664,7 +664,7 @@
 
             <Grid Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition/>
                     <RowDefinition Height="5"/>
@@ -673,7 +673,7 @@
 
 
 
-                <Border BorderBrush="#FF4E4E4E" BorderThickness="3" Background="#FF424242" Grid.Row="0" Grid.ColumnSpan="2" >
+                <Border BorderBrush="#FF4E4E4E" BorderThickness="3" Background="#FF424242" Grid.Row="1" Grid.ColumnSpan="2" >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>

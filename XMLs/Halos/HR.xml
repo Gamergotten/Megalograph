@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<base revision="1.0.0">
+<base revision="1.1.0">
 <ExTypes>
 	<Var name="_blf" type="External:\Shared\_blf.xml" bits="384" />
 	<Var name="chdr" type="External:\Shared\chdr.xml" bits="5632" />

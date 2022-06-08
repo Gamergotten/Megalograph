@@ -648,8 +648,8 @@ namespace gamtetyper
         }
         private void DecompButton_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 BitReader b = new BitReader();
                 b.m_process = XP;
 
@@ -686,11 +686,11 @@ namespace gamtetyper
                 PostConsole(Loaded_Gametypes[Current_Gametype].BIN_File + " Successfully Decompiled!",
                             "Decompiler Done", "green", true);
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    catchexception_and_duly_ignore(ex);
-            //}
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
+            }
         }
 
         private void CompAsButton_Click(object sender, RoutedEventArgs e)

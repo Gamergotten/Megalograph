@@ -227,6 +227,36 @@ namespace gamtetyper
 
             XMLdump.Save(XMLdump_directory);
         }
+        public void WRITE_ENUM_NODE_OF_FILE(Ebum target)
+        {
+            var mmmmmmm = target.nodes_list_yes_i_did_just_do_that;
+
+            string parent_thingo_node = @"Gametype/base";
+            foreach (string s in mmmmmmm.SkipLast(2))
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c) && !Char.IsSymbol(c)));
+                parent_thingo_node += "/" + test;
+            }
+
+            XmlNode node_parent = XMLdump.SelectSingleNode(parent_thingo_node);
+            //XmlNode nodde_child = XMLdump.SelectSingleNode(child_node);
+
+            //if (nodde_child != null)
+            //    node_parent.RemoveChild(nodde_child);
+
+            //XmlNode acthead = XMLdump.CreateNode("element", target.Name, "");
+            //node_parent.AppendChild(acthead); // why are we completely scrubbing this node lol
+
+            //XmlAttribute Attr = XMLdump.CreateAttribute("v");
+            //Attr.Value = target.V;
+            //acthead.Attributes.Append(Attr); // surely this wont work, its set specifically as "get"
+
+
+            append_children_from_ebum_export(node_parent, target);
+
+            XMLdump.Save(XMLdump_directory);
+        }
+
         public void clear_xml_thingo_thanks(Ebum target)
         {
             var mmmmmmm = target.nodes_list_yes_i_did_just_do_that;
@@ -251,7 +281,7 @@ namespace gamtetyper
                 node_parent.RemoveChild(nodde_child);
             else
             {
-                string debug_moment = "we tried to delete something that didnt exist :C";
+                string debug_moment = "we tried to delete something that didnt exist :C"; // ##DEBUG
             }
 
             XMLdump.Save(XMLdump_directory);
@@ -501,11 +531,17 @@ namespace gamtetyper
             if (info.FUCKK_YOU != "" && info.FUCKK_YOU != null)
             {
                 //string parnode = info.FUCKK_YOU.Replace(" ", "");
-                string parnode = String.Concat(info.FUCKK_YOU.Where(c => !Char.IsWhiteSpace(c)));
-                XmlNode enumref_parent = XMLdump.CreateNode("element", parnode, "");
-                parent.AppendChild(enumref_parent);
-                parent = enumref_parent;
 
+                // i for real have no idea what this *was* for, so i will work around it
+
+                if (parent.Name != info.FUCKK_YOU)
+                {
+                    string parnode = String.Concat(info.FUCKK_YOU.Where(c => !Char.IsWhiteSpace(c)));
+                    XmlNode enumref_parent = XMLdump.CreateNode("element", parnode, "");
+                    parent.AppendChild(enumref_parent);
+                    parent = enumref_parent;
+                }
+            //    }
             }
 
             // THIS WOULD BREAK WHEN AN ACTION'S TRIGGER POSITION WAS CHANGED
@@ -755,6 +791,10 @@ namespace gamtetyper
                     return t;
                 case "Enum":
                     string test2 = returnfromdump(node);
+                    if (node.Count > 7)
+                    {
+                        string debug = "";
+                    }
                     if (test2 == null)
                     {
                         XmlDocument c = xina(ph.node);
@@ -812,7 +852,8 @@ namespace gamtetyper
                         ph2.node1 = "RefTypes";
                         // t.Params = new List<Ebum>();
                         // t.Params.Add(readblock(ph2, ph2.node1, node));
-                        //node.RemoveAt(node.Count - 1); // FUCK YOU PREVIOUS ME
+                        // node.RemoveAt(node.Count - 1); // FUCK YOU PREVIOUS ME
+
                         Ebum e3 = readblock(ph2, ph2.node1, node);
                         node.RemoveAt(node.Count - 1);
                         e3.FUCKK_YOU = ph.name;
@@ -883,8 +924,10 @@ namespace gamtetyper
                 string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
                 URItogo += "/" + test;
             }
+            XmlNodeList? null_check = XMLdump.SelectSingleNode(URItogo)?.ChildNodes;
 
-            return XMLdump.SelectSingleNode(URItogo).ChildNodes.Count;
+            if (null_check == null) return 0;
+            return null_check.Count;
         }
         public bool intakedecompiledmode_verscheck(string s, string targethalo)
         {
@@ -924,7 +967,7 @@ namespace gamtetyper
         }
 
         public string hexstringblock;
-        public string returnstringtable_to_binary(List<string> node, int ph_bits,  int ph_chars, bool isreach, bool use_compression)
+        public string returnstringtable_to_binary(List<string> node, int ph_bits,  int ph_chars, bool isreach, bool use_compression, bool is_the_annoying_one)
         {
             // maybe someday we'll add error checking here
 
@@ -993,8 +1036,12 @@ namespace gamtetyper
                         binaryblock += clipwrapper(va.NorwegianStringIndex, ph_chars);
                     }
                 }
+                string sussy_b;
+                if (isreach && is_the_annoying_one) // for some reason, reaches thingo uses an extra bit for the mfing char count - part 2
+                    sussy_b = BitWriter.clippedtolength(Convert.ToString(hexstringblock.Length / 2, 2), ph_chars + 1); // length // 6 bits instead of 5
+                else
+                    sussy_b = BitWriter.clippedtolength(Convert.ToString(hexstringblock.Length / 2, 2), ph_chars); // length
 
-                string sussy_b = BitWriter.clippedtolength(Convert.ToString(hexstringblock.Length / 2, 2), ph_chars); // length
 
                 binaryblock += sussy_b;
 

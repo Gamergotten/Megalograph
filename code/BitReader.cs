@@ -14,7 +14,7 @@ namespace gamtetyper
         public XML_Process m_process;
         public string bitclump;
 
-        //public string fordump;
+        public string fordump;
 
         public string infstring;
 
@@ -42,7 +42,7 @@ namespace gamtetyper
             m_process.writenode("base", "");
             foreach (paramheader2 p in m_process.returnchildren(path))
             {
-                //fordump = "Halo ";
+                fordump = "Halo ";
                 readblock(p, "ExTypes");
                 //runstack();
                 //Console.WriteLine(fordump);
@@ -52,7 +52,7 @@ namespace gamtetyper
 
         public void readblock(paramheader2 ph, string wrap)
         {
-            //fordump += "@" + i;
+            fordump += "@" + i;
 
             switch (ph.type)
             {
@@ -60,71 +60,71 @@ namespace gamtetyper
                     string s1 = bitclumpBIN(ph.bits).ToString();
                     m_process.writenode(ph.name, s1);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s1 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s1 + ") ";
                     break;
                 case "UInt":
                     string s2 = bitclumpBIN(ph.bits).ToString();
                     m_process.writenode(ph.name, s2);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s2 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s2 + ") ";
                     break;
                 case "Long":
                     string s3 = bitclumpBIN1(ph.bits).ToString();
                     m_process.writenode(ph.name, s3);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s3 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s3 + ") ";
                     break;
                 case "ULong":
                     string s4 = bitclumpBIN1(ph.bits).ToString();
                     m_process.writenode(ph.name, s4);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s4 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s4 + ") ";
                     break;
                 case "String":
                     string s5 = bitclumpBIN3(ph.bits);
                     string s5_1 = FromHexString8(s5.Replace("00", ""));
                     m_process.writenode(ph.name, s5_1);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s5 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s5 + ") ";
                     break;
                 case "String16":
                     string s6 = bitclumpBIN3(ph.bits);
                     string s6_1 = FromHexString16(s6.Replace("0000", ""));
                     m_process.writenode(ph.name, s6_1);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s6 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s6 + ") ";
                     break;
                 case "UString8":
                     string s7 = BinaryToString16(bitclumpBIN5());
                     string s7_1 = FromHexString8(s7.Replace("00", ""));
                     m_process.writenode(ph.name, s7_1);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s7 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s7 + ") ";
                     break;
                 case "UString16":
                     string s8 = BinaryToString16(bitclumpBIN4());
                     string s8_1 = FromHexString16(s8.Replace("0000", ""));
                     m_process.writenode(ph.name, s8_1);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s8 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s8 + ") ";
                     break;
                 case "Hex":
                     string s9 = bitclumpBIN3(ph.bits);
                     m_process.writenode(ph.name, s9);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s9 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s9 + ") ";
                     break;
                 case "Blank":
                     string s10 = bitclumpBIN2(ph.bits);
                     m_process.writenode(ph.name, s10);
                     m_process.endnode();
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s10 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s10 + ") ";
                     break;
                 case "Enum":
                     // enum
                     // this'll be interesting
                     string i1 = bitclumpBIN2(ph.bits);
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i1 + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i1 + ") ";
 
                     if (ph.offset != -1)
                     {
@@ -150,7 +150,7 @@ namespace gamtetyper
                 case "Container":
                     // container
                     m_process.writenode(ph.name, "");
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
                     InterpStruct e2 = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
                     readchildren(e2, wrap, ph.node);
                     m_process.endnode();
@@ -159,7 +159,7 @@ namespace gamtetyper
                     // count
                     m_process.writenode(ph.name, "");
                     int m = bitclumpBIN(ph.bits);
-                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
                     for (int i = 0; i < m; i += 1)
                     {
                         m_process.writenode(ph.name + "-child" + i, "");
@@ -173,7 +173,8 @@ namespace gamtetyper
                     m_process.writenode(ph.name, "");
 
                     int m9 = bitclumpBIN(ph.bits);
-                    
+                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
+                    fordump += "\r\n(" + m9 + "-chars) ";
                     List<zoingoboingo> string_indexes = new();
                     for (int i = 0; i < m9; i += 1)
                     {
@@ -206,9 +207,17 @@ namespace gamtetyper
                     if (m9 > 0) // we have at least one string
                     {
                         // table byte length
-                        int m3 = bitclumpBIN(ph.chars);
+                        int m3;
+                        if (isreach && ph.name == "Teamstring") // for some reason, reaches thingo uses an extra bit for the mfing char count
+                            m3 = bitclumpBIN(ph.chars + 1);
+                        else
+                            m3 = bitclumpBIN(ph.chars);
+
+                        fordump += "\r\n(" + m3 + "-uncompressed_chars) ";
                         // is compressed 
                         int d = bitclumpBIN(1);
+
+                        fordump += "\r\n(" + d + "-is_compressed) \r\n";
 
                         if (d == 0)
                         {
@@ -272,7 +281,7 @@ namespace gamtetyper
                         foreach (paramheader2 p in m_process.returnchildren(w[1]))
                         {
 
-                            //fordump += "\r\r" + ph.name + " ";
+                            fordump += "\r\r" + ph.name + " ";
                             readblock(p, "ExTypes");
                             // runstack();
                         }
@@ -533,7 +542,7 @@ namespace gamtetyper
 
         public void readchildren(InterpStruct e, string parentloc, string docx)
         {
-            //fordump += "\r\n" + (e.blockname) + "-child: ";
+            fordump += "\r\n" + (e.blockname) + "-child: ";
             if (e.blockparams != null && e.blockparams.Count > 0) // simplify pls
             {
                 foreach (InterpStruct.s w in e.blockparams)
@@ -544,7 +553,7 @@ namespace gamtetyper
                     readblock(ph, parentloc + "/Var[@name='" + e.blockname + "']");
                 }
             }
-            //fordump += "\r\n";
+            fordump += "\r\n";
         }
 
         public paramheader2 VarInterpret(string type, string lookfor, string docx) // need to fix this to use a shared param rather than an array

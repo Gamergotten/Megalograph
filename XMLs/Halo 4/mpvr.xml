@@ -964,7 +964,7 @@
 	</Var>
 	
 	<Var name="Strings" type="Container" bits="0" >
-		<Var name="metanameStrings" type="HCount" bits="8" chars="16" />
+		<Var name="Stringtable" type="HCount" bits="8" chars="16" />
 		<!--Var name="StringTableStringgroups" type="Count" bits="8" >
 			<Var name="bool1" type="Enum" bits="1" >
 				<Var ID="0" name="Null" />
@@ -1290,8 +1290,9 @@
 				<Var name="metadescBufferIndex" type="HCount" bits="13" />
 			</Var>
 		</Var-->
+		
 		<Var name="Random1bit" type="Int" bits="1" />
-		<Var name="metanameStrings" type="HCount" bits="1" chars="10" />
+		<Var name="metagroupStrings" type="HCount" bits="1" chars="10" />
 		<!--Var name="metagroupStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
@@ -1475,7 +1476,7 @@
 		<Var name="useobjectype" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
-				<Var name="Objecttype" type="Int" bits="12" />
+				<Var name="Objecttype" type="External:\Halo 4\objects.xml" bits="0" />
 			</Var>
 		</Var>
 		<Var name="MapMinimum" type="Int" bits="7" />

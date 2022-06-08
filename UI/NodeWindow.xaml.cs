@@ -718,6 +718,7 @@ namespace gamtetyper.UI
             {
                 int index_for_condition = w + trigger.Conditions_insert;
 
+
                 CodeBlock C = temp_active_conditions[index_for_condition];
                 C.condition_parent.linked_elements_key = trigger_links_index;
 
@@ -2201,48 +2202,59 @@ namespace gamtetyper.UI
 
         private void testab_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            zoom += ((float)e.Delta) / 1000;
-            if (zoom > 2) zoom = 2;
-            else if (zoom < 0.2f) zoom = 0.2f;
-            nodegraph_scale.ScaleX = zoom;
-            nodegraph_scale.ScaleY = zoom;
-
-            testab.RenderTransformOrigin = new(((1f / (testab.ActualWidth)) * -nodegraph_trans.X) + 0.5f, ((1f / (testab.ActualHeight)) * -nodegraph_trans.Y) + 0.5f);
-
-            //DEBUG_LOCAITON.X = RenderTransformOrigin.X * testab.ActualWidth;
-            //DEBUG_LOCAITON.Y = RenderTransformOrigin.Y * testab.ActualHeight;
-
-            if (!graph_in_lod_state && zoom <= 0.2f)
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
-                graph_in_lod_state = true;
-                foreach (var v in active_triggers)
-                {
-                    v.Content_panel.Visibility = Visibility.Hidden;
-                }
-                foreach (var v in active_conditions)
-                {
-                    v.Content_panel.Visibility = Visibility.Hidden;
-                }
-                foreach (var v in active_actions)
-                {
-                    v.Content_panel.Visibility = Visibility.Hidden;
-                }
+                nodegraph_grabbed = true;
+                move_mouse2(0, (float)e.Delta * -1.1);
+                nodegraph_grabbed = false;
             }
-            if (graph_in_lod_state && zoom > 0.2f)
+            else
             {
-                graph_in_lod_state = false;
-                foreach (var v in active_triggers)
+                zoom += ((float)e.Delta) / 750 * zoom;
+                if (zoom > 2) zoom = 2;
+                else if (zoom < 0.025f) zoom = 0.025f;
+                nodegraph_scale.ScaleX = zoom;
+                nodegraph_scale.ScaleY = zoom;
+
+                testab.RenderTransformOrigin = new((1f / (testab.ActualWidth)) * -nodegraph_trans.X + 0.5f,
+                                                   (1f / (testab.ActualHeight)) * -nodegraph_trans.Y + 0.5f);
+
+                //DEBUG_LOCAITON.X = RenderTransformOrigin.X * testab.ActualWidth;
+                //DEBUG_LOCAITON.Y = RenderTransformOrigin.Y * testab.ActualHeight;
+
+                if (!graph_in_lod_state && zoom <= 0.2f)
                 {
-                    v.Content_panel.Visibility = Visibility.Visible;
+                    graph_in_lod_state = true;
+                    foreach (var v in active_triggers)
+                    {
+                        v.Content_panel.Visibility = Visibility.Hidden;
+                    }
+                    foreach (var v in active_conditions)
+                    {
+                        v.Content_panel.Visibility = Visibility.Hidden;
+                    }
+                    foreach (var v in active_actions)
+                    {
+                        v.Content_panel.Visibility = Visibility.Hidden;
+                    }
                 }
-                foreach (var v in active_conditions)
+                if (graph_in_lod_state && zoom > 0.2f)
                 {
-                    v.Content_panel.Visibility = Visibility.Visible;
+                    graph_in_lod_state = false;
+                    foreach (var v in active_triggers)
+                    {
+                        v.Content_panel.Visibility = Visibility.Visible;
+                    }
+                    foreach (var v in active_conditions)
+                    {
+                        v.Content_panel.Visibility = Visibility.Visible;
+                    }
+                    foreach (var v in active_actions)
+                    {
+                        v.Content_panel.Visibility = Visibility.Visible;
+                    }
                 }
-                foreach (var v in active_actions)
-                {
-                    v.Content_panel.Visibility = Visibility.Visible;
-                }
+
             }
         }
         public void recieved_MouseMove(MouseEventArgs e)
@@ -2253,6 +2265,7 @@ namespace gamtetyper.UI
             testmouseY = e.GetPosition(testab).Y;
             move_mouse(DeltaX, DeltaY);
         }
+
         public void reset_movement()
         {
             //nodegraph_grabbed = true;
@@ -2273,7 +2286,12 @@ namespace gamtetyper.UI
 
             double DeltaX = mouseX - mX;
             double DeltaY = mouseY - mY;
-
+            move_mouse2(DeltaX, DeltaY);
+            mouseX = mX;
+            mouseY = mY;
+        }
+        public void move_mouse2(double DeltaX, double DeltaY)
+        {
             double factored_X = DeltaX / nodegraph_scale.ScaleX;
             double factored_Y = DeltaY / nodegraph_scale.ScaleY;
 
@@ -2321,8 +2339,6 @@ namespace gamtetyper.UI
                 double tab_y = ((1f / (testab.ActualHeight)) * -nodegraph_trans.Y) + 0.5f;
                 testab.RenderTransformOrigin = new(tab_x, tab_y);
             }
-            mouseX = mX;
-            mouseY = mY;
 
             // move lines that are currently held
             if (line_dragging_from_branchblockTHEN != null)

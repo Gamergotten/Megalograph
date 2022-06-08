@@ -172,7 +172,7 @@ namespace gamtetyper.UI
                 thing_border.BorderBrush = Brushes.Red;
                 return;
             }
-            if (Convert.ToInt32(Math.Pow(2, linkedthing.Size)) > number)
+            if (Convert.ToInt64(Math.Pow(2, linkedthing.Size)) > number)
             {
                 // check if number is smaller than max
                 // set number on to ebum

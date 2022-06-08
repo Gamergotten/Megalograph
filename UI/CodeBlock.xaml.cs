@@ -71,5 +71,10 @@ namespace gamtetyper
         {
             e.Handled= true;
         }
+
+        private void typename_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

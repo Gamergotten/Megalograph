@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base>
 <ExTypes>
-	<Var name="ObjectType" type="Enum" bits="12" >
+	<Var name="Type" type="Enum" bits="12" >
 		<Var ID="000000000000" name="spartan" />
 		<Var ID="000000000001" name="elite" />
 		<Var ID="000000000010" name="monitor" />

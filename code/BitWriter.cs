@@ -277,7 +277,7 @@ namespace gamtetyper
                         compress_it = true;
 
                     node.Add("Strings");
-                    binarytogo += m_process.returnstringtable_to_binary(node, ph.bits, ph.chars ,isreach, compress_it);
+                    binarytogo += m_process.returnstringtable_to_binary(node, ph.bits, ph.chars ,isreach, compress_it, ph.name == "Teamstring");
                     node.RemoveAt(node.Count - 1);
                     break;
                 default:

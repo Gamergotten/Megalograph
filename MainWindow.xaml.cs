@@ -30,27 +30,26 @@ namespace gamtetyper
 /// </summary>
     public partial class MainWindow : Window
     {
+        
         public static void catchexception_and_duly_ignore(Exception ex)
         {
             crashlog crash_window = new();
-
+            
             crash_window.error_title.Text = ex.Message.ToString();
             if (ex.StackTrace != null)
                 crash_window.error_message.Text = ex.StackTrace.ToString();
 
             if (ex.Message == "Root element is missing.")
             {
-                crash_window.dev_note.Text = "You opened an empty XML you clown";
+                crash_window.dev_note.Text = "XML error";
             }
             if (ex.Message == "Object reference not set to an instance of an object.")
             {
-                crash_window.dev_note.Text = "thanks for the bloody vague error,\r\nyou probably tried to open a reach SGF file with the target set to either Halo 4 or 2\r\ntry to read better next time" +
-                    "\r\nalso this could be fault of a bad gametype mapping, try to stick to gamemodes made by 343/bungie if you keep having this issue\r\nok this can also apply to if you tried to copy paste the branch node into a reach nodegraph";
+                crash_window.dev_note.Text = "a variable broke";
             }
             if (ex.Message.Contains(", is an invalid character."))
             {
-                crash_window.dev_note.Text = "looks like the stupid decompiler broke, in this particular instance it was a bad string\r\nstupid mfer cant write strings with SPECIAL characters" +
-                    "\r\nthis could be due to either: you are targeting the wrong halo like a moron *or* im the moron and this gamemode has some data that isn't mapped correctly";
+                crash_window.dev_note.Text = "database/gamemode is broken, try a different gamemode";
             }
 
             crash_window.Show();
@@ -640,8 +639,8 @@ namespace gamtetyper
         }
         private void DecompButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 BitReader b = new BitReader();
                 b.m_process = XP;
 
@@ -678,11 +677,11 @@ namespace gamtetyper
                 PostConsole(Loaded_Gametypes[Current_Gametype].BIN_File + " Successfully Decompiled!",
                             "Decompiler Done", "green", true);
 
-            }
-            catch (Exception ex)
-            {
-                catchexception_and_duly_ignore(ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    catchexception_and_duly_ignore(ex);
+            //}
         }
 
         private void CompAsButton_Click(object sender, RoutedEventArgs e)
@@ -953,7 +952,7 @@ namespace gamtetyper
         {
             MV_enum_block enumb = new();
             enumb.main = main;
-            enumb.child = data;
+            enumb.child = data; // ysdfgvdsgjh;
 
             enumb.is_setting_up = true;
 
@@ -1083,6 +1082,21 @@ namespace gamtetyper
             //                "Meta Changes Failed", "red", true);
             //}
         }
+        public void write_enum_node(Ebum e)
+        {
+            //try
+            //{
+            XP.WRITE_ENUM_NODE_OF_FILE(e);
+            PostConsole(Loaded_Gametypes[Current_Gametype].SSGF_File + " Meta Changes Saved!",
+                        "Changes Saved", "green", false);
+            //}
+            //catch (Exception ex)
+            //{
+            //    PostConsole(ex.Message,
+            //                "Meta Changes Failed", "red", true);
+            //}
+        }
+
         public void write_using_compression_node(List<string> nodes, bool? use_compression)
         {
             XP.write_string_compression_type(nodes, use_compression);

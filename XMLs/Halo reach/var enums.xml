@@ -181,7 +181,7 @@
 		</Var>
 		<Var ID="010" name="Object.Team" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Team" type="Int" bits="2" />
+			<Var name="Object.Team" type="Int" bits="1" />
 		</Var>
 		<Var ID="011" name="Team.Team" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
@@ -487,14 +487,14 @@
 	<Var name="ScriptTraits" type="Int" bits="4" />
 	
 	<Var name="FireteamFilter" type="Container" bits="0" >
-		<Var name="Fireteam[0]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[1]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[2]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[3]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[4]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[5]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[6]" type="Enumref:Bool" bits="0" />
-		<Var name="Fireteam[7]" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam0" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam1" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam2" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam3" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam4" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam5" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam6" type="Enumref:Bool" bits="0" />
+		<Var name="Fireteam7" type="Enumref:Bool" bits="0" />
 	</Var>
 	
 	<Var name="ObjectTimerIndex" type="Enum" bits="1" >
@@ -737,7 +737,7 @@
 				</Var>
 				<Var ID="00110" name="Obj.IsOfType" >
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-					<Var name="Type" type="Enumref:ObjectType" bits="0" />
+					<Var name="Type1" type="Enumref:ObjectType" bits="0" />
 				</Var>
 				<Var ID="01000" name="Obj.IsOuttaBounds" >
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
@@ -797,7 +797,7 @@
 					<Var name="Trigger" type="Enumref:TriggerRef" bits="0" />
 				</Var>
 				<Var ID="0000010" name="Megl.Create" >
-					<Var name="Type" type="Enumref:ObjectType" bits="0" />
+					<Var name="Type1" type="Enumref:ObjectType" bits="0" />
 					<Var name="OUTObject" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="PlaceAt" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="Label" type="Enumref:LabelRef" bits="0" />
@@ -808,7 +808,7 @@
 				<Var ID="1010111" name="Megl.CreateBetween" >
 					<Var name="ObjA" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="ObjB" type="Enumref:ObjectTypeRef" bits="0" />
-					<Var name="Type" type="Enumref:ObjectType" bits="0" />
+					<Var name="Type1" type="Enumref:ObjectType" bits="0" />
 					<Var name="Radius" type="Enumref:NumericTypeRef" bits="0" />
 					<Var name="OUTObject" type="Enumref:ObjectTypeRef" bits="0" />
 				</Var>
@@ -984,7 +984,7 @@
 				</Var>
 				<Var ID="1001010" name="Player.Grenades_SET" >
 					<Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
-					<Var name="Type" type="Enumref:GrenadeType" bits="0" />
+					<Var name="Type1" type="Enumref:GrenadeType" bits="0" />
 					<Var name="Operator" type="Enumref:SetterOperator" bits="0" />
 					<Var name="Operand" type="Enumref:NumericTypeRef" bits="0" />
 				</Var>
@@ -1193,7 +1193,7 @@
 				</Var>
 				<Var ID="1011101" name="Obj.GiveWeapon" >
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-					<Var name="Type" type="Enumref:ObjectType" bits="0" />
+					<Var name="Type1" type="Enumref:ObjectType" bits="0" />
 					<Var name="Mode" type="Enumref:GiveWeaponMode" bits="0" />			
 				</Var>
 				<Var ID="1011110" name="Obj.DropWeapon" >

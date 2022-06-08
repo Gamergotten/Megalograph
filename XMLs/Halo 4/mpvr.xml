@@ -1476,7 +1476,7 @@
 		<Var name="useobjectype" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
 			<Var ID="1" name="In-Use" >
-				<Var name="Objecttype" type="External:\Halo 4\objects.xml" bits="0" />
+				<Var name="Objecttype" type="Int" bits="12" />
 			</Var>
 		</Var>
 		<Var name="MapMinimum" type="Int" bits="7" />

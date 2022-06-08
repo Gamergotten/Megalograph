@@ -104,6 +104,16 @@ namespace gamtetyper
             }
 
         }
+
+        private readonly NodeWindow nodes = new();
+
+        private void parent_nodegraph_KeyDown(object sender, KeyEventArgs e)
+        {
+            nodes.parent_nodegraph_KeyDown(sender, e);
+            IInputElement focusedControl = Keyboard.FocusedElement;
+            Debug.WriteLine(focusedControl);
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             console_flushed_state = false;
@@ -117,7 +127,6 @@ namespace gamtetyper
             {
 
                 InitializeComponent();
-
                 XP.XMLdirectory = Directory.GetCurrentDirectory() + @"\XMLs\";
 
                 string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory() + @"\XMLs\Halos", "*.xml");
@@ -1125,5 +1134,38 @@ namespace gamtetyper
         {
 
         }
+
+
+        #region WindowStyling
+        // Can execute
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        // Minimize
+        private void CommandBinding_Executed_Minimize(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
+
+        // Maximize
+        private void CommandBinding_Executed_Maximize(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MaximizeWindow(this);
+        }
+
+        // Restore
+        private void CommandBinding_Executed_Restore(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.RestoreWindow(this);
+        }
+
+        // Close
+        private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
+        }
+        #endregion
     }
 }

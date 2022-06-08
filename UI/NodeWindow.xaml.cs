@@ -2242,6 +2242,12 @@ namespace gamtetyper.UI
                 move_mouse2(0, (float)e.Delta * -1.1);
                 nodegraph_grabbed = false;
             }
+            else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                nodegraph_grabbed = true;
+                move_mouse2((float)e.Delta * -1.1, 0);
+                nodegraph_grabbed = false;
+            }
             else
             {
                 zoom += ((float)e.Delta) / 750 * zoom;

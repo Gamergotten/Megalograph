@@ -36,13 +36,13 @@ if you got no errors then it worked, and you can mess with the gametype scripts,
 
 node window controls are: 
 
-press&hold middle mouse to navigate
-
-left click to drag / drag select
-
-right mouse to pop up the basic node creation window
-
-drag at the little node connection boxes to draw connections, 
+- press&hold middle mouse to navigate
+- scroll wheel to zoom/unzoom
+- ctrl scroll wheel to vertically scroll
+- shift scroll wheel to horizontally scroll
+- left click to drag / drag select
+- right mouse to pop up the basic node creation window
+- drag at the little node connection boxes to draw connections
 
 # Metaviewer
 
@@ -71,56 +71,31 @@ nodes cant read dynamic gamemode things (eg: strings, script options, labels. yo
 # Todo list
 
 TODO (v1.0)
-
-. range values
-
-. database max attribute
-
-. database default attribute
-
-. generate blank gamemode from defaults
-
-. negative number support
-
-. warning logger - add warnings for things that can cause the game to not like the gametype
-
-. better exception handling (i think we removed exception handling in v0.2)
-
-. darkmode top window
-
-. node location saving
-
-. comment blocks & comment block saving
-
-. trigger ref index shuffling
-
-. hiding offscreen nodes
-
-. fix meta blocks to look good
-
-. duplication fix - make use of that cool system so it can do the lines & locations when pasting
-
-. rewrite database to remove "Var" from everything
-
-. FIX PROBABLY BROKEN CONSOLE
-
-. better database rearrangements
-
-. prevent copy pasting branch into reach (it crashes if you were wondering)
-
-
+- range values
+- database max attribute
+- database default attribute
+- generate blank gamemode from defaults
+- negative number support
+- warning logger - add warnings for things that can cause the game to not like the gametype
+- better exception handling (i think we removed exception handling in v0.2)
+- darkmode top window
+- node location saving
+- comment blocks & comment block saving
+- trigger ref index shuffling
+- hiding offscreen nodes
+- fix meta blocks to look good
+- duplication fix - make use of that cool system so it can do the lines & locations when pasting
+- rewrite database to remove "Var" from everything
+- FIX PROBABLY BROKEN CONSOLE
+- better database rearrangements
+- prevent copy pasting branch into reach (it crashes if you were wondering)
 
 TODO (v2.0)
-
-. text code editor
-
-. those line things to connect variables with saving?
-
-
+- text code editor
+- those line things to connect variables with saving?
 
 UI work
-
-. toolbar icons
+- toolbar icons
 
 
 

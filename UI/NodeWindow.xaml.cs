@@ -970,7 +970,37 @@ namespace gamtetyper.UI
 
         Dictionary<int, trigger_things> mapped_trig_groups = new();
 
-        private void parent_nodegraph_KeyDown(object sender, KeyEventArgs e)
+        private void TheGrid_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            parent_nodegraph.Focus();
+        }
+
+
+        public void select_all()
+        {
+            foreach (CodeBlock cb in active_triggers)
+            {
+                cb.is_grabbed = true;
+                cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            }
+            foreach (CodeBlock cb in active_conditions)
+            {
+             cb.is_grabbed = true;
+             cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            }
+            foreach (CodeBlock cb in active_actions)
+            {
+                cb.is_grabbed = true;
+                cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            }            
+            foreach (BranchBlock cb in active_branches)
+            {
+             cb.is_grabbed = true;
+             cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            }
+        }
+
+        public void parent_nodegraph_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {
@@ -981,6 +1011,10 @@ namespace gamtetyper.UI
                 if (e.Key == Key.V)
                 {
                     paste_selection();
+                }
+                if (e.Key == Key.A)
+                {
+                    select_all();
                 }
             }
             else if (e.Key == Key.Delete)

@@ -196,6 +196,7 @@
 		<Var ID="00000000000000000000000010111111" name="terr_banner_contested" />
 		<Var ID="00000000000000000000000011000000" name="terr_banner_reverting" />
 		<Var ID="00000000000000000000000011000001" name="terr_banner_capturing" />
+		<Var ID="11111111111111111111111111111111" name="-1" />
 	</Var>
 </ExTypes>
 </base>

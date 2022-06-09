@@ -126,6 +126,7 @@
 		<Var ID="00000000000000000000000001111001" name="infected" />
 		<Var ID="00000000000000000000000001111010" name="navpoint_oddball_goal" />
 		<Var ID="00000000000000000000000001111011" name="navpoint_oddball_thrown" />
+		<Var ID="11111111111111111111111111111111" name="-1" />
 	</Var>
 </ExTypes>
 </base>

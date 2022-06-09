@@ -41,6 +41,7 @@
 		<Var ID="00100100" name="pl" />
 		<Var ID="00100101" name="35_spire_fp" />
 		<Var ID="00100110" name="mp_spire_fp" />
+		<Var ID="11111111" name="-1" />
 	</Var>
 </ExTypes>
 </base>

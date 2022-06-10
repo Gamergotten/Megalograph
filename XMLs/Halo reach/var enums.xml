@@ -828,7 +828,7 @@
 				<Var ID="0110011" name="Game.PlaySound" >
 					<Var name="Sound" type="Enumref:Sound" bits="0" />
 					<Var name="IsImmediate·" type="Enumref:Bool" bits="0" />
-					<Var name="Players" type="Enumref:Players" bits="0" />
+					<Var name="Players" type="Enumref:IncidentPlayers" bits="0" />
 				</Var>
 				<Var ID="1001011" name="Game.SendIncident" >
 					<Var name="Incident" type="Enumref:Incident" bits="0" />

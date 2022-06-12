@@ -178,7 +178,7 @@ namespace gamtetyper
                     List<zoingoboingo> string_indexes = new();
                     for (int i = 0; i < m9; i += 1)
                     {
-                        // do the language thingo // CLEANUP ON ISLE 2
+                        // do the language thingo
                         zoingoboingo z = new();
                         z.EnglishStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);
                         z.JapaneseStringIndex = (bitclumpBIN(1) == 0) ? -1 : bitclumpBIN(ph.chars);

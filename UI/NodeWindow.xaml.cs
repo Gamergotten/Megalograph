@@ -61,6 +61,7 @@ namespace gamtetyper.UI
         public inline_new_node_thing nodewind;
         private void parent_nodegraph_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            this.Focus();
             if (nodewind != null)
             {
                 nodewind.is_fucking_closing = true;
@@ -84,7 +85,6 @@ namespace gamtetyper.UI
 
             nodewind.transfrom_location.X = testmouseX; 
             nodewind.transfrom_location.Y = testmouseY; 
-            nodewind.Focus();
         }
         public void close_new_node_window()
         {
@@ -331,48 +331,7 @@ namespace gamtetyper.UI
                     if (poop2 != -1)
                         snap_links_connection(poop2, 0);
 
-                    int found_thing_now_engaging = -1;
-                    //int index_to_Remove = -1;
-                    for (int index=0; index<active_triggers.Count; index++)
-                    {
-                        var trigger = active_triggers[index];
-                        if (found_thing_now_engaging != -1)
-                        {
-                            trigger.typename.Content = "Trigger" + (index - 1);
-                        }
-                        else
-                        {
-                            if (cb == trigger) // why did we do it this wayyyy
-                            {
-                                found_thing_now_engaging = index;
-                                continue;
-                            }
-                        }
-                    }
-                    for (int index = 0; index < active_actions.Count; index++)
-                    {
-                        var action = active_actions[index];
-                        if (action.action_parent.stored_action.Type.V == "Megl.RunTrigger") // only do this for run trig nodes
-                        {
-                            int test_their_index = int.Parse(action.action_parent.stored_action.Type.Params[0].V);
-                            if (test_their_index == found_thing_now_engaging)
-                            {
-                                action.action_parent.stored_action.Type.Params[0].V = "0";
-                                var benis = action.Content_panel.Children[0] as node_ebum_s;
-                                var benis2 = benis.child_panel.Children[0] as node_ebum_s;
-                                benis2.source_text.Content = "0";
-                            }
-                            if (test_their_index > found_thing_now_engaging)
-                            {
-                                action.action_parent.stored_action.Type.Params[0].V = (test_their_index - 1).ToString();
-                                var benis = action.Content_panel.Children[0] as node_ebum_s;
-                                var benis2 = benis.child_panel.Children[0] as node_ebum_s;
-                                benis2.source_text.Content = action.action_parent.stored_action.Type.Params[0].V;
-
-                            }
-
-                        }
-                    }
+                    run_the_trigger_index_mover(cb, -1, "0");
 
                     active_triggers.Remove(cb);
                     testab.Children.Remove(cb);
@@ -439,6 +398,100 @@ namespace gamtetyper.UI
             {
                 MainWindow.catchexception_and_duly_ignore(ex);
             }
+        }
+
+        public void rearrange_trigger_node(CodeBlock target_trigger, int target_index)
+        {
+            int curr_trigger_index = run_the_trigger_index_mover(target_trigger, -1, "-1");
+            active_triggers.RemoveAt(curr_trigger_index);
+
+            int capped_target_index = target_index;
+            if (capped_target_index < 0)
+                capped_target_index = 0;
+
+            if (capped_target_index > active_triggers.Count)
+            {
+                capped_target_index = active_triggers.Count;
+                active_triggers.Add(target_trigger);
+            }
+            else
+            {
+                active_triggers.Insert(target_index, target_trigger);
+            }
+            run_the_trigger_index_mover(target_trigger, 1, (capped_target_index + 1).ToString());
+
+            for (int index = 0; index < active_actions.Count; index++)
+            {
+                var action = active_actions[index];
+                if (action.action_parent.stored_action.Type.V == "Megl.RunTrigger") // only do this for run trig nodes
+                {
+                    int test_their_index = int.Parse(action.action_parent.stored_action.Type.Params[0].V);
+                    if (test_their_index == -1)
+                    {
+                        action.action_parent.stored_action.Type.Params[0].V = capped_target_index.ToString();
+                        var benis = action.Content_panel.Children[0] as node_ebum_s;
+                        var benis2 = benis.child_panel.Children[0] as node_ebum_s;
+                        benis2.source_text.Content = capped_target_index.ToString();
+                    }
+                }
+            }
+            target_trigger.typename.Content = "Trigger" + capped_target_index;
+        }
+
+        public int run_the_trigger_index_mover(CodeBlock cb, int either_1_or_neg1, string new_value_for_deleted_refs)
+        {
+            int found_thing_now_engaging = -1;
+            //int index_to_Remove = -1;
+            for (int index = 0; index < active_triggers.Count; index++)
+            {
+                var trigger = active_triggers[index];
+                if (found_thing_now_engaging != -1)
+                {
+                    
+                    if (either_1_or_neg1 == 1)
+                    {
+                        trigger.typename.Content = "Trigger" + index;
+                    }
+                    else
+                    {
+                        trigger.typename.Content = "Trigger" + (index + either_1_or_neg1);
+
+                    }
+                }
+                else
+                {
+                    if (cb == trigger) // why did we do it this wayyyy
+                    {
+                        found_thing_now_engaging = index;
+                        continue;
+                    }
+                }
+            }
+            for (int index = 0; index < active_actions.Count; index++)
+            {
+                var action = active_actions[index];
+                if (action.action_parent.stored_action.Type.V == "Megl.RunTrigger") // only do this for run trig nodes
+                {
+                    int test_their_index = int.Parse(action.action_parent.stored_action.Type.Params[0].V);
+                    if (test_their_index == found_thing_now_engaging)
+                    {
+                        action.action_parent.stored_action.Type.Params[0].V = new_value_for_deleted_refs;
+                        var benis = action.Content_panel.Children[0] as node_ebum_s;
+                        var benis2 = benis.child_panel.Children[0] as node_ebum_s;
+                        benis2.source_text.Content = new_value_for_deleted_refs;
+                    }
+                    if (test_their_index > found_thing_now_engaging)
+                    {
+                        action.action_parent.stored_action.Type.Params[0].V = (test_their_index + either_1_or_neg1).ToString();
+                        var benis = action.Content_panel.Children[0] as node_ebum_s;
+                        var benis2 = benis.child_panel.Children[0] as node_ebum_s;
+                        benis2.source_text.Content = action.action_parent.stored_action.Type.Params[0].V;
+
+                    }
+
+                }
+            }
+            return found_thing_now_engaging;
         }
 
         public void delete_branch(BranchBlock bb)
@@ -541,8 +594,16 @@ namespace gamtetyper.UI
                 if (action.Type.V != "Virtual Trigger")
                 {
                     CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                    cb.transfrom_location.X = 400 * ind;
-                    cb.transfrom_location.Y = -700;
+                    if (action.position.has_position)
+                    {
+                        cb.transfrom_location.X = action.position.x;
+                        cb.transfrom_location.Y = action.position.y;
+                    }
+                    else
+                    {
+                        cb.transfrom_location.X = 400 * ind;
+                        cb.transfrom_location.Y = -700;
+                    }
 
                     //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
                     testab.Children.Add(cb);
@@ -558,8 +619,16 @@ namespace gamtetyper.UI
                 else
                 {
                     BranchBlock cb = new BranchBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                    cb.transfrom_location.X = 400 * ind;
-                    cb.transfrom_location.Y = -700;
+                    if (action.position.has_position)
+                    {
+                        cb.transfrom_location.X = action.position.x;
+                        cb.transfrom_location.Y = action.position.y;
+                    }
+                    else
+                    {
+                        cb.transfrom_location.X = 400 * ind;
+                        cb.transfrom_location.Y = -700;
+                    }
 
                     testab.Children.Add(cb);
                     temp_active_branches.Add(ind, cb);
@@ -581,8 +650,16 @@ namespace gamtetyper.UI
                 Gametype.condition condition = c[ind];
                 //, Margin = new Thickness(400 * ind, 300, 0, 0)
                 CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                cb.transfrom_location.X = 400 * ind;
-                cb.transfrom_location.Y = -300;
+                if (condition.position.has_position)
+                {
+                    cb.transfrom_location.X = condition.position.x;
+                    cb.transfrom_location.Y = condition.position.y;
+                }
+                else
+                {
+                    cb.transfrom_location.X = 400 * ind;
+                    cb.transfrom_location.Y = -700;
+                }
 
                 testab.Children.Add(cb);
                 temp_active_conditions.Add(ind, cb);
@@ -614,8 +691,17 @@ namespace gamtetyper.UI
                 height += 300;
 
                 CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                cb.transfrom_location.X = 0;
-                cb.transfrom_location.Y = height;
+                if (trigger.position.has_position)
+                {
+                    cb.transfrom_location.X = trigger.position.x;
+                    cb.transfrom_location.Y = trigger.position.y;
+                }
+                else
+                {
+                    cb.transfrom_location.X = 0;
+                    cb.transfrom_location.Y = height;
+                }
+                
 
 
                 testab.Children.Add(cb);
@@ -753,8 +839,25 @@ namespace gamtetyper.UI
                 if (kv.g_bb == null)
                 { // normal code block
                     longitude += 220;
-                    kv.g_cb.transfrom_location.X = longitude;
-                    kv.g_cb.transfrom_location.Y = height;
+
+                    bool skip_autoplace = false;
+                    if (kv.g_cb.condition_parent != null)
+                    {
+                        skip_autoplace = kv.g_cb.condition_parent.stored_condition.position.has_position == true;
+                    }
+                    else if (kv.g_cb.action_parent != null)
+                    {
+                        skip_autoplace = kv.g_cb.action_parent.stored_action.position.has_position == true;
+                    }
+                    
+
+
+
+                    if (!skip_autoplace)
+                    {
+                        kv.g_cb.transfrom_location.X = longitude;
+                        kv.g_cb.transfrom_location.Y = height;
+                    }
 
                     double _x1 = 0;
                     double _y1 = 0;
@@ -820,8 +923,11 @@ namespace gamtetyper.UI
                 else
                 { // branchblock
                     longitude += 220;
-                    kv.g_bb.transfrom_location.X = longitude;
-                    kv.g_bb.transfrom_location.Y = height;
+                    if (kv.g_bb.branch_parent.stored_action.position.has_position != true)
+                    {
+                        kv.g_bb.transfrom_location.X = longitude;
+                        kv.g_bb.transfrom_location.Y = height;
+                    }
 
                     bool is_reach = false;
                     int c_insert = int.Parse(kv.g_action.Value.Type.Params[0].Params[0].V);
@@ -1005,6 +1111,9 @@ namespace gamtetyper.UI
         {
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {
+
+
+
                 if (e.Key == Key.C)
                 {
                     copy_selection();
@@ -1073,11 +1182,25 @@ namespace gamtetyper.UI
                     is_Reach = true;
 
                 int things_to_copy = 0;
+
+                bool has_found_location_bias = false;
+                double pos_X = 0;
+                double pos_Y = 0;
                 foreach (var v in active_triggers) // triggers
                 {
                     if (v.is_grabbed)
                     {
-                        export_triggs.Add(v.trigger_parent.stored_trigger);
+                        if (!has_found_location_bias)
+                        {
+                            pos_X = v.transfrom_location.X;
+                            pos_Y = v.transfrom_location.Y;
+                            has_found_location_bias = true;
+                        }
+                        var m = v.trigger_parent.stored_trigger;
+                        m.position.has_position = true;
+                        m.position.x = pos_X - v.transfrom_location.X;
+                        m.position.y = pos_Y - v.transfrom_location.Y;
+                        export_triggs.Add(m);
                         things_to_copy++;
                     }
                 }
@@ -1085,7 +1208,17 @@ namespace gamtetyper.UI
                 {
                     if (v.is_grabbed)
                     {
-                        export_actions.Add(v.action_parent.stored_action);
+                        if (!has_found_location_bias)
+                        {
+                            pos_X = v.transfrom_location.X;
+                            pos_Y = v.transfrom_location.Y;
+                            has_found_location_bias = true;
+                        }
+                        var m = v.action_parent.stored_action;
+                        m.position.has_position = true;
+                        m.position.x = pos_X - v.transfrom_location.X;
+                        m.position.y = pos_Y - v.transfrom_location.Y;
+                        export_actions.Add(m);
                         things_to_copy++;
                     }
                 }
@@ -1093,7 +1226,17 @@ namespace gamtetyper.UI
                 {
                     if (v.is_grabbed)
                     {
-                        export_actions.Add(v.branch_parent.stored_action);
+                        if (!has_found_location_bias)
+                        {
+                            pos_X = v.transfrom_location.X;
+                            pos_Y = v.transfrom_location.Y;
+                            has_found_location_bias = true;
+                        }
+                        var m = v.branch_parent.stored_action;
+                        m.position.has_position = true;
+                        m.position.x = pos_X - v.transfrom_location.X;
+                        m.position.y = pos_Y - v.transfrom_location.Y;
+                        export_actions.Add(m);
                         things_to_copy++;
                     }
                 }
@@ -1101,7 +1244,17 @@ namespace gamtetyper.UI
                 {
                     if (v.is_grabbed)
                     {
-                        export_condis.Add(v.condition_parent.stored_condition);
+                        if (!has_found_location_bias)
+                        {
+                            pos_X = v.transfrom_location.X;
+                            pos_Y = v.transfrom_location.Y;
+                            has_found_location_bias = true;
+                        }
+                        var m = v.condition_parent.stored_condition;
+                        m.position.has_position = true;
+                        m.position.x = pos_X - v.transfrom_location.X;
+                        m.position.y = pos_Y - v.transfrom_location.Y;
+                        export_condis.Add(m);
                         things_to_copy++;
                     }
                 }
@@ -1164,8 +1317,16 @@ namespace gamtetyper.UI
                         if (action.Type.V != "Virtual Trigger")
                         {
                             CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                            cb.transfrom_location.X = testmouseX;
-                            cb.transfrom_location.Y = testmouseY;
+                            if (action.position.has_position)
+                            {
+                                cb.transfrom_location.X = testmouseX - action.position.x;
+                                cb.transfrom_location.Y = testmouseY - action.position.y;
+                            }
+                            else
+                            {
+                                cb.transfrom_location.X = testmouseX;
+                                cb.transfrom_location.Y = testmouseY;
+                            }
 
                             //active_actions.Add(ind, new Gametype.ActionUI { UI = cb, stored_action = action });
                             testab.Children.Add(cb);
@@ -1191,8 +1352,16 @@ namespace gamtetyper.UI
                         else
                         {
                             BranchBlock cb = new BranchBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                            cb.transfrom_location.X = testmouseX;
-                            cb.transfrom_location.Y = testmouseY;
+                            if (action.position.has_position)
+                            {
+                                cb.transfrom_location.X = testmouseX - action.position.x;
+                                cb.transfrom_location.Y = testmouseY - action.position.y;
+                            }
+                            else
+                            {
+                                cb.transfrom_location.X = testmouseX;
+                                cb.transfrom_location.Y = testmouseY;
+                            }
 
                             testab.Children.Add(cb);
                             active_branches.Add(cb);
@@ -1220,8 +1389,16 @@ namespace gamtetyper.UI
                         Gametype.condition condition = c[ind];
                         //, Margin = new Thickness(400 * ind, 300, 0, 0)
                         CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                        cb.transfrom_location.X = testmouseX;
-                        cb.transfrom_location.Y = testmouseY;
+                        if (condition.position.has_position)
+                        {
+                            cb.transfrom_location.X = testmouseX - condition.position.x;
+                            cb.transfrom_location.Y = testmouseY - condition.position.y;
+                        }
+                        else
+                        {
+                            cb.transfrom_location.X = testmouseX;
+                            cb.transfrom_location.Y = testmouseY;
+                        }
 
                         testab.Children.Add(cb);
                         active_conditions.Add(cb);
@@ -1255,8 +1432,16 @@ namespace gamtetyper.UI
                     foreach (Gametype.trigger trigger in t)  //   Gametype.trigger
                     {
                         CodeBlock cb = new CodeBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
-                        cb.transfrom_location.X = testmouseX;
-                        cb.transfrom_location.Y = testmouseY;
+                        if (trigger.position.has_position)
+                        {
+                            cb.transfrom_location.X = testmouseX - trigger.position.x;
+                            cb.transfrom_location.Y = testmouseY - trigger.position.y;
+                        }
+                        else
+                        {
+                            cb.transfrom_location.X = testmouseX;
+                            cb.transfrom_location.Y = testmouseY;
+                        }
 
 
                         testab.Children.Add(cb);
@@ -1311,6 +1496,34 @@ namespace gamtetyper.UI
                 if (haloxml2 == "HR")
                     is_Reach = true;
 
+                foreach (var v in active_actions)
+                {
+                    var par = v.action_parent.stored_action;
+                    par.position.has_position = true;
+                    par.position.x = v.transfrom_location.X;
+                    par.position.y = v.transfrom_location.Y;
+
+                    v.action_parent.stored_action = par;
+                }
+                foreach (var v in active_conditions)
+                {
+                    var par = v.condition_parent.stored_condition;
+                    par.position.has_position = true;
+                    par.position.x = v.transfrom_location.X;
+                    par.position.y = v.transfrom_location.Y;
+
+                    v.condition_parent.stored_condition = par;
+                }
+                foreach (var v in active_branches)
+                {
+                    var par = v.branch_parent.stored_action; 
+                    par.position.has_position = true;
+                    par.position.x = v.transfrom_location.X;
+                    par.position.y = v.transfrom_location.Y;
+
+                    v.branch_parent.stored_action = par;
+                }
+
                 foreach (var v in active_triggers)
                 {
                     Gametype.trigger outthis = v.trigger_parent.stored_trigger;
@@ -1322,6 +1535,9 @@ namespace gamtetyper.UI
                     outthis.Actions_count = t.acti_count;
                     outthis.Actions_insert = t.acti_offset;
 
+                    outthis.position.has_position = true;
+                    outthis.position.x = v.transfrom_location.X;
+                    outthis.position.y = v.transfrom_location.Y;
 
                     export_triggs.Add(outthis);
                 }
@@ -2236,6 +2452,7 @@ namespace gamtetyper.UI
 
         private void testab_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            this.Focus();
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 nodegraph_grabbed = true;
@@ -2476,6 +2693,7 @@ namespace gamtetyper.UI
         //bool any_nodes_selected;
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            this.Focus();
             // before we spawn in our selecty square, lets remove the creation box
             if (nodewind != null)
             {

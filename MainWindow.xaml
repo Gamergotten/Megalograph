@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gamtetyper"
         mc:Ignorable="d"
-        Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" KeyDown="parent_nodegraph_KeyDown"
+        Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" 
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <!--KeyDown="parent_nodegraph_KeyDown"-->
     <Window.Resources>
 
         <!--Base style for title bar buttons-->

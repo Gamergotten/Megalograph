@@ -372,6 +372,17 @@ namespace gamtetyper
 
                     Gametype.trigger curr_trigg = new Gametype.trigger();
 
+                    var valid_test = xmln.Attributes["p"];
+                    if (valid_test != null)
+                    {
+                        // we are going to need to check to see if this attribute is not null if we ever add more attributes
+                        // however i'll probably figure that out pretty easy if we ever have that problem because this text will be here lol
+                        string[] s = valid_test.InnerText.Split(",");
+                        curr_trigg.position.x = Convert.ToDouble(s[0]);
+                        curr_trigg.position.y = Convert.ToDouble(s[1]);
+                        curr_trigg.position.has_position = true;
+                    }
+
                     // find our saved name, else give a new one ; we cant save a name right now
                     curr_trigg.Name = "Trigger" + i;
 
@@ -475,6 +486,18 @@ namespace gamtetyper
 
                 XmlNode w = Actions[Index].SelectSingleNode("Type");
 
+                XmlNode actionnodexml = Actions[Index];
+                var valid_test = actionnodexml.Attributes["p"];
+                if (valid_test != null)
+                {
+                    // we are going to need to check to see if this attribute is not null if we ever add more attributes
+                    // however i'll probably figure that out pretty easy if we ever have that problem because this text will be here lol
+                    string[] s = valid_test.InnerText.Split(",");
+                    newaction.position.x = Convert.ToDouble(s[0]);
+                    newaction.position.y = Convert.ToDouble(s[1]);
+                    newaction.position.has_position = true;
+                }
+
                 // grab our ph
                 string xml = haloxml;
                 XmlDocument c = xina(xml);
@@ -498,6 +521,18 @@ namespace gamtetyper
             for (int Index = 0; Index < Conditions.Count; Index++)
             {
                 condition newcondition = new condition();
+
+                XmlNode actionnodexml = Conditions[Index];
+                var valid_test = actionnodexml.Attributes["p"];
+                if (valid_test != null)
+                {
+                    // we are going to need to check to see if this attribute is not null if we ever add more attributes
+                    // however i'll probably figure that out pretty easy if we ever have that problem because this text will be here lol
+                    string[] s = valid_test.InnerText.Split(",");
+                    newcondition.position.x = Convert.ToDouble(s[0]);
+                    newcondition.position.y = Convert.ToDouble(s[1]);
+                    newcondition.position.has_position = true;
+                }
 
                 XmlNode w = Conditions[Index].SelectSingleNode("Type");
 
@@ -603,6 +638,11 @@ namespace gamtetyper
                 XmlNode trighead = XMLdump.CreateNode("element", "TriggerCount-child" + Index, "");
                 a.AppendChild(trighead);
 
+                XmlAttribute posit = XMLdump.CreateAttribute("p");
+                posit.Value = trig.position.x + "," + trig.position.y;
+                trighead.Attributes.Append(posit);
+
+
                 append_children_from_ebum_export(trighead, trig.Attribute);
 
                 append_children_from_ebum_export(trighead, trig.Type);
@@ -646,6 +686,10 @@ namespace gamtetyper
                 XmlNode acthead = XMLdump.CreateNode("element", "ActionCount-child" + Index, "");
                 a.AppendChild(acthead);
 
+                XmlAttribute posit = XMLdump.CreateAttribute("p");
+                posit.Value = action.position.x + "," + action.position.y;
+                acthead.Attributes.Append(posit);
+
                 append_children_from_ebum_export(acthead, action.Type);
             }
         }
@@ -660,6 +704,10 @@ namespace gamtetyper
                 Gametype.condition cond = things_to_export[Index];
                 XmlNode condhead = XMLdump.CreateNode("element", "ConditionCount-child" + Index, "");
                 a.AppendChild(condhead);
+
+                XmlAttribute posit = XMLdump.CreateAttribute("p");
+                posit.Value = cond.position.x + "," + cond.position.y;
+                condhead.Attributes.Append(posit);
 
                 create_and_embed_node_w_attribute("NOT", cond.Not.ToString(), condhead);
 
@@ -1247,5 +1295,30 @@ namespace gamtetyper
             return iS;
         }
         
+
+        //
+        //
+        // proto syntax stuff
+        //
+        public string[] fetch_plaintextCode()
+        {
+            string[] ret = new string[0];
+
+
+
+
+
+
+
+
+
+
+
+
+            return ret;
+        }
+
+
+
     }
 }

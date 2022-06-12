@@ -58,8 +58,15 @@ namespace gamtetyper
         //
         // MEGALO DATA STRUCTURES
         //
+        public struct Vector2D
+        {
+            public bool has_position;
+            public double x { get; set; }
+            public double y { get; set; }
+        }
         public struct trigger
         {
+            public Vector2D position;
             public string Name { get; set; }
             public Ebum Type { get; set; }
             public Ebum Attribute { get; set; }
@@ -75,10 +82,12 @@ namespace gamtetyper
         }
         public struct action
         {
+            public Vector2D position;
             public Ebum Type { get; set; }
         }
         public struct condition
         {
+            public Vector2D position;
             public Ebum Type { get; set; }
             public int Not { get; set; }
             public int insertionpoint { get; set; } // we have to calculate this when exporting to triggers, otherwise isn't relevant

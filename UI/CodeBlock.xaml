@@ -29,12 +29,10 @@
         <Border x:Name="out_connection" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="30" Height="30" MouseLeftButtonDown="out_connection_MouseLeftButtonDown" BorderThickness="1" Background="Transparent">
             <Border BorderBrush="#FF505050" BorderThickness="2" Background="White" Width="10" Height="10" Margin="18,0,0,0"/>
         </Border>
-        <Border x:Name="in_connection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="0,0,0,0" MouseLeftButtonUp="in_connection_MouseLeftButtonUp" BorderThickness="1" MouseLeftButtonDown="in_connection_MouseLeftButtonDown" Background="Transparent">
-            <Border BorderBrush="#FF505050" BorderThickness="2" Background="White" Width="10" Height="10" Margin="0,0,18,0"/>
-        </Border>
-
-
-    </Grid>
+            <Border x:Name="in_connection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="0,0,0,0" MouseLeftButtonUp="in_connection_MouseLeftButtonUp" BorderThickness="1" MouseLeftButtonDown="in_connection_MouseLeftButtonDown" Background="Transparent">
+                <Border BorderBrush="#FF505050" BorderThickness="2" Background="White" Width="10" Height="10" Margin="0,0,18,0"/>
+            </Border>
+        </Grid>
 </Border>
 
 </UserControl>

@@ -43,6 +43,7 @@ node window controls are:
 - left click to drag / drag select
 - right mouse to pop up the basic node creation window
 - drag at the little node connection boxes to draw connections
+- ctrl A to select all nodes
 
 # Metaviewer
 
@@ -78,7 +79,6 @@ TODO (v1.0)
 - negative number support
 - warning logger - add warnings for things that can cause the game to not like the gametype
 - better exception handling (i think we removed exception handling in v0.2)
-- darkmode top window
 - node location saving
 - comment blocks & comment block saving
 - trigger ref index shuffling

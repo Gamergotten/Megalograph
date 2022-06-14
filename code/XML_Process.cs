@@ -349,7 +349,8 @@ namespace gamtetyper
             List<string> list = new List<string>();
             foreach (XmlNode xm in a_o.ChildNodes)
             {
-                list.Add(xm.Attributes["name"]?.InnerText);
+                if (xm.NodeType != XmlNodeType.Comment)
+                    list.Add(xm.Attributes["name"]?.InnerText);
             }
             return list;
         }

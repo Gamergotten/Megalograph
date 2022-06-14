@@ -764,11 +764,11 @@ namespace gamtetyper
             }
         }
 
-        // have fun
+        // have fun f
         private void export_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 SaveButton_Click(null, null);
                 SyntaxWindow sw = new();
                 sw.main = this;
@@ -778,11 +778,11 @@ namespace gamtetyper
 
                 PostConsole("Successessfully exported code to clipboard!",
                                 "exported code", "white", false);
-            }
-            catch (Exception ex)
-            {
-                catchexception_and_duly_ignore(ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    catchexception_and_duly_ignore(ex);
+            //}
         }
 
 

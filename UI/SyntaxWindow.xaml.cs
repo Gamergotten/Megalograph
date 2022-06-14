@@ -34,6 +34,7 @@ namespace Megalograph.UI
             public int trigger_index = -1;
             public code_chunk branch_block;
             public int condition_group = -1;
+            public bool condition_invert = false;
         }
 
         List<trigger> t;
@@ -103,6 +104,7 @@ namespace Megalograph.UI
                 else continue;
                 output_text += spit_out_text_of_chunk(cc, 1);
                 output_text += "end\n\n";
+
             }
             return output_text;
         }
@@ -153,7 +155,11 @@ namespace Megalograph.UI
                             if (last_cond.condition_group == sl.condition_group) // or
                             {
                                 output += "or " + sl.line;
-                                if (cc.contained_lines.Count >= i + 1)
+
+                                if (sl.condition_invert)
+                                    output += "NOT ";
+
+                                if (cc.contained_lines.Count > i + 1)
                                 {
                                     if (cc.contained_lines[i + 1].condition_group == -1)
                                     {
@@ -175,7 +181,11 @@ namespace Megalograph.UI
                             else // and
                             {
                                 output += "and " + sl.line;
-                                if (cc.contained_lines.Count >= i + 1)
+
+                                if (sl.condition_invert)
+                                    output += "NOT ";
+
+                                if (cc.contained_lines.Count > i + 1)
                                 {
                                     if (cc.contained_lines[i + 1].condition_group == -1)
                                     {
@@ -197,8 +207,11 @@ namespace Megalograph.UI
                         }
                         else
                         {
-                            output += space_times(actuated_depth) + "if " + sl.line;
-                            if (cc.contained_lines.Count >= i + 1)
+                            output += space_times(actuated_depth) + "if ";
+                            if (sl.condition_invert)
+                                output += "NOT ";
+                            output += sl.line;
+                            if (cc.contained_lines.Count > i + 1)
                             {
                                 if (cc.contained_lines[i + 1].condition_group == -1)
                                 {
@@ -225,7 +238,6 @@ namespace Megalograph.UI
                         output += space_times(actuated_depth) + sl.line + "\n";
                         last_cond = null;
                     }
-                    
                 }
             }
             while (actuated_depth > depth)
@@ -298,12 +310,11 @@ namespace Megalograph.UI
 
                 if (curr_chunk.contained_lines.Count < factored_insertion)
                 {
-                    curr_chunk.contained_lines.Add(new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group });
+                    curr_chunk.contained_lines.Add(new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group, condition_invert = c_condition.Not==1 });
                 }
                 else
                 {
-                    curr_chunk.contained_lines.Insert(factored_insertion, new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group });
-                    
+                    curr_chunk.contained_lines.Insert(factored_insertion, new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group, condition_invert = c_condition.Not==1 });
                 }
 
             }

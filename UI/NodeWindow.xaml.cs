@@ -2939,19 +2939,22 @@ namespace gamtetyper.UI
                 {
                     if (links.ContainsKey(line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key))
                     {
-                        potential_block p = links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key][0];
-                        if (p._action != null)
-                        {
-                            p._action.Inpath = null;
-                        }
-                        else if (p._condition != null)
-                        {
-                            p._condition.Inpath = null;
+                        if (links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key].Count > 0) 
+                        { 
+                            potential_block p = links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key][0];
+                            if (p._action != null)
+                            {
+                                p._action.Inpath = null;
+                            }
+                            else if (p._condition != null)
+                            {
+                                p._condition.Inpath = null;
 
-                        }
-                        else if (p._branch != null)
-                        {
-                            p._branch.Inpath = null;
+                            }
+                            else if (p._branch != null)
+                            {
+                                p._branch.Inpath = null;
+                            }
                         }
                     }
                     else

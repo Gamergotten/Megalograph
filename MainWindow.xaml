@@ -696,6 +696,9 @@
 
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="10"/>
+
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
@@ -714,6 +717,7 @@
                         <Button x:Name="SaveButton" Grid.Column="13" Content="Save" IsEnabled="False" Click="SaveButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
                         <Button x:Name="SaveAsButton" Grid.Column="14" Content="Save As" IsEnabled="False" Click="SaveAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
+                        <Button x:Name="ExportScript" Grid.Column="16" Content="Export" IsEnabled="False" Click="export_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
                     </Grid>
                 </Border>

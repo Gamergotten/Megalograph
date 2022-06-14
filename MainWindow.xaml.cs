@@ -22,6 +22,7 @@ using static gamtetyper.Gametype;
 using gamtetyper.UI;
 using gamtetyper.metaviewer;
 using gamtetyper.code;
+using Megalograph.UI;
 
 namespace gamtetyper
 {
@@ -284,6 +285,7 @@ namespace gamtetyper
                 CompAsButton.IsEnabled = false;
                 SaveButton.IsEnabled = false;
                 SaveAsButton.IsEnabled = false;
+                ExportScript.IsEnabled = false;
 
                 XP.wipe_decompiled_mode();
                 meta_button.IsEnabled = false;
@@ -318,6 +320,7 @@ namespace gamtetyper
                 CompAsButton.IsEnabled = true;
                 SaveButton.IsEnabled = true;
                 SaveAsButton.IsEnabled = true;
+                ExportScript.IsEnabled = true;
 
                 XP.intakeDecompiledmode(Loaded_Gametypes[Current_Gametype].SSGF_File);
                 meta_button.IsEnabled = true;
@@ -328,6 +331,7 @@ namespace gamtetyper
                 CompAsButton.IsEnabled = false;
                 SaveButton.IsEnabled = false;
                 SaveAsButton.IsEnabled = false;
+                ExportScript.IsEnabled = false;
 
                 XP.wipe_decompiled_mode();
                 meta_button.IsEnabled = false;
@@ -760,7 +764,26 @@ namespace gamtetyper
             }
         }
 
+        // have fun
+        private void export_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SaveButton_Click(null, null);
+                SyntaxWindow sw = new();
+                sw.main = this;
 
+                string s_ = sw.this_is_where_the_fun_begins();
+                Clipboard.SetText(s_);
+
+                PostConsole("Successessfully exported code to clipboard!",
+                                "exported code", "white", false);
+            }
+            catch (Exception ex)
+            {
+                catchexception_and_duly_ignore(ex);
+            }
+        }
 
 
 

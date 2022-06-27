@@ -217,7 +217,7 @@
 		<Var ID="1111111" name="Unlabelled·" />
 	</Var>
 	<Var name="PlayerTypeRef" type="Enum" bits="2" >
-		<Var ID="00" name="Player" >
+		<Var ID="00" name="PlayerRef" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
 		</Var>
 		<Var ID="01" name="Player.Player" >
@@ -576,7 +576,7 @@
 	</Var>
 	
 	<Var name="Players" type="Enum" bits="3" >
-		<Var ID="000" name="No Players" />
+		<Var ID="000" name="NoPlayers" />
 		<Var ID="001" name="Everyone" />
 		<Var ID="010" name="Allies" />
 		<Var ID="011" name="Enemies" />
@@ -723,11 +723,15 @@
 	<Var name="TriggerRef" type="Int" bits="7" />
 	
 	<Var name="VirtualTriggerRef" type="Container" bits="0" >
-		<Var name="ConditionCount" type="Int" bits="10" />
-		<Var name="ConditionInsertion" type="Int" bits="10" />
-		<Var name="ActionCount" type="Int" bits="11" />
-		<Var name="ActionInsertion" type="Int" bits="11" />
+		<Var name="UnanmmedInt1" type="Int" bits="10" />
+		<Var name="UnanmmedInt2" type="Int" bits="10" />
+		<Var name="UnanmmedInt3" type="Int" bits="11" />
+		<Var name="UnanmmedInt4" type="Int" bits="11" />
 	</Var>
+	<!--Var name="ConditionCount" type="Int" bits="10" /-->
+	<!--Var name="ConditionInsertion" type="Int" bits="10" /-->
+	<!--Var name="ActionCount" type="Int" bits="11" /-->
+	<!--Var name="ActionInsertion" type="Int" bits="11" /-->
 	
 	<Var name="PurchaseMode" type="Container" bits="0" >
 		<Var name="alive_weapons·" type="Enumref:Bool" bits="0" />
@@ -824,7 +828,7 @@
 	
 	<Var name="Single7_0_10" type="Int" bits="7" />
 
-	<Var name="NameIndex32" type="External:\Halo 4\names.xml" bits="0" />
+	<Var name="NameIndex32" type="External:\Halo 4\names32.xml" bits="0" />
 
 	<Var name="PowerupType" type="Enum" bits="2" >
 		<Var ID="00" name="Unlabelled·1" />
@@ -849,15 +853,15 @@
 
 
 	<Var name="Tokens1" type="Container" bits="0" >
-	    <Var name="StringIndex" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars1" type="Enumref:StringVars1" bits="0" />
 	</Var>
 	<Var name="Tokens2" type="Container" bits="0" >
-	    <Var name="StringIndex" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars2" type="Enumref:StringVars2" bits="0" />
 	</Var>
 	<Var name="Tokens3" type="Container" bits="0" >
-	    <Var name="StringIndex" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars3" type="Enumref:StringVars3" bits="0" />
 	</Var>
 	
@@ -1783,7 +1787,7 @@
 			   </Var>
 			   <Var ID="10010000" name="UNKNOWN.144·" >
 				   <Var name="Player·" type="Enumref:PlayerTypeRef" bits="0" />
-				   <Var name="Number·" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="OUTBool·" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
 			   <Var ID="10010011" name="UNKNOWN.147_DeviceGet·" >
 				   <Var name="Device" type="Enumref:ObjectTypeRef" bits="0" />
@@ -2008,7 +2012,7 @@
 		<Var name="bits2test" type="Int" bits="2" />
 	</Var>
 	
-	<Var name="MegaloVariables" type="Container" bits="0" >
+	<Var name="MegaloVars" type="Container" bits="0" >
 		<Var name="GlobalVars" type="Container" bits="0" >
 			<Var name="globalnumbers" type="Count" bits="5" >
 				<Var name="Number" type="Enumref:NumericTypeRef" bits="0" />

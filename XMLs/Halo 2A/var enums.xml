@@ -722,7 +722,7 @@
 	
 	<Var name="TriggerRef" type="Int" bits="7" />
 	
-	<Var name="VirtualTriggerRef" type="Container" bits="9" >
+	<Var name="VirtualTriggerRef" type="Container" bits="0" >
 		<Var name="UnanmmedInt1" type="Int" bits="10" />
 		<Var name="UnanmmedInt2" type="Int" bits="10" />
 		<Var name="UnanmmedInt3" type="Int" bits="11" />
@@ -849,15 +849,15 @@
 
 
 	<Var name="Tokens1" type="Container" bits="0" >
-	    <Var name="String" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars1" type="Enumref:StringVars1" bits="0" />
 	</Var>
 	<Var name="Tokens2" type="Container" bits="0" >
-	    <Var name="String" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars2" type="Enumref:StringVars2" bits="0" />
 	</Var>
 	<Var name="Tokens3" type="Container" bits="0" >
-	    <Var name="String" type="Enumref:String" bits="0" />
+	    <Var name="StringI" type="Enumref:String" bits="0" />
 		<Var name="StringVars3" type="Enumref:StringVars3" bits="0" />
 	</Var>
 	
@@ -1534,7 +1534,7 @@
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="BountyText" type="Enumref:Tokens1" bits="0" />
 				</Var> 
-			    <Var ID="01010001" name="Obj.Shields_GET" >
+			   <Var ID="01010001" name="Obj.Shields_GET" >
 					<Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="OUTShields" type="Enumref:NumericTypeRef" bits="0" />
 				</Var>
@@ -1849,6 +1849,8 @@
 				   <Var name="Number1" type="Enumref:NumericTypeRef" bits="0" />
 				   <Var name="Number2" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
+			   <!-- can be found in h4 ctf, checks some relation between flag and player picking it up -->
+			   <!-- if 1: give the player the flag -->
 			   <Var ID="11010000" name="UNKNOWN.208" >
 				   <Var name="Object1" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="Object2" type="Enumref:ObjectTypeRef" bits="0" />

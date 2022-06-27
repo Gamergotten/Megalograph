@@ -2525,6 +2525,7 @@ namespace gamtetyper.UI
 
         public void reset_movement()
         {
+            this.Focus();
             //nodegraph_grabbed = true;
             //move_mouse(0, 0);
             //nodegraph_grabbed = false;
@@ -2939,9 +2940,10 @@ namespace gamtetyper.UI
                 {
                     if (links.ContainsKey(line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key))
                     {
-                        if (links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key].Count > 0) 
-                        { 
-                            potential_block p = links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key][0];
+                        var BALLSinHD = links[line_dragging_from_branchblockDO.branch_parent.CHILD_elements_key];
+                        if (BALLSinHD.Count > 0)
+                        {
+                            potential_block p = BALLSinHD[0];
                             if (p._action != null)
                             {
                                 p._action.Inpath = null;
@@ -2949,7 +2951,6 @@ namespace gamtetyper.UI
                             else if (p._condition != null)
                             {
                                 p._condition.Inpath = null;
-
                             }
                             else if (p._branch != null)
                             {

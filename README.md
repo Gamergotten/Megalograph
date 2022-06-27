@@ -79,9 +79,7 @@ TODO (v1.0)
 - negative number support
 - warning logger - add warnings for things that can cause the game to not like the gametype
 - better exception handling (i think we removed exception handling in v0.2)
-- node location saving
 - comment blocks & comment block saving
-- trigger ref index shuffling
 - hiding offscreen nodes
 - fix meta blocks to look good
 - duplication fix - make use of that cool system so it can do the lines & locations when pasting

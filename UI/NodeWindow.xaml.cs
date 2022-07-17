@@ -321,8 +321,8 @@ namespace gamtetyper.UI
 
         public void delete_codeblock(CodeBlock cb)
         {
-            try
-            { 
+            //try
+            //{ 
                 //check&clear for trigger
                 if (cb.trigger_parent != null)
                 {
@@ -393,11 +393,11 @@ namespace gamtetyper.UI
                 }
 
                 links.Remove(owning_KEY_thing);
-            }
-            catch (Exception ex)
-            {
-                MainWindow.catchexception_and_duly_ignore(ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MainWindow.catchexception_and_duly_ignore(ex);
+            //}
         }
 
         public void rearrange_trigger_node(CodeBlock target_trigger, int target_index)
@@ -753,6 +753,8 @@ namespace gamtetyper.UI
 
         public void run_the_loop_on_mf(Gametype.trigger trigger, int longitude, CodeBlock caller, BranchBlock? altcaller)
         {
+            var among_stupid_code = trigger_links_index;
+            trigger_links_index++;
             // clear those keys so it hopefully doesn't do something silly
             if (caller != null) // is a trigger
             {
@@ -777,7 +779,7 @@ namespace gamtetyper.UI
                     Gametype.action action = temp_active_actions[index_for_action].action_parent.stored_action;
 
                     CodeBlock A = temp_active_actions[index_for_action];
-                    A.action_parent.linked_elements_key = trigger_links_index;
+                    A.action_parent.linked_elements_key = among_stupid_code;
 
                     NODELINEUP.Add(new nodelineupthing { g_action = action, g_cb = A.action_parent.UI });
 
@@ -789,7 +791,7 @@ namespace gamtetyper.UI
                     Gametype.action action = temp_active_branches[index_for_action].branch_parent.stored_action;
 
                     BranchBlock B = temp_active_branches[index_for_action];
-                    B.branch_parent.linked_elements_key = trigger_links_index;
+                    B.branch_parent.linked_elements_key = among_stupid_code;
 
                     NODELINEUP.Add(new nodelineupthing { g_action = action, g_bb = B.branch_parent.UI });
 
@@ -806,7 +808,7 @@ namespace gamtetyper.UI
 
 
                 CodeBlock C = temp_active_conditions[index_for_condition];
-                C.condition_parent.linked_elements_key = trigger_links_index;
+                C.condition_parent.linked_elements_key = among_stupid_code;
 
                 int condition_insert = C.condition_parent.stored_condition.insertionpoint;
                 int factored_insertion = condition_insert;
@@ -1010,25 +1012,21 @@ namespace gamtetyper.UI
                     }
                 }
 
-                if (caller != null) // run for a normal trigger codeblock
-                {
-                    caller.trigger_parent.CHILD_elements_key = trigger_links_index;
-                }
-                else // run for the mentally challenged branch codeblock
-                {
-                    altcaller.branch_parent.CHILD_elements_key = trigger_links_index;
-                }
-
                 //links.actions = trigger.Actions;
 
                 //links.conditions = trigger.Conditions;
-
-
-
-                links.Add(trigger_links_index, linkedstuff);
-                trigger_links_index++;
             }
 
+            if (caller != null) // run for a normal trigger codeblock
+            {
+                caller.trigger_parent.CHILD_elements_key = among_stupid_code;
+            }
+            else // run for the mentally challenged branch codeblock
+            {
+                altcaller.branch_parent.CHILD_elements_key = among_stupid_code;
+            }
+
+            links.Add(among_stupid_code, linkedstuff);
         }
 
         public Dictionary<int, List<potential_block>> links = new();
@@ -1650,8 +1648,8 @@ namespace gamtetyper.UI
 
         public void snap_links_connection(int link, int breakpoint, int KEY_to_inherit = -1)
         {
-            try
-                {
+            //try
+            //    {
                 List<potential_block> link_to_break = links[link];
 
                 // if breakpoint is 0 and key_to_inherit isnt -1 then we wanna take it off a trigger and put it on an action
@@ -1820,11 +1818,11 @@ namespace gamtetyper.UI
                     }
                 }
                 // add them to 
-            }
-            catch (Exception ex)
-            {
-                MainWindow.catchexception_and_duly_ignore(ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MainWindow.catchexception_and_duly_ignore(ex);
+            //}
         }
 
 
@@ -1923,6 +1921,13 @@ namespace gamtetyper.UI
                             }
                         }
                         snap_links_connection(owning_KEY_thing, breanpointbase + 1);
+                        // stupid fix for stupid problem -- that is, cleanup empty key groups after initial snaps
+                        //if (links[owning_KEY_thing].Count == 0)
+                        //{
+                        //    links.Remove(owning_KEY_thing);
+
+                        //}
+
 
                         int key_to_snap = -1;
                         if (cb.action_parent != null)

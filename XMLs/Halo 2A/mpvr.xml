@@ -517,36 +517,42 @@
 				<Var name="int16" type="Int" bits="16" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Projectile Damage Range upper" type="Enum" bits="1" offset="24">
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 4" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Projectile Damage Range lower" type="Enum" bits="1" offset="23" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 4" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 3000f-->
 		<Var name="Damage Upper max" type="Enum" bits="1" offset="22" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 3" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 3000f-->
 		<Var name="Damage Upper min" type="Enum" bits="1" offset="21" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 3000f-->
 		<Var name="Damage Lower" type="Enum" bits="1" offset="20" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 10f-->
 		<Var name="Area of Effect Radius" type="Enum" bits="1" offset="19" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
@@ -565,36 +571,42 @@
 				<Var name="int16" type="Int" bits="16" />
 			</Var>
 		</Var>
+		<!-- min 0f max 6.2831855f-->
 		<Var name="Bloom Increase Rate" type="Enum" bits="1" offset="16" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 6.2831855f-->
 		<Var name="Base Bloom" type="Enum" bits="1" offset="15" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 6.2831855f-->
 		<Var name="Error angle" type="Enum" bits="1" offset="14" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 10f-->
 		<Var name="blank1" type="Enum" bits="1" offset="13" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 130f-->
 		<Var name="blank2" type="Enum" bits="1" offset="12" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 130f-->
 		<Var name="blank3" type="Enum" bits="1" offset="11" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
@@ -671,84 +683,98 @@
 	
 	<Var name="WeaponProperties" type="Container" bits="0" >
 		<Var name="bits50" type="Blank" bits="50" />
+		<!-- min 0f max 6.2831855f-->
 		<Var name="Deviation Angle" type="Enum" bits="1" offset="13" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Magnetism minimum" type="Enum" bits="1" offset="12" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Magnetism short" type="Enum" bits="1" offset="11" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Magnetism long" type="Enum" bits="1" offset="10" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1.5706964f-->
 		<Var name="Magnetism angle" type="Enum" bits="1" offset="9" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Red-Reticule Minimum" type="Enum" bits="1" offset="8" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Red-Reticule Near" type="Enum" bits="1" offset="7" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1000f-->
 		<Var name="Red-Reticule Far" type="Enum" bits="1" offset="6" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 2" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1.5706964f-->
 		<Var name="Red-Reticule Angle" type="Enum" bits="1" offset="5" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1f-->
 		<Var name="Overheated Heat Loss Per Second" type="Enum" bits="1" offset="4" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1f-->
 		<Var name="Heat Illumination" type="Enum" bits="1" offset="3" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1f-->
 		<Var name="Heat Loss Per Second" type="Enum" bits="1" offset="2" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1f-->
 		<Var name="Overheat Threshold" type="Enum" bits="1" offset="1" >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >
 				<Var name="float20 1" type="Int" bits="20" />
 			</Var>
 		</Var>
+		<!-- min 0f max 1f-->
 		<Var name="Heat Recovery Threshold" type="Enum" bits="1"  >
 			<Var ID="0" name="Unchanged" />
 			<Var ID="1" name="Override" >

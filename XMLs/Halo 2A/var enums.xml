@@ -937,8 +937,8 @@
 					<Var name="Incident" type="Enumref:Incident" bits="0" />
 				</Var>
 				<Var ID="10110" name="Game.IsFrameUpdated·" >
-					<Var name="Offset·" type="Enumref:NumericTypeRef" bits="0" />
-					<Var name="Frequency·" type="Enumref:NumericTypeRef" bits="0" />
+					<Var name="Offset·" type="Enumref:VarType" bits="0" />
+					<Var name="Frequency·" type="Enumref:VarType" bits="0" />
 				</Var>
 				
 				<Var ID="00011" name="Player.WasKilled"  >

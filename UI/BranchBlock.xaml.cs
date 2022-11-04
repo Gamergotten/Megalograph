@@ -35,6 +35,7 @@ namespace gamtetyper
         public Line THENpath;
         public Line Inpath;
 
+        public bool is_hidden;
 
         private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base>
 <ExTypes>
-	<Var name="chdr" type="String" bits="32" />
-	<Var name="Unknown0x34" type="Int" bits="32" />
-	<Var name="Unknown0x38" type="Int" bits="16" />
-	<Var name="Unknown0x3A" type="Int" bits="16" />
-	<Var name="Unknown0x3C" type="Int" bits="16" />
-	<Var name="Blank0x3E" type="Int" bits="16" />
-	<Var name="Unknown0x40" type="UInt" bits="32" />
-	<Var name="FileLength" type="UInt" bits="32" />
+	<Var name="chdr" type="String" bits="32" def="chdr" />
+	<Var name="Unknown0x34" type="Int" bits="32" def="704" />
+	<Var name="Unknown0x38" type="Int" bits="16" def="10" />
+	<Var name="Unknown0x3A" type="Int" bits="16" def="2" />
+	<Var name="Unknown0x3C" type="Int" bits="16" def="65535" />
+	<Var name="Blank0x3E" type="Int" bits="16"   def="65535" />
+	<Var name="Unknown0x40" type="UInt" bits="32" def="100663296" />
+	<Var name="FileLength" type="UInt" bits="32" def="696188928"/>
 	
 	<Var name="ID0x48" type="Hex" bits="64" />
 	<Var name="ID0x50" type="Hex" bits="64" />
 	<Var name="ID0x58" type="Hex" bits="64" />
 	<Var name="Blank0x60" type="Hex" bits="64" />
 	
-	<Var name="Unknown0x68" type="Int" bits="8" />
-	<Var name="Unknown0x69" type="Int" bits="8" />
-	<Var name="Unknown0x6A" type="UInt" bits="16" />
+	<Var name="Unknown0x68" type="Int" bits="8" def="1" />
+	<Var name="Unknown0x69" type="Int" bits="8" def="4"/>
+	<Var name="Unknown0x6A" type="UInt" bits="16" def="512"/>
 	
-	<Var name="Unknown0x6C" type="Int" bits="32" />
+	<Var name="Unknown0x6C" type="Int" bits="32" def="-1"/>
 	<Var name="Unknown0x70" type="UInt" bits="32" />
 	<Var name="Blank0x74" type="Hex" bits="32" />
 	

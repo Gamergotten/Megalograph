@@ -14,7 +14,7 @@ namespace gamtetyper
         public XML_Process m_process;
         public string bitclump;
 
-        public string fordump;
+        //public string fordump;
 
         public string infstring;
 
@@ -32,99 +32,85 @@ namespace gamtetyper
                 sb.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
             }
             bitclump = sb.ToString();
-            processbin(sb.ToString(), XML);
-            Console.WriteLine("bits left(" + (bitclump.Length - i) + ")");
-            Console.WriteLine(bitclump.Substring(i));
+            processbin(XML);
+            //Console.WriteLine("bits left(" + (bitclump.Length - i) + ")");
+            //Console.WriteLine(bitclump.Substring(i));
         }
 
-        public void processbin(string c, string path)
+        public void processbin(string path)
         {
             m_process.writenode("base", "");
             foreach (paramheader2 p in m_process.returnchildren(path))
             {
-                fordump = "Halo ";
-                readblock(p, "ExTypes");
+                //fordump = "Halo ";
+                readblock(p, "ExTypes", 1);
                 //runstack();
-                //Console.WriteLine(fordump);
+                //Console.WriteLine(//fordump);
             }
             m_process.endnode();
         }
 
-        public void readblock(paramheader2 ph, string wrap)
+        public void readblock(paramheader2 ph, string wrap, int depth)
         {
-            fordump += "@" + i;
+            //fordump += "@" + i;
 
             switch (ph.type)
             {
                 case "Int":
-                    string s1 = bitclumpBIN(ph.bits).ToString();
-                    m_process.writenode(ph.name, s1);
+                    m_process.writenode(ph.name, bitclumpBIN(ph.bits).ToString());
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s1 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s1 + ") ";
                     break;
                 case "UInt":
-                    string s2 = bitclumpBIN(ph.bits).ToString();
-                    m_process.writenode(ph.name, s2);
+                    m_process.writenode(ph.name, bitclumpBIN(ph.bits).ToString());
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s2 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s2 + ") ";
                     break;
                 case "Long":
-                    string s3 = bitclumpBIN1(ph.bits).ToString();
-                    m_process.writenode(ph.name, s3);
+                    m_process.writenode(ph.name, bitclumpBIN1(ph.bits).ToString());
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s3 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s3 + ") ";
                     break;
                 case "ULong":
-                    string s4 = bitclumpBIN1(ph.bits).ToString();
-                    m_process.writenode(ph.name, s4);
+                    m_process.writenode(ph.name, bitclumpBIN1(ph.bits).ToString());
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s4 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s4 + ") ";
                     break;
                 case "String":
-                    string s5 = bitclumpBIN3(ph.bits);
-                    string s5_1 = FromHexString8(s5.Replace("00", ""));
-                    m_process.writenode(ph.name, s5_1);
+                    m_process.writenode(ph.name, FromHexString8(bitclumpBIN3(ph.bits).Replace("00", "")));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s5 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s5 + ") ";
                     break;
                 case "String16":
-                    string s6 = bitclumpBIN3(ph.bits);
-                    string s6_1 = FromHexString16(s6.Replace("0000", ""));
-                    m_process.writenode(ph.name, s6_1);
+                    m_process.writenode(ph.name, FromHexString16(bitclumpBIN3(ph.bits).Replace("0000", "")));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s6 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s6 + ") ";
                     break;
                 case "UString8":
-                    string s7 = BinaryToString16(bitclumpBIN5());
-                    string s7_1 = FromHexString8(s7.Replace("00", ""));
-                    m_process.writenode(ph.name, s7_1);
+                    m_process.writenode(ph.name, FromHexString8(BinaryToString16(bitclumpBIN5()).Replace("00", "")));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s7 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s7 + ") ";
                     break;
                 case "UString16":
-                    string s8 = BinaryToString16(bitclumpBIN4());
-                    string s8_1 = FromHexString16(s8.Replace("0000", ""));
-                    m_process.writenode(ph.name, s8_1);
+                    m_process.writenode(ph.name, FromHexString16(BinaryToString16(bitclumpBIN4()).Replace("0000", "")));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s8 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s8 + ") ";
                     break;
                 case "Hex":
-                    string s9 = bitclumpBIN3(ph.bits);
-                    m_process.writenode(ph.name, s9);
+                    m_process.writenode(ph.name, bitclumpBIN3(ph.bits));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s9 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s9 + ") ";
                     break;
                 case "Blank":
-                    string s10 = bitclumpBIN2(ph.bits);
-                    m_process.writenode(ph.name, s10);
+                    m_process.writenode(ph.name, bitclumpBIN2(ph.bits));
                     m_process.endnode();
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s10 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + s10 + ") ";
                     break;
                 case "Enum":
                     // enum
                     // this'll be interesting
                     string i1 = bitclumpBIN2(ph.bits);
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i1 + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + i1 + ") ";
 
                     if (ph.offset != -1)
                     {
@@ -133,6 +119,7 @@ namespace gamtetyper
                         cw.w.name = ph.name;
                         cw.depth = ph.offset;
                         cw.parentnode = wrap;
+                        cw.nodedepth = depth;
                         cw.docx = ph.node;
                         cw.read2 = ph.node1 + "/Var[@name='" + ph.name + "']";
                         stack.Add(cw);
@@ -142,7 +129,7 @@ namespace gamtetyper
                         InterpStruct e = m_process.readdata("base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@ID='" + i1 + "']", ph.node);
                         m_process.writenode(ph.name, e.blockname);
                         skip = true;
-                        readchildren(e, wrap + "/Var[@name='" + ph.name + "']", ph.node);
+                        readchildren(e, wrap + "/Var[@name='" + ph.name + "']", ph.node, depth+1);
                         m_process.endnode();
                         skip = false;
                     }
@@ -150,21 +137,21 @@ namespace gamtetyper
                 case "Container":
                     // container
                     m_process.writenode(ph.name, "");
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
                     InterpStruct e2 = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
-                    readchildren(e2, wrap, ph.node);
+                    readchildren(e2, wrap, ph.node, depth + 1);
                     m_process.endnode();
                     break;
                 case "Count":
                     // count
                     m_process.writenode(ph.name, "");
                     int m = bitclumpBIN(ph.bits);
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": " + m + ") ";
                     for (int i = 0; i < m; i += 1)
                     {
                         m_process.writenode(ph.name + "-child" + i, "");
                         InterpStruct e3 = m_process.readdata("/base/" + ph.node1 + "/Var[@name='" + ph.name + "']", ph.node);
-                        readchildren(e3, wrap, ph.node);
+                        readchildren(e3, wrap, ph.node, depth + 1);
                         m_process.endnode();
                     }
                     m_process.endnode();
@@ -173,8 +160,8 @@ namespace gamtetyper
                     m_process.writenode(ph.name, "");
 
                     int m9 = bitclumpBIN(ph.bits);
-                    fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
-                    fordump += "\r\n(" + m9 + "-chars) ";
+                    //fordump += "(" + ph.bits + "-bit " + ph.type + " - " + ph.name + ": ) ";
+                    //fordump += "\r\n(" + m9 + "-chars) ";
                     List<zoingoboingo> string_indexes = new();
                     for (int i = 0; i < m9; i += 1)
                     {
@@ -213,11 +200,11 @@ namespace gamtetyper
                         else
                             m3 = bitclumpBIN(ph.chars);
 
-                        fordump += "\r\n(" + m3 + "-uncompressed_chars) ";
+                        //fordump += "\r\n(" + m3 + "-uncompressed_chars) ";
                         // is compressed 
                         int d = bitclumpBIN(1);
 
-                        fordump += "\r\n(" + d + "-is_compressed) \r\n";
+                        //fordump += "\r\n(" + d + "-is_compressed) \r\n";
 
                         if (d == 0)
                         {
@@ -262,7 +249,6 @@ namespace gamtetyper
                             do_the_language(current_string.DutchStringIndex, "DutchString");
                             do_the_language(current_string.NorwegianStringIndex, "NorwegianString");
                         }
-
                         m_process.endnode();
                     }
 
@@ -281,8 +267,8 @@ namespace gamtetyper
                         foreach (paramheader2 p in m_process.returnchildren(w[1]))
                         {
 
-                            fordump += "\r\r" + ph.name + " ";
-                            readblock(p, "ExTypes");
+                            //fordump += "\r\r" + ph.name + " ";
+                            readblock(p, "ExTypes", depth+1);
                             // runstack();
                         }
                         if (ph.bits > 0)
@@ -295,7 +281,7 @@ namespace gamtetyper
                         }
                         m_process.endnode();
                     }
-                    if (ph.type.Contains("Enumref"))
+                    else if (ph.type.Contains("Enumref"))
                     {
                         // container
                         string[] w = ph.type.Split(":");
@@ -305,25 +291,33 @@ namespace gamtetyper
                         ph2.node1 = "RefTypes";
 
                         m_process.writenode(ph.name, "");
-                        readblock(ph2, ph2.node1);
+                        readblock(ph2, ph2.node1, depth + 1);
+                        m_process.endnode();
+                    }
+                    else if (ph.type.Contains("Ref0:") || ph.type.Contains("Ref1:"))
+                    {
+                        // then we just give it our index
+                        m_process.writenode(ph.name, bitclumpBIN(ph.bits).ToString());
                         m_process.endnode();
                     }
                     break;
 
             }
             if (!skip)
-                runstack();
+                runstack(depth);
 
         }
-        void runstack()
+        void runstack(int nodedepth)
         {
             int w2 = stack.Count;
+            if (w2 == 0) return;
+
             for (int q = 0; q < w2; q++)
             {
                 if (stack.Count > 0)
                 {
                     callstack cs = stack.ElementAt(q);
-                    if (cs.depth <= 0)
+                    if (cs.depth <= 0 && nodedepth == cs.nodedepth)
                     {
                         stack.RemoveAt(q);
                         q--;
@@ -331,19 +325,22 @@ namespace gamtetyper
                         skip = true;
                         m_process.writenode(cs.w.name, cs.w.blockname);
                         if (cs.read2 == null)
-                            readchildren(cs.w, cs.parentnode, cs.docx);
+                            readchildren(cs.w, cs.parentnode, cs.docx, nodedepth + 1);
 
                         if (cs.read2 != null)
-                            readchildren(cs.w, cs.read2, cs.docx);
+                            readchildren(cs.w, cs.read2, cs.docx, nodedepth + 1);
 
                         m_process.endnode();
                         skip = false;
                     }
                     else
                     {
-                        stack.RemoveAt(q);
-                        cs.depth -= 1;
-                        stack.Insert(q, cs);
+                        if (nodedepth == cs.nodedepth) // by god, i swear somne things are just gonna get stuck in infinite stacks
+                        {
+                            stack.RemoveAt(q);
+                            cs.depth -= 1;
+                            stack.Insert(q, cs);
+                        }
                     }
                 }
 
@@ -355,6 +352,7 @@ namespace gamtetyper
         public struct callstack
         {
             public int depth { get; set; }
+            public int nodedepth { get; set; }
             public InterpStruct w { get; set; }
             public string parentnode { get; set; }
             public string read2 { get; set; }
@@ -516,6 +514,7 @@ namespace gamtetyper
         }
         void continuehunt()
         {
+            // TODO: make this a while loop and not recursive
             string n = bitclump.Substring(i, 16);
             i += 16;
             infstring += n;
@@ -531,6 +530,7 @@ namespace gamtetyper
         }
         void continuehunt8()
         {
+            // TODO: make this a while loop and not recursive
             string n = bitclump.Substring(i, 8);
             i += 8;
             infstring += n;
@@ -540,9 +540,9 @@ namespace gamtetyper
         }
 
 
-        public void readchildren(InterpStruct e, string parentloc, string docx)
+        public void readchildren(InterpStruct e, string parentloc, string docx, int depth)
         {
-            fordump += "\r\n" + (e.blockname) + "-child: ";
+            //fordump += "\r\n" + (e.blockname) + "-child: ";
             if (e.blockparams != null && e.blockparams.Count > 0) // simplify pls
             {
                 foreach (InterpStruct.s w in e.blockparams)
@@ -550,10 +550,10 @@ namespace gamtetyper
                     paramheader2 ph = VarInterpret(parentloc + "/Var[@name='" + e.blockname + "']" + "", w.name, docx);
                     ph.node = docx;
                     ph.node1 = parentloc + "/Var[@name='" + e.blockname + "']";
-                    readblock(ph, parentloc + "/Var[@name='" + e.blockname + "']");
+                    readblock(ph, parentloc + "/Var[@name='" + e.blockname + "']", depth);
                 }
             }
-            fordump += "\r\n";
+            //fordump += "\r\n";
         }
 
         public paramheader2 VarInterpret(string type, string lookfor, string docx) // need to fix this to use a shared param rather than an array
@@ -587,6 +587,8 @@ namespace gamtetyper
             public int bits { get; set; }
             public int offset { get; set; }
             public int chars { get; set; }
+            public int max { get; set; }
+            public string? Default { get; set; }
         }
 
         struct param

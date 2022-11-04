@@ -9,13 +9,10 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="55"/>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="45"/>
             </Grid.ColumnDefinitions>
             <CheckBox x:Name="knot_box" Content="NOT" Foreground="White" Click="CheckBox_Click" />
-            <TextBlock Text="OR Group" Grid.Column="2" Foreground="White"/>
-            <TextBox x:Name="OR_group" Text="Number" Grid.Column="3" KeyDown="alter_cond_OR_group"/>
+            <CheckBox x:Name="or_box" Grid.Column="1" Content="OR" Foreground="White" Click="or_box_Click" />
         </Grid>
     </Border>
 </UserControl>

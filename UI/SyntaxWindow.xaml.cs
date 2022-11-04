@@ -310,11 +310,11 @@ namespace Megalograph.UI
 
                 if (curr_chunk.contained_lines.Count < factored_insertion)
                 {
-                    curr_chunk.contained_lines.Add(new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group, condition_invert = c_condition.Not==1 });
+                    curr_chunk.contained_lines.Add(new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_index_helper, condition_invert = c_condition.Not==1 });
                 }
                 else
                 {
-                    curr_chunk.contained_lines.Insert(factored_insertion, new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_Group, condition_invert = c_condition.Not==1 });
+                    curr_chunk.contained_lines.Insert(factored_insertion, new string_line { line = string_ify_code(c_condition.Type), condition_group = c_condition.OR_index_helper, condition_invert = c_condition.Not==1 });
                 }
 
             }

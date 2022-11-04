@@ -22,7 +22,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="block_name" Text="Test block name" Margin="5,0,0,0" Grid.Column="1" Foreground="White"/>
                 <TextBlock Grid.Column="2" Text=":" Foreground="White"/>
-                <TextBlock x:Name="block_preview" Text="Test block preview" Margin="1,0,5,0" Grid.Column="3" Foreground="White" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+                <TextBox x:Name="block_preview" Text="Test block preview" Margin="1,0,5,0" Grid.Column="3" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" KeyDown="block_preview_KeyDown"/>
                 <Button x:Name="expand_button" Content="+"  Click="Button_Click" Foreground="White" BorderBrush="#FF757575" Background="#FF4A4A4A"/>
             </Grid>
         </Border>

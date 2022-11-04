@@ -224,6 +224,7 @@
 		<Var ID="000011011011" name="dlc_covenant_bomb" />
 		<Var ID="000011011100" name="dlc_invasion_heavy_shield" />
 		<Var ID="000011011101" name="dlc_invasion_bomb_door" />
+		<Var ID="000100000100" name="lan_a_mf" />
 	</Var>
 </ExTypes>
 </base>

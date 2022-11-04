@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
 using gamtetyper.UI;
+using Megalograph.UI;
 namespace gamtetyper.UI
 {
     /// <summary>
@@ -31,6 +32,7 @@ namespace gamtetyper.UI
         //}
         public Ebum linkedthing;
         public NodeWindow xmlp;
+
 
         private void source_text_Click(object sender, RoutedEventArgs e)
         {
@@ -60,59 +62,67 @@ namespace gamtetyper.UI
                 number_box.Focus();
 
             }
-            if (type == "UInt")
+            //if (type == "UInt")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "Long")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "ULong")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "String")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "String16")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "UString8")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "UString16")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "Hex")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type == "Blank")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type.Contains("Enumref"))
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            else if (type == "Enum")
             {
-                string debug_dis = "hello ";
-            }
-            if (type == "Long")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "ULong")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "String")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "String16")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "UString8")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "UString16")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "Hex")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "Blank")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type.Contains("Enumref"))
-            {
-                string debug_dis = "hello ";
-            }
-            if (type == "Enum")
-            {
-                source_text.Visibility = Visibility.Collapsed;
-                enum_selected_thing = source_enum;
+                if (xmlp.main.sasuage != null)
+                {   // cleanup the previous window
+                    xmlp.main.sasuage.closethis();
+                }
 
-                source_enum.Visibility = Visibility.Visible;
+                //source_text.Visibility = Visibility.Collapsed;
+                //enum_selected_thing = source_enum;
 
-                source_enum.ItemsSource = xmlp.WHY2(linkedthing.XMLDoc, linkedthing.XMLPath);
+                xmlp.main.sasuage = new();
+                var strings_out = xmlp.WHY2(linkedthing.XMLDoc, linkedthing.XMLPath);
 
-                ignore_selection_change = true;
+                xmlp.main.sasuage.souroce_selection = strings_out;
+                xmlp.main.sasuage._content.ItemsSource = strings_out;
+
+
+                //ignore_selection_change = true;
                 int current_index = 0;
                 int selected_index = -1;
-                foreach (var v in source_enum.ItemsSource)
+                foreach (var v in xmlp.main.sasuage._content.ItemsSource)
                 {
                     string s = v as string;
                     if (s == linkedthing.V)
@@ -121,25 +131,66 @@ namespace gamtetyper.UI
                     }
                     current_index++;
                 }
-                source_enum.SelectedIndex = selected_index;
+                xmlp.main.sasuage._content.SelectedIndex = selected_index;
 
-                source_enum.Focus();
-                source_enum.IsDropDownOpen = true;
+                var coords = source_text.PointToScreen(new Point(0, 0));
 
-                ignore_selection_change = false;
+                xmlp.main.sasuage.Top = coords.Y;
+                xmlp.main.sasuage.Left = coords.X;
+
+                xmlp.main.sasuage.Show();
+                xmlp.main.sasuage.Focus();
+                xmlp.main.sasuage.search.Focus();
+
+                xmlp.main.sasuage.is_disabled = false;
+                xmlp.main.sasuage.parent_return = this;
             }
-            if (type == "Container")
+            else if (type.Contains("Ref0:") || type.Contains("Ref1:"))
             {
-                // literally dont do anything if this ones clicked, not sure how there is even this one
+                if (xmlp.main.sasuage != null)
+                {   // cleanup the previous window
+                    xmlp.main.sasuage.closethis();
+                }
+
+                //source_text.Visibility = Visibility.Collapsed;
+                //enum_selected_thing = source_enum;
+
+                xmlp.main.sasuage = new();
+
+
+                List<string>? v = null; 
+                if (linkedthing.Type.Split(":")[0] == "Ref0")
+                    v = xmlp.main.XP.return_all_Entries_for_reference_block(type.Split(":")[1]);
+                else // is +1
+                    v = xmlp.main.XP.return_all_entries_and_none(type.Split(":")[1]);
+
+                xmlp.main.sasuage.souroce_selection = v;
+                xmlp.main.sasuage._content.ItemsSource = v;
+                xmlp.main.sasuage._content.SelectedIndex = int.Parse(linkedthing.V);
+
+
+
+                var coords = source_text.PointToScreen(new Point(0, 0));
+                xmlp.main.sasuage.Top = coords.Y;
+                xmlp.main.sasuage.Left = coords.X;
+                xmlp.main.sasuage.Show();
+                xmlp.main.sasuage.Focus();
+                xmlp.main.sasuage.search.Focus();
+                xmlp.main.sasuage.is_disabled = false;
+                xmlp.main.sasuage.parent_return = this;
             }
-            if (type == "Count")
-            {
-                string debug_dis = "hello ";
-            }
-            if (type.Contains("External"))
-            {
-                string debug_dis = "hello ";
-            }
+            //if (type == "Container")
+            //{
+            //    // literally dont do anything if this ones clicked, not sure how there is even this one
+            //}
+            //if (type == "Count")
+            //{
+            //    string debug_dis = "hello ";
+            //}
+            //if (type.Contains("External"))
+            //{
+            //    string debug_dis = "hello ";
+            //}
         }
 
         public TextBox number_box;
@@ -197,40 +248,52 @@ namespace gamtetyper.UI
             }
         }
 
-        public ComboBox enum_selected_thing;
 
-        private void source_enum_LostFocus(object sender, RoutedEventArgs e)
+
+        public void recieve_selection(string selected_enum, int index)
         {
-
-        }
-
-        private void source_enum_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ignore_selection_change)
-                return;
-            
-            source_text.Visibility = Visibility.Visible;
-            enum_selected_thing.Visibility = Visibility.Collapsed;
-
-            string selected_enum = enum_selected_thing.SelectedItem.ToString();
-
             linkedthing.V = selected_enum;
             source_text.Content = selected_enum;
 
-            xmlp.WHY3(this);
-
-            enum_selected_thing = null;
-        }
-
-        private void source_enum_DropDownClosed(object sender, EventArgs e)
-        {
-            if (enum_selected_thing != null)
+            if (linkedthing.Type.Contains("Ref0:") || linkedthing.Type.Contains("Ref1:"))
             {
-                source_text.Visibility = Visibility.Visible;
-                enum_selected_thing.Visibility = Visibility.Collapsed;
-
-                enum_selected_thing = null;
+                linkedthing.V = index.ToString();
+                source_text.Content = selected_enum;
             }
+            else // is a reference, and we just need the index instead
+            {
+                xmlp.WHY3(this);
+            }
+
         }
+
+        //private void source_enum_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (ignore_selection_change)
+        //        return;
+            
+        //    source_text.Visibility = Visibility.Visible;
+        //    enum_selected_thing.Visibility = Visibility.Collapsed;
+
+        //    string selected_enum = enum_selected_thing.SelectedItem.ToString();
+
+        //    linkedthing.V = selected_enum;
+        //    source_text.Content = selected_enum;
+
+        //    xmlp.WHY3(this);
+                
+        //    enum_selected_thing = null;
+        //}
+
+        //private void source_enum_DropDownClosed(object sender, EventArgs e)
+        //{
+        //    if (enum_selected_thing != null)
+        //    {
+        //        source_text.Visibility = Visibility.Visible;
+        //        enum_selected_thing.Visibility = Visibility.Collapsed;
+
+        //        enum_selected_thing = null;
+        //    }
+        //}
     }
 }

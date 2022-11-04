@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base>
 <ExTypes>
-	<Var name="_eof" type="String" bits="32" />
-	<Var name="Unknown1_4byte" type="Int" bits="32" />
-	<Var name="Unknown2_2byte" type="Int" bits="16" />
-	<Var name="Unknown3_2byte" type="Int" bits="16" />
-	<Var name="Unknown4_4byte" type="Int" bits="32" />
+	<Var name="_eof" type="String" bits="32" def="_eof" />
+	<Var name="Unknown1_4byte" type="Int" bits="32" def="17" />
+	<Var name="Unknown2_2byte" type="Int" bits="16" def="1" />
+	<Var name="Unknown3_2byte" type="Int" bits="16" def="1" />
+	<Var name="Unknown4_4byte" type="Int" bits="32" def="32536" />
 </ExTypes>
 </base>

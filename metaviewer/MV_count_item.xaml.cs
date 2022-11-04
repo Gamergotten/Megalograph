@@ -51,5 +51,23 @@ namespace gamtetyper.metaviewer
             }
 
         }
+
+        private void block_name_KeyDown(object sender, KeyEventArgs e)
+        {
+            // setup the path, should probably bake this in
+            var mmmmmmm = child.nodes_list_yes_i_did_just_do_that;
+            string thingo_node = @"Gametype/base";
+            foreach (string s in mmmmmmm)
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c) && !Char.IsSymbol(c)));
+                thingo_node += "/" + test;
+            }
+
+            main.main.write_node_refname(thingo_node, block_name.Text);
+            if (e.Key == Key.Return)
+            {
+                Keyboard.ClearFocus();
+            }
+        }
     }
 }

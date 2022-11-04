@@ -267,8 +267,14 @@
 		<Var name="AutoMomentumn" type="Int" bits="2" />
 		<Var name="Vaulting" type="Int" bits="2" />
 		<Var name="Stealthy" type="Int" bits="2" />
+		<Var name="PlayerScale" type="Enum" bits="1" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
+				<Var name="Scale" type="Int" bits="16" />
+			</Var>
+		</Var>
 		<!-- 1bit?? just gave it to camo -->
-		<Var name="Camo" type="Int" bits="4" />
+		<Var name="Camo" type="Int" bits="3" />
 		<Var name="Visiblewaypoint" type="Int" bits="2" />
 		<Var name="VisibleName" type="Int" bits="2" />
 		<Var name="Aura" type="Int" bits="3" />
@@ -935,22 +941,22 @@
 	</Var>
 	
 	<Var name="ScriptedPlayerTraits" type="Count" bits="5" >
-		<Var name="String1" type="Int" bits="8" />
-		<Var name="String2" type="Int" bits="8" />
+		<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
+		<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 		<Var name="PlayerTraits" type="Enumref:PlayerTraits" bits="0" />
 		<Var name="IsHidden" type="Int" bits="1" />
 		<Var name="IsRuntime" type="Int" bits="1" />
 	</Var>
 	<Var name="ScriptOptions" type="Count" bits="5" >
-		<Var name="String1" type="Int" bits="8" />
-		<Var name="String2" type="Int" bits="8" />
+		<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
+		<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 		<Var name="ScriptOption" type="Enum" bits="1" >
 			<Var ID="0" name="Scriptoption" >
 				<Var name="ChildIndex" type="Int" bits="4" />
 				<Var name="ScriptOptionChild" type="Count" bits="5" >
 					<Var name="Value" type="Int" bits="10" />
-					<Var name="String1" type="Int" bits="8" />
-					<Var name="String2" type="Int" bits="8" />
+					<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
+					<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 				</Var>
 				<Var name="Unknown" type="Int" bits="4" />
 			</Var>
@@ -1071,7 +1077,7 @@
 		</Var>
 		<Var name="StringTableBufferIndex" type="HCount" bits="16" /-->
 		
-		<Var name="StringNameIndex" type="Int" bits="8" />
+		<Var name="StringNameIndex" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 		<Var name="metanameStrings" type="HCount" bits="1" chars="11" />
 		<!--Var name="metanameStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
@@ -1290,8 +1296,8 @@
 				<Var name="metadescBufferIndex" type="HCount" bits="13" />
 			</Var>
 		</Var-->
-		
-		<Var name="Random1bit" type="Int" bits="1" />
+
+		<Var name="metaintroStrings" type="HCount" bits="1" chars="13" />
 		<Var name="metagroupStrings" type="HCount" bits="1" chars="10" />
 		<!--Var name="metagroupStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
@@ -1459,7 +1465,7 @@
 	<Var name="unknown1790" type="Blank" bits="1790" />
 	
 	<Var name="Labels" type="Count" bits="5" >
-		<Var name="StringID" type="Int" bits="8" />
+		<Var name="StringID" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 		
 		<Var name="usenumber" type="Enum" bits="1" offset="3">
 			<Var ID="0" name="Null" />

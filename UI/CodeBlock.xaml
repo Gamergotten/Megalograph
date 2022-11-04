@@ -19,8 +19,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border x:Name="head" BorderBrush="Black" Background="#FF9E009E" BorderThickness="1" CornerRadius="1">
-            <Label x:Name="typename" Content="Block Name" Margin="30,0,0,0" Foreground="White" MouseLeftButtonDown="Label_MouseDown" MouseLeftButtonUp="Label_MouseUp" MouseDoubleClick="typename_MouseDoubleClick"/>
+        <Border x:Name="head" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+            <Label x:Name="typename" Margin="30,0,0,0" Foreground="White" MouseLeftButtonDown="Label_MouseDown" MouseLeftButtonUp="Label_MouseUp" MouseDoubleClick="typename_MouseDoubleClick"/>
         </Border>
         <StackPanel x:Name="Content_panel" Grid.Row="1" Margin="5,4,5,5">
                 

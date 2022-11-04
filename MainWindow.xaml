@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:gamtetyper"
         mc:Ignorable="d"
         Title="Greetings, Gametyper" Height="750" Width="1200" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" 
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" Closing="Window_Closing">
     <!--KeyDown="parent_nodegraph_KeyDown"-->
     <Window.Resources>
 
@@ -518,7 +518,7 @@
         <!--Window chrome-->
         <Grid Grid.Row="0" Height="30" Background="#252526" Grid.ColumnSpan="3">
             <!--Image Source="/256cycles_bright3.ico" Stretch="Fill" Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/-->
-            <Label Margin="7,2,0,0" Content="Megalograph v0.2.2" Foreground="White" />
+            <Label Margin="7,2,0,0" Content="Megalograph v0.7.0" Foreground="White" />
 
             <!--Caption buttons-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
@@ -670,13 +670,25 @@
                     <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
 
-
+                <Grid x:Name="node_counters" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top"> 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="triggers_text" Grid.Row="0" Content=""  Foreground="White" HorizontalAlignment="Right"/>
+                    <Label x:Name="conditions_text" Grid.Row="1" Content=""  Foreground="White" HorizontalAlignment="Right"/>
+                    <Label x:Name="actions_text" Grid.Row="2" Content=""  Foreground="White" HorizontalAlignment="Right"/>
+                    <Label x:Name="branches_text" Grid.Row="3" Content=""  Foreground="White" HorizontalAlignment="Right"/>
+                </Grid>
 
 
                 <Border BorderBrush="#FF4E4E4E" BorderThickness="3" Background="#FF424242" Grid.Row="1" Grid.ColumnSpan="2" >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="10"/>
@@ -701,23 +713,24 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+                        <Button x:Name="NewDmpFile" Grid.Column="1" Content="New .sgf" IsEnabled="False" Foreground="White" Style="{DynamicResource ButtonStyle1}" Click="NewDmpFile_Click" />
 
-                        <Button x:Name="OpnDmpButtontoolbar" Grid.Column="1" Content="Open .sgf" Click="importDmpButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
-                        <Button x:Name="OpnBINButtontoolbar" Grid.Column="2" Content="Open .bin" Click="importBINButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="OpnDmpButtontoolbar" Grid.Column="2" Content="Open .sgf" Click="importDmpButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="OpnBINButtontoolbar" Grid.Column="3" Content="Open .bin" Click="importBINButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
-                        <Button x:Name="RecenterButton" Grid.Column="4" Content="Recenter" IsEnabled="False" Foreground="White" Style="{DynamicResource ButtonStyle1}" Click="RecenterButton_Click" />
-                        <Button x:Name="CloseButton" Grid.Column="5" Content="Close Tab" IsEnabled="False" Foreground="White" Style="{DynamicResource ButtonStyle1}" Click="CloseButton_Click" />
+                        <Button x:Name="RecenterButton" Grid.Column="5" Content="Recenter" IsEnabled="False" Foreground="White" Style="{DynamicResource ButtonStyle1}" Click="RecenterButton_Click" />
+                        <Button x:Name="CloseButton" Grid.Column="6" Content="Close Tab" IsEnabled="False" Foreground="White" Style="{DynamicResource ButtonStyle1}" Click="CloseButton_Click" />
 
-                        <Button x:Name="DecompButton" Grid.Column="7" Content="Decompile" IsEnabled="False" Click="DecompButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
-                        <Button x:Name="DecompAsButton" Grid.Column="8" Content="Decmp As" IsEnabled="False" Click="DecompAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="DecompButton" Grid.Column="8" Content="Decompile" IsEnabled="False" Click="DecompButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="DecompAsButton" Grid.Column="9" Content="Decmp As" IsEnabled="False" Click="DecompAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
-                        <Button x:Name="CompButton" Grid.Column="10" Content="Compile" IsEnabled="False" Click="CompButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
-                        <Button x:Name="CompAsButton" Grid.Column="11" Content="Cmpile As" IsEnabled="False" Click="CompAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="CompButton" Grid.Column="11" Content="Compile" IsEnabled="False" Click="CompButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="CompAsButton" Grid.Column="12" Content="Cmpile As" IsEnabled="False" Click="CompAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
-                        <Button x:Name="SaveButton" Grid.Column="13" Content="Save" IsEnabled="False" Click="SaveButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
-                        <Button x:Name="SaveAsButton" Grid.Column="14" Content="Save As" IsEnabled="False" Click="SaveAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="SaveButton" Grid.Column="14" Content="Save" IsEnabled="False" Click="SaveButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="SaveAsButton" Grid.Column="15" Content="Save As" IsEnabled="False" Click="SaveAsButton_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
-                        <Button x:Name="ExportScript" Grid.Column="16" Content="Export" IsEnabled="False" Click="export_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
+                        <Button x:Name="ExportScript" Grid.Column="17" Content="Export" IsEnabled="False" Click="export_Click" Foreground="White" Style="{DynamicResource ButtonStyle1}" />
 
                     </Grid>
                 </Border>

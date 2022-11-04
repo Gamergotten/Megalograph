@@ -45,11 +45,10 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="block_name" Text="Basic element name" Margin="5,1,5,0" Foreground="White" Grid.Row="2"/>
+                <TextBlock x:Name="block_name" Margin="5,1,5,0" Foreground="White" Grid.Row="2"/>
 
-                <Button x:Name="source_text" Grid.Column="1" Content="Interact" Click="source_text_Click" Grid.RowSpan="3"/>
-                <TextBox x:Name="source_int" Grid.Column="1" Text="poop" LostFocus="source_int_LostFocus" KeyDown="source_int_KeyDown" BorderBrush="Gray" Visibility="Collapsed" Grid.RowSpan="3" />
-                <ComboBox x:Name="source_enum" Grid.Column="1" LostFocus="source_enum_LostFocus" SelectionChanged="source_enum_SelectionChanged" Visibility="Collapsed" DropDownClosed="source_enum_DropDownClosed" Grid.RowSpan="3"/>
+                <Button x:Name="source_text" Grid.Column="1" Click="source_text_Click" Grid.RowSpan="3"/>
+                <TextBox x:Name="source_int" Grid.Column="1" LostFocus="source_int_LostFocus" KeyDown="source_int_KeyDown" BorderBrush="Gray" Visibility="Collapsed" Grid.RowSpan="3" />
             </Grid>
         </Border>
         <StackPanel x:Name="child_panel" Grid.Row="1" Margin="10,2,0,2">

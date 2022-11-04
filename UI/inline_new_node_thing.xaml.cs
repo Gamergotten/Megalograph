@@ -56,6 +56,12 @@ namespace gamtetyper.UI
             is_fucking_closing = true;
             main.close_new_node_window();
         }
+        private void new_comment_click(object sender, RoutedEventArgs e)
+        {
+            main.create_comment(node_X, node_Y);
+            is_fucking_closing = true;
+            main.close_new_node_window();
+        }
 
         private void Window_LostFocus(object sender, RoutedEventArgs e)
         {

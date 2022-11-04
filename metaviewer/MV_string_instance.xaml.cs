@@ -71,5 +71,15 @@ namespace gamtetyper.metaviewer
             }
 
         }
+        private void block_preview_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty(XML_location)) return;
+
+            main.main.write_node_refname(XML_location, block_preview.Text);
+            if (e.Key == Key.Return)
+            {
+                Keyboard.ClearFocus();
+            }
+        }
     }
 }

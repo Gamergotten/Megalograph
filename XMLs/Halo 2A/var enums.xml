@@ -28,24 +28,24 @@
 		</Var>
 		<Var ID="0000001" name="Player.Number" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="PlayerNum" type="Int" bits="4" />
+			<Var name="PlayerNum" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playernumbers" bits="4" />
 		</Var>
 		<Var ID="0000010" name="Object.Number" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="ObjectNum" type="Int" bits="4" />
+			<Var name="ObjectNum" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectnumbers" bits="4" />
 		</Var>
 		<Var ID="0000011" name="Team.Number" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="TeamNum" type="Int" bits="4" />
+			<Var name="TeamNum" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamnumbers" bits="4" />
 		</Var>
 		<Var ID="0000100" name="Global.Number" >
-		    <Var name="GlobalNum" type="Enumref:NumericRef" bits="0" />
+			<Var name="GlobalNum" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/GlobalVars/globalnumbers" bits="5" />
 		</Var>
 		<Var ID="0000101" name="Scratch.Number" >
 		    <Var name="ScratchNum" type="Enumref:ScratchNumericRef" bits="0" />
 		</Var>
 		<Var ID="0000110" name="ScriptOption" >
-			<Var name="Option" type="Int" bits="4" />
+			<Var name="Option" type="Ref0:Gametype/base/mpvr/ScriptOptions" bits="4" />
 		</Var>
 		<Var ID="0000111" name="Object.SpawnSeq" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
@@ -70,11 +70,11 @@
 		</Var>
 		<Var ID="0001110" name="Player.Stat" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Statistic" type="Int" bits="2" />
+			<Var name="Statistic" type="Ref0:Gametype/base/mpvr/megl/playerstats" bits="2" />
 		</Var>
 		<Var ID="0001111" name="Team.Stat" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Statistic" type="Int" bits="2" />
+			<Var name="Statistic" type="Ref0:Gametype/base/mpvr/megl/playerstats" bits="2" />
 		</Var>
 		<Var ID="0010000" name="Unk16·" />
 		<Var ID="0010001" name="CurrentRound" />
@@ -222,15 +222,15 @@
 		</Var>
 		<Var ID="01" name="Player.Player" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Player.Player" type="Int" bits="2" />
+			<Var name="Player.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playerplayers" bits="2" />
 		</Var>
 		<Var ID="10" name="Object.Player" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Player" type="Int" bits="2" />
+			<Var name="Object.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectplayers" bits="2" />
 		</Var>
 		<Var ID="11" name="Team.Player" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Team.Player" type="Int" bits="2" />
+			<Var name="Team.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamplayers" bits="2" />
 		</Var>
 	</Var>
 	<Var name="ObjectTypeRef" type="Enum" bits="3" >
@@ -239,30 +239,30 @@
 		</Var>
 		<Var ID="001" name="Player.Object" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Player.Object" type="Int" bits="2" />
+			<Var name="Player.Object" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playerobjects" bits="2" />
 		</Var>
 		<Var ID="010" name="Object.Object" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Object" type="Int" bits="3" />
+			<Var name="Object.Object" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectobjects" bits="3" />
 		</Var>
 		<Var ID="011" name="Team.Object" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Team.Object" type="Int" bits="3" />
+			<Var name="Team.Object" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamobjects" bits="3" />
 		</Var>
 		<Var ID="100" name="Player.Biped" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
 		</Var>
 		<Var ID="101" name="Player.Player.Biped" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Player.Player" type="Int" bits="2" />
+			<Var name="Player.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playerplayers" bits="2" />
 		</Var>
 		<Var ID="110" name="Object.Player.Biped" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Player" type="Int" bits="2" />
+			<Var name="Object.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectplayers" bits="2" />
 		</Var>
 		<Var ID="111" name="Team.Player.Biped" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Team.Player" type="Int" bits="2" />
+			<Var name="Team.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamplayers" bits="2" />
 		</Var>
 	</Var>
 	<Var name="TeamTypeRef" type="Enum" bits="3" >
@@ -271,15 +271,15 @@
 		</Var>
 		<Var ID="001" name="Player.Team" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Player.Team" type="Int" bits="2" />
+			<Var name="Player.Team" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playerteams" bits="2" />
 		</Var>
 		<Var ID="010" name="Object.Team" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Team" type="Int" bits="1" />
+			<Var name="Object.Team" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectteams" bits="1" />
 		</Var>
 		<Var ID="011" name="Team.Team" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Team.Team" type="Int" bits="2" />
+			<Var name="Team.Team" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamteams" bits="2" />
 		</Var>
 		<Var ID="100" name="PlayersTeam" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
@@ -292,19 +292,19 @@
 	</Var>
 	<Var name="TimerTypeRef" type="Enum" bits="3" >
 		<Var ID="000" name="Timer" >
-			<Var name="Timer" type="Enumref:TimerRef" bits="0" />
+			<Var name="Timer" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/GlobalVars/globaltimers" bits="3" />
 		</Var>
 		<Var ID="001" name="Player.Timer" >
 			<Var name="Player" type="Enumref:PlayerRef" bits="0" />
-			<Var name="Player.Timer" type="Int" bits="2" />
+			<Var name="Player.Timer" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/PlayerVars/playertimers" bits="2" />
 		</Var>
 		<Var ID="010" name="Team.Timer" >
 			<Var name="Team" type="Enumref:TeamRef" bits="0" />
-			<Var name="Team.Timer" type="Int" bits="2" />
+			<Var name="Team.Timer" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/TeamVars/teamtimers" bits="2" />
 		</Var>
 		<Var ID="011" name="Object.Timer" >
 			<Var name="Object" type="Enumref:ObjectRef" bits="0" />
-			<Var name="Object.Timer" type="Int" bits="2" />
+			<Var name="Object.Timer" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objecttimers" bits="2" />
 		</Var>
 		<Var ID="100" name="GameRoundTimer" />
 		<Var ID="101" name="SuddenDeathTimer" />
@@ -515,9 +515,9 @@
 	</Var>
 	
 	<Var name="GetterOperator" type="Enum" bits="3" >
+		<Var ID="010" name="(==)Equals" />
 		<Var ID="000" name="(&lt;) LessThan" />
 		<Var ID="001" name="(&gt;) GreaterThan" />
-		<Var ID="010" name="(==)Equals" />
 		<Var ID="011" name="(&lt;=)LessThanEquals" />
 		<Var ID="100" name="(&gt;=)GreaterThanEquals" />
 		<Var ID="101" name="(!=)NotEquals" />
@@ -525,11 +525,11 @@
 		<Var ID="111" name="Unlabelled·" />
 	</Var>
     <Var name="SetterOperator" type="Enum" bits="4" >
+		<Var ID="0100" name="(=) Set" />
 		<Var ID="0000" name="(+=)Add" />
 		<Var ID="0001" name="(-=)Subtract" />
 		<Var ID="0010" name="(·=)Multiply" />
 		<Var ID="0011" name="(/=)Divide" />
-		<Var ID="0100" name="(=) Set" />
 		<Var ID="0101" name="(%=)Modulo" />
 		<Var ID="0110" name="(&amp;=)BinaryAND" />
 		<Var ID="0111" name="(|=)BinaryOR" />
@@ -564,7 +564,7 @@
 	
 	<Var name="LabelRef" type="Enum" bits="1" >
 		<Var ID="0" name="Label" >
-			<Var name="ScriptLabel" type="Int" bits="4" />
+			<Var name="ScriptLabel" type="Ref0:Gametype/base/mpvr/Labels" bits="4" />
 		</Var>
 		<Var ID="1" name="None" />
 	</Var>
@@ -590,40 +590,40 @@
 	</Var>
 	
 	<Var name="WaypointIcon" type="Enum" bits="5" >
-		<Var ID="00000" name="Unlabelled·1" />
-		<Var ID="00001" name="Unlabelled·2" />
-		<Var ID="00010" name="Unlabelled·3" />
-		<Var ID="00011" name="Unlabelled·4" />
-		<Var ID="00100" name="Unlabelled·5" />
-		<Var ID="00101" name="Unlabelled·6" />
-		<Var ID="00110" name="Unlabelled·7" />
-		<Var ID="00111" name="Unlabelled·8" />
-		<Var ID="01000" name="Unlabelled·9" />
-		<Var ID="01001" name="Unlabelled·10" />
-		<Var ID="01010" name="Unlabelled·11" />
-		<Var ID="01011" name="Unlabelled·12" />
-		<Var ID="01100" name="Unlabelled·13" >
+		<Var ID="00000" name="None" />
+		<Var ID="00001" name="Speaker" />
+		<Var ID="00010" name="X" />
+		<Var ID="00011" name="Lightning bolt" />
+		<Var ID="00100" name="Bullseye" />
+		<Var ID="00101" name="Diamond" />
+		<Var ID="00110" name="Bomb" />
+		<Var ID="00111" name="Flag" />
+		<Var ID="01000" name="Skull" />
+		<Var ID="01001" name="Crown" />
+		<Var ID="01010" name="VIP" />
+		<Var ID="01011" name="Locked" />
+		<Var ID="01100" name="A" >
 			<Var name="NumberType" type="Enumref:NumericTypeRef" bits="0" />
 		</Var>
-		<Var ID="01101" name="Unlabelled·14" />
-		<Var ID="01110" name="Unlabelled·15" />
-		<Var ID="01111" name="Unlabelled·16" />
-		<Var ID="10000" name="Unlabelled·17" />
-		<Var ID="10001" name="Unlabelled·18" />
-		<Var ID="10010" name="Unlabelled·19" />
-		<Var ID="10011" name="Unlabelled·20" />
-		<Var ID="10100" name="Unlabelled·21" />
-		<Var ID="10101" name="Unlabelled·22" />
-		<Var ID="10110" name="Unlabelled·23" />
-		<Var ID="10111" name="Unlabelled·24" />
-		<Var ID="11000" name="Unlabelled·25" />
-		<Var ID="11001" name="Unlabelled·26" />
-		<Var ID="11010" name="Unlabelled·27" />
-		<Var ID="11011" name="Unlabelled·28" />
-		<Var ID="11100" name="Unlabelled·29" />
-		<Var ID="11101" name="Unlabelled·30" />
-		<Var ID="11110" name="Unlabelled·31" />
-		<Var ID="11111" name="Unlabelled·32" />
+		<Var ID="01101" name="B" />
+		<Var ID="01110" name="C" />
+		<Var ID="01111" name="D" />
+		<Var ID="10000" name="E" />
+		<Var ID="10001" name="F" />
+		<Var ID="10010" name="G" />
+		<Var ID="10011" name="H" />
+		<Var ID="10100" name="I" />
+		<Var ID="10101" name="Ordnance" />
+		<Var ID="10110" name="Activate" />
+		<Var ID="10111" name="Parachute" />
+		<Var ID="11000" name="Ammo" />
+		<Var ID="11001" name="Uplink" />
+		<Var ID="11010" name="Shield" />
+		<Var ID="11011" name="Inwards" />
+		<Var ID="11100" name="Teardrop" />
+		<Var ID="11101" name="Unlabelled·" />
+		<Var ID="11110" name="Unlabelled·" />
+		<Var ID="11111" name="Unlabelled·" />
 	</Var>
 	<Var name="WaypointPriority" type="Enum" bits="2" >
 		<Var ID="00" name="Low" />
@@ -652,7 +652,7 @@
 		</Var>
 	</Var>
 	
-	<Var name="ScriptTraits" type="Int" bits="4" />
+	<Var name="ScriptTraits" type="Ref0:Gametype/base/mpvr/ScriptedPlayerTraits" bits="4" />
 	
 	<Var name="FireteamFilter" type="Container" bits="0" >
 		<Var name="Fireteam0" type="Enumref:Bool" bits="0" />
@@ -667,12 +667,12 @@
 	
 	<Var name="ObjectTimerIndex" type="Enum" bits="1" >
 		<Var ID="0" name="Timer" >
-			<Var name="Object.Timer" type="Int" bits="2" />
+			<Var name="Object.Timer" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objecttimers" bits="2" />
 		</Var>
 		<Var ID="1" name="None" />
 	</Var>
 	
-	<Var name="Sound" type="Int" bits="8" />
+	<Var name="SoundIndex" type="External:\Halo 2A\sounds.xml" bits="0" />
 
 	<Var name="TimerRate" type="Enum" bits="5" >
 		<Var ID="00000" name="0%" />
@@ -745,18 +745,18 @@
 	
 	<Var name="WidgetRef" type="Enum" bits="1" >
 		<Var ID="0" name="Widget" >
-			<Var name="ScriptWidget" type="Int" bits="2" />
+			<Var name="ScriptWidget" type="Ref0:Gametype/base/mpvr/megl/hudwidgets" bits="2" />
 		</Var>
 		<Var ID="1" name="NoWidget" />
 	</Var>
 	<Var name="WidgetMeter" type="Enum" bits="2" >
 		<Var ID="00" name="None" />
-		<Var ID="01" name="Timer" >
-			<Var name="TimerRef" type="Enumref:TimerTypeRef" bits="0" />
-		</Var>
-		<Var ID="10" name="Fraction" >
+		<Var ID="01" name="Fraction" >
 			<Var name="Current" type="Enumref:NumericTypeRef" bits="0" />
 			<Var name="Maximum" type="Enumref:NumericTypeRef" bits="0" />
+		</Var>
+		<Var ID="10" name="Timer" >
+			<Var name="TimerRef" type="Enumref:TimerTypeRef" bits="0" />
 		</Var>
 		<Var ID="11" name="Unlabelled·" />
 	</Var>
@@ -777,7 +777,7 @@
 		<Var ID="111" name="Unlabelled·" />
 	</Var>
 	
-	<Var name="Incident" type="Int" bits="11" />
+	<Var name="IncidentIndex" type="External:\Halo 2A\incidents.xml" bits="0" />
 	
 	<Var name="GiveWeaponMode" type="Enum" bits="2" >
 		<Var ID="00" name="Primary" />
@@ -794,7 +794,7 @@
 	
 	<Var name="ObjectPlayerIndex" type="Enum" bits="1" >
 		<Var ID="0" name="PlayerIndex" >
-			<Var name="Object.Player" type="Int" bits="2" />
+			<Var name="Object.Player" type="Ref0:Gametype/base/mpvr/megl/MegaloVars/ObjectVars/objectplayers" bits="2" />
 		</Var>
 		<Var ID="1" name="None" />
 	</Var>
@@ -843,7 +843,7 @@
 
 	<Var name="TeamDisposition" type="Int" bits="2" />
 
-	<Var name="Incident32" type="Int" bits="32" />
+	<!--Var name="Incident32" type="External:\Halo 2A\incidents32.xml" bits="32" /-->
 
 	<Var name="Medal" type="Int" bits="16" />
 
@@ -861,7 +861,7 @@
 		<Var name="StringVars3" type="Enumref:StringVars3" bits="0" />
 	</Var>
 	
-	<Var name="String" type="Int" bits="8" />
+	<Var name="String" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 	
 	<Var name="StringToken" type="Enum" bits="3" >
 		<Var ID="000" name="None" />
@@ -923,7 +923,7 @@
 </RefTypes>
 <ExTypes>
 	<Var name="MegaloScript" type="Container" bits="0" >
-		<Var name="ConditionCount" type="Count" bits="10" >
+		<Var name="ConditionCount" type="Count" bits="10" max="576" >
 		    <Var name="Type" type="Enum" bits="5" offset="3" >
 				<Var ID="00000" name="None" />
 				<Var ID="00001" name="Megl.If" >
@@ -934,7 +934,7 @@
 				
 				<Var ID="10010" name="Game.IsForge" />
 				<Var ID="10111" name="Game.IncidentCheck" >
-					<Var name="Incident" type="Enumref:Incident" bits="0" />
+					<Var name="Incident" type="Enumref:IncidentIndex" bits="0" />
 				</Var>
 				<Var ID="10110" name="Game.IsFrameUpdated·" >
 					<Var name="Offset·" type="Enumref:VarType" bits="0" />
@@ -1027,7 +1027,7 @@
 		   <Var name="ORsequence" type="Int" bits="10"  />
 		   <Var name="ConditionOffset" type="Int" bits="11" />
 		</Var>
-		<Var name="ActionCount" type="Count" bits="11" >
+		<Var name="ActionCount" type="Count" bits="11" max="1088" >
 		   <Var name="Type" type="Enum" bits="8" >
 				<Var ID="00000000" name="None" />
 			   
@@ -1079,7 +1079,7 @@
 			   </Var>
 			   <Var ID="00011011" name="Game.Message" >
 				   <Var name="TargetPlayers" type="Enumref:IncidentPlayers" bits="0" />
-				   <Var name="Sound" type="Enumref:Sound" bits="0" />
+				   <Var name="Sound" type="Enumref:SoundIndex" bits="0" />
 				   <Var name="String" type="Enumref:Tokens2" bits="0" />
 			   </Var>
 			   <Var ID="00100001" name="Game.EndRound" />
@@ -1094,13 +1094,13 @@
 				   <Var name="OUTBool" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
 			   <Var ID="01001000" name="Game.PlaySound" >
-				   <Var name="Sound" type="Enumref:Sound" bits="0" />
+				   <Var name="Sound" type="Enumref:SoundIndex" bits="0" />
 				   <Var name="IsImmediate·" type="Enumref:Bool" bits="0" />
 				   <Var name="Players" type="Enumref:IncidentPlayers" bits="0" />
 			   </Var>
 			   <Var ID="01001001" name="Game.PlaySoundOnObject" >
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Sound" type="Enumref:Sound" bits="0" />
+				   <Var name="Sound" type="Enumref:SoundIndex" bits="0" />
 			   </Var>
 			   <Var ID="01001110" name="Game.RoundText_SET" >
 				   <Var name="CurrentRoundText" type="Enumref:Tokens3" bits="0" />
@@ -1109,12 +1109,12 @@
 				   <Var name="LastRoundText" type="Enumref:Tokens3" bits="0" />
 			   </Var>
 			   <Var ID="01100111" name="Game.SendIncident" >
-				   <Var name="Incident" type="Enumref:Incident" bits="0" />
+				   <Var name="Incident" type="Enumref:IncidentIndex" bits="0" />
 				   <Var name="Cause·" type="Enumref:IncidentPlayers" bits="0" />
 				   <Var name="Effect·" type="Enumref:IncidentPlayers" bits="0" />
 			   </Var>
 			   <Var ID="01101000" name="Game.SendNumIncident" >
-				   <Var name="Incident" type="Enumref:Incident" bits="0" />
+				   <Var name="Incident" type="Enumref:IncidentIndex" bits="0" />
 				   <Var name="Cause·" type="Enumref:IncidentPlayers" bits="0" />
 				   <Var name="Effect·" type="Enumref:IncidentPlayers" bits="0" />
 				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
@@ -1394,6 +1394,10 @@
 			   <Var ID="11001111" name="Player.OrdancePoints_SET" >
 				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
 				   <Var name="Points" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10001011" name="Player.CanRespawn_SET" >
+				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
+				   <Var name="Bool" type="Enumref:Bool" bits="0" />
 			   </Var>
 			   
 			   
@@ -1721,6 +1725,12 @@
 					<Var name="Base" type="Enumref:ObjectTypeRef" bits="0" />
 					<Var name="BaseMarker" type="Enumref:NameIndex" bits="0" />
 				</Var>
+			   <Var ID="10001001" name="Obj.CandySpawning_SET" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Enabled" type="Enumref:Bool" bits="0" />
+				   <Var name="Instantly" type="Enumref:Bool" bits="0" />
+				   <Var name="Activator" type="Enumref:PlayerTypeRef" bits="0" />
+			   </Var>
 
 
 
@@ -1749,112 +1759,105 @@
 				   <Var name="OUTNumber" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
 
-
-			   <Var ID="00011010" name="UNKNOWN.26" >
+			   <!-- somewhat known-->
+			   <Var ID="00011010" name="UNKNOWN.26_Obj.TerrContested_SET" >
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="State" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="01001101" name="UNKNOWN.77_SetTeamText" >
-				   <Var name="Team" type="Enumref:TeamTypeRef" bits="0" />
-				   <Var name="Tokens2" type="Enumref:Tokens2" bits="0" />
-			   </Var>
-			   <Var ID="10001000" name="UNKNOWN.136" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10001001" name="UNKNOWN.137" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Bool1" type="Enumref:Bool" bits="0" />
-				   <Var name="Bool2" type="Enumref:Bool" bits="0" />
-				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10001011" name="UNKNOWN.139" >
+			   <Var ID="10001101" name="UNKNOWN.141_Player.NormalSpawning_SET" >
 				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
 				   <Var name="Bool" type="Enumref:Bool" bits="0" />
 			   </Var>
-			   <Var ID="10001101" name="UNKNOWN.141" >
-				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
-				   <Var name="Bool" type="Enumref:Bool" bits="0" />
+			   <Var ID="10001110" name="UNKNOWN.142_Game.SpawnWeighting_SET" >
+				   <Var name="SpawnType1·" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="SpawnType2·" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="10001110" name="UNKNOWN.142·" >
-				   <Var name="Number1·" type="Enumref:NumericTypeRef" bits="0" />
-				   <Var name="Number2·" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10010000" name="UNKNOWN.144·" >
-				   <Var name="Player·" type="Enumref:PlayerTypeRef" bits="0" />
-				   <Var name="OUTBool·" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10010011" name="UNKNOWN.147_DeviceGet·" >
+			   <Var ID="10010011" name="UNKNOWN.147_Obj.InteractionTime_GET" >
 				   <Var name="Device" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="OUTNumber·" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="OUTNumber" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="10010100" name="UNKNOWN.148_DeviceSet·" >
+			   <Var ID="10010100" name="UNKNOWN.148_Obj.InteractionTime_SET" >
 				   <Var name="Device" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Number·" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10010111" name="UNKNOWN.151_CandySpawner·" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Number·" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10100011" name="UNKNOWN.163·" />
-			   <Var ID="10100100" name="UNKNOWN.164·" />
-			   <Var ID="10100110" name="UNKNOWN.166·" >
-				   <Var name="Object1" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Object2" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Uint8_1" type="Enumref:Uint8" bits="0" />
-				   <Var name="Uint8_2" type="Enumref:Uint8" bits="0" />
-				   <Var name="Uint8_3" type="Enumref:Uint8" bits="0" />
-				   <Var name="Uint8_4" type="Enumref:Uint8" bits="0" />
-				   <Var name="Object3" type="Enumref:ObjectTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10101000" name="UNKNOWN.168·" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="OUTBool1" type="Enumref:NumericTypeRef" bits="0" />
-				   <Var name="OUTBool2" type="Enumref:NumericTypeRef" bits="0" />
-				   <Var name="OUTBool3" type="Enumref:Bool" bits="0" />
-			   </Var>
-			   <Var ID="10101001" name="UNKNOWN.169·" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="10101010" name="UNKNOWN.170·" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Bool" type="Enumref:Bool" bits="0" />
-				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   <Var ID="10100110" name="UNKNOWN.166_Obj.CopyPositionOffset" >
+				   <Var name="CopyTo" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="CopyFrom" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="MaxForward·" type="Enumref:Uint8" bits="0" />
+				   <Var name="MinHeight·" type="Enumref:Uint8" bits="0" />
+				   <Var name="MoveRadius·" type="Enumref:Uint8" bits="0" />
+				   <Var name="MaxHeight·" type="Enumref:Uint8" bits="0" />
+				   <Var name="Object3·" type="Enumref:ObjectTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="10101011" name="UNKNOWN.171_CandySpawner·" >
+			   <Var ID="10101000" name="Obj.OutOfBounds_GET" >
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="IsHardkill" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="IsSoftkill" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="Constant" type="Enumref:Bool" bits="0" />
 			   </Var>
-			   <Var ID="10101100" name="UNKNOWN.172_CandySpawner·" >
-				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
-				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10101101" name="UNKNOWN.173·" >
+			   <Var ID="10101101" name="UNKNOWN.173_Player.IsFinalKiller" >
 				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
 				   <Var name="Float8bit" type="Enumref:Uint8" bits="0" />
 			   </Var>
-			   <Var ID="10110001" name="UNKNOWN.177·" >
+			   <Var ID="10110001" name="UNKNOWN.177_Obj.InteractingPlayer_SET" >
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
 			   </Var>
-			   <Var ID="10110010" name="UNKNOWN.178·" >
+			   <Var ID="10110010" name="UNKNOWN.178_Obj.AllowInteraction" >
 				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="Bool" type="Enumref:Bool" bits="0" />
 			   </Var>
-			   <Var ID="10111010" name="UNKNOWN.186_ordance" >
-				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
-			   <Var ID="10111011" name="UNKNOWN.187_ordance" >
-				   <Var name="Number1" type="Enumref:NumericTypeRef" bits="0" />
-				   <Var name="Number2" type="Enumref:NumericTypeRef" bits="0" />
-			   </Var>
 			   <!-- can be found in h4 ctf, checks some relation between flag and player picking it up -->
 			   <!-- if 1: give the player the flag -->
-			   <Var ID="11010000" name="UNKNOWN.208" >
+			   <Var ID="11010000" name="UNKNOWN.208_Obj.ObjRelation_GET" >
 				   <Var name="Object1" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="Object2" type="Enumref:ObjectTypeRef" bits="0" />
 				   <Var name="OUTBool" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+
+			   
+			   <!-- completely unknown-->
+			   <Var ID="01001101" name="UNKNOWN.77_TeamUnkText_SET" >
+				   <Var name="Team" type="Enumref:TeamTypeRef" bits="0" />
+				   <Var name="Tokens2" type="Enumref:Tokens2" bits="0" />
+			   </Var>
+			   <Var ID="10001000" name="UNKNOWN.136_ObjUnkPlayer_SET" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Player" type="Enumref:PlayerTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10010000" name="UNKNOWN.144_PlayerUnkBool_GET" >
+				   <Var name="Player·" type="Enumref:PlayerTypeRef" bits="0" />
+				   <Var name="OUTBool·" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10010111" name="UNKNOWN.151_CandySpawner_GET" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Number·" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10100011" name="UNKNOWN.163_UnkDebugs" />
+			   <Var ID="10100100" name="UNKNOWN.164_UnkDebugs" />
+			   <Var ID="10101001" name="UNKNOWN.169_DispenserAltActivate" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10101010" name="UNKNOWN.170_ObjUnkNum_SET" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Bool" type="Enumref:Bool" bits="0" />
+				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10101011" name="UNKNOWN.171_CandySpawner_GET·" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10101100" name="UNKNOWN.172_CandySpawner_GET·" >
+				   <Var name="Object" type="Enumref:ObjectTypeRef" bits="0" />
+				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10111010" name="UNKNOWN.186_ordance_SET" >
+				   <Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
+			   </Var>
+			   <Var ID="10111011" name="UNKNOWN.187_ordance_SET" >
+				   <Var name="Number1" type="Enumref:NumericTypeRef" bits="0" />
+				   <Var name="Number2" type="Enumref:NumericTypeRef" bits="0" />
 			   </Var>
 			   
 
@@ -1959,7 +1962,7 @@
 				<Var ID="11111111" name="Unlabelled·" />
 			</Var>
 		</Var>
-		<Var name="TriggerCount" type="Count" bits="8" >
+		<Var name="TriggerCount" type="Count" bits="8" max="128" >
 		    <Var name="Type" type="Enum" bits="3" offset="1" >
 				<Var ID="000" name="Do" />
 				<Var ID="001" name="ForeachPlayer" />
@@ -2002,7 +2005,7 @@
 	</Var>
 	
 	<Var name="playerstats" type="Count" bits="3" >
-		<Var name="stringindex" type="Int" bits="8" />
+		<Var name="stringindex" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="8" />
 		<Var name="format" type="Int" bits="2" />
 		<Var name="sortorder" type="Int" bits="2" />
 		<Var name="groupbyteam" type="Int" bits="1" />
@@ -2111,52 +2114,52 @@
 	
 	<Var name="InsertionPoints" type="Container" bits="0" >
 		<Var name="Init" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="LocalInit" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="HostMigration" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="DoubleHostMigration" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="ObjectDeath" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="Local" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="Pregame" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 		<Var name="Incident" type="Enum" bits="1" >
+			<Var ID="1" name="Unused" />
 			<Var ID="0" name="Used" >
 				<Var name="Triggerref" type="Int" bits="7" />
 			</Var>
-			<Var ID="1" name="Unused" />
 		</Var>
 	</Var>
 </ExTypes>

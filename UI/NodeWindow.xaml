@@ -7,10 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              KeyDown="parent_nodegraph_KeyDown" Focusable="True" Loaded="TheGrid_OnLoaded">
-    <Border Background="#FF232323" x:Name="parent_nodegraph" Grid.Column="2" MouseWheel="testab_MouseWheel" ClipToBounds="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" MouseRightButtonDown="parent_nodegraph_MouseRightButtonDown" MouseDown="parent_nodegraph_MouseDown" MouseUp="parent_nodegraph_MouseUp" MouseLeave="parent_nodegraph_MouseLeave"  
-            >
-        <Canvas x:Name="testab" Background="#FF232323"   HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.5,1.5" Width="800" Height="800" 
-             >
+    <Grid Background="#FF232323" x:Name="parent_nodegraph" MouseWheel="testab_MouseWheel" ClipToBounds="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" MouseRightButtonDown="parent_nodegraph_MouseRightButtonDown" MouseDown="parent_nodegraph_MouseDown" MouseUp="parent_nodegraph_MouseUp" MouseLeave="parent_nodegraph_MouseLeave"  >
+
+        
+        <Canvas x:Name="testab" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.5,1.5" Width="800" Height="800" 
+                 >
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="nodegraph_scale" ScaleX="1" ScaleY="1"/>
@@ -20,5 +21,24 @@
 
 
         </Canvas>
-    </Border>
+        <Border x:Name="nodefinder" HorizontalAlignment="Right" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#FF5D5A5A"  Margin="0,60,0,0" Visibility="Collapsed" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="finderbox" MinWidth="120" Foreground="White" Background="#FF313131" TextChanged="finderbox_TextChanged" KeyDown="finderbox_KeyDown"/>
+                <Button Grid.Column="1" Content="&lt;" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="Nodefinder_back"/>
+                <Button Grid.Column="2" Content="&gt;" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="Nodefinder_next"/>
+                <Button Grid.Column="3" Content="S" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="Nodefinder_select"/>
+                <Button Grid.Column="4" Content="X" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="Nodefinder_close"/>
+            </Grid>
+        </Border>
+        <TextBlock x:Name="results_found" Text="0 Results found! [i:0]" Grid.Row="1" Grid.ColumnSpan="4" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,82,0,0" Visibility="Collapsed"/>
+
+    </Grid>
 </UserControl>

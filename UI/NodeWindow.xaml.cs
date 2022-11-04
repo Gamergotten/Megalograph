@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static gamtetyper.Gametype;
+using Megalograph.code;
+using Megalograph.UI;
 
 namespace gamtetyper.UI
 {
@@ -37,12 +39,12 @@ namespace gamtetyper.UI
 
         public void WHY3(node_ebum_s parent_thing)
         {
-            //string bad_fix_trim_his_BALLS = String.Join("", parent_thing.linkedthing.XMLPath.Split('/').SkipLast(1));
+            //string bad_fix = String.Join("", parent_thing.linkedthing.XMLPath.Split('/').SkipLast(1));
             string path = @"/base/" + parent_thing.linkedthing.XMLPath + "/Var[@name='" + parent_thing.linkedthing.V + "']";
             string path2 = parent_thing.linkedthing.XMLPath;
             string doc = parent_thing.linkedthing.XMLDoc;
 
-            var ebums = main.XP.readchildren(main.XP.readdata(path, doc), path2, doc, new List<string> { "BALLS" });
+            var ebums = main.XP.readchildren(main.XP.readdata(path, doc), path2, doc, new List<string> { "BALLS" }); // purposefully read it wrong?
 
             parent_thing.linkedthing.Params = new List<Ebum>();
 
@@ -94,6 +96,37 @@ namespace gamtetyper.UI
                 nodewind = null;
             }
         }
+
+
+        public void call_main_update_node_counts()
+        {
+            string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
+            bool is_Reach = false;
+            if (haloxml2 == "HR")
+                is_Reach = true;
+            main.update_nodes_count(active_triggers.Count, active_conditions.Count, active_actions.Count, active_branches.Count, is_Reach);
+        }
+        public void create_comment(double x, double y)
+        {
+            CommentBlock cb = new CommentBlock { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, main_window = this };
+            cb.transfrom_location.X = x;
+            cb.transfrom_location.Y = y;
+
+            cb.main_window = this;
+
+            int index_of_last_comment = -1; // -1 + 1 == 0
+            for (int i = 0; i < testab.Children.Count; i++)
+                if (testab.Children[i] as CommentBlock != null)
+                    index_of_last_comment = i;
+            index_of_last_comment++;
+            if (testab.Children.Count > index_of_last_comment)
+                testab.Children.Insert(index_of_last_comment, cb);
+            else
+                testab.Children.Add(cb);
+
+            this.Focus();
+            active_comments.Add(cb);
+        }
         public void create_trigger(double x, double y)
         {
             string haloxml = main.returnmegldoc_fromhalo(main.Loaded_Gametypes[main.Current_Gametype].Target_Halo);
@@ -126,10 +159,12 @@ namespace gamtetyper.UI
 
             handleType(cb, cb.Content_panel, trigger.Attribute);
 
-            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
+            cb.head.Background = BrushPresets.trigger_header;
 
             cb.trigger_parent.CHILD_elements_key = -1;
 
+            call_main_update_node_counts();
+            this.Focus();
         }
 
 
@@ -152,7 +187,7 @@ namespace gamtetyper.UI
             cb.action_parent = new Gametype.ActionUI { UI = cb, stored_action = action };
             cb.typename.Content = "Action";
             handleType(cb, cb.Content_panel, action.Type);
-            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
+            cb.head.Background = BrushPresets.action_header;
 
             int test_this_mofo = links.Count;
             while (links.ContainsKey(test_this_mofo))
@@ -163,6 +198,8 @@ namespace gamtetyper.UI
             linkedstuff.Add(new potential_block { _action = cb });
             links.Add(test_this_mofo, linkedstuff);
             cb.action_parent.linked_elements_key = test_this_mofo;
+            call_main_update_node_counts();
+            this.Focus();
         }
         public void create_condition(double x, double y)
         {
@@ -170,7 +207,7 @@ namespace gamtetyper.UI
 
             Gametype.condition condition = new();
             condition.Not = 0;
-            condition.OR_Group = 0;
+            condition.OR = false;
             condition.insertionpoint = -1;
             condition.Type = main.XP.cheat_to_do_the_node_creation("/base/ExTypes/Var[@name='MegaloScript']/Var[@name='ConditionCount']/Var[@name='Type']",
                                                               "ExTypes/Var[@name='MegaloScript']/Var[@name='ConditionCount']", haloxml);
@@ -188,7 +225,7 @@ namespace gamtetyper.UI
             //cb.
 
             condition_top_blocks phee = new();
-            phee.OR_group.Text = condition.OR_Group.ToString();
+            //phee.OR_group.Text = condition.OR_Group.ToString();
             phee.knot_box.IsChecked = (condition.Not == 1);
             cb.Content_panel.Children.Add(phee);
             phee.cb = cb;
@@ -196,7 +233,7 @@ namespace gamtetyper.UI
 
             handleType(cb, cb.Content_panel, condition.Type);
 
-            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
+            cb.head.Background = BrushPresets.condition_header;
 
             int test_this_mofo = links.Count;
             while (links.ContainsKey(test_this_mofo))
@@ -207,6 +244,8 @@ namespace gamtetyper.UI
             linkedstuff.Add(new potential_block { _condition = cb });
             links.Add(test_this_mofo, linkedstuff);
             cb.condition_parent.linked_elements_key = test_this_mofo;
+            call_main_update_node_counts();
+            this.Focus();
         }
         public void create_branch(double x, double y)
         {
@@ -317,6 +356,8 @@ namespace gamtetyper.UI
             linkedstuff.Add(new potential_block { _branch = cb });
             links.Add(test_this_mofo, linkedstuff);
             cb.branch_parent.linked_elements_key = test_this_mofo;
+            call_main_update_node_counts();
+            this.Focus();
         }
 
         public void delete_codeblock(CodeBlock cb)
@@ -398,6 +439,7 @@ namespace gamtetyper.UI
             //{
             //    MainWindow.catchexception_and_duly_ignore(ex);
             //}
+            call_main_update_node_counts();
         }
 
         public void rearrange_trigger_node(CodeBlock target_trigger, int target_index)
@@ -537,6 +579,7 @@ namespace gamtetyper.UI
                 owning_KEY_thing = bb.branch_parent.linked_elements_key;
                 links.Remove(owning_KEY_thing);
 
+                call_main_update_node_counts();
             }
             catch (Exception ex)
             {
@@ -544,12 +587,19 @@ namespace gamtetyper.UI
             }
         }
 
+        public void delete_comment(CommentBlock cb)
+        {
+            active_comments.Remove(cb);
+            testab.Children.Remove(cb);
+        }
 
         public List<CodeBlock> active_triggers = new();
         // im *pretty sure* that we only use the number for converting to nodes
         public List<CodeBlock> active_conditions = new();
 
         public List<CodeBlock> active_actions = new();
+
+        public List<CommentBlock> active_comments = new();
 
         public List<BranchBlock> active_branches = new();
 
@@ -578,10 +628,23 @@ namespace gamtetyper.UI
             // bla lab la return struct data from xml
 
             string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
-            string haloxml = main.returnmegldoc_fromhalo(haloxml2);
             bool is_Reach = false;
             if (haloxml2 == "HR")
                 is_Reach = true;
+            string haloxml = main.returnmegldoc_fromhalo(haloxml2);
+
+            // comments first, so they go behind everything
+            active_comments.Clear();
+            var finger = main.XP.docomments(haloxml);
+            if (finger != null)
+            {
+                foreach (var v in finger)
+                {
+                    testab.Children.Add(v);
+                    v.main_window = this;
+                    active_comments.Add(v);
+                }
+            }
 
             t = main.XP.returnScripts(is_Reach, haloxml);
             a = main.XP.doactions(haloxml);
@@ -614,7 +677,7 @@ namespace gamtetyper.UI
 
                     handleType(cb, cb.Content_panel, action.Type);
 
-                    cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
+                    cb.head.Background = BrushPresets.action_header;
                 }
                 else
                 {
@@ -670,15 +733,16 @@ namespace gamtetyper.UI
                 //cb.
 
                 condition_top_blocks phee = new();
-                phee.OR_group.Text = condition.OR_Group.ToString();
+                phee.or_box.IsChecked = condition.OR;
                 phee.knot_box.IsChecked = (condition.Not == 1);
                 cb.Content_panel.Children.Add(phee);
+                cb.condition_parent.Cond_stuff = phee;
                 phee.cb = cb;
 
 
                 handleType(cb, cb.Content_panel, condition.Type);
 
-                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
+                cb.head.Background = BrushPresets.condition_header;
             }
 
             height = 0;
@@ -701,7 +765,7 @@ namespace gamtetyper.UI
                     cb.transfrom_location.X = 0;
                     cb.transfrom_location.Y = height;
                 }
-                
+
 
 
                 testab.Children.Add(cb);
@@ -718,7 +782,7 @@ namespace gamtetyper.UI
 
                 handleType(cb, cb.Content_panel, trigger.Attribute);
 
-                cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
+                cb.head.Background = BrushPresets.trigger_header;
 
                 run_the_loop_on_mf(trigger, longitude, cb, null);
             }
@@ -742,6 +806,10 @@ namespace gamtetyper.UI
             temp_active_conditions.Clear();
             temp_active_actions.Clear();
             temp_active_branches.Clear();
+
+            call_main_update_node_counts();
+
+            move_graph_test_visibility();
         }
 
         public struct nodelineupthing
@@ -801,6 +869,7 @@ namespace gamtetyper.UI
             }
 
             List<int> insertion_points = new List<int>();
+            int OR_INDEX = -1;
 
             for (int w = 0; w < trigger.Conditions_count; w++)  // LINE UP EVERY CONDITION ELEMENT
             {
@@ -809,6 +878,12 @@ namespace gamtetyper.UI
 
                 CodeBlock C = temp_active_conditions[index_for_condition];
                 C.condition_parent.linked_elements_key = among_stupid_code;
+
+                if (C.condition_parent.stored_condition.OR_index_helper == OR_INDEX && OR_INDEX != -1)
+                {
+                    C.condition_parent.Cond_stuff.or_box.IsChecked = true;
+                }
+                OR_INDEX = C.condition_parent.stored_condition.OR_index_helper;
 
                 int condition_insert = C.condition_parent.stored_condition.insertionpoint;
                 int factored_insertion = condition_insert;
@@ -1044,6 +1119,26 @@ namespace gamtetyper.UI
             t_element.Children.Add(y);
             y.source_text.Content = append.V;
 
+
+
+            if (append.Type.Contains("Ref0:") || append.Type.Contains("Ref1:"))
+            {
+                List<string>? v = null;
+                if (append.Type.Split(":")[0] == "Ref0")
+                    v = main.XP.return_all_Entries_for_reference_block(append.Type.Split(":")[1]);
+                else // is +1
+                    v = main.XP.return_all_entries_and_none(append.Type.Split(":")[1]);
+
+                int sel_ind = int.Parse(append.V);
+                if (v != null)
+                {
+                    if (sel_ind < v.Count)
+                    {
+                        y.source_text.Content = v[sel_ind];
+                    }
+                }
+            }
+
             //y.type_text.Text = append.Type;
             //y.bit_text.Text = append.Size.ToString();
             //rip bozo, you will be missed
@@ -1072,12 +1167,13 @@ namespace gamtetyper.UI
         List<Gametype.trigger> export_triggs = new();
         List<Gametype.action> export_actions = new();
         List<Gametype.condition> export_condis = new();
+        List<Gametype.comment> export_comments = new();
 
         Dictionary<int, trigger_things> mapped_trig_groups = new();
 
         private void TheGrid_OnLoaded(object sender, RoutedEventArgs e)
         {
-            parent_nodegraph.Focus();
+            this.Focus();
         }
 
 
@@ -1086,22 +1182,27 @@ namespace gamtetyper.UI
             foreach (CodeBlock cb in active_triggers)
             {
                 cb.is_grabbed = true;
-                cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                cb.status_border.BorderBrush = BrushPresets.selection_border;
             }
             foreach (CodeBlock cb in active_conditions)
             {
-             cb.is_grabbed = true;
-             cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                 cb.is_grabbed = true;
+                 cb.status_border.BorderBrush = BrushPresets.selection_border;
             }
             foreach (CodeBlock cb in active_actions)
             {
                 cb.is_grabbed = true;
-                cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                cb.status_border.BorderBrush = BrushPresets.selection_border;
             }            
             foreach (BranchBlock cb in active_branches)
             {
-             cb.is_grabbed = true;
-             cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                 cb.is_grabbed = true;
+                 cb.status_border.BorderBrush = BrushPresets.selection_border;
+            }
+            foreach (CommentBlock cb in active_comments)
+            {
+                cb.is_grabbed = true;
+                cb.status_border.BorderBrush = BrushPresets.selection_border;
             }
         }
 
@@ -1116,14 +1217,24 @@ namespace gamtetyper.UI
                 {
                     copy_selection();
                 }
-                if (e.Key == Key.V)
+                else if (e.Key == Key.V)
                 {
                     paste_selection();
                 }
-                if (e.Key == Key.A)
+                else if (e.Key == Key.A)
                 {
                     select_all();
                 }
+                else if (e.Key == Key.F)
+                {
+                    nodefinder.Visibility = Visibility.Visible;
+                    results_found.Visibility = Visibility.Visible;
+                    // 
+                    main.node_counters.Visibility = Visibility.Collapsed;
+                    is_ctrl_f_open = true;
+                    finderbox.Focus();
+                }
+
             }
             else if (e.Key == Key.Delete)
             {
@@ -1163,8 +1274,18 @@ namespace gamtetyper.UI
                         i--;
                     }
                 }
+                for (int i = 0; i < active_comments.Count; i++)
+                {
+                    CommentBlock cb = active_comments[i];
+                    if (cb.is_grabbed)
+                    {
+                        delete_comment(cb);
+                        i--;
+                    }
+                }
             }
         }
+        // TODO: fix this for comments & linking
         public void copy_selection()
         {
             try
@@ -1172,6 +1293,9 @@ namespace gamtetyper.UI
                 export_triggs.Clear();
                 export_actions.Clear();
                 export_condis.Clear();
+                export_comments.Clear();
+
+
                 mapped_trig_groups.Clear();
 
                 string haloxml2 = main.Loaded_Gametypes[main.Current_Gametype].Target_Halo;
@@ -1256,6 +1380,31 @@ namespace gamtetyper.UI
                         things_to_copy++;
                     }
                 }
+                foreach (var v in active_comments) // conditions
+                {
+                    if (v.is_grabbed)
+                    {
+                        if (!has_found_location_bias)
+                        {
+                            pos_X = v.transfrom_location.X;
+                            pos_Y = v.transfrom_location.Y;
+                            has_found_location_bias = true;
+                        }
+                        var m = new Gametype.comment();
+                        m.position.x = pos_X - v.transfrom_location.X;
+                        m.position.y = pos_Y - v.transfrom_location.Y;
+                        m.size.x = v.Width;
+                        m.size.y = v.Height;
+                        m.ALPHA = v.our_color.A;
+                        m.RED = v.our_color.R;
+                        m.GREEN = v.our_color.G;
+                        m.BLUE = v.our_color.B;
+                        m.text = v.note.Text;
+
+                        export_comments.Add(m);
+                        things_to_copy++;
+                    }
+                }
                 if (things_to_copy > 0)
                 {
                     var backup_our_open_xml = main.XP.XMLdump;
@@ -1264,6 +1413,7 @@ namespace gamtetyper.UI
                     main.XP.exportScripts(export_triggs, is_Reach);
                     main.XP.exportactions(export_actions);
                     main.XP.exportconditions(export_condis);
+                    main.XP.exportcomments(export_comments);
 
                     Clipboard.SetText(":::"+main.XP.XMLdump.OuterXml);
 
@@ -1304,6 +1454,31 @@ namespace gamtetyper.UI
                     if (haloxml2 == "HR")
                         is_Reach = true;
 
+                    var finger = main.XP.docomments(haloxml);
+                    if (finger != null)
+                    {
+                        foreach (var v in finger)
+                        {
+
+                            v.transfrom_location.X = testmouseX - v.transfrom_location.X;
+                            v.transfrom_location.Y = testmouseY - v.transfrom_location.Y;
+
+                            v.main_window = this;
+
+                            int index_of_last_comment = -1; // -1 + 1 == 0
+                            for (int i = 0; i < testab.Children.Count; i++)
+                                if (testab.Children[i] as CommentBlock != null)
+                                    index_of_last_comment = i;
+                            index_of_last_comment++;
+                            if (testab.Children.Count > index_of_last_comment)
+                                testab.Children.Insert(index_of_last_comment, v);
+                            else
+                                testab.Children.Add(v);
+
+                            active_comments.Add(v);
+                        }
+                    }
+
                     t = main.XP.returnScripts(is_Reach, haloxml);
                     a = main.XP.doactions(haloxml);
                     c = main.XP.doconditions(haloxml);
@@ -1335,7 +1510,7 @@ namespace gamtetyper.UI
 
                             handleType(cb, cb.Content_panel, action.Type);
 
-                            cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 214, 0, 0));
+                            cb.head.Background = BrushPresets.action_header;
 
                             int test_this_mofo = links.Count;
                             while (links.ContainsKey(test_this_mofo))
@@ -1407,7 +1582,7 @@ namespace gamtetyper.UI
                         //cb.
 
                         condition_top_blocks phee = new();
-                        phee.OR_group.Text = condition.OR_Group.ToString();
+                        phee.or_box.IsChecked = condition.OR;
                         phee.knot_box.IsChecked = (condition.Not == 1);
                         cb.Content_panel.Children.Add(phee);
                         phee.cb = cb;
@@ -1415,7 +1590,7 @@ namespace gamtetyper.UI
 
                         handleType(cb, cb.Content_panel, condition.Type);
 
-                        cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 158, 0, 158));
+                        cb.head.Background = BrushPresets.condition_header;
 
                         int test_this_mofo = links.Count;
                         while (links.ContainsKey(test_this_mofo))
@@ -1456,12 +1631,11 @@ namespace gamtetyper.UI
 
                         handleType(cb, cb.Content_panel, trigger.Attribute);
 
-                        cb.head.Background = new SolidColorBrush(Color.FromArgb(255, 212, 117, 0));
+                        cb.head.Background = BrushPresets.trigger_header;
 
                         cb.trigger_parent.CHILD_elements_key = -1;
                         //run_the_loop_on_mf(trigger, longitude, cb, null);
                     }
-
 
 
                     main.XP.XMLdump = backup_our_open_xml;
@@ -1471,6 +1645,7 @@ namespace gamtetyper.UI
                                      + c.Count + " conditions "
                                      + t.Count + " actions) pasted successfully",
                                 "Nodes Copied", "white", false);
+                    call_main_update_node_counts();
                 }
             }
             catch (Exception ex)
@@ -1482,10 +1657,11 @@ namespace gamtetyper.UI
         public void SaveButton_Click()
         {
             try
-            { 
+            {
                 export_triggs.Clear();
                 export_actions.Clear();
                 export_condis.Clear();
+                export_comments.Clear();
 
                 mapped_trig_groups.Clear();
 
@@ -1538,10 +1714,29 @@ namespace gamtetyper.UI
                     outthis.position.y = v.transfrom_location.Y;
 
                     export_triggs.Add(outthis);
+
                 }
+                foreach (var v in active_comments)
+                {
+                    var par = new Gametype.comment();
+                    par.position.x = v.transfrom_location.X;
+                    par.position.y = v.transfrom_location.Y;
+                    par.size.x = v.Width;
+                    par.size.y = v.Height;
+
+                    par.text = v.note.Text;
+                    par.ALPHA = v.our_color.A;
+                    par.RED = v.our_color.R;
+                    par.GREEN = v.our_color.G;
+                    par.BLUE = v.our_color.B;
+
+                    export_comments.Add(par);
+                }
+
                 main.XP.exportScripts(export_triggs, is_Reach);
                 main.XP.exportactions(export_actions);
                 main.XP.exportconditions(export_condis);
+                main.XP.exportcomments(export_comments);
                 main.XP.quick_save_the_xmls();
             }
             catch (Exception ex)
@@ -1553,6 +1748,8 @@ namespace gamtetyper.UI
         {
             List<Gametype.action> temp_actions = new();
             List<Gametype.condition> temp_condis = new();
+
+            int OR_depth = -1;
 
             if (mapped_trig_groups.ContainsKey(poop))
             { // use the previous link
@@ -1606,8 +1803,21 @@ namespace gamtetyper.UI
                         {
                             Gametype.condition gp = X._condition.condition_parent.stored_condition;
 
+                            if (gp.OR) // is OR
+                            {
+                                if (OR_depth == -1) OR_depth++;
+                                gp.OR_index_helper = OR_depth;
+                            }
+                            else // is AND  
+                            {
+                                OR_depth++;
+                                gp.OR_index_helper = OR_depth;
+                            }
+
                             gp.insertionpoint = se - _conditions_count;
                             _conditions_count++;
+
+
 
                             temp_condis.Add(gp);
                         }
@@ -2454,6 +2664,61 @@ namespace gamtetyper.UI
         public bool nodegraph_grabbed;
         public bool graph_in_lod_state;
 
+        public bool doodoo(bool is_hidden, double X, double Y, UIElement block)
+        {
+
+            double factored_X = ((parent_nodegraph.ActualWidth/2) / nodegraph_scale.ScaleX) + 500;
+            double factored_Y = ((parent_nodegraph.ActualHeight/2) / nodegraph_scale.ScaleY) + 500;
+            double topleft_X = nodegraph_trans.X - (factored_X);
+            double topleft_Y = nodegraph_trans.Y - (factored_Y);
+            double botright_X = nodegraph_trans.X + (factored_X);
+            double botright_Y = nodegraph_trans.Y + (factored_Y);
+
+            // if is inside the 
+            bool IS_ONSCREEN = ((-X) > topleft_X && (-X) < botright_X
+                             && (-Y) > topleft_Y && (-Y) < botright_Y);
+            
+            if (is_hidden) 
+            {
+                if (IS_ONSCREEN) // then display this element
+                {
+                    //testab.Children.Add(block);
+                    block.Visibility = Visibility.Visible;
+                    return false;
+                }
+            }
+            else if (!IS_ONSCREEN) // then hide this element
+            {
+                //testab.Children.Remove(block);
+                block.Visibility = Visibility.Collapsed;
+                return true;
+            }
+
+            return is_hidden;
+        }
+        public void move_graph_test_visibility()
+        {
+            foreach (var v in active_triggers)
+            {
+                v.is_hidden = doodoo(v.is_hidden, v.transfrom_location.X, v.transfrom_location.Y, v);
+            }
+            foreach (var v in active_conditions)
+            {
+                v.is_hidden = doodoo(v.is_hidden, v.transfrom_location.X, v.transfrom_location.Y, v);
+            }
+            foreach (var v in active_actions)
+            {
+                v.is_hidden = doodoo(v.is_hidden, v.transfrom_location.X, v.transfrom_location.Y, v);
+            }
+            foreach (var v in active_branches)
+            {
+                v.is_hidden = doodoo(v.is_hidden, v.transfrom_location.X, v.transfrom_location.Y, v);
+            }
+            foreach (var v in active_comments)
+            {
+                v.is_hidden = doodoo(v.is_hidden, v.transfrom_location.X, v.transfrom_location.Y, v);
+            }
+        }
 
         private void testab_MouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -2516,7 +2781,7 @@ namespace gamtetyper.UI
                         v.Content_panel.Visibility = Visibility.Visible;
                     }
                 }
-
+                move_graph_test_visibility();
             }
         }
         public void recieved_MouseMove(MouseEventArgs e)
@@ -2528,14 +2793,14 @@ namespace gamtetyper.UI
             move_mouse(DeltaX, DeltaY);
         }
 
-        public void reset_movement()
+        public void set_movement(double X, double Y)
         {
             this.Focus();
             //nodegraph_grabbed = true;
             //move_mouse(0, 0);
             //nodegraph_grabbed = false;
-            nodegraph_trans.X = 0;
-            nodegraph_trans.Y = 0;
+            nodegraph_trans.X = X;
+            nodegraph_trans.Y = Y;
 
             double tab_x = ((1f / (testab.ActualWidth)) * -nodegraph_trans.X) + 0.5f;
             double tab_y = ((1f / (testab.ActualHeight)) * -nodegraph_trans.Y) + 0.5f;
@@ -2557,6 +2822,32 @@ namespace gamtetyper.UI
         {
             double factored_X = DeltaX / nodegraph_scale.ScaleX;
             double factored_Y = DeltaY / nodegraph_scale.ScaleY;
+
+            // resizing comments
+            foreach (var v in active_comments)
+            {
+                if (v.drag_direction != CommentBlock.direction.NONE)
+                {
+                    if (v.drag_direction == CommentBlock.direction.TOP)
+                    {
+                        v.Height += factored_Y;
+                        v.transfrom_location.Y -= factored_Y;
+                    }
+                    else if (v.drag_direction == CommentBlock.direction.LEFT)
+                    {
+                        v.Width += factored_X;
+                        v.transfrom_location.X -= factored_X;
+                    }
+                    else if (v.drag_direction == CommentBlock.direction.RIGHT)
+                    {
+                        v.Width -= factored_X;
+                    }
+                    else if (v.drag_direction == CommentBlock.direction.BOTTOM)
+                    {
+                        v.Height -= factored_Y;
+                    }
+                }
+            }
 
             // 
             if (isdragging_nodes)
@@ -2589,6 +2880,13 @@ namespace gamtetyper.UI
                         drag_retarded_block(cb, factored_X, factored_Y);
                     }
                 }
+                foreach (CommentBlock cb in active_comments)
+                {
+                    if (cb.is_grabbed)
+                    {
+                        drag_comment(cb, factored_X, factored_Y);
+                    }
+                }
             }
 
             if (nodegraph_grabbed)
@@ -2601,6 +2899,7 @@ namespace gamtetyper.UI
                 double tab_x = ((1f / (testab.ActualWidth)) * -nodegraph_trans.X) + 0.5f;
                 double tab_y = ((1f / (testab.ActualHeight)) * -nodegraph_trans.Y) + 0.5f;
                 testab.RenderTransformOrigin = new(tab_x, tab_y);
+                move_graph_test_visibility();
             }
 
             // move lines that are currently held
@@ -2690,12 +2989,18 @@ namespace gamtetyper.UI
                 cb.THENpath.Y1 = cb.transfrom_location.Y + 42;
             }
         }
+        public void drag_comment(CommentBlock cb, double Delta_X, double Delta_Y)
+        {
+            cb.transfrom_location.X -= Delta_X;
+            cb.transfrom_location.Y -= Delta_Y;
+        }
 
         public selectionBorder selection_box;
         double selectstartX;
         double selectstartY;
 
         bool isdragging_nodes;
+        bool isjust_dragging_commentblock = false;
         //bool any_nodes_selected;
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -2732,7 +3037,14 @@ namespace gamtetyper.UI
         }
         public void Window_MouseLeftButtonUp()
         {
-            isdragging_nodes = false;
+            bool unselect = !(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift));
+            // stop resizing comments
+            foreach (var v in active_comments)
+            {
+                if (v.drag_direction != CommentBlock.direction.NONE)
+                    v.drag_direction = CommentBlock.direction.NONE;
+            }
+
             if (selection_box != null)
             {
                 testab.Children.Remove(selection_box);
@@ -2740,7 +3052,7 @@ namespace gamtetyper.UI
 
                 foreach (CodeBlock cb in active_triggers)
                 {
-                    if (cb.is_grabbed)
+                    if (cb.is_grabbed && unselect)
                     {
                         cb.is_grabbed = false;
                         cb.status_border.BorderBrush = Brushes.White;
@@ -2748,12 +3060,12 @@ namespace gamtetyper.UI
                     if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
                     {
                         cb.is_grabbed = true;
-                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
                     }
                 }
                 foreach (CodeBlock cb in active_actions)
                 {
-                    if (cb.is_grabbed)
+                    if (cb.is_grabbed && unselect)
                     {
                         cb.is_grabbed = false;
                         cb.status_border.BorderBrush = Brushes.White;
@@ -2761,12 +3073,12 @@ namespace gamtetyper.UI
                     if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
                     {
                         cb.is_grabbed = true;
-                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
                     }
                 }
                 foreach (CodeBlock cb in active_conditions)
                 {
-                    if (cb.is_grabbed)
+                    if (cb.is_grabbed && unselect)
                     {
                         cb.is_grabbed = false;
                         cb.status_border.BorderBrush = Brushes.White;
@@ -2774,12 +3086,12 @@ namespace gamtetyper.UI
                     if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
                     {
                         cb.is_grabbed = true;
-                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
                     }
                 }
                 foreach (BranchBlock cb in active_branches)
                 {
-                    if (cb.is_grabbed)
+                    if (cb.is_grabbed && unselect)
                     {
                         cb.is_grabbed = false;
                         cb.status_border.BorderBrush = Brushes.White;
@@ -2787,53 +3099,137 @@ namespace gamtetyper.UI
                     if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
                     {
                         cb.is_grabbed = true;
-                        cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    }
+                }
+                foreach (CommentBlock cb in active_comments)
+                {
+                    if (cb.is_grabbed && unselect)
+                    {
+                        cb.is_grabbed = false;
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                    if (is_code_block_in_selection(cb.transfrom_location.X, cb.transfrom_location.Y))
+                    {
+                        cb.is_grabbed = true;
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
+                        // then we have to select everything it contains
+                        select_all_comment_contained(cb);
                     }
                 }
             }
             else
             {
-                if (count_grabbed_nodes() == 1)
+                if ((count_grabbed_nodes() == 1 || isjust_dragging_commentblock) && isdragging_nodes)
                 {
-                    foreach (CodeBlock cb in active_triggers)
-                    {
-                        if (cb.is_grabbed)
-                        {
-                            cb.is_grabbed = false;
-                            cb.status_border.BorderBrush = Brushes.White;
-                        }
-                    }
-                    foreach (CodeBlock cb in active_actions)
-                    {
-                        if (cb.is_grabbed)
-                        {
-                            cb.is_grabbed = false;
-                            cb.status_border.BorderBrush = Brushes.White;
-                        }
-                    }
-                    foreach (CodeBlock cb in active_conditions)
-                    {
-                        if (cb.is_grabbed)
-                        {
-                            cb.is_grabbed = false;
-                            cb.status_border.BorderBrush = Brushes.White;
-                        }
-                    }
-                    foreach (BranchBlock cb in active_branches)
-                    {
-                        if (cb.is_grabbed)
-                        {
-                            cb.is_grabbed = false;
-                            cb.status_border.BorderBrush = Brushes.White;
-                        }
-                    }
+                    clear_grabbed_thingos();
                 }
             }
+            isdragging_nodes = false;
+            isjust_dragging_commentblock = false;
+
 
             // clear dragged lines n junk
             wait_a_second_and_then_solve_our_problem();
 
 
+        }
+        void select_all_comment_contained(CommentBlock cb)
+        {
+            if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                foreach (CodeBlock ccb in active_triggers)
+                {
+                    if (!ccb.is_grabbed)
+                    {
+                        if (cb.transfrom_location.X + cb.Width > ccb.transfrom_location.X && ccb.transfrom_location.X > cb.transfrom_location.X
+                        && cb.transfrom_location.Y + cb.Height > ccb.transfrom_location.Y && ccb.transfrom_location.Y > cb.transfrom_location.Y)
+                        {
+                            ccb.is_grabbed = true;
+                            ccb.status_border.BorderBrush = BrushPresets.selection_border;
+                        }
+                    }
+                }
+                foreach (CodeBlock ccb in active_actions)
+                {
+                    if (!ccb.is_grabbed)
+                    {
+                        if (cb.transfrom_location.X + cb.Width > ccb.transfrom_location.X && ccb.transfrom_location.X > cb.transfrom_location.X
+                        && cb.transfrom_location.Y + cb.Height > ccb.transfrom_location.Y && ccb.transfrom_location.Y > cb.transfrom_location.Y)
+                        {
+                            ccb.is_grabbed = true;
+                            ccb.status_border.BorderBrush = BrushPresets.selection_border;
+                        }
+                    }
+                }
+                foreach (CodeBlock ccb in active_conditions)
+                {
+                    if (!ccb.is_grabbed)
+                    {
+                        if (cb.transfrom_location.X + cb.Width > ccb.transfrom_location.X && ccb.transfrom_location.X > cb.transfrom_location.X
+                        && cb.transfrom_location.Y + cb.Height > ccb.transfrom_location.Y && ccb.transfrom_location.Y > cb.transfrom_location.Y)
+                        {
+                            ccb.is_grabbed = true;
+                            ccb.status_border.BorderBrush = BrushPresets.selection_border;
+                        }
+                    }
+                }
+                foreach (BranchBlock ccb in active_branches)
+                {
+                    if (!ccb.is_grabbed)
+                    {
+                        if (cb.transfrom_location.X + cb.Width > ccb.transfrom_location.X && ccb.transfrom_location.X > cb.transfrom_location.X
+                        && cb.transfrom_location.Y + cb.Height > ccb.transfrom_location.Y && ccb.transfrom_location.Y > cb.transfrom_location.Y)
+                        {
+                            ccb.is_grabbed = true;
+                            ccb.status_border.BorderBrush = BrushPresets.selection_border;
+                        }
+                    }
+                }
+            }
+        }
+        void clear_grabbed_thingos()
+        {
+            foreach (CodeBlock cb in active_triggers)
+            {
+                if (cb.is_grabbed)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            foreach (CodeBlock cb in active_actions)
+            {
+                if (cb.is_grabbed)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            foreach (CodeBlock cb in active_conditions)
+            {
+                if (cb.is_grabbed)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            foreach (BranchBlock cb in active_branches)
+            {
+                if (cb.is_grabbed)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            foreach (CommentBlock cb in active_comments)
+            {
+                if (cb.is_grabbed)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
         }
 
         public bool is_code_block_in_selection(double c_x, double c_y)
@@ -3008,11 +3404,30 @@ namespace gamtetyper.UI
 
         public void branchclick(BranchBlock bb)
         {
-            bb.is_grabbed = true;
-            bb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            if (nodewind != null)
+            {
+                nodewind.is_fucking_closing = true;
+                close_new_node_window();
+                nodewind = null;
+            }
+            bool not_multiselect = !(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift));
+            if (not_multiselect && !bb.is_grabbed)
+                clear_grabbed_thingos();
+            if (not_multiselect)
+            {
+                isdragging_nodes = true;
+            }
 
-            isdragging_nodes = true;
-            // start moving all grabbed
+            if (!bb.is_grabbed)
+            {
+                bb.is_grabbed = true;
+                bb.status_border.BorderBrush = BrushPresets.selection_border;
+            }
+            else if (!not_multiselect)
+            {
+                bb.is_grabbed = false;
+                bb.status_border.BorderBrush = Brushes.White;
+            }
         }
         public void branchrelease(BranchBlock bb)
         {
@@ -3031,11 +3446,24 @@ namespace gamtetyper.UI
                 nodewind = null;
             }
 
-            cb.is_grabbed = true;
-            cb.status_border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 220, 173, 14));
+            bool not_multiselect = !(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift));
+            if (not_multiselect && !cb.is_grabbed)
+                clear_grabbed_thingos();
+            if (not_multiselect)
+            {
+                isdragging_nodes = true;
+            }
 
-            isdragging_nodes = true;
-            // start moving all grabbed
+            if (!cb.is_grabbed)
+            {
+                cb.is_grabbed = true;
+                cb.status_border.BorderBrush = BrushPresets.selection_border;
+            }
+            else if (!not_multiselect)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
         }
         public void codeblockrelease(CodeBlock cb)
         {
@@ -3044,6 +3472,45 @@ namespace gamtetyper.UI
 
             Window_MouseLeftButtonUp();
         }
+
+        public void commentblockclick(CommentBlock cb)
+        {
+            if (nodewind != null)
+            {
+                nodewind.is_fucking_closing = true;
+                close_new_node_window();
+                nodewind = null;
+            }
+
+            bool not_multiselect = !(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift));
+            if (not_multiselect && !cb.is_grabbed)
+                clear_grabbed_thingos();
+            if (not_multiselect)
+            {
+                isdragging_nodes = true;
+                isjust_dragging_commentblock = (count_grabbed_nodes() == 0);
+            }
+
+            if (!cb.is_grabbed)
+            {
+                cb.is_grabbed = true;
+                cb.status_border.BorderBrush = BrushPresets.selection_border;
+                select_all_comment_contained(cb);
+            }
+            else if (!not_multiselect)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+        }
+        public void commentblockrelease(CommentBlock cb)
+        {
+            //cb.is_grabbed = false;
+            //cb.status_border.BorderBrush = Brushes.White;
+
+            Window_MouseLeftButtonUp();
+        }
+
 
         private void parent_nodegraph_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -3082,8 +3549,479 @@ namespace gamtetyper.UI
                     returnvalue++;
                 }
             }
+            foreach (CommentBlock cb in active_comments)
+            {
+                if (cb.is_grabbed)
+                {
+                    returnvalue++;
+                }
+            }
             return returnvalue;
         }
+
+        private int searched_node_index = -1;
+        private string lookfor;
+        public bool is_ctrl_f_open;
+        // node finding stuff
+        private bool scan_node_for_match(StackPanel UInode, bool cond)
+        {
+            foreach (var child in UInode.Children)
+            {
+                if (cond){cond = false; continue;}
+
+                node_ebum_s? param = child as node_ebum_s;
+                if (param != null)
+                {
+                    if (param.block_name.Text.Contains(lookfor, StringComparison.OrdinalIgnoreCase))
+                        return true;
+                    else if (((string)param.source_text.Content == null)? false : ((string)param.source_text.Content).Contains(lookfor, StringComparison.OrdinalIgnoreCase))
+                        return true;
+                    else if (scan_node_for_match(param.child_panel, false)) 
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        struct point_with_invalid
+        {
+            public double X;
+            public double Y;
+            public int? highest_if_invalid;
+        }
+        private point_with_invalid lookfor_nodes()
+        {
+            point_with_invalid out_location = new point_with_invalid();
+            bool has_found_index_match = false;
+            int resultss = 0;
+            lookfor = finderbox.Text;
+            foreach (CodeBlock cb in active_triggers)
+            {
+                cb.is_grabbed = false;
+                if ((cb.typename.Content as string).Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase))
+                {
+                    cb.status_border.BorderBrush = BrushPresets.finder_border;
+                    if (resultss == searched_node_index)
+                    {
+                        out_location.X = cb.transfrom_location.X;
+                        out_location.Y = cb.transfrom_location.Y;
+                        has_found_index_match = true;
+                    }
+                    resultss++;
+                }
+                else if (scan_node_for_match(cb.Content_panel, false))
+                {
+                    cb.status_border.BorderBrush = BrushPresets.finder_border;
+                    if (resultss == searched_node_index)
+                    {
+                        out_location.X = cb.transfrom_location.X;
+                        out_location.Y = cb.transfrom_location.Y;
+                        has_found_index_match = true;
+                    }
+                    resultss++;
+                }
+                else
+                {
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            bool matches = ("action".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CodeBlock cb in active_actions)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = BrushPresets.finder_border;
+                    if (resultss == searched_node_index)
+                    {
+                        out_location.X = cb.transfrom_location.X;
+                        out_location.Y = cb.transfrom_location.Y;
+                        has_found_index_match = true;
+                    }
+                    resultss++;
+                }
+            }
+            else
+            {
+                foreach (CodeBlock cb in active_actions)
+                {
+                    cb.is_grabbed = false;
+                    if (scan_node_for_match(cb.Content_panel, false))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        if (resultss == searched_node_index)
+                        {
+                            out_location.X = cb.transfrom_location.X;
+                            out_location.Y = cb.transfrom_location.Y;
+                            has_found_index_match = true;
+                        }
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+
+            matches = ("condition".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CodeBlock cb in active_conditions)
+                {
+                    cb.is_grabbed = false;
+                    cb.status_border.BorderBrush = BrushPresets.finder_border;
+                    if (resultss == searched_node_index)
+                    {
+                        out_location.X = cb.transfrom_location.X;
+                        out_location.Y = cb.transfrom_location.Y;
+                        has_found_index_match = true;
+                    }
+                    resultss++;
+                }
+            }
+            else
+            {
+                foreach (CodeBlock cb in active_conditions)
+                {
+                    cb.is_grabbed = false;
+                    if (scan_node_for_match(cb.Content_panel, true))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        if (resultss == searched_node_index)
+                        {
+                            out_location.X = cb.transfrom_location.X;
+                            out_location.Y = cb.transfrom_location.Y;
+                            has_found_index_match = true;
+                        }
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+            // these can only be found by searching "branch"
+            matches = ("branch".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            foreach (BranchBlock cb in active_branches)
+            {
+                cb.is_grabbed = false;
+                if (matches)
+                {
+                    cb.status_border.BorderBrush = BrushPresets.finder_border;
+                    if (resultss == searched_node_index)
+                    {
+                        out_location.X = cb.transfrom_location.X;
+                        out_location.Y = cb.transfrom_location.Y;
+                        has_found_index_match = true;
+                    }
+                    resultss++;
+                }
+                else
+                {
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+
+            matches = ("comment".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CommentBlock cb in active_comments)
+                {
+                    cb.is_grabbed = false;
+                    if (matches)
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        if (resultss == searched_node_index)
+                        {
+                            out_location.X = cb.transfrom_location.X;
+                            out_location.Y = cb.transfrom_location.Y;
+                            has_found_index_match = true;
+                        }
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+            else
+            {
+                foreach (CommentBlock cb in active_comments)
+                {
+                    cb.is_grabbed = false;
+                    if (cb.note.Text.Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        if (resultss == searched_node_index)
+                        {
+                            out_location.X = cb.transfrom_location.X;
+                            out_location.Y = cb.transfrom_location.Y;
+                            has_found_index_match = true;
+                        }
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+
+            results_found.Text = resultss + " Results found! [i:" + searched_node_index + "]";
+            if (!has_found_index_match)
+                out_location.highest_if_invalid = resultss;
+            return out_location;
+        }
+
+        private void finderbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            searched_node_index = -1;
+            lookfor_nodes();
+        }
+
+        // back
+        private void Nodefinder_back(object sender, RoutedEventArgs e)
+        {
+            searched_node_index--;
+            var point = lookfor_nodes();
+            if (point.highest_if_invalid != null)
+            {
+                searched_node_index = (int)point.highest_if_invalid;
+                if (point.highest_if_invalid > 0)
+                {
+                    Nodefinder_back(null, null);
+                }
+            }
+            else
+            {
+                set_movement((-point.X)+300, (-point.Y)+355);
+                move_graph_test_visibility();
+            }
+        }
+        // forward
+        private void Nodefinder_next(object sender, RoutedEventArgs e)
+        {
+            searched_node_index++;
+            var point = lookfor_nodes();
+            if (point.highest_if_invalid != null)
+            {
+                searched_node_index = -1;
+                if (point.highest_if_invalid > 0)
+                {
+                    Nodefinder_next(null, null);
+                }
+            }
+            else
+            {
+                set_movement((-point.X)+300, (-point.Y)+355);
+                move_graph_test_visibility();
+            }
+        }
+        // close
+        private void Nodefinder_close(object sender, RoutedEventArgs e)
+        {
+            results_found.Visibility = Visibility.Collapsed;
+            nodefinder.Visibility = Visibility.Collapsed;
+            // and then make the counters show up again
+            main.node_counters.Visibility = Visibility.Visible;
+
+            // we almost forgot to undo the node finder colors
+            foreach (CodeBlock cb in active_triggers)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+            foreach (CodeBlock cb in active_actions)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+            foreach (CodeBlock cb in active_conditions)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+            foreach (BranchBlock cb in active_branches)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+            foreach (CommentBlock cb in active_comments)
+            {
+                cb.is_grabbed = false;
+                cb.status_border.BorderBrush = Brushes.White;
+            }
+        }
+        // select all, opposed to highlight
+        private void Nodefinder_select(object sender, RoutedEventArgs e)
+        {
+            int resultss = 0;
+            lookfor = finderbox.Text;
+            foreach (CodeBlock cb in active_triggers)
+            {
+                cb.is_grabbed = false;
+                if ((cb.typename.Content as string).Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase))
+                {
+                    cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    cb.is_grabbed = true;
+                    resultss++;
+                }
+                else if (scan_node_for_match(cb.Content_panel, false))
+                {
+                    cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    cb.is_grabbed = true;
+                    resultss++;
+                }
+                else
+                {
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+            bool matches = ("action".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CodeBlock cb in active_actions)
+                {
+                    cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    cb.is_grabbed = true;
+                    resultss++;
+                }
+            }
+            else
+            {
+                foreach (CodeBlock cb in active_actions)
+                {
+                    cb.is_grabbed = false;
+                    if (scan_node_for_match(cb.Content_panel, false))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
+                        cb.is_grabbed = true;
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+
+            matches = ("condition".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CodeBlock cb in active_conditions)
+                {
+                    cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    cb.is_grabbed = true;
+                    resultss++;
+                }
+            }
+            else
+            {
+                foreach (CodeBlock cb in active_conditions)
+                {
+                    cb.is_grabbed = false;
+                    if (scan_node_for_match(cb.Content_panel, true))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.selection_border;
+                        cb.is_grabbed = true;
+                        resultss++;
+                    }
+                }
+            }
+            // these can only be found by searching "branch"
+            matches = ("branch".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            foreach (BranchBlock cb in active_branches)
+            {
+                cb.is_grabbed = false;
+                if (matches)
+                {
+                    cb.status_border.BorderBrush = BrushPresets.selection_border;
+                    cb.is_grabbed = true;
+                    resultss++;
+                }
+                else
+                {
+                    cb.status_border.BorderBrush = Brushes.White;
+                }
+            }
+
+            matches = ("comment".Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase));
+            if (matches)
+            {
+                foreach (CommentBlock cb in active_comments)
+                {
+                    cb.is_grabbed = false;
+                    if (matches)
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        cb.is_grabbed = true;
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+            else
+            {
+                foreach (CommentBlock cb in active_comments)
+                {
+                    cb.is_grabbed = false;
+                    if (cb.note.Text.Contains(finderbox.Text, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.status_border.BorderBrush = BrushPresets.finder_border;
+                        resultss++;
+                    }
+                    else
+                    {
+                        cb.status_border.BorderBrush = Brushes.White;
+                    }
+                }
+            }
+
+
+            results_found.Text = resultss + " Nodes selected!";
+        }
+
+        private void finderbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Nodefinder_next(null, null); // lol, epic lazy moment, but we have like 100 methods in here already
+                finderbox.Focus();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                Nodefinder_close(null, null);
+            }
+        }
+
+
+
+        // TODO: make this support the new trigger referencing system
+        public void runtrigger_goto(string index)
+        {
+            try
+            {
+                int ind = int.Parse(index);
+                if (ind < active_triggers.Count)
+                {
+                    set_movement((-active_triggers[ind].transfrom_location.X) + 300, (-active_triggers[ind].transfrom_location.Y) + 355);
+                    move_graph_test_visibility();
+                }
+            }
+            catch (Exception ex)
+            {
+                MainWindow.catchexception_and_duly_ignore(ex);
+            }
+
+        }
+
+
 
     }
 }

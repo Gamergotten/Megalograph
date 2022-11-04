@@ -12,6 +12,7 @@ using static gamtetyper.BitWriter;
 using System.Collections;
 using System.Windows.Controls.Primitives;
 using gamtetyper.code;
+using Megalograph.UI;
 
 namespace gamtetyper
 {
@@ -198,6 +199,57 @@ namespace gamtetyper
             XMLdump.Save(XMLdump_directory);
         }
 
+        public string fetch_username_from_count_thingo(string thingo_node)
+        {
+            XmlNode node = XMLdump.SelectSingleNode(thingo_node);
+            XmlAttribute? xn = node.Attributes["n"];
+            if (xn != null)
+            {
+                return xn.Value;
+            }
+            return null;
+        }
+        public void patchup_strings_so_they_are_referenced_properly()
+        {
+            XmlNode node = XMLdump.SelectSingleNode(@"Gametype/base/mpvr/Strings/Stringtable/Strings");
+            if (node != null) // then there IS a string table?
+            {
+                for (int i = 0; i < node.ChildNodes.Count; i++)
+                {
+                    XmlNode child = node.ChildNodes[i];
+                    XmlNode string_namer = child.FirstChild;
+                    if (string_namer != null)
+                    {
+                        string_namer = string_namer.FirstChild;
+                        if (string_namer != null)
+                        {
+                            XmlAttribute? xn = string_namer.Attributes["v"];
+                            if (xn != null)
+                            {
+                                assign_count_item_name(@"Gametype/base/mpvr/Strings/Stringtable/Strings/" + child.Name, xn.Value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void assign_count_item_name(string thingo_node, string newname)
+        {
+
+            XmlNode node = XMLdump.SelectSingleNode(thingo_node);
+            XmlAttribute? xn = node.Attributes["n"];
+            if (xn != null)
+            {
+                //node.Attributes.Remove(xn);
+                xn.Value = newname;
+            }
+            else
+            {
+                XmlAttribute Attr = XMLdump.CreateAttribute("n");
+                Attr.Value = newname;
+                node.Attributes.Append(Attr);
+            }
+        }
         public void WRITE_NODE_OF_FILE(Ebum target)
         {
             var mmmmmmm = target.nodes_list_yes_i_did_just_do_that;
@@ -512,6 +564,63 @@ namespace gamtetyper
 
             return ActionDump;
         }
+        public List<CommentBlock>? docomments(string haloxml)
+        {
+            var is_valid = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/Comments");
+            if (is_valid == null) return null;
+
+            XmlNodeList Comments = is_valid.ChildNodes;
+
+            List<CommentBlock> ResultingCommnents = new List<CommentBlock>();
+
+            for (int Index = 0; Index < Comments.Count; Index++)
+            {
+                CommentBlock Commnent_ = new CommentBlock();
+
+
+                XmlNode commentnodexml = Comments[Index];
+                // position
+                var valid_test = commentnodexml.Attributes["p"];
+                if (valid_test != null)
+                {
+                    string[] s = valid_test.InnerText.Split(",");
+                    Commnent_.transfrom_location.X = Convert.ToDouble(s[0]);
+                    Commnent_.transfrom_location.Y = Convert.ToDouble(s[1]);
+                }
+                // size
+                valid_test = commentnodexml.Attributes["s"];
+                if (valid_test != null)
+                {
+                    string[] s = valid_test.InnerText.Split(",");
+                    Commnent_.Height = Convert.ToDouble(s[0]);
+                    Commnent_.Width = Convert.ToDouble(s[1]);
+                }
+                // text
+                valid_test = commentnodexml.Attributes["t"];
+                if (valid_test != null)
+                {
+                    Commnent_.note.Text = valid_test.InnerText;
+                }
+                // color
+                valid_test = commentnodexml.Attributes["c"];
+                if (valid_test != null)
+                {
+                    string[] s = valid_test.InnerText.Split(",");
+                    Commnent_.our_color.A = Convert.ToByte(s[0]);
+                    Commnent_.our_color.R = Convert.ToByte(s[1]);
+                    Commnent_.our_color.G = Convert.ToByte(s[2]);
+                    Commnent_.our_color.B = Convert.ToByte(s[3]);
+                    Commnent_.update_color();
+                }
+
+
+
+                ResultingCommnents.Add(Commnent_);
+            }
+
+            return ResultingCommnents;
+        }
+
 
         public List<Gametype.condition> doconditions(string haloxml)
         {
@@ -548,7 +657,7 @@ namespace gamtetyper
                 string node = Conditions[Index].Name;
                 newcondition.Not = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount/" + node + "/NOT").Attributes["v"].InnerText);
                 newcondition.insertionpoint = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount/" + node + "/ConditionOffset").Attributes["v"].InnerText);
-                newcondition.OR_Group = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount/" + node + "/ORsequence").Attributes["v"].InnerText);
+                newcondition.OR_index_helper = int.Parse(XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/ConditionCount/" + node + "/ORsequence").Attributes["v"].InnerText);
 
                 ConditionsDump.Add(newcondition);
             }
@@ -712,11 +821,50 @@ namespace gamtetyper
 
                 create_and_embed_node_w_attribute("NOT", cond.Not.ToString(), condhead);
 
-                create_and_embed_node_w_attribute("ORsequence", cond.OR_Group.ToString(), condhead);
+                create_and_embed_node_w_attribute("ORsequence", cond.OR_index_helper.ToString(), condhead);
 
                 create_and_embed_node_w_attribute("ConditionOffset", cond.insertionpoint.ToString(), condhead);
 
                 append_children_from_ebum_export(condhead, cond.Type);
+            }
+        }
+
+        public void exportcomments(List<Gametype.comment> things_to_export)
+        {
+            XmlNode? a = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript/Comments");
+            if (a == null)
+            {
+                a = XMLdump.CreateNode("element", "Comments", "");
+                var sausage1 = XMLdump.SelectSingleNode("/Gametype/base/mpvr/megl/MegaloScript");
+                sausage1.AppendChild(a);
+            }
+            else
+            {
+                a.RemoveAll();
+            }
+
+            for (int Index = 0; Index < things_to_export.Count; Index++)
+            {
+                var comment = things_to_export[Index];
+                XmlNode comment_node = XMLdump.CreateNode("element", "Comments-child" + Index, "");
+                a.AppendChild(comment_node);
+                // position
+                XmlAttribute posit1 = XMLdump.CreateAttribute("p");
+                posit1.Value = comment.position.x + "," + comment.position.y;
+                comment_node.Attributes.Append(posit1);
+                // size
+                XmlAttribute posit4 = XMLdump.CreateAttribute("s");
+                posit4.Value = comment.size.y + "," + comment.size.x;
+                comment_node.Attributes.Append(posit4);
+                // color
+                XmlAttribute posit2 = XMLdump.CreateAttribute("c");
+                posit2.Value = comment.ALPHA + "," + comment.RED + "," + comment.GREEN + "," + comment.BLUE;
+                comment_node.Attributes.Append(posit2);
+                // text
+                XmlAttribute posit3 = XMLdump.CreateAttribute("t");
+                posit3.Value = comment.text;
+                comment_node.Attributes.Append(posit3);
+
             }
         }
         public void quick_save_the_xmls()
@@ -790,66 +938,55 @@ namespace gamtetyper
             //XmlNode xnfdsahghvbgdsavghgvhdtf = i.SelectSingleNode(t.XMLPath);
 
             t.Size = ph.bits; // int.Parse(xnfdsahghvbgdsavghgvhdtf.Attributes["bits"]?.InnerText);
+            t.max = ph.max;
 
             switch (ph.type)
             {
                 case "Int":
-                    var test1 = returnfromdump(node);
-                    if (test1 == null)
-                    {
-                        test1 = "0";
-                    }
-                    t.V = test1;
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "UInt":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "Long":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "ULong":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "String":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "String16":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "UString8":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "UString16":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "Hex":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "Blank":
-                    t.V = returnfromdump(node);
+                    t.V = returnfromdump(node, ref ph);
                     node.RemoveAt(node.Count - 1);
                     return t;
                 case "Enum":
-                    string test2 = returnfromdump(node);
-                    if (node.Count > 7)
-                    {
-                        string debug = "";
-                    }
-                    if (test2 == null)
-                    {
-                        XmlDocument c = xina(ph.node);
-                        XmlNode w = c.SelectSingleNode("base/" + wrap + "/Var[@name='" + ph.name + "']");
-                        test2 = w.ChildNodes[0].Attributes["name"]?.InnerText;
-                    }
+                    string test2 = returnfromdump(node, ref ph);
+                    if (test2 == null) // then pick the first one?
+                        test2 = return_enum_first_option(ref ph, wrap);
+
                     string y1 = "base/" + wrap + "/Var[@name='" + ph.name + "']/Var[@name='" + test2 + "']";
                     // i think we need to read the value of the enum and use this here
                     InterpStruct e1 = readdata(y1, ph.node);
@@ -891,7 +1028,7 @@ namespace gamtetyper
                             t.Params.Add(readblock(p, "ExTypes", node));
                         }
                     }
-                    if (ph.type.Contains("Enumref"))
+                    else if (ph.type.Contains("Enumref"))
                     {
                         // should just work tbh
                         string[] w = ph.type.Split(":");
@@ -906,17 +1043,62 @@ namespace gamtetyper
                         Ebum e3 = readblock(ph2, ph2.node1, node);
                         node.RemoveAt(node.Count - 1);
                         e3.FUCKK_YOU = ph.name;
-                        if (ph.name == "Bool1")
-                        {
-                            string DEBUGTHESEBooLLS = "";
-                        }
                         return e3;
+                    }
+                    else if (ph.type.Contains("Ref0:") || ph.type.Contains("Ref1:"))
+                    {
+                        t.V = returnfromdump(node, ref ph);
+                        if (t.V == null)
+                            t.V = "0";
+                        node.RemoveAt(node.Count - 1);
+                        return t;
                     }
                     break;
 
             }
             node.RemoveAt(node.Count - 1);
             return t;
+        }
+        public string return_enum_first_option(ref BitReader.paramheader2 ph, string wrap)
+        {
+            XmlDocument c = xina(ph.node);
+            XmlNode w = c.SelectSingleNode("base/" + wrap + "/Var[@name='" + ph.name + "']");
+            return w.ChildNodes[0].Attributes["name"]?.InnerText;
+        }
+        public List<string>? return_all_entries_and_none(string referencednode)
+        {
+            List<string>? output = return_all_Entries_for_reference_block(referencednode);
+            if (output != null)
+            {
+                if (output.Count > 0)
+                    output.Insert(0, "None");
+                else
+                    output.Add("None");
+            }
+            else
+                output = new List<string> { "None" };
+            return output;
+        }
+        public List<string>? return_all_Entries_for_reference_block(string referencednode)
+        {
+            XmlNode a = XMLdump.SelectSingleNode(referencednode);
+            if (a != null)
+            {
+                List<string> output = new List<string>();
+                foreach (XmlNode node in a.ChildNodes)
+                {
+                    if (node.Attributes["n"] != null)
+                    {
+                        output.Add(node.Attributes["n"]?.InnerText);
+                    }
+                    else
+                    {
+                        output.Add(node.Name);
+                    }
+                }
+                return output;
+            }
+            return null;
         }
 
         public paramheader2 VarInterpret(string type, string lookfor, string docx) // need to fix this to use a shared param rather than an array
@@ -1001,7 +1183,28 @@ namespace gamtetyper
             XMLdump_directory = null;
         }
 
-        public string returnfromdump(List<string> height)
+        public bool test_enum_selection(string nodepath, string doc)
+        { 
+            XmlDocument c = xina(doc);
+            XmlNode w = c.SelectSingleNode(nodepath);
+            return w == null;
+        }
+        public string? returnfromdump(List<string> height, ref BitReader.paramheader2 fallback)
+        {
+            string URItogo = @"Gametype/base";
+            foreach (string s in height)
+            {
+                string test = String.Concat(s.Where(c => !Char.IsWhiteSpace(c)));
+                URItogo += "/" + test;
+            }
+            XmlNode a = XMLdump.SelectSingleNode(URItogo);
+            if (a != null)
+                return a.Attributes["v"]?.InnerText;
+            if (fallback.Default != null)
+                return fallback.Default;
+            return null;
+        }
+        public string? returnfromdump(List<string> height) // boring override for compatibilty with older thingos
         {
             string URItogo = @"Gametype/base";
             foreach (string s in height)
@@ -1032,6 +1235,7 @@ namespace gamtetyper
             }
             XmlNode a = XMLdump.SelectSingleNode(URItogo);
             // now we've got our dump string node
+            if (a == null) goto poop;
             XmlNodeList all_Strings = a.ChildNodes;
             if (all_Strings.Count > 0)
             {
@@ -1124,12 +1328,12 @@ namespace gamtetyper
 
                 return binaryblock;
             }
-            else
-            {
+            
+            poop:
                 // no strings :megamind:
                 string blank_stringtable = BitWriter.clippedtolength(Convert.ToString(0, 2), ph_bits);
                 return blank_stringtable;
-            }
+            
 
             // checklist
             //
@@ -1151,6 +1355,7 @@ namespace gamtetyper
         public int stringtablelanguage(string lang_node, XmlNode parent, Dictionary<string, int> bozo_check)
         {
             XmlNode es = parent.SelectSingleNode(lang_node);
+            if (es == null) return -1;
             string stringcheck = es.Attributes["v"]?.InnerText;
             if (stringcheck == "True")
             {
@@ -1209,6 +1414,7 @@ namespace gamtetyper
             string test = String.Concat(name.Where(c => !Char.IsWhiteSpace(c)));
 
             xmlWriter.WriteStartElement(test);
+
             if (!string.IsNullOrWhiteSpace(value))
                 xmlWriter.WriteAttributeString("v", value);
         }
@@ -1266,6 +1472,13 @@ namespace gamtetyper
             o.bits = int.Parse(w.Attributes["bits"]?.InnerText);
             o.offset = (w.Attributes["offset"]?.InnerText != null)? int.Parse(w.Attributes["offset"]?.InnerText): -1;
             o.chars = (w.Attributes["chars"]?.InnerText != null) ? int.Parse(w.Attributes["chars"]?.InnerText) : -1;
+            o.max = (w.Attributes["max"]?.InnerText != null) ? int.Parse(w.Attributes["max"]?.InnerText) : 0;
+            if (w.Attributes["def"]?.InnerText != null)
+                o.Default = w.Attributes["def"]?.InnerText;
+            else if (o.type == "Int" || o.type == "UInt" || o.type == "Long" || o.type == "ULong") // change this is we ever support anything else in the nodegraph
+                    o.Default = "0";
+            else
+                o.Default = null;
             return o;
         }
         //
@@ -1297,27 +1510,6 @@ namespace gamtetyper
         }
         
 
-        //
-        //
-        // proto syntax stuff
-        //
-        public string[] fetch_plaintextCode()
-        {
-            string[] ret = new string[0];
-
-
-
-
-
-
-
-
-
-
-
-
-            return ret;
-        }
 
 
 

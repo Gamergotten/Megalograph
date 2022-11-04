@@ -30,8 +30,8 @@
 		<Var name="VehicleUse" type="Int" bits="4" />
 		<Var name="Unknown" type="Int" bits="2" />
 		<Var name="JumpHeight" type="Enum" bits="1" >
-			<Var ID="0" name="True" />
-			<Var ID="1" name="False" >
+			<Var ID="0" name="Unchanged" />
+			<Var ID="1" name="Override" >
 				<Var name="JumpHeight" type="Int" bits="9" />
 			</Var>
 		</Var>
@@ -291,20 +291,20 @@
 	</Var>
 	
 	<Var name="ScriptedPlayerTraits" type="Count" bits="5" >
-		<Var name="String1" type="Int" bits="7" />
-		<Var name="String2" type="Int" bits="7" />
+		<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
+		<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
 		<Var name="PlayerTraits" type="Enumref:PlayerTraits" bits="0" />
 	</Var>
 	<Var name="ScriptOptions" type="Count" bits="5" >
-		<Var name="String1" type="Int" bits="7" />
-		<Var name="String2" type="Int" bits="7" />
+		<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
+		<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
 		<Var name="ScriptOption" type="Enum" bits="1" >
 			<Var ID="0" name="Scriptoption" >
 				<Var name="ChildIndex" type="Int" bits="3" />
 				<Var name="ScriptOptionChild" type="Count" bits="4" >
 					<Var name="Value" type="Int" bits="10" />
-					<Var name="String1" type="Int" bits="7" />
-					<Var name="String2" type="Int" bits="7" />
+					<Var name="String1" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
+					<Var name="String2" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
 				</Var>
 				<Var name="Unknown" type="Int" bits="3" />
 			</Var>
@@ -395,7 +395,7 @@
 		</Var>
 		<Var name="StringTableBufferIndex" type="HCount" bits="15" /-->
 		
-		<Var name="StringNameIndex" type="Int" bits="7" />
+		<Var name="StringNameIndex" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
 		<Var name="metanameStrings" type="HCount" bits="1" chars="9" />
 		<!--Var name="metanameStringgroups" type="Enum" bits="1" >
 			<Var ID="0" name="Null" />
@@ -671,7 +671,7 @@
 	<Var name="unknown1824" type="Blank" bits="1824" />
 	
 	<Var name="Labels" type="Count" bits="5" >
-		<Var name="StringID" type="Int" bits="7" />
+		<Var name="StringID" type="Ref1:Gametype/base/mpvr/Strings/Stringtable/Strings" bits="7" />
 		
 		<Var name="usenumber" type="Enum" bits="1" offset="3">
 			<Var ID="0" name="Null" />

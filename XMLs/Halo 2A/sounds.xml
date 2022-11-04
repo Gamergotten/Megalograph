@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base>
+<ExTypes>
+	<Var name="NameIndex" type="Enum" bits="8" >
+		<Var ID="00000000" name="None"/>
+		<Var ID="00000001" name="CTF Dropped [null]"/>
+		<Var ID="00000010" name="CTF Recovered [null]"/>
+		<Var ID="00000011" name="CTF Reset [null]"/>
+		<Var ID="00000100" name="CTF Stolen [null]"/>
+		<Var ID="00000101" name="CTF Taken [null]"/>
+		<Var ID="00000110" name="VIP Intro"/>
+		<Var ID="00000111" name="VIP New"/>
+		<Var ID="00001000" name="VIP Killed"/>
+		<Var ID="00001001" name="Juggernaut Intro"/>
+		<Var ID="00001010" name="Juggernaut New"/>
+		<Var ID="00001011" name="Territories Intro"/>
+		<Var ID="00001100" name="Territories Captured"/>
+		<Var ID="00001101" name="Territories Lost"/>
+		<Var ID="00001110" name="Assault Intro"/>
+		<Var ID="00001111" name="Assault Armed"/>
+		<Var ID="00010000" name="Assault Detonated"/>
+		<Var ID="00010001" name="Assault Disarmed"/>
+		<Var ID="00010010" name="Assault Dropped"/>
+		<Var ID="00010011" name="Assault Reset"/>
+		<Var ID="00010100" name="Assault Returned"/>
+		<Var ID="00010101" name="Assault Taken"/>
+		<Var ID="00010110" name="Infection Intro"/>
+		<Var ID="00010111" name="Infection Infected"/>
+		<Var ID="00011000" name="Infection Last Man Standing"/>
+		<Var ID="00011001" name="Infection New"/>
+		<Var ID="00011010" name="Oddball Intro"/>
+		<Var ID="00011011" name="Oddball Spawn"/>
+		<Var ID="00011100" name="Oddball Taken"/>
+		<Var ID="00011101" name="Oddball Dropped"/>
+		<Var ID="00011110" name="Oddball Reset"/>
+		<Var ID="00011111" name="KOTH Intro"/>
+		<Var ID="00100000" name="KOTH Controlled"/>
+		<Var ID="00100001" name="KOTH Contested"/>
+		<Var ID="00100010" name="KOTH Moved"/>
+		<Var ID="00100011" name="Headhunter Intro"/>
+		<Var ID="00100100" name="Stockpile Intro"/>
+		<Var ID="00100101" name="Race Intro"/>
+		<Var ID="00100110" name="CTF Defense"/>
+		<Var ID="00100111" name="CTF Offense"/>
+		<Var ID="00101000" name="VIP Goal Moved"/>
+		<Var ID="00101001" name="Assault Armed 2"/>
+		<Var ID="00101010" name="Assault Armed 3"/>
+		<Var ID="00101011" name="Assault Disarmed 2"/>
+		<Var ID="00101100" name="Assault Disarmed 3"/>
+		<Var ID="00101101" name="General Sudden Death"/>
+		<Var ID="00101110" name="General Game Over"/>
+		<Var ID="00101111" name="Invasion Boneyard Elite Defeat"/>
+		<Var ID="00110000" name="Invasion Boneyard Elite Phase 1 Defeat"/>
+		<Var ID="00110001" name="Invasion Boneyard Elite Phase 1 Intro"/>
+		<Var ID="00110010" name="Invasion Boneyard Elite Phase 1 Victory"/>
+		<Var ID="00110011" name="Invasion Boneyard Elite Phase 2 Defeat"/>
+		<Var ID="00110100" name="Invasion Boneyard Elite Phase 2 Victory"/>
+		<Var ID="00110101" name="Invasion Boneyard Elite Phase 3 Victory"/>
+		<Var ID="00110110" name="Invasion Boneyard Elite Victory"/>
+		<Var ID="00110111" name="Invasion Boneyard Spartan Defeat"/>
+		<Var ID="00111000" name="Invasion Boneyard Spartan Phase 1 Intro"/>
+		<Var ID="00111001" name="Invasion Boneyard Spartan Phase 1 Victory"/>
+		<Var ID="00111010" name="Invasion Boneyard Spartan Phase 2 Intro"/>
+		<Var ID="00111011" name="Invasion Boneyard Spartan Phase 2 Victory"/>
+		<Var ID="00111100" name="Invasion Boneyard Spartan Phase 3 Intro"/>
+		<Var ID="00111101" name="Invasion Boneyard Spartan Phase 3 Victory"/>
+		<Var ID="00111110" name="Invasion Spire Elite Defeat"/>
+		<Var ID="00111111" name="Invasion Spire Elite Phase 1 Defeat"/>
+		<Var ID="01000000" name="Invasion Spire Elite Phase 1 Intro"/>
+		<Var ID="01000001" name="Invasion Spire Elite Phase 2 Intro"/>
+		<Var ID="01000010" name="Invasion Spire Elite Phase 2 Victory"/>
+		<Var ID="01000011" name="Invasion Spire Elite Phase 3 Intro"/>
+		<Var ID="01000100" name="Invasion Spire Elite Phase 3 Victory"/>
+		<Var ID="01000101" name="Invasion Spire Spartan Defeat"/>
+		<Var ID="01000110" name="Invasion Spire Spartan Phase 1 Defeat"/>
+		<Var ID="01000111" name="Invasion Spire Spartan Phase 1 Extra"/>
+		<Var ID="01001000" name="Invasion Spire Spartan Phase 1 Intro"/>
+		<Var ID="01001001" name="Invasion Spire Spartan Phase 1 Victory"/>
+		<Var ID="01001010" name="Invasion Spire Spartan Phase 2 Defeat"/>
+		<Var ID="01001011" name="Invasion Spire Spartan Phase 2 Victory"/>
+		<Var ID="01001100" name="Invasion Spire Spartan Phase 3 Victory"/>
+		<Var ID="01001101" name="Invasion Spire Spartan Victory"/>
+		<Var ID="01001110" name="Invasion Boneyard Spartan Phase 3 Defeat"/>
+		<Var ID="01001111" name="Invasion Spire Elite Phase 3 Defeat"/>
+		<Var ID="01010000" name="Invasion Elite Big Win Music"/>
+		<Var ID="01010001" name="Invasion Elite Win 1 Music"/>
+		<Var ID="01010010" name="Invasion Elite Win 2 Music"/>
+		<Var ID="01010011" name="Invasion Beginning Music"/>
+		<Var ID="01010100" name="Invasion Spartan Big Win Music"/>
+		<Var ID="01010101" name="Invasion Spartan Win 1 Music"/>
+		<Var ID="01010110" name="Invasion Spartan Win 2 Music"/>
+		<Var ID="01010111" name="Invasion Boneyard Generator Power Down"/>
+		<Var ID="01011000" name="Survivial Awarded Lives"/>
+		<Var ID="01011001" name="General Timer Beep"/>
+		<Var ID="01011010" name="Survival Alpha Point Attack [null]"/>
+		<Var ID="01011011" name="Survival Bravo Point Attack [null]"/>
+		<Var ID="01011100" name="Survival Charlie Point Attack [null]"/>
+		<Var ID="01011101" name="Survival 1 Generator Intro"/>
+		<Var ID="01011110" name="Survival 2 Generator Intro"/>
+		<Var ID="01011111" name="Survival 3 Generator Intro"/>
+		<Var ID="01100000" name="Survival 5 Lives Left"/>
+		<Var ID="01100001" name="Survival 10 Lives Left"/>
+		<Var ID="01100010" name="CTF New Stolen"/>
+		<Var ID="01100011" name="CTF New Captured"/>
+		<Var ID="01100100" name="Survival Generator Destroyed"/>
+		<Var ID="01100101" name="Survival Objective Complete"/>
+		<Var ID="01100110" name="Regicide Intro"/>
+		<Var ID="01100111" name="Unknown [null]"/>
+		<Var ID="01101000" name="Unknown [null]"/>
+		<Var ID="01101001" name="Unknown [null]"/>
+		<Var ID="01101010" name="Unknown [null]"/>
+		<Var ID="01101011" name="Unknown [null]"/>
+		<Var ID="01101100" name="Unknown [null]"/>
+		<Var ID="01101101" name="Unknown [null]"/>
+		<Var ID="01101110" name="Unknown [null]"/>
+		<Var ID="01101111" name="Unknown [null]"/>
+		<Var ID="01110000" name="Unknown [null]"/>
+		<Var ID="01110001" name="Unknown [null]"/>
+		<Var ID="01110010" name="Unknown [null]"/>
+		<Var ID="01110011" name="Unknown [null]"/>
+		<Var ID="01110100" name="Supremacy Medal 1"/>
+		<Var ID="01110101" name="Supremacy Medal 2"/>
+		<Var ID="01110110" name="Supremacy Medal 3"/>
+		<Var ID="01110111" name="Supremacy Medal 4"/>
+		<Var ID="01111000" name="Supremacy Medal 5"/>
+		<Var ID="01111001" name="Supremacy Medal 6"/>
+		<Var ID="01111010" name="Supremacy Medal 7"/>
+		<Var ID="01111011" name="Supremacy Medal 8"/>
+		<Var ID="01111100" name="Supremacy Medal 9"/>
+		<Var ID="01111101" name="Supremacy Medal 10"/>
+		<Var ID="01111110" name="Supremacy Medal 11"/>
+		<Var ID="01111111" name="Unknown [null]"/>
+		<Var ID="10000000" name="Unknown [null]"/>
+		<Var ID="10000001" name="Unknown [null]"/>
+		<Var ID="10000010" name="Unknown [null]"/>
+		<Var ID="10000011" name="Unknown [null]"/>
+		<Var ID="10000100" name="Unknown [null]"/>
+		<Var ID="10000101" name="Unknown [null]"/>
+		<Var ID="10000110" name="Unknown [null]"/>
+		<Var ID="10000111" name="Unknown [null]"/>
+		<Var ID="10001000" name="Unknown [null]"/>
+		<Var ID="10001001" name="Unknown [null]"/>
+		<Var ID="10001010" name="Unknown [null]"/>
+		<Var ID="10001011" name="Unknown [null]"/>
+		<Var ID="10001100" name="Unknown [null]"/>
+		<Var ID="10001101" name="Unknown [null]"/>
+		<Var ID="10001110" name="Unknown [null]"/>
+		<Var ID="10001111" name="Unknown [null]"/>
+		<Var ID="10010000" name="Unknown [null]"/>
+		<Var ID="10010001" name="Unknown [null]"/>
+		<Var ID="10010010" name="Unknown [null]"/>
+		<Var ID="10010011" name="Unknown [null]"/>
+		<Var ID="10010100" name="Unknown [null]"/>
+		<Var ID="10010101" name="Unknown [null]"/>
+		<Var ID="10010110" name="Unknown [null]"/>
+		<Var ID="10010111" name="Unknown [null]"/>
+		<Var ID="10011000" name="Unknown [null]"/>
+		<Var ID="10011001" name="Unknown [null]"/>
+		<Var ID="10011010" name="Unknown [null]"/>
+		<Var ID="10011011" name="Unknown [null]"/>
+		<Var ID="10011100" name="Unknown [null]"/>
+		<Var ID="10011101" name="Unknown [null]"/>
+		<Var ID="10011110" name="Unknown [null]"/>
+		<Var ID="10011111" name="Unknown [null]"/>
+		<Var ID="10100000" name="Unknown [null]"/>
+		<Var ID="10100001" name="Unknown [null]"/>
+		<Var ID="10100010" name="Unknown [null]"/>
+		<Var ID="10100011" name="Unknown [null]"/>
+		<Var ID="10100100" name="Unknown [null]"/>
+		<Var ID="10100101" name="Unknown [null]"/>
+		<Var ID="10100110" name="Unknown [null]"/>
+		<Var ID="10100111" name="Dominion Upgrade 2"/>
+		<Var ID="10101000" name="Unknown [null]"/>
+		<Var ID="10101001" name="Unknown [null]"/>
+		<Var ID="10101010" name="Unknown [null]"/>
+		<Var ID="10101011" name="Unknown [null]"/>
+		<Var ID="10101100" name="Unknown [null]"/>
+		<Var ID="10101101" name="Unknown [null]"/>
+		<Var ID="10101110" name="Unknown [null]"/>
+		<Var ID="10101111" name="Blam Interact 1"/>
+		<Var ID="10110000" name="Unknown [null]"/>
+		<Var ID="10110001" name="Blam Arming"/>
+		<Var ID="10110010" name="Unknown [null]"/>
+		<Var ID="10110011" name="Dominion Upgrade 1"/>
+		<Var ID="10110100" name="Dominion Boot Up"/>
+		<Var ID="10110101" name="Dominion Offline"/>
+		<Var ID="10110110" name="Dominion Restored"/>
+		<Var ID="10110111" name="Domonion Generator Off"/>
+		<Var ID="10111000" name="Dominion Generator On"/>
+		<Var ID="10111001" name="Unknown [null]"/>
+		<Var ID="10111010" name="Unknown [null]"/>
+		<Var ID="10111011" name="Dominion Shield Up"/>
+		<Var ID="10111100" name="Dominion Shield Down"/>
+		<Var ID="10111101" name="Dominion Interact In"/>
+		<Var ID="10111110" name="Dominion Interact Out"/>
+		<Var ID="10111111" name="Unknown [null]"/>
+		<Var ID="11000000" name="Unknown [null]"/>
+		<Var ID="11000001" name="Unknown [null]"/>
+		<Var ID="11000010" name="Skullball Beep Interrupt	"/>
+		<Var ID="11000011" name="Skullball Tick	"/>
+		<Var ID="11000100" name="Skullball Beep"/>
+		<Var ID="11000101" name="Flood Safehaven New [null]"/>
+		<Var ID="11000110" name="Unknown [null]"/>
+		<Var ID="11000111" name="Unknown [null]"/>
+		<Var ID="11001000" name="Unknown [null]"/>
+		<Var ID="11001001" name="Unknown [null]"/>
+		<Var ID="11001010" name="Unknown [null]"/>
+		<Var ID="11001011" name="Unknown [null]"/>
+		<Var ID="11001100" name="Blam Beep 1 [null]"/>
+		<Var ID="11001101" name="Blam Beep 2 [null]"/>
+		<Var ID="11001110" name="Blam Beep 3 [null]"/>
+		<Var ID="11001111" name="Blam Beep Stop All"/>
+		<Var ID="11010000" name="Unknown [null]"/>
+		<Var ID="11010001" name="Unknown [null]"/>
+		<Var ID="11010010" name="Unknown [null]"/>
+		<Var ID="11010011" name="Unknown [null]"/>
+		<Var ID="11010100" name="Unknown [null]"/>
+		<Var ID="11010101" name="Blam Intro"/>
+		<Var ID="11010110" name="Unknown [null]"/>
+		<Var ID="11010111" name="Unknown [null]"/>
+		<Var ID="11011000" name="Unknown [null]"/>
+		<Var ID="11011001" name="Unknown [null]"/>
+		<Var ID="11011010" name="Unknown [null]"/>
+		<Var ID="11011011" name="Unknown [null]"/>
+		<Var ID="11011100" name="Unknown [null]"/>
+		<Var ID="11011101" name="Unknown [null]"/>
+		<Var ID="11011110" name="Unknown [null]"/>
+		<Var ID="11011111" name="Blam Arming Fail"/>
+		<Var ID="11100000" name="Blam Disarming [null]"/>
+		<Var ID="11100001" name="Blam Extraction"/>
+		<Var ID="11100010" name="Unknown [null]"/>
+		<Var ID="11100011" name="Unknown [null]"/>
+		<Var ID="11100100" name="Unknown [null]"/>
+		<Var ID="11100101" name="Unknown [null]"/>
+		<Var ID="11100110" name="Unknown [null]"/>
+		<Var ID="11100111" name="Unknown [null]"/>
+		<Var ID="11101000" name="Unknown [null]"/>
+		<Var ID="11101001" name="Unknown [null]"/>
+		<Var ID="11101010" name="Unknown [null]"/>
+		<Var ID="11101011" name="Unknown [null]"/>
+		<Var ID="11101100" name="Unknown [null]"/>
+		<Var ID="11101101" name="Unknown [null]"/> 
+		<Var ID="11111111" name="-1"/>
+	</Var>
+</ExTypes>
+</base>

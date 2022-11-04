@@ -2,13 +2,13 @@
 <base>
 <ExTypes>
 	<Var name="Type" type="Enum" bits="12" >
-		<Var ID="000000000000" name="spartan" />
-		<Var ID="000000000001" name="elite" />
+		<Var ID="000000000000" name="spartan [null]" />
+		<Var ID="000000000001" name="elite [null]" />
 		<Var ID="000000000010" name="monitor" />
 		<Var ID="000000000011" name="flag" />
-		<Var ID="000000000100" name="bomb" />
+		<Var ID="000000000100" name="bomb [null]" />
 		<Var ID="000000000101" name="ball" />
-		<Var ID="000000000110" name="area" />
+		<Var ID="000000000110" name="area [null]" />
 		<Var ID="000000000111" name="stand" />
 		<Var ID="000000001000" name="destination" />
 		<Var ID="000000001001" name="frag_grenade" />
@@ -39,30 +39,30 @@
 		<Var ID="000000100010" name="ctf_flag_spawn_point" />
 		<Var ID="000000100011" name="respawn_zone" />
 		<Var ID="000000100100" name="oddball_ball_spawn_point" />
-		<Var ID="000000100101" name="fusion_coil" />
+		<Var ID="000000100101" name="fusion_coil [null]" />
 		<Var ID="000000100110" name="initial_spawn_point" />
-		<Var ID="000000100111" name="teleporter_sender" />
-		<Var ID="000000101000" name="teleporter_reciever" />
-		<Var ID="000000101001" name="teleporter_2way" />
+		<Var ID="000000100111" name="teleporter_sender [null]" />
+		<Var ID="000000101000" name="teleporter_reciever [null]" />
+		<Var ID="000000101001" name="teleporter_2way [null]" />
 		<Var ID="000000101010" name="weak_respawn_zone" />
 		<Var ID="000000101011" name="weak_anti_respawn_zone" />
 		<Var ID="000000101100" name="mp_cinematic_camera" />
-		<Var ID="000000101101" name="cov_power_module" />
+		<Var ID="000000101101" name="cov_power_module [null]" />
 		<Var ID="000000101110" name="machinegun" />
 		<Var ID="000000101111" name="machinegun_turret" />
 		<Var ID="000000110000" name="warthog_gunner" />
 		<Var ID="000000110001" name="warthog_gauss_turret" />
-		<Var ID="000000110010" name="teleporter" />
-		<Var ID="000000110011" name="juggernaut" />
+		<Var ID="000000110010" name="teleporter [null]" />
+		<Var ID="000000110011" name="juggernaut [null]" />
 		<Var ID="000000110100" name="covenant_carbine" />
 		<Var ID="000000110101" name="fuel_rod_cannon" />
 		<Var ID="000000110110" name="battle_rifle" />
 		<Var ID="000000110111" name="koth_falloff_respawn" />
-		<Var ID="000000111000" name="aa_none" />
+		<Var ID="000000111000" name="aa_none [null]" />
 		<Var ID="000000111001" name="odd_falloff_respawn" />
 		<Var ID="000000111010" name="koth_anti_respawn" />
 		<Var ID="000000111011" name="odd_anti_respawn" />
-		<Var ID="000000111100" name="bomb_disarm" />
+		<Var ID="000000111100" name="bomb_disarm [null]" />
 		<Var ID="000000111101" name="flashing_area" />
 		<Var ID="000000111110" name="h2a_koth_hill_flashing" />
 		<Var ID="000000111111" name="h2a_territories_flashing" />
@@ -75,18 +75,18 @@
 		<Var ID="000001000110" name="h2a_assault_bomb_goal_area" />
 		<Var ID="000001000111" name="h2a_territory_static" />
 		<Var ID="000001001000" name="odd_confetti" />
-		<Var ID="000001001001" name="carry_bomb" />
+		<Var ID="000001001001" name="carry_bomb [null]" />
 		<Var ID="000001001010" name="koth_explosion" />
 		<Var ID="000001001011" name="on_switch" />
 		<Var ID="000001001100" name="off_switch" />
 		<Var ID="000001001101" name="toggle_switch" />
-		<Var ID="000001001110" name="mp_ca_ascension_dome_shield" />
+		<Var ID="000001001110" name="mp_ca_ascension_dome_shield*" />
 		<Var ID="000001001111" name="timed_on_switch" />
 		<Var ID="000001010000" name="timed_toggle_switch" />
-		<Var ID="000001010001" name="h2a_sancuary_waterfall" />
+		<Var ID="000001010001" name="h2a_sancuary_waterfall*" />
 		<Var ID="000001010010" name="damage_on_switch" />
-		<Var ID="000001010011" name="shutter" />
-		<Var ID="000001010100" name="h2a_lockout_steamvent" />
+		<Var ID="000001010011" name="shutter*" />
+		<Var ID="000001010100" name="h2a_lockout_steamvent [null]" />
 		<Var ID="000001010101" name="gungoose" />
 		<Var ID="000001010110" name="brute_plasma" />
 		<Var ID="000001010111" name="smg_suppressed" />

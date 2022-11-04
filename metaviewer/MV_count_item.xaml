@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="block_name" Text="Test item name" Grid.Column="1" Margin="5,0,0,0" Foreground="White" HorizontalAlignment="Left"/>
+                <TextBox x:Name="block_name" Text="Test item name" Grid.Column="1" Margin="5,0,0,0"  HorizontalAlignment="Stretch" Background="#FF272727" Foreground="White" BorderBrush="#FF505050" KeyDown="block_name_KeyDown"/>
                 <Button x:Name="expand_button" Content="+" Grid.Column="0" Click="Button_Click" Foreground="White" BorderBrush="#FF757575" Background="#FF4A4A4A"/>
 
             </Grid>

@@ -291,6 +291,7 @@
 		<Var ID="000100011110" name="mammoth_turret" />
 		<Var ID="000100011111" name="dom_turret_pad" />
 		<Var ID="000100100000" name="auto_turret_vehicle_knight" />
+		<Var ID="100000100110" name="f_u_lan"/>
 	</Var>
 </ExTypes>
 </base>

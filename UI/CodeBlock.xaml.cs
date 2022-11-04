@@ -39,6 +39,7 @@ namespace gamtetyper
         public Line Inpath;
         public Line Outpath;
 
+        public bool is_hidden;
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -86,6 +87,13 @@ namespace gamtetyper
 
                 main.Children.Add(Rename_trigger_box);
                 Rename_trigger_box.Focus();
+            }
+            else if (action_parent != null)
+            {
+                if (action_parent.stored_action.Type.V == "Megl.RunTrigger") // run move to that trigger mechanic
+                {
+                    main_window.runtrigger_goto(action_parent.stored_action.Type.Params[0].V);
+                }
             }
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)

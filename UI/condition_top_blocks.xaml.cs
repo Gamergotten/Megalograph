@@ -28,27 +28,6 @@ namespace gamtetyper.UI
 
         public CodeBlock cb;
 
-        private void alter_cond_OR_group(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return &&cb != null) // e.Key == Key.Return &&
-            {
-                var v = cb.condition_parent.stored_condition;
-                try
-                {
-                    v.OR_Group = int.Parse(OR_group.Text);
-                }
-                catch
-                {
-                    border.BorderBrush = Brushes.Red;
-                    return;
-                }
-                cb.condition_parent.stored_condition = v;
-                border.BorderBrush = Brushes.White;
-                //OR_group.foc
-                Keyboard.ClearFocus();
-            }
-        }
-
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             if (cb != null)
@@ -57,6 +36,13 @@ namespace gamtetyper.UI
                 v.Not = (bool)(knot_box.IsChecked) ? 1 : 0;
                 cb.condition_parent.stored_condition = v;
             }
+        }
+
+        private void or_box_Click(object sender, RoutedEventArgs e)
+        {
+            var v = cb.condition_parent.stored_condition;
+            v.OR = (bool)or_box.IsChecked;
+            cb.condition_parent.stored_condition = v;
         }
     }
 }

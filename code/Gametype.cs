@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static gamtetyper.MainWindow;
 using System.Windows.Shapes;
+using gamtetyper.UI;
 
 namespace gamtetyper
 {
@@ -42,6 +43,7 @@ namespace gamtetyper
         public class ConditionUI
         {
             public CodeBlock UI { get; set; }
+            public condition_top_blocks Cond_stuff { set; get; }
             public int linked_elements_key { get; set; }
             public condition stored_condition { get; set; }
 
@@ -91,7 +93,20 @@ namespace gamtetyper
             public Ebum Type { get; set; }
             public int Not { get; set; }
             public int insertionpoint { get; set; } // we have to calculate this when exporting to triggers, otherwise isn't relevant
-            public int OR_Group { get; set; }
+            public bool OR { get; set; }
+
+            public int OR_index_helper { get; set; }
+        }
+        public struct comment
+        {
+            public Vector2D position;
+            public Vector2D size;
+
+            public string text { get; set; }
+            public byte ALPHA { get; set; }
+            public byte RED { get; set; }
+            public byte BLUE { get; set; }
+            public byte GREEN { get; set; }
         }
 
         public class Ebum
@@ -105,6 +120,7 @@ namespace gamtetyper
             public int Size { get; set; }
             public string FUCKK_YOU { get; set; } // the parent node in instances where we need a parent xml node
             public List<string> nodes_list_yes_i_did_just_do_that { get; set; }
+            public int max { get; set; }
         }
 
     }

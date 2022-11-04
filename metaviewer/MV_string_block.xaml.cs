@@ -61,9 +61,18 @@ namespace gamtetyper.metaviewer
                         stringchunk.main = main;
                         stringchunk.block_name.Text = s;
                         stringchunk.XML_location = parent_thingo_node +"/"+ s;
-                        
-                        string sus = main.main.XP.return_from_dump_location(parent_thingo_node + "/" + s + "/EnglishString/String");
-                        stringchunk.block_preview.Text = sus;
+
+                        string something = main.main.XP.fetch_username_from_count_thingo(stringchunk.XML_location);
+                        if (!string.IsNullOrEmpty(something))
+                        {
+                            stringchunk.block_preview.Text = something;
+                        }
+                        else
+                        {
+                            string sus = main.main.XP.return_from_dump_location(parent_thingo_node + "/" + s + "/EnglishString/String");
+                            stringchunk.block_preview.Text = sus;
+                        }
+
 
                         childs_panel.Children.Add(stringchunk);
                     }

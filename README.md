@@ -25,6 +25,8 @@ EDIT: i would like to warn RVT users that this tool does not do everything for y
 
 to get started, find a .bin file from one of the supported halos (halo reach, halo 4 or halo 2A)
 
+you could also look for the bin files provided by the tool (like the blank 2A one)
+
 open that with megalograph (with the "open .bin" button on the main toolbar)
 
 once you've got that, hit decompile. (it may take a while, im not the best programmer lol)
@@ -44,6 +46,9 @@ node window controls are:
 - right mouse to pop up the basic node creation window
 - drag at the little node connection boxes to draw connections
 - ctrl A to select all nodes
+- shift select nodes for multiselect
+- ctrl select to just move comment blocks, and not blocks contained
+- ctrl F to search for text inside of nodes
 
 # Metaviewer
 
@@ -61,11 +66,10 @@ there are a few handy tools in there, such as the count item creation/removal an
 
 copy & pasting doesn't remember which nodes were connected (yet)
 
-saving the nodegraph actually doesn't save the nodes positions (yet)
+it does not save nodes that are not connected to anything
 
-nor does it save nodes that are not connected to anything
+nodes cant read some dynamic gamemode things (eg: global objects) as they are clumped together with other options in the enums, would have to make a hybrid enum&reference value type
 
-nodes cant read dynamic gamemode things (eg: strings, script options, labels. you have to index those)
 
 
 
@@ -79,14 +83,27 @@ TODO (v1.0)
 - negative number support
 - warning logger - add warnings for things that can cause the game to not like the gametype
 - better exception handling (i think we removed exception handling in v0.2)
-- comment blocks & comment block saving
-- hiding offscreen nodes
 - fix meta blocks to look good
 - duplication fix - make use of that cool system so it can do the lines & locations when pasting
 - rewrite database to remove "Var" from everything
 - FIX PROBABLY BROKEN CONSOLE
 - better database rearrangements
 - prevent copy pasting branch into reach (it crashes if you were wondering)
+- auto connect functionality
+- insertion point indexes are not updated when triggers indexes are
+- update export funcationality to support .numbers & stuff
+- record non-connected nodes
+- falisafe feedback - output things that failed to be read correctly
+- max exceeded error checking
+- load sgf xml from source rather than mem
+- REWRITE NODES - THE BIG REWRITE (post decomp touchup the scripts into human readable code)
+- user defined code blocks aka functions/macros
+- make a popup telling that compile was successfull
+- vehicle groups not mapped out
+- fix if count is open when adding new count item
+- middle click dont release while outside of nodegraph
+- same with other imputs probably
+- count item does not infact save when focus lost due to deletion
 
 TODO (v2.0)
 - text code editor

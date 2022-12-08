@@ -373,9 +373,9 @@
 		<Var ID="0111" name="(|=)BinaryOR" />
 		<Var ID="1000" name="(^=)BinaryXOR" />
 		<Var ID="1001" name="(~=)BinaryNOT" />
-		<Var ID="1010" name="Unlabelled·" />
-		<Var ID="1011" name="Unlabelled·" />
-		<Var ID="1100" name="Unlabelled·" />
+		<Var ID="1010" name="(&lt;&lt;)LeftShift" />
+		<Var ID="1011" name="(&gt;&gt;)RightShift·" />
+		<Var ID="1100" name="(abs)Absolute" />
 		<Var ID="1101" name="Unlabelled·" />
 		<Var ID="1110" name="Unlabelled·" />
 		<Var ID="1111" name="Unlabelled·" />
@@ -1287,7 +1287,7 @@
 		<Var name="groupbyteam" type="Int" bits="1" />
 	</Var>
 	
-	<Var name="MegaloVariables" type="Container" bits="0" >
+	<Var name="MegaloVars" type="Container" bits="0" >
 		<Var name="GlobalVars" type="Container" bits="0" >
 			<Var name="globalnumbers" type="Count" bits="4" >
 				<Var name="Number" type="Enumref:NumericTypeRef" bits="0" />
